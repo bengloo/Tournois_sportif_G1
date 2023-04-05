@@ -3,6 +3,7 @@ package instance.modele.contrainte;
 import instance.modele.Equipe;
 import instance.modele.Journee;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class ContrainteHBClassement {
@@ -14,12 +15,31 @@ public class ContrainteHBClassement {
 
     private Integer penalite;
 
-    public ContrainteHBClassement(Equipe equipe, Map<Integer, Journee> journees, Map<Integer, Equipe> equipesAdverses, TypeMode mode, Integer max, Integer penalite) {
-        this.equipe = equipe;
-        this.journees = journees;
-        this.equipesAdverses = equipesAdverses;
-        this.mode = mode;
-        this.max = max;
+    public ContrainteHBClassement(TypeMode mode,Integer max, Integer penalite) {
+
+        super(false);
         this.penalite = penalite;
+        this.equipes = new HashMap<>();
+        this.journees = new HashMap<>();
+        this.equipesAdverses = new HashMap<>();
+        this.max = max;
+
+    }
+
+    public boolean addEquipe(Equipe equipeToAdd){
+        if(equipeToAdd == null) return false;
+        this.equipes.put(equipeToAdd.getId(), equipeToAdd);
+        return true;
+    }
+    public boolean addJournee(Journee journeeToAdd){
+        if(journeeToAdd == null) return false;
+        this.journees.put(journeeToAdd.getId(), journeeToAdd);
+        return true;
+    }
+
+    public boolean addEquipeAdverse(Equipe equipeToAdd){
+        if(equipeToAdd == null) return false;
+        this.equipesAdverses.put(equipeToAdd.getId(), equipeToAdd);
+        return true;
     }
 }
