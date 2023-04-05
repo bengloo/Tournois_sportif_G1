@@ -2,7 +2,6 @@ package instance.modele.contrainte;
 
 import instance.modele.Equipe;
 import instance.modele.Journee;
-import instance.modele.Rencontre;
 
 import java.util.Map;
 

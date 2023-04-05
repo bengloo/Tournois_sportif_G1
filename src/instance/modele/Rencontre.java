@@ -1,6 +1,8 @@
 package instance.modele;
 
 public class Rencontre {
-    //TODO
-    //id , contrainte ,rencontre
+    private Equipe exterieur;
+    private Equipe domicile;
+    private Journee journee;
+
 }

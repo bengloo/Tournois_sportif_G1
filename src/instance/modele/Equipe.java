@@ -2,9 +2,12 @@ package instance.modele;
 
 public class Equipe {
     private Integer id;
-    //contrainte placement
-        //tab de jour
-        //mode
-        //max
 
+    public Equipe(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getId() {
+        return this.id;
+    }
 }

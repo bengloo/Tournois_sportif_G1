@@ -13,4 +13,13 @@ public class ContrainteHBClassement {
     private Integer max;
 
     private Integer penalite;
+
+    public ContrainteHBClassement(Equipe equipe, Map<Integer, Journee> journees, Map<Integer, Equipe> equipesAdverses, TypeMode mode, Integer max, Integer penalite) {
+        this.equipe = equipe;
+        this.journees = journees;
+        this.equipesAdverses = equipesAdverses;
+        this.mode = mode;
+        this.max = max;
+        this.penalite = penalite;
+    }
 }

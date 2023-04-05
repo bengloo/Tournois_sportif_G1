@@ -4,20 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="96fb2b8e-b4b4-4186-b22f-d101eb0310ed" name="Changes" comment="initialisation du projet">
-      <change afterPath="$PROJECT_DIR$/src/instance/Instance.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/instance/modele/Equipe.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/instance/modele/Journee.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/instance/modele/Rencontre.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/instance/modele/contrainte/Contrainte.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/instance/modele/contrainte/ContrainteEquite.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/instance/modele/contrainte/ContrainteHBClassement.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/instance/modele/contrainte/ContraintePauseEquipe.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/instance/modele/contrainte/ContraintePauseGlobale.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/instance/modele/contrainte/ContraintePlacement.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/instance/modele/contrainte/ContrainteRencontres.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/instance/modele/contrainte/TypeMode.java" afterDir="false" />
+    <list default="true" id="96fb2b8e-b4b4-4186-b22f-d101eb0310ed" name="Changes" comment="modele">
+      <change afterPath="$PROJECT_DIR$/src/solution/Championnat.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/instance/Instance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/instance/Instance.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/instance/modele/Equipe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/instance/modele/Equipe.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/instance/modele/Journee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/instance/modele/Journee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/instance/modele/Rencontre.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/instance/modele/Rencontre.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/instance/modele/contrainte/Contrainte.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/instance/modele/contrainte/Contrainte.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/instance/modele/contrainte/ContrainteEquite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/instance/modele/contrainte/ContrainteEquite.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/instance/modele/contrainte/ContrainteHBClassement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/instance/modele/contrainte/ContrainteHBClassement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/instance/modele/contrainte/ContraintePauseEquipe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/instance/modele/contrainte/ContraintePauseEquipe.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/instance/modele/contrainte/ContraintePauseGlobale.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/instance/modele/contrainte/ContraintePauseGlobale.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/instance/modele/contrainte/ContrainteRencontres.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/instance/modele/contrainte/ContrainteRencontres.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/instance/modele/contrainte/ContrainteSeparation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/instance/modele/contrainte/ContrainteSeparation.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,8 +27,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -39,6 +39,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "settings.editor.selected.configurable": "preferences.lookFeel"
+  }
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -62,11 +70,19 @@
       <option name="project" value="LOCAL" />
       <updated>1680678852183</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="modele">
+      <created>1680683198352</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1680683198352</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="initialisation du projet" />
-    <option name="LAST_COMMIT_MESSAGE" value="initialisation du projet" />
+    <MESSAGE value="modele" />
+    <option name="LAST_COMMIT_MESSAGE" value="modele" />
   </component>
 </project>

@@ -1,7 +1,6 @@
 package instance.modele.contrainte;
 
 import instance.modele.Equipe;
-import instance.modele.Journee;
 
 import java.util.Map;
 
@@ -13,5 +12,9 @@ public class ContrainteSeparation {
 
     private Integer penalite;
 
-
+    public ContrainteSeparation(Map<Integer, Equipe> equipes, Integer min, Integer penalite) {
+        this.equipes = equipes;
+        this.min = min;
+        this.penalite = penalite;
+    }
 }
