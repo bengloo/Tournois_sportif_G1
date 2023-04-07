@@ -20,7 +20,7 @@ public class Instance {
     private LinkedList<ContraintePauseEquipe> contraintesPauseEquipe;
     private LinkedList<ContraintePauseGlobale> contraintesPauseGlobale;
     private LinkedList<ContrainteHBClassement>contraintesHBClassement;
-    private LinkedList<ContrainteHBClassement>contraintesSeparation;
+    private LinkedList<ContrainteSeparation>contraintesSeparation;
 
     public Instance(String nom) {
         this.nom = nom;
@@ -49,16 +49,29 @@ public class Instance {
     public boolean addContrainte(Contrainte contrainteToAdd){
         if(contrainteToAdd == null) return false;
         switch ( contrainteToAdd.getTypeContrainte()){
-            case EQUITE: this.contraintesEquite.add((ContrainteEquite)contrainteToAdd);
-            case HBCLASSEMENT: this.contraintesHBClassement.add((ContrainteHBClassement)contrainteToAdd);
-            case PAUSEEQUIPE: this.contraintesPauseEquipe.add((ContraintePauseEquipe) contrainteToAdd);
-            case PAUSEGLOBALE: this.contraintesPauseGlobale.add((ContraintePauseGlobale) contrainteToAdd);
-            case PLACEMENT: this.contraintesPlacement.add((ContraintePlacement) contrainteToAdd);
-            case RENCONTRES: this.contraintesRencontre.add((ContrainteRencontres) contrainteToAdd);
-            case SEPARATION: this.contraintesSeparation.add((ContrainteSeparation)contrainteToAdd);
+            case EQUITE:
+                this.contraintesEquite.add((ContrainteEquite)contrainteToAdd);
+                break;
+            case HBCLASSEMENT:
+                this.contraintesHBClassement.add((ContrainteHBClassement)contrainteToAdd);
+                break;
+            case PAUSEEQUIPE:
+                this.contraintesPauseEquipe.add((ContraintePauseEquipe) contrainteToAdd);
+                break;
+            case PAUSEGLOBALE:
+                this.contraintesPauseGlobale.add((ContraintePauseGlobale) contrainteToAdd);
+                break;
+            case PLACEMENT:
+                this.contraintesPlacement.add((ContraintePlacement) contrainteToAdd);
+                break;
+            case RENCONTRES:
+                this.contraintesRencontre.add((ContrainteRencontres) contrainteToAdd);
+                break;
+            case SEPARATION:
+                this.contraintesSeparation.add((ContrainteSeparation)contrainteToAdd);
+                break;
+            default: return false;
         }
-
-
         return true;
     }
 }

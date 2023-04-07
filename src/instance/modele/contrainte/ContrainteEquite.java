@@ -14,17 +14,6 @@ public class ContrainteEquite extends Contrainte {
     private Integer max;
     private Integer penalite;
 
-    public ContrainteEquite(Integer max) {
-
-
-        super(true);
-        this.penalite = -1;
-        this.equipes = new HashMap<>();
-        this.journees = new HashMap<>();
-        this.equipesAdverses = new HashMap<>();
-        this.max = max;
-
-    }
     public ContrainteEquite(Integer max, Integer penalite) {
 
         super(false);

@@ -6,7 +6,7 @@ import instance.modele.Journee;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ContrainteHBClassement {
+public class ContrainteHBClassement  extends Contrainte{
     private Equipe equipe;
     private Map<Integer, Journee> journees;
     private Map<Integer, Equipe> equipesAdverses;
@@ -15,20 +15,28 @@ public class ContrainteHBClassement {
 
     private Integer penalite;
 
-    public ContrainteHBClassement(TypeMode mode,Integer max, Integer penalite) {
-
-        super(false);
-        this.penalite = penalite;
-        this.equipes = new HashMap<>();
+    public ContrainteHBClassement(Equipe equipe,TypeMode mode,Integer max) {
+        super(true);
+        this.equipe=equipe;
         this.journees = new HashMap<>();
         this.equipesAdverses = new HashMap<>();
+        this.mode = mode;
         this.max = max;
-
+        this.penalite = -1;
+    }
+    public ContrainteHBClassement(Equipe equipe,TypeMode mode,Integer max, Integer penalite) {
+        super(false);
+        this.equipe=equipe;
+        this.journees = new HashMap<>();
+        this.equipesAdverses = new HashMap<>();
+        this.mode = mode;
+        this.max = max;
+        this.penalite = penalite;
     }
 
-    public boolean addEquipe(Equipe equipeToAdd){
+    public boolean addEquipeAdverse(Equipe equipeToAdd){
         if(equipeToAdd == null) return false;
-        this.equipes.put(equipeToAdd.getId(), equipeToAdd);
+        this.equipesAdverses.put(equipeToAdd.getId(), equipeToAdd);
         return true;
     }
     public boolean addJournee(Journee journeeToAdd){
@@ -37,9 +45,4 @@ public class ContrainteHBClassement {
         return true;
     }
 
-    public boolean addEquipeAdverse(Equipe equipeToAdd){
-        if(equipeToAdd == null) return false;
-        this.equipesAdverses.put(equipeToAdd.getId(), equipeToAdd);
-        return true;
-    }
 }
