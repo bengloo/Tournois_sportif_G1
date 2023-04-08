@@ -1,7 +1,8 @@
 package instance.modele.contrainte;
 
 import instance.modele.Equipe;
-import instance.modele.Journee;
+import solution.Championnat;
+import solution.Journee;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -45,4 +46,8 @@ public class ContrainteHBClassement  extends Contrainte{
         return true;
     }
 
+    @Override
+    public int TestContrainte(Championnat championnat) {
+        return 0;
+    }
 }

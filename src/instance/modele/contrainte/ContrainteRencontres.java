@@ -1,8 +1,8 @@
 package instance.modele.contrainte;
 
-import instance.modele.Equipe;
-import instance.modele.Journee;
-import instance.modele.Rencontre;
+import solution.Championnat;
+import solution.Journee;
+import solution.Rencontre;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -32,5 +32,11 @@ public class ContrainteRencontres extends Contrainte{
         if(rencontreToAdd == null) return false;
         this.rencontres.add(rencontreToAdd);
         return true;
+    }
+
+
+    @Override
+    public int TestContrainte(Championnat championnat) {
+        return 0;
     }
 }

@@ -1,8 +1,8 @@
 package instance;
 
 import instance.modele.Equipe;
-import instance.modele.Journee;
 import instance.modele.contrainte.*;
+import solution.Journee;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -13,7 +13,6 @@ public class Instance {
     private String nom;
     private Map<Integer, Equipe> equipes;
 
-    private Map<Integer, Journee> journees;
     private LinkedList<ContraintePlacement> contraintesPlacement;
     private LinkedList<ContrainteEquite> contraintesEquite;
     private LinkedList<ContrainteRencontres> contraintesRencontre;
@@ -25,7 +24,6 @@ public class Instance {
     public Instance(String nom) {
         this.nom = nom;
         equipes =new HashMap<>();
-        journees =new HashMap<>();
         contraintesEquite =new LinkedList<>();
         contraintesHBClassement =new LinkedList<>();
         contraintesRencontre =new LinkedList<>();
@@ -42,7 +40,6 @@ public class Instance {
     }
     public boolean addJournee(Journee journeeToAdd){
         if(journeeToAdd == null) return false;
-        this.journees.put(journeeToAdd.getId(), journeeToAdd);
         return true;
     }
 

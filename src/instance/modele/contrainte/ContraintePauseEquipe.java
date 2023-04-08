@@ -1,7 +1,8 @@
 package instance.modele.contrainte;
 
 import instance.modele.Equipe;
-import instance.modele.Journee;
+import solution.Championnat;
+import solution.Journee;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -34,5 +35,10 @@ public class ContraintePauseEquipe extends Contrainte{
         if(journeeToAdd == null) return false;
         this.journees.put(journeeToAdd.getId(), journeeToAdd);
         return true;
+    }
+
+    @Override
+    public int TestContrainte(Championnat championnat) {
+        return 0;
     }
 }
