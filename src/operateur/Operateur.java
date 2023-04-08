@@ -1,6 +1,6 @@
 package operateur;
 
-import solution.Journee;
+import instance.modele.Journee;
 
 public abstract class Operateur {
     Journee journee;

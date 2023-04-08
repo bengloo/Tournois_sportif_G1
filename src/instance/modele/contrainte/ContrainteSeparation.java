@@ -23,9 +23,9 @@ public class ContrainteSeparation extends Contrainte{
 
     }
 
-    public boolean addEquipe(int id){
-        if(id>=0) return false;
-        this.equipes.put(id, new Equipe(id));
+    public boolean addEquipe(Equipe equipe){
+        if(equipe==null) return false;
+        this.equipes.put(equipe.getId(),equipe);
         return true;
     }
 
@@ -33,5 +33,15 @@ public class ContrainteSeparation extends Contrainte{
     @Override
     public int getPenaliteCumulee(Championnat championnat) {
         return 0;
+    }
+
+    @Override
+    public String toString() {
+        return "ContrainteSeparation{" +
+                "equipes=" + equipes +
+                ", min=" + min +
+                ", penalite=" + penalite +
+                ", dure=" + dure +
+                '}';
     }
 }

@@ -2,7 +2,7 @@ package instance.modele.contrainte;
 
 import instance.modele.Equipe;
 import solution.Championnat;
-import solution.Journee;
+import instance.modele.Journee;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,14 +29,14 @@ public class ContraintePauseGlobale extends Contrainte{
         this.penalite = penalite;
     }
 
-    public boolean addEquipe(int id){
-        if(id>=0) return false;
-        this.equipes.put(id, new Equipe(id));
+    public boolean addEquipe(Equipe equipe){
+        if(equipe==null) return false;
+        this.equipes.put(equipe.getId(),equipe);
         return true;
     }
-    public boolean addJournee(int id){
-        if(id>=0) return false;
-        this.journees.put(id, new Journee(id));
+    public boolean addJournee(Journee journee){
+        if(journee==null) return false;
+        this.journees.put(journee.getId(),journee);
         return true;
     }
 
@@ -44,5 +44,16 @@ public class ContraintePauseGlobale extends Contrainte{
     @Override
     public int getPenaliteCumulee(Championnat championnat) {
         return 0;
+    }
+
+    @Override
+    public String toString() {
+        return "ContraintePauseGlobale{" +
+                "journees=" + journees +
+                ", equipes=" + equipes +
+                ", max=" + max +
+                ", penalite=" + penalite +
+                ", dure=" + dure +
+                '}';
     }
 }

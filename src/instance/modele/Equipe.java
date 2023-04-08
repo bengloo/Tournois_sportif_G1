@@ -10,4 +10,14 @@ public class Equipe {
     public Integer getId() {
         return this.id;
     }
+
+    public String toStringLong() {
+        return "Equipe{" +
+                "id=" + id +
+                '}';
+    }
+    @Override
+    public String toString(){
+        return id.toString();
+    }
 }

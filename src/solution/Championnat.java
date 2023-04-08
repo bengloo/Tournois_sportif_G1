@@ -1,6 +1,7 @@
 package solution;
 
 import instance.Instance;
+import instance.modele.Journee;
 
 import java.util.Map;
 

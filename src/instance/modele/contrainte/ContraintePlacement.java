@@ -2,7 +2,7 @@ package instance.modele.contrainte;
 
 import instance.modele.Equipe;
 import solution.Championnat;
-import solution.Journee;
+import instance.modele.Journee;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,9 +21,9 @@ public class ContraintePlacement extends Contrainte{
         this.max = max;
     }
 
-    public boolean addJournee(int id){
-        if(id>=0) return false;
-        this.journees.put(id, new Journee(id));
+    public boolean addJournee(Journee journee){
+        if(journee==null) return false;
+        this.journees.put(journee.getId(),journee);
         return true;
     }
 
@@ -31,5 +31,16 @@ public class ContraintePlacement extends Contrainte{
     @Override
     public int getPenaliteCumulee(Championnat championnat) {
         return 0;
+    }
+
+    @Override
+    public String toString() {
+        return "ContraintePlacement{" +
+                "equipe=" + equipe +
+                ", journees=" + journees +
+                ", mode=" + mode +
+                ", max=" + max +
+                ", dure=" + dure +
+                '}';
     }
 }

@@ -1,10 +1,12 @@
 package instance.modele.contrainte;
 
+import instance.Instance;
 import solution.Championnat;
 
 public abstract class Contrainte {
 
-    protected boolean dure;
+    protected final boolean dure;
+
     public Contrainte(boolean dure) {
         this.dure=dure;
     }

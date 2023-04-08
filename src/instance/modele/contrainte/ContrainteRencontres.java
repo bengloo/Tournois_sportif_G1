@@ -1,7 +1,7 @@
 package instance.modele.contrainte;
 
 import solution.Championnat;
-import solution.Journee;
+import instance.modele.Journee;
 import instance.modele.Rencontre;
 
 import java.util.HashMap;
@@ -22,15 +22,15 @@ public class ContrainteRencontres extends Contrainte{
         this.max = max;
     }
 
-    public boolean addJournee(int id){
-        if(id>=0) return false;
-        this.journees.put(id, new Journee(id));
+    public boolean addJournee(Journee journee){
+        if(journee==null) return false;
+        this.journees.put(journee.getId(),journee);
         return true;
     }
 
-    public boolean addRencontre(Rencontre rencontreToAdd){
-        if(rencontreToAdd == null) return false;
-        this.rencontres.add(rencontreToAdd);
+    public boolean addRencontre(Rencontre rencontre){
+        if(rencontre == null) return false;
+        this.rencontres.add(rencontre);
         return true;
     }
 
@@ -38,5 +38,16 @@ public class ContrainteRencontres extends Contrainte{
     @Override
     public int getPenaliteCumulee(Championnat championnat) {
         return 0;
+    }
+
+    @Override
+    public String toString() {
+        return "ContrainteRencontres{" +
+                "journees=" + journees +
+                ", rencontres=" + rencontres +
+                ", min=" + min +
+                ", max=" + max +
+                ", dure=" + dure +
+                '}';
     }
 }

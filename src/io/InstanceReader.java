@@ -1,15 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package io;
 
-// TO CHECK : import des classes Instance, Client, Depot et Point
+import java.awt.event.WindowStateListener;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
 import instance.Instance;
-import instance.reseau.Client;
-import instance.reseau.Depot;
-import instance.reseau.Point;
+import instance.modele.Equipe;
+import instance.modele.contrainte.ContraintePlacement;
+import instance.modele.contrainte.TypeMode;
 import io.exception.FileExistException;
 import io.exception.FormatFileException;
 import io.exception.OpenFileException;
@@ -24,49 +25,36 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Cette classe permet de lire une instance pour les TPs du cours de LE4-SI
- * POO pour l'optimisation.
- * 
- * Les instances sont fournies sur moodle au format ".vrp".
- * 
- * Pour que le lecteur d'instance fonctionne correctement, il faut que les 
- * signatures des constructeurs des classes Depot, Client, et Instances, ainsi 
- * que la methode ajouterClient de la classe Instance soient bien conformes a 
- * la description dans le sujet du TP.
- * Des commentaires annotes avec 'TO CHECK' vous permettent de facilement reperer
- * dans cette classe les lignes que vous devez verifier et modifier si besoin. 
- * 
- * @author Maxime Ogier
- */
+import static instance.modele.contrainte.TypeMode.*;
+
 public class InstanceReader {
     /**
      * Le fichier contenant l'instance.
      */
     private File instanceFile;
-    
+
     /**
      * Constructeur par donnee du chemin du fichier d'instance.
-     * @param inputPath le chemin du fichier d'instance, qui doit se terminer 
+     * @param inputPath le chemin du fichier d'instance, qui doit se terminer
      * par l'extension du fichier (.xml).
-     * @throws ReaderException lorsque le fichier n'est pas au bon format ou 
+     * @throws ReaderException lorsque le fichier n'est pas au bon format ou
      * ne peut pas etre ouvert.
      */
     public InstanceReader(String inputPath) throws ReaderException {
         if (inputPath == null) {
             throw new OpenFileException();
         }
-        if (!inputPath.endsWith(".vrp")) {
-            throw new FormatFileException("vrp", "vrp");
+        if (!inputPath.endsWith(".txt")) {
+            throw new FormatFileException("txt", "txt");
         }
         String instanceName = inputPath;
         this.instanceFile = new File(instanceName);
     }
-    
+
     /**
      * Methode principale pour lire le fichier d'instance.
      * @return l'instance lue
-     * @throws ReaderException lorsque les donnees dans le fichier d'instance 
+     * @throws ReaderException lorsque les donnees dans le fichier d'instance
      * sont manquantes ou au mauvais format.
      */
     public Instance readInstance() throws ReaderException {
@@ -74,183 +62,725 @@ public class InstanceReader {
             FileReader f = new FileReader(this.instanceFile.getAbsolutePath());
             BufferedReader br = new BufferedReader(f);
             String nom = lireNom(br);
-            int capacite = lireCapacite(br);
-            Map<Integer, Point> points = lirePoints(br);
-            List<Client> clients = lireDemandes(br, points);
-            Depot depot = lireDepot(br, points);
+            int nbEquipes = lireNbEquipes(br);
+
+            Instance i = new Instance(nom,nbEquipes);
+
+
+
+
+
             // TO CHECK : constructeur de la classe Instance
-            Instance instance = new Instance(nom, capacite, depot);
-            for(Client c : clients) {
-                // TO CHECK : ajout d'un client dans la classe Instance
-                instance.ajouterClient(c);
-            }
+            this.lireContraintesDures(br, i);
+            this.lireContraintesSouples(br, i);
+
             br.close();
             f.close();
-            return instance;
+            return i;
         } catch (FileNotFoundException ex) {
             throw new FileExistException(instanceFile.getName());
         } catch (IOException ex) {
             throw new ReaderException("IO exception", ex.getMessage());
         }
     }
-    
+
     /**
      * Lecture du nom de l'instance.
      * La ligne dans le fichier doit commencer par "NAME :"
      * @param br lecteur courant du fichier d'instance
      * @return le nom de l'instance
-     * @throws IOException 
+     * @throws IOException
      */
     private String lireNom(BufferedReader br) throws IOException {
         String ligne = br.readLine();
-        while(!ligne.contains("NAME :")) {
-            ligne = br.readLine();
-        }
-        ligne = ligne.replace(" ", "");
-        ligne = ligne.replace("NAME:", "");
-        return ligne;
-    }
-    
-    /**
-     * Lecture des coordonees des points.
-     * La section dans le fichier doit commencer par "NODE_COORD_SECTION"
-     * puis chaque ligne contient : id, abscisse, ordonnee.
-     * La section se termine par "DEMAND_SECTION"
-     * @param br lecteur courant du fichier d'instance
-     * @return tous les points de l'instance, avec des ids uniques
-     * @throws IOException 
-     */
-    private Map<Integer,Point> lirePoints(BufferedReader br) throws IOException {
-        Map<Integer, Point> points = new LinkedHashMap<>();
-        String ligne = br.readLine();
-        while(!ligne.contains("NODE_COORD_SECTION")) {
+        while(!ligne.contains("// Nom")) {
             ligne = br.readLine();
         }
         ligne = br.readLine();
-        while(!ligne.contains("DEMAND_SECTION")) {
-            Point p = lireUnPoint(ligne);
-            points.put(p.getId(), p);
-            ligne = br.readLine();
-        }
-        return points;
-    }
-    
-    /**
-     * Lecture de la capacite de camions.
-     * La ligne doit commencer par "CAPACITY :"
-     * @param br le lecteur courant du fichier d'instance
-     * @return la capacite des camions
-     * @throws IOException 
-     */
-    private int lireCapacite(BufferedReader br) throws IOException {
-        String ligne = br.readLine();
-        while(!ligne.contains("CAPACITY :")) {
-            ligne = br.readLine();
-        }
-        ligne = ligne.replace(" ", "");
-        ligne = ligne.replace("CAPACITY:", "");
-        ligne = ligne.trim();
-        int capacite = Integer.parseInt(ligne);
-        return capacite;
-    }
-    
-    /**
-     * Lecture des demandes des clients.
-     * Cette methode doit etre appelee juste apres la methode lirePoints.
-     * La lecture se termine par la ligne "DEPOT_SECTION".
-     * Seuls les clients avec une demande strictement positive sont renvoyes.
-     * @param br le lecteur courant du fichier d'instance
-     * @param points l'ensemble des points (lus avec la methode lirePoints)
-     * @return l'ensemble des clients avec une demande strictement positive
-     * @throws IOException 
-     */
-    private List<Client> lireDemandes(BufferedReader br, Map<Integer, Point> points) 
-            throws IOException {
-        List<Client> clients = new ArrayList<>();
-        String ligne = br.readLine();
-        while(!ligne.contains("DEPOT_SECTION")) {
-            Client c = lireUneDemande(ligne, points);
-            if(c != null) {
-                clients.add(c);
-            }
-            ligne = br.readLine();
-        }
-        return clients;
+        return ligne;
     }
 
-    /**
-     * Lecture d'un point sur une ligne.
-     * @param ligne ligne du fichier d'instance contenant un point avec : id, 
-     * abscisse, ordonnee
-     * @return un point (client avec demande de 0)
-     * @throws IOException
-     * @throws NumberFormatException 
-     */
-    private Point lireUnPoint(String ligne) throws IOException, NumberFormatException {
-        ligne = ligne.strip();
-        String[] values = ligne.split(" |\t");
-        int id = Integer.parseInt(values[0]);
-        int x = Integer.parseInt(values[1]);
-        int y = Integer.parseInt(values[2]);
-        // TO CHECK : constructeur de la classe Client
-        // ordre des paramètres : quantite, identifiant, abscisse, ordonnee
-        return new Client(id,x,y,0);
-    }
-    
-    /**
-     * Lecture d'un client avec sa demande.
-     * A partir de l'id du client, on recupere le point correspondant, et on cree
-     * un client avec les ccaracteristiques du point et sa demande.
-     * @param ligne ligne du fichier de texte dans laquelle on a l'id du client 
-     * et sa demande
-     * @param points tous les points de l'instance
-     * @return un client avec demande positive, null si la demande est negative 
-     * ou nulle
-     * @throws IOException
-     * @throws NumberFormatException 
-     */
-    private Client lireUneDemande(String ligne, Map<Integer, Point> points) 
-            throws IOException, NumberFormatException {
-        ligne = ligne.strip();
-        String[] values = ligne.split(" |\t");
-        int id = Integer.parseInt(values[0]);
-        int q = Integer.parseInt(values[1]);
-        if(q <= 0) {
-            return null;
-        }
-        Point p = points.get(id);
-        // TO CHECK : constructeur de la classe Client
-        // ordre des paramètres : quantite, identifiant, abscisse, ordonnee
-        return new Client(p.getId(), p.getAbscisse(), p.getOrdonnee(), q);
-    }
-    
-    /**
-     * Lecture du depot.
-     * Parmi les point de l'instance, on choisit celui dont l'id est celui du depot.
-     * Cette methode doit etre appelee juste apres la methode lireDemandes
-     * @param br le lecteur courant du fichier d'instance
-     * @param points les points de l'instance (lus avec la methode lirePoints)
-     * @return le depot de l'instance
-     * @throws IOException 
-     */
-    private Depot lireDepot(BufferedReader br, Map<Integer, Point> points) throws IOException {
+
+    private void lireContraintesDures(BufferedReader br, Instance i) throws IOException {
         String ligne = br.readLine();
-        ligne = ligne.strip();
-        int id = Integer.parseInt(ligne);
-        Point p = points.get(id);
-        // TO CHECK : constructeur de la classe Depot
-        // ordre des paramètres : identifiant, abscisse, ordonnee
-        Depot depot = new Depot(p.getId(), p.getAbscisse(), p.getOrdonnee());
-        return depot;
+        while(!ligne.contains("// Contraintes dures")) {
+            ligne = br.readLine();
+        }
+
+        System.out.println("\n--------------- CONTRAINTES DURES ---------------");
+        i.addContrainte(this.lireContraintesPlacement(br,i));
+        this.lireContraintesHBClassement(br);
+        this.lireContraintesRencontres(br);
+        this.lireContraintesPauseEquipes(br);
+        this.lireContraintesPauseGlobale(br);
     }
-    
+
+
+
+
+    private ContraintePlacement lireContraintesPlacement(BufferedReader br,Instance instance) throws IOException {
+        String ligne = br.readLine();
+        String[] tokens, tokensJours;
+        int idEquipe, max, nbContraintesPlacement;
+        String idJour;
+        String maxStr;
+        String mode;
+        String equipeStr;
+        ContraintePlacement contraintePlacement = null;
+
+
+
+        while(!ligne.contains("// Contraintes de placement")) {
+            ligne = br.readLine();
+        }
+
+        while(!ligne.contains("// Nombre")) {
+            ligne = br.readLine();
+        }
+
+        ligne = br.readLine();
+        ligne = ligne.trim();
+        nbContraintesPlacement = Integer.parseInt(ligne);
+
+
+        while(!ligne.contains("// Contraintes")) {
+            ligne = br.readLine();
+        }
+
+        for(int i =0; i<nbContraintesPlacement;i++){
+            ligne = br.readLine();
+            System.out.println(ligne);
+
+            tokens = ligne.split("\t");
+            equipeStr = tokens[0].split("=")[1];
+
+            idJour = tokens[1].split("=")[1];
+
+            mode = tokens[2].split("=")[1];
+            maxStr = tokens[3].split("=")[1];
+
+            idEquipe = Integer.parseInt(equipeStr);
+            max = Integer.parseInt(maxStr);
+
+            contraintePlacement = new ContraintePlacement(instance.getEquipeById(idEquipe), castModeToTypeEnum(mode), max);
+
+            tokensJours = idJour.split(";");
+            for (int j = 0; j < tokensJours.length; j++) {
+                contraintePlacement.addJournee(instance.getJourneeById(Integer.parseInt(tokensJours[j])));
+            }
+
+            System.out.println("\nCONTRAINTES PLACEMENT");
+            System.out.println("La valeur de l'équipe est : " + idEquipe);
+            System.out.println("La liste des jours est : " + idJour);
+            System.out.println("Le mode est : " + mode);
+            System.out.println("La valeur du max est : " +max);
+
+        }
+        return contraintePlacement;
+    }
+
+    private void lireContraintesHBClassement(BufferedReader br) throws IOException {
+        String ligne = br.readLine();
+        int nbContraintesHBClassement, idEquipe, max;
+        String equipeStr, mode, idJour, idEquipeAdverse, maxStr;
+        String[] tokens;
+
+        while(!ligne.contains("// Contraintes d'equipes en haut et bas de classement")) {
+            ligne = br.readLine();
+        }
+
+        while(!ligne.contains("// Nombre")) {
+            ligne = br.readLine();
+        }
+
+        ligne = br.readLine();
+        ligne = ligne.trim();
+        nbContraintesHBClassement = Integer.parseInt(ligne);
+
+
+        while(!ligne.contains("// Contraintes")) {
+            ligne = br.readLine();
+        }
+
+        for(int i =0; i<nbContraintesHBClassement;i++){
+            ligne = br.readLine();
+            System.out.println(ligne);
+
+            tokens = ligne.split("\t");
+            equipeStr = tokens[0].split("=")[1];
+            idJour = tokens[1].split("=")[1];
+            idEquipeAdverse = tokens[2].split("=")[1];
+            mode = tokens[3].split("=")[1];
+            maxStr = tokens[4].split("=")[1];
+
+            idEquipe = Integer.parseInt(equipeStr);
+            max = Integer.parseInt(maxStr);
+
+            System.out.println("\nCONTRAINTES HB CLASSEMENT");
+            System.out.println("La valeur de l'équipe est : " + idEquipe);
+            System.out.println("La liste des jours est : " + idJour);
+            System.out.println("La Liste des équipes adverses sont : " +idEquipeAdverse);
+            System.out.println("Le mode est : " + mode);
+            System.out.println("La valeur du max est : " +max);
+
+        }
+    }
+
+    private void lireContraintesRencontres(BufferedReader br) throws IOException {
+        String ligne = br.readLine();
+        int nbContraintesRencontre, max, min;
+        String idJour, idRencontre, maxStr, minStr;
+        String[] tokens;
+
+        while(!ligne.contains("// Contraintes de rencontres")) {
+            ligne = br.readLine();
+        }
+
+        while(!ligne.contains("// Nombre")) {
+            ligne = br.readLine();
+        }
+
+        ligne = br.readLine();
+        ligne = ligne.trim();
+        nbContraintesRencontre = Integer.parseInt(ligne);
+
+
+        while(!ligne.contains("// Contraintes")) {
+            ligne = br.readLine();
+        }
+
+        for(int i =0; i<nbContraintesRencontre;i++){
+            ligne = br.readLine();
+            System.out.println(ligne);
+
+            tokens = ligne.split("\t");
+
+            idJour = tokens[0].split("=")[1];
+            idRencontre = tokens[1].split("=")[1];
+            minStr = tokens[2].split("=")[1];
+            maxStr = tokens[3].split("=")[1];
+
+            min = Integer.parseInt(minStr);
+            max = Integer.parseInt(maxStr);
+
+            System.out.println("\nCONTRAINTES RENCONTRES");
+            System.out.println("La liste des jours est : " + idJour);
+            System.out.println("La Liste des équipes adverses sont : " +idRencontre);
+            System.out.println("La valeur du min est : " + min);
+            System.out.println("La valeur du max est : " +max);
+
+        }
+    }
+
+    private void lireContraintesPauseEquipes(BufferedReader br) throws IOException {
+        String ligne = br.readLine();
+        int nbContraintesPauseEquipes, max, idEquipe;
+        String idJour,maxStr, equipeStr, mode;
+        String[] tokens;
+
+        while(!ligne.contains("// Contraintes de pause par equipe")) {
+            ligne = br.readLine();
+        }
+
+        while(!ligne.contains("// Nombre")) {
+            ligne = br.readLine();
+        }
+
+        ligne = br.readLine();
+        ligne = ligne.trim();
+        nbContraintesPauseEquipes = Integer.parseInt(ligne);
+
+
+        while(!ligne.contains("// Contraintes")) {
+            ligne = br.readLine();
+        }
+
+        for(int i =0; i<nbContraintesPauseEquipes;i++){
+            ligne = br.readLine();
+            System.out.println(ligne);
+
+            tokens = ligne.split("\t");
+
+            equipeStr = tokens[0].split("=")[1];
+            idJour = tokens[1].split("=")[1];
+            mode = tokens[2].split("=")[1];
+            maxStr = tokens[3].split("=")[1];
+
+            idEquipe = Integer.parseInt(equipeStr);
+            max = Integer.parseInt(maxStr);
+
+            System.out.println("\nCONTRAINTES PAUSE EQUIPES");
+            System.out.println("La Liste des équipes adverses sont : " +idEquipe);
+            System.out.println("La liste des jours est : " + idJour);
+            System.out.println("La valeur du min est : " + mode);
+            System.out.println("La valeur du max est : " +max);
+
+        }
+    }
+
+    private void lireContraintesPauseGlobale(BufferedReader br) throws IOException {
+        String ligne = br.readLine();
+        int nbContraintesPauseGlobale, max;
+        String idJour,maxStr, equipeStr;
+        String[] tokens;
+
+        while(!ligne.contains("// Contraintes de pause globale")) {
+            ligne = br.readLine();
+        }
+
+        while(!ligne.contains("// Nombre")) {
+            ligne = br.readLine();
+        }
+
+        ligne = br.readLine();
+        ligne = ligne.trim();
+        nbContraintesPauseGlobale = Integer.parseInt(ligne);
+
+
+        while(!ligne.contains("// Contraintes")) {
+            ligne = br.readLine();
+        }
+
+        for(int i =0; i<nbContraintesPauseGlobale;i++){
+            ligne = br.readLine();
+            System.out.println(ligne);
+
+            tokens = ligne.split("\t");
+
+            equipeStr = tokens[0].split("=")[1];
+            idJour = tokens[1].split("=")[1];
+            maxStr = tokens[2].split("=")[1];
+
+
+            max = Integer.parseInt(maxStr);
+
+            System.out.println("\nCONTRAINTES PAUSE GLOBALE");
+            System.out.println("La Liste des équipes adverses sont : " +equipeStr);
+            System.out.println("La liste des jours est : " + idJour);
+            System.out.println("La valeur du max est : " +max);
+
+        }
+    }
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    //CONTRAINTES SOUPLES
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    private void lireContraintesSouples(BufferedReader br, Instance i) throws IOException {
+        String ligne = br.readLine();
+        while(!ligne.contains("// Contraintes souples")) {
+            ligne = br.readLine();
+        }
+        System.out.println("\n--------------- CONTRAINTES SOUPLES ---------------");
+        this.lireContraintesPlacementSouple(br);
+        this.lireContraintesHBClassementSouple(br);
+        this.lireContraintesRencontresSouple(br);
+        this.lireContraintesPauseEquipesSouple(br);
+        this.lireContraintesPauseGlobaleSouple(br);
+        this.lireContraintesEquite(br);
+        this.lireContraintesSeparation(br);
+    }
+
+
+
+
+    private void lireContraintesPlacementSouple(BufferedReader br) throws IOException {
+        String ligne = br.readLine();
+        String[] tokens;
+        int idEquipe, max, nbContraintesPlacement,penalite;
+        String idJour, maxStr, mode, equipeStr,penaliteStr;
+
+
+
+        while(!ligne.contains("// Contraintes de placement")) {
+            ligne = br.readLine();
+        }
+
+        while(!ligne.contains("// Nombre")) {
+            ligne = br.readLine();
+        }
+
+        ligne = br.readLine();
+        ligne = ligne.trim();
+        nbContraintesPlacement = Integer.parseInt(ligne);
+
+
+        while(!ligne.contains("// Contraintes")) {
+            ligne = br.readLine();
+        }
+
+        for(int i =0; i<nbContraintesPlacement;i++){
+            ligne = br.readLine();
+            System.out.println(ligne);
+
+            tokens = ligne.split("\t");
+            equipeStr = tokens[0].split("=")[1];
+            idJour = tokens[1].split("=")[1];
+            mode = tokens[2].split("=")[1];
+            maxStr = tokens[3].split("=")[1];
+            penaliteStr = tokens[4].split("=")[1];
+
+
+            idEquipe = Integer.parseInt(equipeStr);
+            max = Integer.parseInt(maxStr);
+            penalite = Integer.parseInt(penaliteStr);
+
+            System.out.println("\nCONTRAINTES PLACEMENT SOUPLE");
+            System.out.println("La valeur de l'équipe est : " + idEquipe);
+            System.out.println("La liste des jours est : " + idJour);
+            System.out.println("Le mode est : " + mode);
+            System.out.println("La valeur du max est : " +max);
+            System.out.println("La valeur de la penalite est : " +penalite);
+
+
+        }
+    }
+
+    private void lireContraintesHBClassementSouple(BufferedReader br) throws IOException {
+        String ligne = br.readLine();
+        int nbContraintesHBClassement, idEquipe, max, penalite;
+        String equipeStr, mode, idJour, idEquipeAdverse, maxStr, penaliteStr;
+        String[] tokens;
+
+        while(!ligne.contains("// Contraintes d'equipes en haut et bas de classement")) {
+            ligne = br.readLine();
+        }
+
+        while(!ligne.contains("// Nombre")) {
+            ligne = br.readLine();
+        }
+
+        ligne = br.readLine();
+        ligne = ligne.trim();
+        nbContraintesHBClassement = Integer.parseInt(ligne);
+
+
+        while(!ligne.contains("// Contraintes")) {
+            ligne = br.readLine();
+        }
+
+        for(int i =0; i<nbContraintesHBClassement;i++){
+            ligne = br.readLine();
+            System.out.println(ligne);
+
+            tokens = ligne.split("\t");
+            equipeStr = tokens[0].split("=")[1];
+            idJour = tokens[1].split("=")[1];
+            idEquipeAdverse = tokens[2].split("=")[1];
+            mode = tokens[3].split("=")[1];
+            maxStr = tokens[4].split("=")[1];
+            penaliteStr = tokens[5].split("=")[1];
+
+            idEquipe = Integer.parseInt(equipeStr);
+            max = Integer.parseInt(maxStr);
+            penalite = Integer.parseInt(penaliteStr);
+
+            System.out.println("\nCONTRAINTES HB CLASSEMENT SOUPLE");
+            System.out.println("La valeur de l'équipe est : " + idEquipe);
+            System.out.println("La liste des jours est : " + idJour);
+            System.out.println("La Liste des équipes adverses sont : " +idEquipeAdverse);
+            System.out.println("Le mode est : " + mode);
+            System.out.println("La valeur du max est : " +max);
+            System.out.println("La valeur de la penalite est : " +penalite);
+
+        }
+    }
+
+    private void lireContraintesRencontresSouple(BufferedReader br) throws IOException {
+        String ligne = br.readLine();
+        int nbContraintesRencontre, max, min,penalite;
+        String idJour, idRencontre, maxStr, minStr,penaliteStr;
+        String[] tokens;
+
+        while(!ligne.contains("// Contraintes de rencontres")) {
+            ligne = br.readLine();
+        }
+
+        while(!ligne.contains("// Nombre")) {
+            ligne = br.readLine();
+        }
+
+        ligne = br.readLine();
+        ligne = ligne.trim();
+        nbContraintesRencontre = Integer.parseInt(ligne);
+
+
+        while(!ligne.contains("// Contraintes")) {
+            ligne = br.readLine();
+        }
+
+        for(int i =0; i<nbContraintesRencontre;i++){
+            ligne = br.readLine();
+            System.out.println(ligne);
+
+            tokens = ligne.split("\t");
+
+            idJour = tokens[0].split("=")[1];
+            idRencontre = tokens[1].split("=")[1];
+            minStr = tokens[2].split("=")[1];
+            maxStr = tokens[3].split("=")[1];
+            penaliteStr = tokens[4].split("=")[1];
+
+            min = Integer.parseInt(minStr);
+            max = Integer.parseInt(maxStr);
+            penalite = Integer.parseInt(penaliteStr);
+
+            System.out.println("\nCONTRAINTES RENCONTRES SOUPLE");
+            System.out.println("La liste des jours est : " + idJour);
+            System.out.println("La Liste des rencontres sont : " +idRencontre);
+            System.out.println("La valeur du min est : " + min);
+            System.out.println("La valeur du max est : " +max);
+            System.out.println("La valeur de la penalite est : " +penalite);
+
+        }
+    }
+
+    private void lireContraintesPauseEquipesSouple(BufferedReader br) throws IOException {
+        String ligne = br.readLine();
+        int nbContraintesRencontre, max, idEquipe,penalite;
+        String idJour,maxStr, equipeStr, mode,penaliteStr;
+        String[] tokens;
+
+        while(!ligne.contains("// Contraintes de pause par equipe")) {
+            ligne = br.readLine();
+        }
+
+        while(!ligne.contains("// Nombre")) {
+            ligne = br.readLine();
+        }
+
+        ligne = br.readLine();
+        ligne = ligne.trim();
+        nbContraintesRencontre = Integer.parseInt(ligne);
+
+
+        while(!ligne.contains("// Contraintes")) {
+            ligne = br.readLine();
+        }
+
+        for(int i =0; i<nbContraintesRencontre;i++){
+            ligne = br.readLine();
+            System.out.println(ligne);
+
+            tokens = ligne.split("\t");
+
+            equipeStr = tokens[0].split("=")[1];
+            idJour = tokens[1].split("=")[1];
+            mode = tokens[2].split("=")[1];
+            maxStr = tokens[3].split("=")[1];
+            penaliteStr = tokens[4].split("=")[1];
+
+
+            idEquipe = Integer.parseInt(equipeStr);
+            max = Integer.parseInt(maxStr);
+            penalite = Integer.parseInt(penaliteStr);
+
+            System.out.println("\nCONTRAINTES PAUSE EQUIPES SOUPLE");
+            System.out.println("La Liste des équipes adverses sont : " +idEquipe);
+            System.out.println("La liste des jours est : " + idJour);
+            System.out.println("La valeur du min est : " + mode);
+            System.out.println("La valeur du max est : " +max);
+            System.out.println("La valeur de la penalite est : " +penalite);
+
+
+        }
+    }
+
+    private void lireContraintesPauseGlobaleSouple(BufferedReader br) throws IOException {
+       String ligne = br.readLine();
+        int nbContraintesRencontre, max, penalite;
+        String idJour,maxStr, equipeStr,penaliteStr;
+        String[] tokens;
+
+        while(!ligne.contains("// Contraintes de pause globale")) {
+            ligne = br.readLine();
+        }
+
+        while(!ligne.contains("// Nombre")) {
+            ligne = br.readLine();
+        }
+
+        ligne = br.readLine();
+        ligne = ligne.trim();
+        nbContraintesRencontre = Integer.parseInt(ligne);
+
+
+        while(!ligne.contains("// Contraintes")) {
+            ligne = br.readLine();
+        }
+
+        for(int i =0; i<nbContraintesRencontre;i++){
+            ligne = br.readLine();
+            System.out.println(ligne);
+
+            tokens = ligne.split("\t");
+
+            equipeStr = tokens[0].split("=")[1];
+            idJour = tokens[1].split("=")[1];
+            maxStr = tokens[2].split("=")[1];
+            penaliteStr = tokens[3].split("=")[1];
+
+
+
+            max = Integer.parseInt(maxStr);
+            penalite= Integer.parseInt(penaliteStr);
+
+            System.out.println("\nCONTRAINTES PAUSE GLOBALE SOUPLE");
+            System.out.println("La Liste des équipes adverses sont : " +equipeStr);
+            System.out.println("La liste des jours est : " + idJour);
+            System.out.println("La valeur du max est : " +max);
+            System.out.println("La valeur du max est : " +penalite);
+
+
+        }
+    }
+
+
+    private void lireContraintesEquite(BufferedReader br) throws IOException {
+        String ligne = br.readLine();
+        int nbContraintesRencontre, max, penalite;
+        String idJour,maxStr, equipeStr, penaliteStr;
+        String[] tokens;
+
+        while(!ligne.contains("// Contraintes d'equite")) {
+            ligne = br.readLine();
+        }
+
+        while(!ligne.contains("// Nombre")) {
+            ligne = br.readLine();
+        }
+
+        ligne = br.readLine();
+        ligne = ligne.trim();
+        nbContraintesRencontre = Integer.parseInt(ligne);
+
+
+        while(!ligne.contains("// Contraintes")) {
+            ligne = br.readLine();
+        }
+
+
+        for(int i =0; i<nbContraintesRencontre;i++){
+            ligne = br.readLine();
+            System.out.println(ligne);
+
+            tokens = ligne.split("\t");
+
+            equipeStr = tokens[0].split("=")[1];
+            idJour = tokens[1].split("=")[1];
+            maxStr = tokens[2].split("=")[1];
+            penaliteStr = tokens[3].split("=")[1];
+
+
+
+            max = Integer.parseInt(maxStr);
+            penalite = Integer.parseInt(penaliteStr);
+
+            System.out.println("\nCONTRAINTES EQUITE SOUPLE");
+            System.out.println("La Liste des équipes adverses sont : " +equipeStr);
+            System.out.println("La liste des jours est : " + idJour);
+            System.out.println("La valeur du max est : " +max);
+            System.out.println("La valeur de la penalite est : " +penalite);
+
+
+        }
+    }
+
+
+
+    private void lireContraintesSeparation(BufferedReader br) throws IOException {
+        String ligne = br.readLine();
+        int nbContraintesRencontre, min,penalite;
+        String idEquipe, minStr,penaliteStr;
+        String[] tokens;
+
+        while(!ligne.contains("// Contraintes de separation")) {
+            ligne = br.readLine();
+        }
+
+        while(!ligne.contains("// Nombre")) {
+            ligne = br.readLine();
+        }
+
+        ligne = br.readLine();
+        ligne = ligne.trim();
+        nbContraintesRencontre = Integer.parseInt(ligne);
+
+
+        while(!ligne.contains("// Contraintes")) {
+            ligne = br.readLine();
+        }
+
+        for(int i =0; i<nbContraintesRencontre;i++){
+            ligne = br.readLine();
+            System.out.println(ligne);
+
+            tokens = ligne.split("\t");
+
+            idEquipe = tokens[0].split("=")[1];
+            minStr = tokens[1].split("=")[1];
+            penaliteStr = tokens[2].split("=")[1];
+
+            min = Integer.parseInt(minStr);
+
+            penalite = Integer.parseInt(penaliteStr);
+
+            System.out.println("\nCONTRAINTES SEPARATION SOUPLE");
+            System.out.println("La liste des jours est : " + idEquipe);
+            System.out.println("La valeur du min est : " + min);
+            System.out.println("La valeur de la penalite est : " +penalite);
+
+        }
+    }
+
+
+
+
+    /**
+     * Lecture du nombre d'équipes.
+     * La ligne doit commencer par "// Nombre d'equipes"
+     * @param br le lecteur courant du fichier d'instance
+     * @return le nombre d'équipes
+     * @throws IOException
+     */
+    private int lireNbEquipes(BufferedReader br) throws IOException {
+        String ligne = br.readLine();
+        while(!ligne.contains("// Nombre d'equipes")) {
+            ligne = br.readLine();
+        }
+        ligne = br.readLine();
+        ligne = ligne.trim();
+        int nbEquipes = Integer.parseInt(ligne);
+        return nbEquipes;
+    }
+
+    private TypeMode castModeToTypeEnum(String mode) {
+        TypeMode typeMode = null;
+
+        switch(mode) {
+            case "D":
+                typeMode = DOMICILE;
+                break;
+            case "E":
+                typeMode = EXTERIEUR;
+                break;
+            case "DE":
+                typeMode = INDEFINI;
+                break;
+        }
+        return typeMode;
+    }
+
+
     /**
      * Test de lecture d'une instance.
-     * @param args 
+     * @param args
      */
     public static void main(String[] args) {
         try {
-            InstanceReader reader = new InstanceReader("instances/A-n32-k5.vrp");
+            InstanceReader reader = new InstanceReader("instances/instance_ITC2021_Test_1.txt");
             reader.readInstance();
             System.out.println("Instance lue avec success !");
         } catch (ReaderException ex) {
@@ -258,3 +788,4 @@ public class InstanceReader {
         }
     }
 }
+

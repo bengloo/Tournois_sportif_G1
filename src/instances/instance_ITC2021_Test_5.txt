@@ -1,0 +1,192 @@
+// Nom
+Test Instance 5
+
+// Nombre d'equipes
+16
+
+// Contraintes dures
+
+// Contraintes de placement
+// Nombre
+8
+// Contraintes
+equipe=8	jours=7;17;23;26	mode=D	max=1
+equipe=11	jours=22	mode=D	max=0
+equipe=5	jours=2;27	mode=E	max=1
+equipe=9	jours=6;7;10;28	mode=D	max=1
+equipe=3	jours=14	mode=E	max=0
+equipe=6	jours=0;6;19;24	mode=E	max=2
+equipe=10	jours=3;18	mode=E	max=1
+equipe=9	jours=0;1;17	mode=E	max=1
+
+// Contraintes d'equipes en haut et bas de classement
+// Nombre
+16
+// Contraintes
+equipe=12	jours=5;7;18;25;26	equipesAdverses=0;6;13;14;15	mode=DE	max=1
+equipe=12	jours=0	equipesAdverses=6	mode=D	max=0
+equipe=2	jours=2;7;13;20;22	equipesAdverses=1;4;8;11;13	mode=DE	max=1
+equipe=1	jours=10	equipesAdverses=0	mode=D	max=0
+equipe=3	jours=7	equipesAdverses=5	mode=E	max=0
+equipe=11	jours=3;10;25;26	equipesAdverses=1;12;14;15	mode=DE	max=1
+equipe=2	jours=14	equipesAdverses=0	mode=D	max=0
+equipe=8	jours=9	equipesAdverses=11	mode=E	max=0
+equipe=9	jours=27	equipesAdverses=14	mode=E	max=0
+equipe=5	jours=15	equipesAdverses=4	mode=D	max=0
+equipe=7	jours=9	equipesAdverses=0	mode=D	max=0
+equipe=2	jours=8;11;14;21;22;29	equipesAdverses=3;7;8;10;13;15	mode=DE	max=4
+equipe=12	jours=0;1;18;19;21;25	equipesAdverses=0;3;5;13;14;15	mode=DE	max=2
+equipe=12	jours=12	equipesAdverses=3	mode=D	max=0
+equipe=5	jours=25	equipesAdverses=2	mode=D	max=0
+equipe=15	jours=6;12;14;17	equipesAdverses=4;11;12;13	mode=DE	max=1
+
+// Contraintes de rencontres
+// Nombre
+31
+// Contraintes
+jours=9	rencontres=14,13	min=0	max=0
+jours=20	rencontres=6,3	min=1	max=1
+jours=10	rencontres=6,14	min=1	max=1
+jours=19	rencontres=14,13	min=0	max=0
+jours=3	rencontres=7,12	min=0	max=0
+jours=27	rencontres=5,8	min=1	max=1
+jours=21;23	rencontres=3,13;5,6;11,4	min=2	max=3
+jours=12	rencontres=6,9	min=0	max=0
+jours=5;11;28	rencontres=0,5;8,5;12,11	min=2	max=3
+jours=4;13;14;20	rencontres=2,15;6,5;9,4;13,0	min=2	max=4
+jours=28	rencontres=9,15	min=0	max=0
+jours=4;23;29	rencontres=0,3;14,15;15,8	min=0	max=1
+jours=11	rencontres=6,12	min=0	max=0
+jours=1;22;25	rencontres=0,4;0,11;3,12	min=2	max=3
+jours=6;11	rencontres=0,1;13,8	min=0	max=1
+jours=2;28	rencontres=2,4;11,12	min=0	max=1
+jours=1;10	rencontres=6,7;8,9	min=0	max=1
+jours=11;23	rencontres=14,4;15,3	min=1	max=2
+jours=20;26;28;29	rencontres=12,11;13,7;15,2;15,7	min=2	max=4
+jours=2	rencontres=5,7	min=1	max=1
+jours=3	rencontres=8,10	min=0	max=0
+jours=4;9;18;23	rencontres=5,1;8,2;9,0;10,2	min=2	max=4
+jours=9	rencontres=7,3	min=0	max=0
+jours=8	rencontres=0,9	min=1	max=1
+jours=8	rencontres=11,5	min=1	max=1
+jours=10;20	rencontres=7,15;9,4	min=1	max=2
+jours=17;23;24;26	rencontres=3,14;4,13;11,8;15,4	min=2	max=4
+jours=4	rencontres=3,9	min=1	max=1
+jours=9	rencontres=9,7	min=1	max=1
+jours=2;9;14;29	rencontres=0,3;1,15;11,1;13,4	min=0	max=2
+jours=2;6;7;28	rencontres=5,12;6,4;12,13;15,8	min=2	max=4
+
+// Contraintes de pause par equipe
+// Nombre
+13
+// Contraintes
+equipe=0	jours=23	mode=DE	max=0
+equipe=6	jours=12	mode=DE	max=0
+equipe=10	jours=11	mode=DE	max=0
+equipe=5	jours=4;7;28	mode=DE	max=1
+equipe=4	jours=4;6;14;15;17;27	mode=DE	max=2
+equipe=14	jours=4;8;13;19;22;28	mode=DE	max=2
+equipe=0	jours=27	mode=DE	max=0
+equipe=11	jours=13;17;20	mode=DE	max=1
+equipe=2	jours=2	mode=DE	max=0
+equipe=7	jours=4;5;11;19;22;24	mode=DE	max=2
+equipe=7	jours=8;14;17;19;21;27	mode=DE	max=2
+equipe=10	jours=3;14;17;18;22;29	mode=DE	max=2
+equipe=11	jours=8;11;19	mode=DE	max=1
+
+// Contraintes de pause globale
+// Nombre
+0
+// Contraintes
+
+
+// Contraintes souples
+
+// Contraintes de placement
+// Nombre
+29
+// Contraintes
+equipe=3	jours=4;12;20;29	mode=D	max=1	penalite=1
+equipe=8	jours=8;22	mode=E	max=1	penalite=1
+equipe=15	jours=2;17;26	mode=D	max=1	penalite=1
+equipe=14	jours=8;12;15;21;23	mode=D	max=1	penalite=1
+equipe=14	jours=21	mode=D	max=0	penalite=1
+equipe=10	jours=0;7;10;12;17;20	mode=D	max=2	penalite=1
+equipe=5	jours=7;8;20;22;27	mode=D	max=1	penalite=1
+equipe=13	jours=7	mode=D	max=0	penalite=1
+equipe=13	jours=5;27	mode=E	max=1	penalite=1
+equipe=2	jours=18	mode=E	max=0	penalite=1
+equipe=12	jours=23	mode=E	max=0	penalite=1
+equipe=2	jours=5;19;22;23;24;29	mode=D	max=2	penalite=1
+equipe=10	jours=2	mode=E	max=0	penalite=1
+equipe=13	jours=0;4;5;13;23;25	mode=E	max=2	penalite=1
+equipe=3	jours=21	mode=E	max=0	penalite=1
+equipe=5	jours=14;22	mode=D	max=1	penalite=1
+equipe=6	jours=20	mode=D	max=0	penalite=1
+equipe=2	jours=8;9;14;24;25	mode=E	max=1	penalite=1
+equipe=13	jours=7	mode=E	max=0	penalite=1
+equipe=6	jours=1;8;12;18;20	mode=E	max=1	penalite=1
+equipe=14	jours=1	mode=D	max=0	penalite=1
+equipe=11	jours=5;10;14;15;28	mode=E	max=1	penalite=1
+equipe=15	jours=1;2	mode=D	max=1	penalite=1
+equipe=4	jours=7;10;15;18;23	mode=E	max=1	penalite=1
+equipe=13	jours=6	mode=E	max=0	penalite=1
+equipe=1	jours=5;9;11;12;22;27	mode=D	max=2	penalite=1
+equipe=9	jours=7;18;22;29	mode=D	max=1	penalite=1
+equipe=1	jours=1	mode=D	max=0	penalite=1
+equipe=7	jours=9;15;18	mode=E	max=1	penalite=1
+
+// Contraintes d'equipes en haut et bas de classement
+// Nombre
+0
+// Contraintes
+
+// Contraintes de rencontres
+// Nombre
+5
+// Contraintes
+jours=5;13;14	rencontres=15,9	min=1	max=1	penalite=1
+jours=12	rencontres=1,0;2,3;15,2	min=2	max=3	penalite=1
+jours=27	rencontres=5,12	min=0	max=0	penalite=1
+jours=17	rencontres=4,13	min=0	max=0	penalite=1
+jours=20	rencontres=0,10;9,10	min=0	max=1	penalite=1
+
+// Contraintes de pause par equipe
+// Nombre
+20
+// Contraintes
+equipe=2	jours=0;2;15;18;22;29	mode=DE	max=2	penalite=5
+equipe=0	jours=6;13;18;21;26;28	mode=DE	max=2	penalite=5
+equipe=6	jours=6;17;20;21;25;28	mode=DE	max=2	penalite=5
+equipe=6	jours=2	mode=DE	max=0	penalite=5
+equipe=9	jours=27	mode=DE	max=0	penalite=5
+equipe=5	jours=8;11;22	mode=DE	max=1	penalite=5
+equipe=10	jours=5;7;8;10;11;22	mode=DE	max=2	penalite=5
+equipe=8	jours=25	mode=DE	max=0	penalite=5
+equipe=6	jours=9;14;16;19;26;27	mode=DE	max=2	penalite=5
+equipe=8	jours=19;24;26	mode=DE	max=1	penalite=5
+equipe=12	jours=21	mode=DE	max=0	penalite=5
+equipe=5	jours=11;15;19;20;27;29	mode=DE	max=2	penalite=5
+equipe=9	jours=0	mode=DE	max=0	penalite=5
+equipe=10	jours=24	mode=DE	max=0	penalite=5
+equipe=12	jours=27	mode=DE	max=0	penalite=5
+equipe=3	jours=18	mode=DE	max=0	penalite=5
+equipe=8	jours=9	mode=DE	max=0	penalite=5
+equipe=2	jours=5	mode=DE	max=0	penalite=5
+equipe=7	jours=8	mode=DE	max=0	penalite=5
+equipe=7	jours=6;7;14;15;20;24	mode=DE	max=2	penalite=5
+
+// Contraintes de pause globale
+// Nombre
+0
+// Contraintes
+
+// Contraintes d'equite
+// Nombre
+0
+// Contraintes
+
+// Contraintes de separation
+// Nombre
+0
+// Contraintes

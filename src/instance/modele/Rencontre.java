@@ -1,18 +1,14 @@
 package instance.modele;
 
-import solution.Journee;
-
 import java.util.Objects;
 
 public class Rencontre {
     private Equipe exterieur;
     private Equipe domicile;
-    private Journee journee;
 
     public Rencontre(Equipe exterieur, Equipe domicile) {
         this.exterieur = exterieur;
         this.domicile = domicile;
-        this.journee=null;
     }
 
     @Override
@@ -25,5 +21,17 @@ public class Rencontre {
     @Override
     public int hashCode() {
         return Objects.hash(exterieur, domicile);
+    }
+
+
+    public String toStringLong() {
+        return "Rencontre{" +
+                "exterieur=" + exterieur +
+                ", domicile=" + domicile +
+                '}';
+    }
+    @Override
+    public String toString() {
+        return exterieur.getId()+","+domicile.getId();
     }
 }
