@@ -1,6 +1,6 @@
-package solution;
+package instance.modele;
 
-import instance.modele.Equipe;
+import solution.Journee;
 
 import java.util.Objects;
 

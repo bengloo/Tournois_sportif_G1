@@ -31,9 +31,9 @@ public class ContraintePauseEquipe extends Contrainte{
         this.penalite = penalite;
     }
 
-    public boolean addJournee(Journee journeeToAdd){
-        if(journeeToAdd == null) return false;
-        this.journees.put(journeeToAdd.getId(), journeeToAdd);
+    public boolean addJournee(int id){
+        if(id>=0) return false;
+        this.journees.put(id, new Journee(id));
         return true;
     }
 

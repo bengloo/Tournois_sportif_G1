@@ -29,14 +29,14 @@ public class ContraintePauseGlobale extends Contrainte{
         this.penalite = penalite;
     }
 
-    public boolean addEquipe(Equipe equipeToAdd){
-        if(equipeToAdd == null) return false;
-        this.equipes.put(equipeToAdd.getId(), equipeToAdd);
+    public boolean addEquipe(int id){
+        if(id>=0) return false;
+        this.equipes.put(id, new Equipe(id));
         return true;
     }
-    public boolean addJournee(Journee journeeToAdd){
-        if(journeeToAdd == null) return false;
-        this.journees.put(journeeToAdd.getId(), journeeToAdd);
+    public boolean addJournee(int id){
+        if(id>=0) return false;
+        this.journees.put(id, new Journee(id));
         return true;
     }
 

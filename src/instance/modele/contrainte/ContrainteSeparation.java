@@ -23,9 +23,9 @@ public class ContrainteSeparation extends Contrainte{
 
     }
 
-    public boolean addEquipe(Equipe equipeToAdd){
-        if(equipeToAdd == null) return false;
-        this.equipes.put(equipeToAdd.getId(), equipeToAdd);
+    public boolean addEquipe(int id){
+        if(id>=0) return false;
+        this.equipes.put(id, new Equipe(id));
         return true;
     }
 

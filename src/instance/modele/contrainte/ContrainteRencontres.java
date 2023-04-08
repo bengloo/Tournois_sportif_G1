@@ -2,7 +2,7 @@ package instance.modele.contrainte;
 
 import solution.Championnat;
 import solution.Journee;
-import solution.Rencontre;
+import instance.modele.Rencontre;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -22,9 +22,9 @@ public class ContrainteRencontres extends Contrainte{
         this.max = max;
     }
 
-    public boolean addJournee(Journee journeeToAdd){
-        if(journeeToAdd == null) return false;
-        this.journees.put(journeeToAdd.getId(), journeeToAdd);
+    public boolean addJournee(int id){
+        if(id>=0) return false;
+        this.journees.put(id, new Journee(id));
         return true;
     }
 

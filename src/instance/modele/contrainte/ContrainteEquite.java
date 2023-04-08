@@ -26,20 +26,20 @@ public class ContrainteEquite extends Contrainte {
 
     }
 
-    public boolean addEquipe(Equipe equipeToAdd){
-        if(equipeToAdd == null) return false;
-        this.equipes.put(equipeToAdd.getId(), equipeToAdd);
+    public boolean addEquipe(int id){
+        if(id>=0) return false;
+        this.equipes.put(id, new Equipe(id));
         return true;
     }
-    public boolean addJournee(Journee journeeToAdd){
-        if(journeeToAdd == null) return false;
-        this.journees.put(journeeToAdd.getId(), journeeToAdd);
+    public boolean addJournee(int id){
+        if(id>=0) return false;
+        this.journees.put(id, new Journee(id));
         return true;
     }
 
-    public boolean addEquipeAdverse(Equipe equipeToAdd){
-        if(equipeToAdd == null) return false;
-        this.equipesAdverses.put(equipeToAdd.getId(), equipeToAdd);
+    public boolean addEquipeAdverse(int id){
+        if(id>=0) return false;
+        this.equipesAdverses.put(id, new Equipe(id));
         return true;
     }
 
