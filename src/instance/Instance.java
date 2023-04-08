@@ -103,6 +103,10 @@ public class Instance {
     public Map<Integer, Equipe> getEquipes() {
         return equipes;
     }
+
+    public Map<Integer, Journee> getJournees() {
+        return journees;
+    }
     public Equipe getEquipeById(int id){
         return this.equipes.get(id);
     }

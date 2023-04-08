@@ -7,10 +7,14 @@ import java.util.Map;
 
 public class Championnat {
     private final Instance instance;
-    private Map<Integer, Journee> journees;
+    private Map<Integer, JourneeChampionat> journees;
 
     public Championnat(Instance instance) {
         this.instance = instance;
+        for(Map.Entry j: instance.getJournees().entrySet()){
+            int id= (int)j.getKey();
+            journees.put(id,new JourneeChampionat(id));
+        }
     }
 
     public int getPhase(Journee journee){
