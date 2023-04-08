@@ -38,7 +38,7 @@ public class ContraintePauseEquipe extends Contrainte{
     }
 
     @Override
-    public int TestContrainte(Championnat championnat) {
+    public int getPenaliteCumulee(Championnat championnat) {
         return 0;
     }
 }

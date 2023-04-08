@@ -11,6 +11,7 @@ public class InsertionSimple implements Solveur{
 
     @Override
     public Championnat solve(Instance instance) {
+
         return null;
     }
 }

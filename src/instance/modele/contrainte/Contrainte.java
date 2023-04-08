@@ -28,9 +28,10 @@ public abstract class Contrainte {
 
     /**
      * @param championnat la solution
-     * @return int la penalité cumulé si souple , si dure et valide 0 , si dure et invalide -1
+     * @return a chaque fois que la contrainte est verifier cumule les penalité cumulé si la contrainte verifier est dure retourné Max integer sin retourner O
+     *
      **/
-    public abstract int TestContrainte(Championnat championnat);
+    public abstract int getPenaliteCumulee(Championnat championnat);
 
     /**
      *
@@ -38,6 +39,6 @@ public abstract class Contrainte {
      * @return si la contrainte conserve la viabilité de la solution
      */
     public boolean checkContrainte(Championnat championnat){
-        return TestContrainte(championnat)>0;
+        return getPenaliteCumulee(championnat)!=Integer.MAX_VALUE;
     }
 }

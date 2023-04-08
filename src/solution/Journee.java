@@ -31,4 +31,8 @@ public class Journee {
     public int hashCode() {
         return Objects.hash(getId());
     }
+
+    public boolean ajouterRencontre(Rencontre rencontreToADD){
+        return false;
+    }
 }

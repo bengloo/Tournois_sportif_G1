@@ -44,7 +44,7 @@ public class ContrainteEquite extends Contrainte {
     }
 
     @Override
-    public int TestContrainte(Championnat championnat) {
+    public int getPenaliteCumulee(Championnat championnat) {
         return 0;
     }
 }

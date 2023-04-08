@@ -71,4 +71,8 @@ public class Instance {
         }
         return true;
     }
+
+    public Map<Integer, Equipe> getEquipes() {
+        return equipes;
+    }
 }
