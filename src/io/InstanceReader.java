@@ -1,14 +1,6 @@
 package io;
 
-import java.awt.event.WindowStateListener;
-import java.io.*;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
 import instance.Instance;
-import instance.modele.Equipe;
 import instance.modele.contrainte.ContraintePlacement;
 import instance.modele.contrainte.TypeMode;
 import io.exception.FileExistException;
@@ -20,10 +12,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
 
 import static instance.modele.contrainte.TypeMode.*;
 
