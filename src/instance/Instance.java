@@ -59,8 +59,10 @@ public class Instance {
         return true;
     }
     public boolean addRencontre(Equipe equipe,Equipe equipeAdverse){
+
+        if(equipe==null||equipeAdverse==null)return false;
         String id= equipe.getId()+","+equipeAdverse.getId();
-        if(equipe==null||equipeAdverse==null||this.rencontres.containsKey(id))return false;
+        if(this.rencontres.containsKey(id))return false;
         this.rencontres.put(id, new Rencontre(equipe,equipeAdverse));
         return true;
     }
