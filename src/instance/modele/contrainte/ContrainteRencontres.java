@@ -14,12 +14,24 @@ public class ContrainteRencontres extends Contrainte{
     private Integer min;
     private Integer max;
 
+    private Integer penalite;
+
     public ContrainteRencontres(Integer min,Integer max) {
         super(false);
         this.journees = new HashMap<>();
         this.rencontres = new LinkedList<>();
         this.min = max;
         this.max = max;
+        this.penalite = -1;
+    }
+
+    public ContrainteRencontres(Integer min,Integer max, Integer penalite) {
+        super(false);
+        this.journees = new HashMap<>();
+        this.rencontres = new LinkedList<>();
+        this.min = max;
+        this.max = max;
+        this.penalite = penalite;
     }
 
     public boolean addJournee(Journee journee){

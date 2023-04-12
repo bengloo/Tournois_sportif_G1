@@ -104,37 +104,37 @@ public class InstanceReader {
         this.lireContraintesPauseGlobale(br);
     }
 
+    private void lireContraintesSouples(BufferedReader br, Instance i) throws IOException {
+        String ligne = br.readLine();
+        lecture(br, ligne, "// Contraintes souples");
+
+        System.out.println("\n--------------- CONTRAINTES SOUPLES ---------------");
+        i.addContrainte(this.lireContraintesPlacement(br,i,true));
+        i.addContrainte(this.lireContraintesHBClassement(br,i,true));
+        i.addContrainte(this.lireContraintesRencontres(br,i,true));
+        i.addContrainte(this.lireContraintesPauseEquipes(br,i,true));
+        i.addContrainte(this.lireContraintesPauseGlobale(br,i,true));
+       // i.addContrainte(this.lireContraintesEquite(br,i));
+       // i.addContrainte(this.lireContraintesSeparation(br,i));
+    }
 
 
-
-    private ContraintePlacement lireContraintesPlacement(BufferedReader br,Instance instance) throws IOException {
+    private ContraintePlacement lireContraintesPlacement(BufferedReader br,Instance instance, boolean estSouple) throws IOException {
         String ligne = br.readLine();
         String[] tokens, tokensJours;
-        int idEquipe, max, nbContraintesPlacement;
-        String idJour;
-        String maxStr;
-        String mode;
-        String equipeStr;
+        int idEquipe, max, nbContraintesPlacement, penalite =-1;
+        String idJour, maxStr, mode, equipeStr,penaliteStr;
         ContraintePlacement contraintePlacement = null;
 
+        lecture(br,ligne,"// Contraintes de placement");
 
-
-        while(!ligne.contains("// Contraintes de placement")) {
-            ligne = br.readLine();
-        }
-
-        while(!ligne.contains("// Nombre")) {
-            ligne = br.readLine();
-        }
+        lecture(br,ligne,"// Nombre");
 
         ligne = br.readLine();
         ligne = ligne.trim();
         nbContraintesPlacement = Integer.parseInt(ligne);
 
-
-        while(!ligne.contains("// Contraintes")) {
-            ligne = br.readLine();
-        }
+        lecture(br,ligne,"// Contraintes");
 
         for(int i =0; i<nbContraintesPlacement;i++){
             ligne = br.readLine();
@@ -142,21 +142,36 @@ public class InstanceReader {
 
             tokens = ligne.split("\t");
             equipeStr = tokens[0].split("=")[1];
-
             idJour = tokens[1].split("=")[1];
-
             mode = tokens[2].split("=")[1];
             maxStr = tokens[3].split("=")[1];
+
+            System.out.println(tokens.toString());
 
             idEquipe = Integer.parseInt(equipeStr);
             max = Integer.parseInt(maxStr);
 
-            contraintePlacement = new ContraintePlacement(instance.getEquipeById(idEquipe), castModeToTypeEnum(mode), max);
+            // Seulement si la contrainte est souple
+            if (estSouple) {
+                penaliteStr = tokens[4].split("=")[1];
+                penalite = Integer.parseInt(penaliteStr);
+                System.out.println(instance.getEquipesById(idEquipe));
+                contraintePlacement = new ContraintePlacement(instance.getEquipesById(idEquipe), castModeToTypeEnum(mode), max, penalite);
+            } else {
+                contraintePlacement = new ContraintePlacement(instance.getEquipesById(idEquipe), castModeToTypeEnum(mode), max);
+            }
 
             tokensJours = idJour.split(";");
+
             for (int j = 0; j < tokensJours.length; j++) {
-                //TODO retourn false si erreur d'ajout
-                contraintePlacement.addJournee(instance.getJourneeById(Integer.parseInt(tokensJours[j])));
+                //TODO return false si erreur d'ajout
+
+                System.out.println(contraintePlacement.addJournee(instance.getJourneeById(Integer.parseInt(tokensJours[j]))));
+                //contraintePlacement.addJournee(instance.getJourneeById(Integer.parseInt(tokensJours[j])));
+                System.out.println("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
+                System.out.println(instance.getJourneeById(Integer.parseInt(tokensJours[j])));
+                System.out.println(idJour);
+                System.out.println(contraintePlacement.toString());
             }
 
             System.out.println("\nCONTRAINTES PLACEMENT");
@@ -164,33 +179,30 @@ public class InstanceReader {
             System.out.println("La liste des jours est : " + idJour);
             System.out.println("Le mode est : " + mode);
             System.out.println("La valeur du max est : " +max);
+            System.out.println("la valeur de la penalite est :" +penalite);
 
         }
         return contraintePlacement;
     }
 
-    private void lireContraintesHBClassement(BufferedReader br) throws IOException {
+    private ContrainteHBClassement lireContraintesHBClassement(BufferedReader br, Instance instance, boolean estSouple) throws IOException {
         String ligne = br.readLine();
-        int nbContraintesHBClassement, idEquipe, max;
-        String equipeStr, mode, idJour, idEquipeAdverse, maxStr;
-        String[] tokens;
+        int nbContraintesHBClassement, idEquipe, max, penalite = -1;
+        String equipeStr, mode, idJour, idEquipeAdverse, maxStr, penaliteStr;
+        String[] tokens, tokensJours, tokensEA;
+        ContrainteHBClassement contrainteHBClassement = null;
 
-        while(!ligne.contains("// Contraintes d'equipes en haut et bas de classement")) {
+
+            lecture(br,ligne,"// Contraintes d'equipes en haut et bas de classement");
+
+            lecture(br,ligne,"// Nombre");
+
             ligne = br.readLine();
-        }
-
-        while(!ligne.contains("// Nombre")) {
-            ligne = br.readLine();
-        }
-
-        ligne = br.readLine();
-        ligne = ligne.trim();
-        nbContraintesHBClassement = Integer.parseInt(ligne);
+            ligne = ligne.trim();
+            nbContraintesHBClassement = Integer.parseInt(ligne);
 
 
-        while(!ligne.contains("// Contraintes")) {
-            ligne = br.readLine();
-        }
+            lecture(br,ligne,"// Contraintes");
 
         for(int i =0; i<nbContraintesHBClassement;i++){
             ligne = br.readLine();
@@ -206,38 +218,56 @@ public class InstanceReader {
             idEquipe = Integer.parseInt(equipeStr);
             max = Integer.parseInt(maxStr);
 
+            // Seulement si la contrainte est souple
+            if (estSouple) {
+                penaliteStr = tokens[4].split("=")[1];
+                penalite = Integer.parseInt(penaliteStr);
+                contrainteHBClassement = new ContrainteHBClassement(instance.getEquipesById(idEquipe), castModeToTypeEnum(mode), max, penalite);
+            } else {
+                contrainteHBClassement = new ContrainteHBClassement(instance.getEquipesById(idEquipe), castModeToTypeEnum(mode), max);
+            }
+
+            tokensJours = idJour.split(";");
+            tokensEA = idEquipeAdverse.split(";");
+
+            for (int j = 0; j < tokensJours.length; j++) {
+                //TODO return false si erreur d'ajout
+                contrainteHBClassement.addJournee(instance.getJourneeById(Integer.parseInt(tokensJours[j])));
+            }
+
+            for (int k = 0; k < tokensEA.length; k++) {
+                //TODO return false si erreur d'ajout
+                contrainteHBClassement.addEquipeAdverse(instance.getEquipesById(Integer.parseInt(tokensEA[k])));
+            }
+
             System.out.println("\nCONTRAINTES HB CLASSEMENT");
             System.out.println("La valeur de l'équipe est : " + idEquipe);
             System.out.println("La liste des jours est : " + idJour);
             System.out.println("La Liste des équipes adverses sont : " +idEquipeAdverse);
             System.out.println("Le mode est : " + mode);
             System.out.println("La valeur du max est : " +max);
-
+            System.out.println("la valeur de la penalite est :" +penalite);
         }
+        return contrainteHBClassement;
     }
 
-    private void lireContraintesRencontres(BufferedReader br) throws IOException {
+    private ContrainteRencontres lireContraintesRencontres(BufferedReader br, Instance instance, boolean estSouple) throws IOException {
         String ligne = br.readLine();
-        int nbContraintesRencontre, max, min;
-        String idJour, idRencontre, maxStr, minStr;
-        String[] tokens;
+        int nbContraintesRencontre, max, min,penalite = -1;
+        String idJour, idRencontre, maxStr, minStr,penaliteStr;
+        String[] tokens, tokensJours, tokensRencontres;
+        ContrainteRencontres contrainteRencontres = null;
 
-        while(!ligne.contains("// Contraintes de rencontres")) {
-            ligne = br.readLine();
-        }
+        lecture(br,ligne,"// Contraintes de rencontre");
 
-        while(!ligne.contains("// Nombre")) {
-            ligne = br.readLine();
-        }
+        lecture(br,ligne,"// Nombre");
 
         ligne = br.readLine();
         ligne = ligne.trim();
         nbContraintesRencontre = Integer.parseInt(ligne);
 
 
-        while(!ligne.contains("// Contraintes")) {
-            ligne = br.readLine();
-        }
+        lecture(br,ligne,"// Contraintes");
 
         for(int i =0; i<nbContraintesRencontre;i++){
             ligne = br.readLine();
@@ -253,37 +283,59 @@ public class InstanceReader {
             min = Integer.parseInt(minStr);
             max = Integer.parseInt(maxStr);
 
+
+            // Seulement si la contrainte est souple
+            if (estSouple) {
+                penaliteStr = tokens[4].split("=")[1];
+                penalite = Integer.parseInt(penaliteStr);
+                contrainteRencontres = new ContrainteRencontres(min, max, penalite);
+            } else {
+                contrainteRencontres = new ContrainteRencontres(min, max);
+            }
+
+
+            contrainteRencontres = new ContrainteRencontres(min, max);
+
+            tokensJours = idJour.split(";");
+            tokensRencontres = idRencontre.split(";");
+
+            for (int j = 0; j < tokensJours.length; j++) {
+                //TODO return false si erreur d'ajout
+                contrainteRencontres.addJournee(instance.getJourneeById(Integer.parseInt(tokensJours[j])));
+            }
+
+            for (int k = 0; k < tokensRencontres.length; k++) {
+                //TODO return false si erreur d'ajout
+                contrainteRencontres.addRencontre(instance.getRencontreById(tokensRencontres[k]));
+            }
+
             System.out.println("\nCONTRAINTES RENCONTRES");
             System.out.println("La liste des jours est : " + idJour);
-            System.out.println("La Liste des équipes adverses sont : " +idRencontre);
+            System.out.println("La liste des équipes adverses sont : " +idRencontre);
             System.out.println("La valeur du min est : " + min);
             System.out.println("La valeur du max est : " +max);
-
+            System.out.println("La valeur de la pénalité est : " +penalite);
         }
+        return contrainteRencontres;
     }
 
-    private void lireContraintesPauseEquipes(BufferedReader br) throws IOException {
+    private ContraintePauseEquipe lireContraintesPauseEquipes(BufferedReader br, Instance instance, boolean estSouple) throws IOException {
         String ligne = br.readLine();
-        int nbContraintesPauseEquipes, max, idEquipe;
-        String idJour,maxStr, equipeStr, mode;
-        String[] tokens;
+        int nbContraintesPauseEquipes, max, idEquipe, penalite = -1;
+        String idJour,maxStr, equipeStr, mode, penaliteStr;
+        String[] tokens,tokensJours, tokensEA;
+        ContraintePauseEquipe contraintePauseEquipe = null;
 
-        while(!ligne.contains("// Contraintes de pause par equipe")) {
-            ligne = br.readLine();
-        }
+        lecture(br,ligne,"// Contraintes de pause par equipe");
 
-        while(!ligne.contains("// Nombre")) {
-            ligne = br.readLine();
-        }
+        lecture(br,ligne,"// Nombre");
 
         ligne = br.readLine();
         ligne = ligne.trim();
         nbContraintesPauseEquipes = Integer.parseInt(ligne);
 
 
-        while(!ligne.contains("// Contraintes")) {
-            ligne = br.readLine();
-        }
+        lecture(br,ligne,"// Contraintes");
 
         for(int i =0; i<nbContraintesPauseEquipes;i++){
             ligne = br.readLine();
@@ -299,37 +351,51 @@ public class InstanceReader {
             idEquipe = Integer.parseInt(equipeStr);
             max = Integer.parseInt(maxStr);
 
+            // Seulement si la contrainte est souple
+            if (estSouple) {
+                penaliteStr = tokens[4].split("=")[1];
+                penalite = Integer.parseInt(penaliteStr);
+                contraintePauseEquipe = new ContraintePauseEquipe(instance.getEquipesById(idEquipe), castModeToTypeEnum(mode), max, penalite);
+            } else {
+                contraintePauseEquipe = new ContraintePauseEquipe(instance.getEquipesById(idEquipe), castModeToTypeEnum(mode), max);
+            }
+
+            tokensJours = idJour.split(";");
+
+            for (int j = 0; j < tokensJours.length; j++) {
+                //TODO return false si erreur d'ajout
+                contraintePauseEquipe.addJournee(instance.getJourneeById(Integer.parseInt(tokensJours[j])));
+            }
+
             System.out.println("\nCONTRAINTES PAUSE EQUIPES");
             System.out.println("La Liste des équipes adverses sont : " +idEquipe);
             System.out.println("La liste des jours est : " + idJour);
             System.out.println("La valeur du min est : " + mode);
             System.out.println("La valeur du max est : " +max);
-
+            System.out.println("La valeur de la pénalité est : " +penalite);
         }
+        System.out.println(instance);
+        return contraintePauseEquipe;
+
     }
 
-    private void lireContraintesPauseGlobale(BufferedReader br) throws IOException {
+    private ContraintePauseGlobale lireContraintesPauseGlobale(BufferedReader br, Instance instance, boolean estSouple) throws IOException {
         String ligne = br.readLine();
-        int nbContraintesPauseGlobale, max;
-        String idJour,maxStr, equipeStr;
-        String[] tokens;
+        int nbContraintesPauseGlobale, max, penalite = -1;
+        String idJour,maxStr, equipeStr, penaliteStr;
+        String[] tokens, tokensJours, tokensE;
+        ContraintePauseGlobale contraintePauseGlobale = null;
 
-        while(!ligne.contains("// Contraintes de pause globale")) {
-            ligne = br.readLine();
-        }
+        lecture(br,ligne,"// Contraintes de pause globale");
 
-        while(!ligne.contains("// Nombre")) {
-            ligne = br.readLine();
-        }
+        lecture(br,ligne,"// Nombre");
 
         ligne = br.readLine();
         ligne = ligne.trim();
         nbContraintesPauseGlobale = Integer.parseInt(ligne);
 
 
-        while(!ligne.contains("// Contraintes")) {
-            ligne = br.readLine();
-        }
+        lecture(br,ligne,"// Contraintes");
 
         for(int i =0; i<nbContraintesPauseGlobale;i++){
             ligne = br.readLine();
@@ -344,287 +410,36 @@ public class InstanceReader {
 
             max = Integer.parseInt(maxStr);
 
+            // Seulement si la contrainte est souple
+            if (estSouple) {
+                penaliteStr = tokens[4].split("=")[1];
+                penalite = Integer.parseInt(penaliteStr);
+                contraintePauseGlobale = new ContraintePauseGlobale(max, penalite);
+            } else {
+                contraintePauseGlobale = new ContraintePauseGlobale(max);
+            }
+
+            tokensJours = idJour.split(";");
+            tokensE = equipeStr.split(";");
+
+            for (int j = 0; j < tokensJours.length; j++) {
+                //TODO return false si erreur d'ajout
+                contraintePauseGlobale.addJournee(instance.getJourneeById(Integer.parseInt(tokensJours[j])));
+            }
+
+            for (int k = 0; k < tokensE.length; k++) {
+                //TODO return false si erreur d'ajout
+                contraintePauseGlobale.addEquipe(instance.getEquipesById(Integer.parseInt(tokensE[k])));
+            }
+
             System.out.println("\nCONTRAINTES PAUSE GLOBALE");
             System.out.println("La Liste des équipes adverses sont : " +equipeStr);
             System.out.println("La liste des jours est : " + idJour);
             System.out.println("La valeur du max est : " +max);
-
+            System.out.println("La valeur de la pénalité est : " +penalite);
         }
-    }
-
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
-    //CONTRAINTES SOUPLES
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-    private void lireContraintesSouples(BufferedReader br, Instance i) throws IOException {
-        String ligne = br.readLine();
-        while(!ligne.contains("// Contraintes souples")) {
-            ligne = br.readLine();
-        }
-        System.out.println("\n--------------- CONTRAINTES SOUPLES ---------------");
-        this.lireContraintesPlacementSouple(br);
-        this.lireContraintesHBClassementSouple(br);
-        this.lireContraintesRencontresSouple(br);
-        this.lireContraintesPauseEquipesSouple(br);
-        this.lireContraintesPauseGlobaleSouple(br);
-        this.lireContraintesEquite(br);
-        this.lireContraintesSeparation(br);
-    }
-
-
-
-
-    private void lireContraintesPlacementSouple(BufferedReader br) throws IOException {
-        String ligne = br.readLine();
-        String[] tokens;
-        int idEquipe, max, nbContraintesPlacement,penalite;
-        String idJour, maxStr, mode, equipeStr,penaliteStr;
-
-
-
-        while(!ligne.contains("// Contraintes de placement")) {
-            ligne = br.readLine();
-        }
-
-        while(!ligne.contains("// Nombre")) {
-            ligne = br.readLine();
-        }
-
-        ligne = br.readLine();
-        ligne = ligne.trim();
-        nbContraintesPlacement = Integer.parseInt(ligne);
-
-
-        while(!ligne.contains("// Contraintes")) {
-            ligne = br.readLine();
-        }
-
-        for(int i =0; i<nbContraintesPlacement;i++){
-            ligne = br.readLine();
-            System.out.println(ligne);
-
-            tokens = ligne.split("\t");
-            equipeStr = tokens[0].split("=")[1];
-            idJour = tokens[1].split("=")[1];
-            mode = tokens[2].split("=")[1];
-            maxStr = tokens[3].split("=")[1];
-            penaliteStr = tokens[4].split("=")[1];
-
-
-            idEquipe = Integer.parseInt(equipeStr);
-            max = Integer.parseInt(maxStr);
-            penalite = Integer.parseInt(penaliteStr);
-
-            System.out.println("\nCONTRAINTES PLACEMENT SOUPLE");
-            System.out.println("La valeur de l'équipe est : " + idEquipe);
-            System.out.println("La liste des jours est : " + idJour);
-            System.out.println("Le mode est : " + mode);
-            System.out.println("La valeur du max est : " +max);
-            System.out.println("La valeur de la penalite est : " +penalite);
-
-
-        }
-    }
-
-    private void lireContraintesHBClassementSouple(BufferedReader br) throws IOException {
-        String ligne = br.readLine();
-        int nbContraintesHBClassement, idEquipe, max, penalite;
-        String equipeStr, mode, idJour, idEquipeAdverse, maxStr, penaliteStr;
-        String[] tokens;
-
-        while(!ligne.contains("// Contraintes d'equipes en haut et bas de classement")) {
-            ligne = br.readLine();
-        }
-
-        while(!ligne.contains("// Nombre")) {
-            ligne = br.readLine();
-        }
-
-        ligne = br.readLine();
-        ligne = ligne.trim();
-        nbContraintesHBClassement = Integer.parseInt(ligne);
-
-
-        while(!ligne.contains("// Contraintes")) {
-            ligne = br.readLine();
-        }
-
-        for(int i =0; i<nbContraintesHBClassement;i++){
-            ligne = br.readLine();
-            System.out.println(ligne);
-
-            tokens = ligne.split("\t");
-            equipeStr = tokens[0].split("=")[1];
-            idJour = tokens[1].split("=")[1];
-            idEquipeAdverse = tokens[2].split("=")[1];
-            mode = tokens[3].split("=")[1];
-            maxStr = tokens[4].split("=")[1];
-            penaliteStr = tokens[5].split("=")[1];
-
-            idEquipe = Integer.parseInt(equipeStr);
-            max = Integer.parseInt(maxStr);
-            penalite = Integer.parseInt(penaliteStr);
-
-            System.out.println("\nCONTRAINTES HB CLASSEMENT SOUPLE");
-            System.out.println("La valeur de l'équipe est : " + idEquipe);
-            System.out.println("La liste des jours est : " + idJour);
-            System.out.println("La Liste des équipes adverses sont : " +idEquipeAdverse);
-            System.out.println("Le mode est : " + mode);
-            System.out.println("La valeur du max est : " +max);
-            System.out.println("La valeur de la penalite est : " +penalite);
-
-        }
-    }
-
-    private void lireContraintesRencontresSouple(BufferedReader br) throws IOException {
-        String ligne = br.readLine();
-        int nbContraintesRencontre, max, min,penalite;
-        String idJour, idRencontre, maxStr, minStr,penaliteStr;
-        String[] tokens;
-
-        while(!ligne.contains("// Contraintes de rencontres")) {
-            ligne = br.readLine();
-        }
-
-        while(!ligne.contains("// Nombre")) {
-            ligne = br.readLine();
-        }
-
-        ligne = br.readLine();
-        ligne = ligne.trim();
-        nbContraintesRencontre = Integer.parseInt(ligne);
-
-
-        while(!ligne.contains("// Contraintes")) {
-            ligne = br.readLine();
-        }
-
-        for(int i =0; i<nbContraintesRencontre;i++){
-            ligne = br.readLine();
-            System.out.println(ligne);
-
-            tokens = ligne.split("\t");
-
-            idJour = tokens[0].split("=")[1];
-            idRencontre = tokens[1].split("=")[1];
-            minStr = tokens[2].split("=")[1];
-            maxStr = tokens[3].split("=")[1];
-            penaliteStr = tokens[4].split("=")[1];
-
-            min = Integer.parseInt(minStr);
-            max = Integer.parseInt(maxStr);
-            penalite = Integer.parseInt(penaliteStr);
-
-            System.out.println("\nCONTRAINTES RENCONTRES SOUPLE");
-            System.out.println("La liste des jours est : " + idJour);
-            System.out.println("La Liste des rencontres sont : " +idRencontre);
-            System.out.println("La valeur du min est : " + min);
-            System.out.println("La valeur du max est : " +max);
-            System.out.println("La valeur de la penalite est : " +penalite);
-
-        }
-    }
-
-    private void lireContraintesPauseEquipesSouple(BufferedReader br) throws IOException {
-        String ligne = br.readLine();
-        int nbContraintesRencontre, max, idEquipe,penalite;
-        String idJour,maxStr, equipeStr, mode,penaliteStr;
-        String[] tokens;
-
-        while(!ligne.contains("// Contraintes de pause par equipe")) {
-            ligne = br.readLine();
-        }
-
-        while(!ligne.contains("// Nombre")) {
-            ligne = br.readLine();
-        }
-
-        ligne = br.readLine();
-        ligne = ligne.trim();
-        nbContraintesRencontre = Integer.parseInt(ligne);
-
-
-        while(!ligne.contains("// Contraintes")) {
-            ligne = br.readLine();
-        }
-
-        for(int i =0; i<nbContraintesRencontre;i++){
-            ligne = br.readLine();
-            System.out.println(ligne);
-
-            tokens = ligne.split("\t");
-
-            equipeStr = tokens[0].split("=")[1];
-            idJour = tokens[1].split("=")[1];
-            mode = tokens[2].split("=")[1];
-            maxStr = tokens[3].split("=")[1];
-            penaliteStr = tokens[4].split("=")[1];
-
-
-            idEquipe = Integer.parseInt(equipeStr);
-            max = Integer.parseInt(maxStr);
-            penalite = Integer.parseInt(penaliteStr);
-
-            System.out.println("\nCONTRAINTES PAUSE EQUIPES SOUPLE");
-            System.out.println("La Liste des équipes adverses sont : " +idEquipe);
-            System.out.println("La liste des jours est : " + idJour);
-            System.out.println("La valeur du min est : " + mode);
-            System.out.println("La valeur du max est : " +max);
-            System.out.println("La valeur de la penalite est : " +penalite);
-
-
-        }
-    }
-
-    private void lireContraintesPauseGlobaleSouple(BufferedReader br) throws IOException {
-       String ligne = br.readLine();
-        int nbContraintesRencontre, max, penalite;
-        String idJour,maxStr, equipeStr,penaliteStr;
-        String[] tokens;
-
-        while(!ligne.contains("// Contraintes de pause globale")) {
-            ligne = br.readLine();
-        }
-
-        while(!ligne.contains("// Nombre")) {
-            ligne = br.readLine();
-        }
-
-        ligne = br.readLine();
-        ligne = ligne.trim();
-        nbContraintesRencontre = Integer.parseInt(ligne);
-
-
-        while(!ligne.contains("// Contraintes")) {
-            ligne = br.readLine();
-        }
-
-        for(int i =0; i<nbContraintesRencontre;i++){
-            ligne = br.readLine();
-            System.out.println(ligne);
-
-            tokens = ligne.split("\t");
-
-            equipeStr = tokens[0].split("=")[1];
-            idJour = tokens[1].split("=")[1];
-            maxStr = tokens[2].split("=")[1];
-            penaliteStr = tokens[3].split("=")[1];
-
-
-
-            max = Integer.parseInt(maxStr);
-            penalite= Integer.parseInt(penaliteStr);
-
-            System.out.println("\nCONTRAINTES PAUSE GLOBALE SOUPLE");
-            System.out.println("La Liste des équipes adverses sont : " +equipeStr);
-            System.out.println("La liste des jours est : " + idJour);
-            System.out.println("La valeur du max est : " +max);
-            System.out.println("La valeur du max est : " +penalite);
-
-
-        }
+        System.out.println(contraintePauseGlobale);
+        return contraintePauseGlobale;
     }
 
 
@@ -634,22 +449,16 @@ public class InstanceReader {
         String idJour,maxStr, equipeStr, penaliteStr;
         String[] tokens;
 
-        while(!ligne.contains("// Contraintes d'equite")) {
-            ligne = br.readLine();
-        }
+        lecture(br,ligne, "// Contraintes d'equite");
 
-        while(!ligne.contains("// Nombre")) {
-            ligne = br.readLine();
-        }
+        lecture(br,ligne, "// Nombre");
 
         ligne = br.readLine();
         ligne = ligne.trim();
         nbContraintesRencontre = Integer.parseInt(ligne);
 
 
-        while(!ligne.contains("// Contraintes")) {
-            ligne = br.readLine();
-        }
+        lecture(br,ligne, "// Contraintes");
 
 
         for(int i =0; i<nbContraintesRencontre;i++){
@@ -686,22 +495,16 @@ public class InstanceReader {
         String idEquipe, minStr,penaliteStr;
         String[] tokens;
 
-        while(!ligne.contains("// Contraintes de separation")) {
-            ligne = br.readLine();
-        }
+        lecture(br,ligne, "// Contraintes de separation");
 
-        while(!ligne.contains("// Nombre")) {
-            ligne = br.readLine();
-        }
+        lecture(br,ligne, "// Nombre");
 
         ligne = br.readLine();
         ligne = ligne.trim();
         nbContraintesRencontre = Integer.parseInt(ligne);
 
 
-        while(!ligne.contains("// Contraintes")) {
-            ligne = br.readLine();
-        }
+        lecture(br,ligne, "// Contraintes");
 
         for(int i =0; i<nbContraintesRencontre;i++){
             ligne = br.readLine();
@@ -737,9 +540,7 @@ public class InstanceReader {
      */
     private int lireNbEquipes(BufferedReader br) throws IOException {
         String ligne = br.readLine();
-        while(!ligne.contains("// Nombre d'equipes")) {
-            ligne = br.readLine();
-        }
+        lecture(br,ligne, "// Nombre d'equipes");
         ligne = br.readLine();
         ligne = ligne.trim();
         int nbEquipes = Integer.parseInt(ligne);
@@ -763,6 +564,17 @@ public class InstanceReader {
         return typeMode;
     }
 
+    /**
+     * Lecture d'un commentaire de l'instance
+     * @param br
+     * @param commentaire
+     */
+    private void lecture(BufferedReader br, String ligne, String commentaire) throws IOException {
+        while(!ligne.contains(commentaire)) {
+            ligne = br.readLine();
+        }
+    }
+
 
     /**
      * Test de lecture d'une instance.
@@ -770,7 +582,7 @@ public class InstanceReader {
      */
     public static void main(String[] args) {
         try {
-            InstanceReader reader = new InstanceReader("instances/instance_ITC2021_Test_1.txt");
+            InstanceReader reader = new InstanceReader("instances/instance_ITC2021_Test_4.txt");
             reader.readInstance();
             System.out.println("Instance lue avec success !");
         } catch (ReaderException ex) {

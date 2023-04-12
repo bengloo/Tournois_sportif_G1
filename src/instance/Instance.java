@@ -36,7 +36,7 @@ public class Instance {
         for(int id=0;id<nbEquipe;id++){
             for(int idAdverse=0;idAdverse<nbEquipe;idAdverse++){
                 if(id!=idAdverse){
-                    addRencontre(this.getEquipeById(id),this.getEquipeById(idAdverse));
+                    addRencontre(this.getEquipesById(id),this.getEquipesById(idAdverse));
                 }
             }
         }
@@ -101,7 +101,7 @@ public class Instance {
     public Map<Integer, Journee> getJournees() {
         return journees;
     }
-    public Equipe getEquipeById(int id){
+    public Equipe getEquipesById(int id){
         return this.equipes.get(id);
     }
     public Rencontre getRencontreById(String id){
