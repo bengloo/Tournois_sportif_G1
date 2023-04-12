@@ -12,6 +12,7 @@ public class ContraintePlacement extends Contrainte{
     private Map<Integer, Journee> journees;
     private TypeMode mode;
     private Integer max;
+    private Integer penalite;
 
     public ContraintePlacement(Equipe equipe,TypeMode mode,Integer max) {
         super(false);
@@ -19,6 +20,16 @@ public class ContraintePlacement extends Contrainte{
         this.journees = new HashMap<>();
         this.mode = mode;
         this.max = max;
+        this.penalite = -1;
+    }
+
+    public ContraintePlacement(Equipe equipe,TypeMode mode,Integer max, Integer penalite) {
+        super(false);
+        this.equipe=equipe;
+        this.journees = new HashMap<>();
+        this.mode = mode;
+        this.max = max;
+        this.penalite = penalite;
     }
 
     public boolean addJournee(Journee journee){
@@ -40,6 +51,7 @@ public class ContraintePlacement extends Contrainte{
                 ", journees=" + journees +
                 ", mode=" + mode +
                 ", max=" + max +
+                ", penalite=" + penalite +
                 ", dure=" + dure +
                 '}';
     }

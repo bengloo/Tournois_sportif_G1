@@ -1,8 +1,7 @@
 package io;
 
 import instance.Instance;
-import instance.modele.contrainte.ContraintePlacement;
-import instance.modele.contrainte.TypeMode;
+import instance.modele.contrainte.*;
 import io.exception.FileExistException;
 import io.exception.FormatFileException;
 import io.exception.OpenFileException;
@@ -54,10 +53,6 @@ public class InstanceReader {
 
             Instance i = new Instance(nom,nbEquipes);
 
-
-
-
-
             // TO CHECK : constructeur de la classe Instance
             this.lireContraintesDures(br, i);
             this.lireContraintesSouples(br, i);
@@ -81,9 +76,7 @@ public class InstanceReader {
      */
     private String lireNom(BufferedReader br) throws IOException {
         String ligne = br.readLine();
-        while(!ligne.contains("// Nom")) {
-            ligne = br.readLine();
-        }
+        lecture(br, ligne, "// Nom");
         ligne = br.readLine();
         return ligne;
     }
@@ -91,17 +84,16 @@ public class InstanceReader {
 
     private void lireContraintesDures(BufferedReader br, Instance i) throws IOException {
         String ligne = br.readLine();
-        while(!ligne.contains("// Contraintes dures")) {
-            ligne = br.readLine();
-        }
+        lecture(br, ligne, "// Contraintes dures");
 
         System.out.println("\n--------------- CONTRAINTES DURES ---------------");
         //TODO retourne false si erreur d'ajout
-        i.addContrainte(this.lireContraintesPlacement(br,i));
-        this.lireContraintesHBClassement(br);
-        this.lireContraintesRencontres(br);
-        this.lireContraintesPauseEquipes(br);
-        this.lireContraintesPauseGlobale(br);
+        i.addContrainte(this.lireContraintesPlacement(br,i,false));
+        i.addContrainte(this.lireContraintesHBClassement(br,i,false));
+        i.addContrainte(this.lireContraintesRencontres(br,i,false));
+        i.addContrainte(this.lireContraintesPauseEquipes(br,i,false));
+        i.addContrainte(this.lireContraintesPauseGlobale(br,i,false));
+
     }
 
     private void lireContraintesSouples(BufferedReader br, Instance i) throws IOException {
