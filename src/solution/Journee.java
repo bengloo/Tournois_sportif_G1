@@ -38,7 +38,7 @@ public class Journee {
         return  this.rencontres.put(rencontreToADD.getLabel(),rencontreToADD) != null;
     }
 
-    public boolean checkIntegriteeChampiona(){
+    public boolean checkIntegriteeChampionatf(){
         return false;
     }
 

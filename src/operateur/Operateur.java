@@ -16,6 +16,7 @@ public abstract class Operateur {
         this.journee = j;
         this.rencontre=r;
         this.penalitee = Integer.MAX_VALUE;
+
     }
 
     public int getDeltaPenalite() {
