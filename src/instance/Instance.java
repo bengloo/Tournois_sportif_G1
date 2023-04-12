@@ -77,29 +77,21 @@ public class Instance {
         if(contrainteToAdd == null) return false;
         switch ( contrainteToAdd.getTypeContrainte()){
             case EQUITE:
-                this.contraintesEquite.add((ContrainteEquite)contrainteToAdd);
-                break;
+                return this.contraintesEquite.add((ContrainteEquite)contrainteToAdd);
             case HBCLASSEMENT:
-                this.contraintesHBClassement.add((ContrainteHBClassement)contrainteToAdd);
-                break;
+                return this.contraintesHBClassement.add((ContrainteHBClassement)contrainteToAdd);
             case PAUSEEQUIPE:
-                this.contraintesPauseEquipe.add((ContraintePauseEquipe) contrainteToAdd);
-                break;
+                return this.contraintesPauseEquipe.add((ContraintePauseEquipe) contrainteToAdd);
             case PAUSEGLOBALE:
-                this.contraintesPauseGlobale.add((ContraintePauseGlobale) contrainteToAdd);
-                break;
+                return this.contraintesPauseGlobale.add((ContraintePauseGlobale) contrainteToAdd);
             case PLACEMENT:
-                this.contraintesPlacement.add((ContraintePlacement) contrainteToAdd);
-                break;
+                return this.contraintesPlacement.add((ContraintePlacement) contrainteToAdd);
             case RENCONTRES:
-                this.contraintesRencontre.add((ContrainteRencontres) contrainteToAdd);
-                break;
+                return this.contraintesRencontre.add((ContrainteRencontres) contrainteToAdd);
             case SEPARATION:
-                this.contraintesSeparation.add((ContrainteSeparation)contrainteToAdd);
-                break;
+                return this.contraintesSeparation.add((ContrainteSeparation)contrainteToAdd);
             default: return false;
         }
-        return true;
     }
 
     public Map<Integer, Equipe> getEquipes() {

@@ -96,6 +96,7 @@ public class InstanceReader {
         }
 
         System.out.println("\n--------------- CONTRAINTES DURES ---------------");
+        //TODO retourne false si erreur d'ajout
         i.addContrainte(this.lireContraintesPlacement(br,i));
         this.lireContraintesHBClassement(br);
         this.lireContraintesRencontres(br);
@@ -154,6 +155,7 @@ public class InstanceReader {
 
             tokensJours = idJour.split(";");
             for (int j = 0; j < tokensJours.length; j++) {
+                //TODO retourn false si erreur d'ajout
                 contraintePlacement.addJournee(instance.getJourneeById(Integer.parseInt(tokensJours[j])));
             }
 
