@@ -53,6 +53,7 @@ public class InstanceReader {
             int nbEquipes = lireNbEquipes(br);
 
             Instance i = new Instance(nom,nbEquipes);
+            System.out.println(i);
 
             // TO CHECK : constructeur de la classe Instance
             this.lireContraintesDures(br, i);
@@ -107,15 +108,15 @@ public class InstanceReader {
         i.addContrainte(this.lireContraintesRencontres(br,i,true));
         i.addContrainte(this.lireContraintesPauseEquipes(br,i,true));
         i.addContrainte(this.lireContraintesPauseGlobale(br,i,true));
-       // i.addContrainte(this.lireContraintesEquite(br,i));
-       // i.addContrainte(this.lireContraintesSeparation(br,i));
+        //i.addContrainte(this.lireContraintesEquite(br,i));
+        //i.addContrainte(this.lireContraintesSeparation(br,i));
     }
 
 
     private ContraintePlacement lireContraintesPlacement(BufferedReader br,Instance instance, boolean estSouple) throws IOException {
         String ligne = br.readLine();
         String[] tokens, tokensJours;
-        int idEquipe, max, nbContraintesPlacement, penalite =-1;
+        int idEquipe, max, nbContraintesPlacement, penalite = Integer.MAX_VALUE;
         String idJour, maxStr, mode, equipeStr,penaliteStr;
         ContraintePlacement contraintePlacement = null;
 
@@ -176,7 +177,7 @@ public class InstanceReader {
 
     private ContrainteHBClassement lireContraintesHBClassement(BufferedReader br, Instance instance, boolean estSouple) throws IOException {
         String ligne = br.readLine();
-        int nbContraintesHBClassement, idEquipe, max, penalite = -1;
+        int nbContraintesHBClassement, idEquipe, max, penalite  = Integer.MAX_VALUE;
         String equipeStr, mode, idJour, idEquipeAdverse, maxStr, penaliteStr;
         String[] tokens, tokensJours, tokensEA;
         ContrainteHBClassement contrainteHBClassement = null;
@@ -242,7 +243,7 @@ public class InstanceReader {
 
     private ContrainteRencontres lireContraintesRencontres(BufferedReader br, Instance instance, boolean estSouple) throws IOException {
         String ligne = br.readLine();
-        int nbContraintesRencontre, max, min,penalite = -1;
+        int nbContraintesRencontre, max, min,penalite = Integer.MAX_VALUE;
         String idJour, idRencontre, maxStr, minStr,penaliteStr;
         String[] tokens, tokensJours, tokensRencontres;
         ContrainteRencontres contrainteRencontres = null;
@@ -310,7 +311,7 @@ public class InstanceReader {
 
     private ContraintePauseEquipe lireContraintesPauseEquipes(BufferedReader br, Instance instance, boolean estSouple) throws IOException {
         String ligne = br.readLine();
-        int nbContraintesPauseEquipes, max, idEquipe, penalite = -1;
+        int nbContraintesPauseEquipes, max, idEquipe, penalite = Integer.MAX_VALUE;
         String idJour,maxStr, equipeStr, mode, penaliteStr;
         String[] tokens,tokensJours, tokensEA;
         ContraintePauseEquipe contraintePauseEquipe = null;
@@ -370,7 +371,7 @@ public class InstanceReader {
 
     private ContraintePauseGlobale lireContraintesPauseGlobale(BufferedReader br, Instance instance, boolean estSouple) throws IOException {
         String ligne = br.readLine();
-        int nbContraintesPauseGlobale, max, penalite = -1;
+        int nbContraintesPauseGlobale, max, penalite = Integer.MAX_VALUE;
         String idJour,maxStr, equipeStr, penaliteStr;
         String[] tokens, tokensJours, tokensE;
         ContraintePauseGlobale contraintePauseGlobale = null;

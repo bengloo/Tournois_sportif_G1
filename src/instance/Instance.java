@@ -54,7 +54,7 @@ public class Instance {
     }
 
     public boolean addEquipe(int id){
-        if(id>=0 ||this.equipes.containsKey(id))return false;
+        if(id < 0 ||this.equipes.containsKey(id))return false;
         this.equipes.put(id, new Equipe(id));
         return true;
     }
@@ -68,7 +68,7 @@ public class Instance {
     }
 
     public boolean addJournee(int id){
-        if(id>=0 ||this.journees.containsKey(id))return false;
+        if(id < 0 ||this.journees.containsKey(id))return false;
         this.journees.put(id, new Journee(id));
         return true;
     }
