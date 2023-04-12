@@ -12,6 +12,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+
 import static instance.modele.contrainte.TypeMode.*;
 
 public class InstanceReader {
@@ -147,9 +148,10 @@ public class InstanceReader {
             if (estSouple) {
                 penaliteStr = tokens[4].split("=")[1];
                 penalite = Integer.parseInt(penaliteStr);
-                System.out.println(instance.getEquipesById(idEquipe));
                 contraintePlacement = new ContraintePlacement(instance.getEquipesById(idEquipe), castModeToTypeEnum(mode), max, penalite);
             } else {
+
+
                 contraintePlacement = new ContraintePlacement(instance.getEquipesById(idEquipe), castModeToTypeEnum(mode), max);
             }
 
@@ -157,13 +159,8 @@ public class InstanceReader {
 
             for (int j = 0; j < tokensJours.length; j++) {
                 //TODO return false si erreur d'ajout
+             contraintePlacement.addJournee(instance.getJourneeById(Integer.parseInt(tokensJours[j])));
 
-                System.out.println(contraintePlacement.addJournee(instance.getJourneeById(Integer.parseInt(tokensJours[j]))));
-                //contraintePlacement.addJournee(instance.getJourneeById(Integer.parseInt(tokensJours[j])));
-                System.out.println("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
-                System.out.println(instance.getJourneeById(Integer.parseInt(tokensJours[j])));
-                System.out.println(idJour);
-                System.out.println(contraintePlacement.toString());
             }
 
             System.out.println("\nCONTRAINTES PLACEMENT");
@@ -429,6 +426,7 @@ public class InstanceReader {
             System.out.println("La liste des jours est : " + idJour);
             System.out.println("La valeur du max est : " +max);
             System.out.println("La valeur de la pénalité est : " +penalite);
+            System.out.println("C'EST L INSTANCE §§§§§§§§§§§§§§§§§§§§"+instance.toString());
         }
         System.out.println(contraintePauseGlobale);
         return contraintePauseGlobale;
