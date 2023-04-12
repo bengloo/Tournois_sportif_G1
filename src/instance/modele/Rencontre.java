@@ -7,8 +7,9 @@ public class Rencontre {
     private Equipe domicile;
 
     public Rencontre(Equipe exterieur, Equipe domicile) {
-        this.exterieur = exterieur;
         this.domicile = domicile;
+        this.exterieur = exterieur;
+
     }
 
     @Override
@@ -23,15 +24,26 @@ public class Rencontre {
         return Objects.hash(exterieur, domicile);
     }
 
+    public String getLabel(){
+        return this.domicile.getId().toString()+"-"+this.exterieur.getId().toString();
+    }
 
     public String toStringLong() {
         return "Rencontre{" +
-                "exterieur=" + exterieur +
-                ", domicile=" + domicile +
+                "domicile=" + domicile +
+                ", exterieur=" + exterieur +
                 '}';
     }
     @Override
     public String toString() {
         return exterieur.getId()+","+domicile.getId();
+    }
+
+    public Equipe getExterieur() {
+        return exterieur;
+    }
+
+    public Equipe getDomicile() {
+        return domicile;
     }
 }

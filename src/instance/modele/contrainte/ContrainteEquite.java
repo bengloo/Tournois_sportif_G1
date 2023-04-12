@@ -1,11 +1,12 @@
 package instance.modele.contrainte;
 
-import instance.Instance;
 import instance.modele.Equipe;
+import instance.modele.Rencontre;
 import solution.Championnat;
-import instance.modele.Journee;
+import solution.Journee;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 public class ContrainteEquite extends Contrainte {
@@ -46,6 +47,17 @@ public class ContrainteEquite extends Contrainte {
 
     @Override
     public int getPenaliteCumulee(Championnat championnat) {
+        Iterator i =championnat.getInstance().getRencontres().entrySet().iterator();
+        while(i.hasNext()){
+            Map.Entry mapentry = (Map.Entry) i.next();
+            mapentry.getValue();
+        }
+        for(Map.Entry r:championnat.getInstance().getRencontres().entrySet()) {
+            if(r.getValue().);
+
+        }
+
+
         return 0;
     }
 

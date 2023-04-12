@@ -1,20 +1,32 @@
 package solution;
 
 import instance.Instance;
-import instance.modele.Journee;
+import instance.modele.Rencontre;
+import instance.modele.contrainte.Contrainte;
+import instance.modele.contrainte.TypeContrainte;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class Championnat {
-    private final Instance instance;
-    private Map<Integer, JourneeChampionat> journees;
+    private static Instance instance;
+    private Map<Integer, Journee> journees;
 
-    public Championnat(Instance instance) {
+    private Map<Contrainte,Integer> coutContraintes;
+
+    public Championnat(Instance instance,HashMap<Integer,Journee> journees) {
         this.instance = instance;
-        for(Map.Entry j: instance.getJournees().entrySet()){
-            int id= (int)j.getKey();
-            journees.put(id,new JourneeChampionat(id));
+        this.journees = journees;
+        this.coutContraintes = new HashMap<>();
+        for(TypeContrainte type:TypeContrainte.values()) {
+            for (Contrainte contrainte : instance.getContraintes(type)){
+                coutContraintes.put(contrainte,0);
+            };
         }
+    }
+
+    public static Instance getInstance() {
+        return instance;
     }
 
     public int getPhase(Journee journee){

@@ -1,17 +1,20 @@
 package operateur;
 
-import instance.modele.Journee;
+import instance.modele.Rencontre;
+import solution.Journee;
 
 public abstract class Operateur {
     Journee journee;
+    Rencontre rencontre;
     Integer penalitee;
 
     public Operateur() {
         this.penalitee = Integer.MAX_VALUE;
     }
 
-    public Operateur(Journee j) {
+    public Operateur(Journee j,Rencontre r) {
         this.journee = j;
+        this.rencontre=r;
         this.penalitee = Integer.MAX_VALUE;
     }
 

@@ -1,10 +1,11 @@
 package instance;
 
 import instance.modele.Equipe;
-import instance.modele.Journee;
+import solution.Journee;
 import instance.modele.Rencontre;
 import instance.modele.contrainte.*;
 
+import java.lang.reflect.Array;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -26,7 +27,7 @@ public class Instance {
     private LinkedList<ContrainteHBClassement>contraintesHBClassement;
     private LinkedList<ContrainteSeparation>contraintesSeparation;
 
-    public Instance(String nom,int nbEquipe) {
+    public Instance(String nom,int nbEquipe,HashMap<Integer,Journee>journees) {
         this.nom = nom;
         equipes =new HashMap<>();
         for(int id=0;id<nbEquipe;id++){
@@ -40,10 +41,7 @@ public class Instance {
                 }
             }
         }
-        journees=new HashMap<>();
-        for(int id=0;id<nbEquipe*2-2;id++){
-            addJournee(id);
-        }
+        journees=journees;
         contraintesEquite =new LinkedList<>();
         contraintesHBClassement =new LinkedList<>();
         contraintesRencontre =new LinkedList<>();
@@ -94,6 +92,7 @@ public class Instance {
         }
     }
 
+
     public Map<Integer, Equipe> getEquipes() {
         return equipes;
     }
@@ -109,6 +108,30 @@ public class Instance {
     }
     public Journee getJourneeById(int id){
         return this.journees.get(id);
+    }
+
+    public LinkedList<? extends Contrainte> getContraintes(TypeContrainte type){
+        switch (type ){
+            case EQUITE:
+                return this.contraintesEquite;
+            case HBCLASSEMENT:
+                return this.contraintesHBClassement;
+            case PAUSEEQUIPE:
+                return this.contraintesPauseEquipe;
+            case PAUSEGLOBALE:
+                return this.contraintesPauseGlobale;
+            case PLACEMENT:
+                return this.contraintesPlacement;
+            case RENCONTRES:
+                return this.contraintesRencontre;
+            case SEPARATION:
+                return this.contraintesSeparation;
+            default: return null;
+        }
+    }
+
+    public Map<String, Rencontre> getRencontres() {
+        return rencontres;
     }
 
     @Override
