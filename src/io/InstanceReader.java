@@ -94,6 +94,7 @@ public class InstanceReader {
         i.addContrainte(this.lireContraintesHBClassement(br,i,false));
         i.addContrainte(this.lireContraintesRencontres(br,i,false));
         i.addContrainte(this.lireContraintesPauseEquipes(br,i,false));
+
         i.addContrainte(this.lireContraintesPauseGlobale(br,i,false));
 
     }
