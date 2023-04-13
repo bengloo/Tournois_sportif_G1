@@ -1,9 +1,9 @@
 package instance;
 
 import instance.modele.Equipe;
-import instance.modele.Journee;
 import instance.modele.Rencontre;
 import instance.modele.contrainte.*;
+import solution.Journee;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -26,7 +26,7 @@ public class Instance {
     private LinkedList<ContrainteHBClassement>contraintesHBClassement;
     private LinkedList<ContrainteSeparation>contraintesSeparation;
 
-    public Instance(String nom,int nbEquipe) {
+    public Instance(String nom,int nbEquipe,HashMap<Integer,Journee>journees) {
         this.nom = nom;
         equipes =new HashMap<>();
         for(int id=0;id<nbEquipe;id++){
@@ -40,10 +40,8 @@ public class Instance {
                 }
             }
         }
-        journees=new HashMap<>();
-        for(int id=0;id<nbEquipe*2-2;id++){
-            addJournee(id);
-        }
+        System.out.println(journees);
+        this.journees=journees;
         contraintesEquite =new LinkedList<>();
         contraintesHBClassement =new LinkedList<>();
         contraintesRencontre =new LinkedList<>();
@@ -89,7 +87,7 @@ public class Instance {
             case RENCONTRES:
                 return this.contraintesRencontre.add((ContrainteRencontres) contrainteToAdd);
             case SEPARATION:
-                return this.contraintesSeparation.add((ContrainteSeparation)contrainteToAdd);
+                return this.contraintesSeparation.add((ContrainteSeparation) contrainteToAdd);
             default: return false;
         }
     }
@@ -111,6 +109,25 @@ public class Instance {
         return this.journees.get(id);
     }
 
+    public LinkedList<? extends Contrainte> getContraintes(TypeContrainte type){
+        switch (type ){
+            case EQUITE:
+                return this.contraintesEquite;
+            case HBCLASSEMENT:
+                return this.contraintesHBClassement;
+            case PAUSEEQUIPE:
+                return this.contraintesPauseEquipe;
+            case PAUSEGLOBALE:
+                return this.contraintesPauseGlobale;
+            case PLACEMENT:
+                return this.contraintesPlacement;
+            case RENCONTRES:
+                return this.contraintesRencontre;
+            case SEPARATION:
+                return this.contraintesSeparation;
+            default: return null;
+        }
+    }
     @Override
     public String toString() {
         return "Instance{" +

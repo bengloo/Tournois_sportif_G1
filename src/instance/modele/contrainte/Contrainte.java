@@ -1,6 +1,5 @@
 package instance.modele.contrainte;
 
-import instance.Instance;
 import solution.Championnat;
 
 public abstract class Contrainte {

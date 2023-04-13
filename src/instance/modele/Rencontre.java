@@ -11,6 +11,10 @@ public class Rencontre {
         this.domicile = domicile;
     }
 
+    public String getLabel(){
+        return this.domicile.getId().toString()+"-"+this.exterieur.getId().toString();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

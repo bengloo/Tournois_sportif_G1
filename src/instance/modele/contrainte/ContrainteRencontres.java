@@ -1,9 +1,8 @@
 package instance.modele.contrainte;
 
-import solution.Championnat;
-import instance.modele.Journee;
 import instance.modele.Rencontre;
-
+import solution.Journee;
+import solution.Championnat;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;

@@ -1,17 +1,20 @@
-package instance.modele;
+package solution;
+
+import instance.modele.Rencontre;
 
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 
 public class Journee {
     private final Integer id;
+    private HashMap<String,Rencontre> rencontres;
 
 
 
 
     public Journee(Integer id) {
-        this.id=id;
+        this.id = id;
+        this.rencontres = new HashMap<>();
 
     }
     public Integer getId() {
@@ -31,10 +34,11 @@ public class Journee {
     }
 
     public boolean ajouterRencontre(Rencontre rencontreToADD){
-        return false;
+        if(rencontreToADD == null)return false;
+        return  this.rencontres.put(rencontreToADD.getLabel(),rencontreToADD) != null;
     }
 
-    public boolean checkIntegriteeChampiona(){
+    public boolean checkIntegriteeChampionatf(){
         return false;
     }
 

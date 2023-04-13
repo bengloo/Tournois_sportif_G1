@@ -6,11 +6,14 @@ import io.exception.FileExistException;
 import io.exception.FormatFileException;
 import io.exception.OpenFileException;
 import io.exception.ReaderException;
+import solution.Journee;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashMap;
 
 
 import static instance.modele.contrainte.TypeMode.*;
@@ -45,14 +48,14 @@ public class InstanceReader {
      * @throws ReaderException lorsque les donnees dans le fichier d'instance
      * sont manquantes ou au mauvais format.
      */
-    public Instance readInstance() throws ReaderException {
+    public Instance readInstance(HashMap<Integer, Journee> journees) throws ReaderException {
         try{
             FileReader f = new FileReader(this.instanceFile.getAbsolutePath());
             BufferedReader br = new BufferedReader(f);
             String nom = lireNom(br);
             int nbEquipes = lireNbEquipes(br);
 
-            Instance i = new Instance(nom,nbEquipes);
+            Instance i = new Instance(nom,nbEquipes,journees);
             System.out.println(i);
 
             // TO CHECK : constructeur de la classe Instance
@@ -564,21 +567,6 @@ public class InstanceReader {
     private void lecture(BufferedReader br, String ligne, String commentaire) throws IOException {
         while(!ligne.contains(commentaire)) {
             ligne = br.readLine();
-        }
-    }
-
-
-    /**
-     * Test de lecture d'une instance.
-     * @param args
-     */
-    public static void main(String[] args) {
-        try {
-            InstanceReader reader = new InstanceReader("instances/instance_ITC2021_Test_4.txt");
-            reader.readInstance();
-            System.out.println("Instance lue avec success !");
-        } catch (ReaderException ex) {
-            System.out.println(ex.getMessage());
         }
     }
 }
