@@ -17,6 +17,8 @@ public class OperateurInsertion extends Operateur{
 
     @Override
     protected boolean doMouvement() {
+
+
         return false;
     }
 }

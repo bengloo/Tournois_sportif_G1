@@ -5,18 +5,32 @@ import io.InstanceReader;
 import io.exception.ReaderException;
 import solution.Journee;
 
+import java.io.File;
 import java.util.HashMap;
 
 public class TestReader {
     public static void main(String[] args) {
-        String path="instances/instance_ITC2021_Test_4.txt";
-        try {
-            InstanceReader reader = new InstanceReader(path);
-            Instance i= reader.readInstance();
-            System.out.println(i);
-            System.out.println("Instance lue avec success !");
-        } catch (ReaderException ex) {
-            System.out.println(ex.getMessage());
+        File dir  = new File("/home/bengloo/IdeaProjects/Tournois_sportif_G1/instances");
+        System.out.println(dir.toString());
+        File[] liste = dir.listFiles();
+        System.out.println(liste.toString());
+        for(File item : liste){
+            if(item.isFile()&&!item.getName().equals("readMe.txt"))
+            {
+                System.out.format("Nom du fichier: %s%n", item.getName());
+                String path=item.getName();
+                try {
+                    InstanceReader reader = new InstanceReader("instances/"+path);
+                    Instance i= reader.readInstance();
+                    System.out.println(i);
+                    System.out.println("Instance lue avec success !");
+                } catch (ReaderException ex) {
+                    System.out.println(ex.getMessage());
+                }
+            }
+            }
+
         }
-    }
+
+
 }
