@@ -1,49 +1,46 @@
 package instance.modele.contrainte;
 
-import instance.modele.Equipe;
+import solution.Equipe;
 import operateur.Operateur;
 import solution.Championnat;
 import solution.Journee;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeSet;
 
 public class ContraintePauseGlobale extends Contrainte{
 
-    private Map<Integer, Journee> journees;
-    private Map<Integer, Equipe> equipes;
+    private TreeSet<Integer> journees;
+    private TreeSet<Integer>  equipes;
     private Integer max;
 
     public ContraintePauseGlobale(Integer max) {
         super();
-        this.journees = new HashMap<>();
-        this.equipes = new HashMap<>();
+        this.journees = new TreeSet<>();
+        this.equipes = new TreeSet<>();
         this.max = max;
+    }
+
+    public ContraintePauseGlobale(Integer max, Integer penalite) {
+        super(penalite);
+        this.journees = new TreeSet<>();
+        this.equipes = new TreeSet<>();
+        this.max = max;
+    }
+
+    public boolean addEquipe(Integer id){
+        return equipes.add(id);
+    }
+
+    public boolean addJournee(Integer id){
+        return journees.add(id);
     }
 
     @Override
     public TypeContrainte getTypeContrainte() {
         return TypeContrainte.PAUSEGLOBALE;
     }
-
-    public ContraintePauseGlobale(Integer max, Integer penalite) {
-        super(penalite);
-        this.journees = new HashMap<>();
-        this.equipes = new HashMap<>();
-        this.max = max;
-    }
-
-    public boolean addEquipe(Equipe equipe){
-        if(equipe==null) return false;
-        this.equipes.put(equipe.getId(),equipe);
-        return true;
-    }
-    public boolean addJournee(Journee journee){
-        if(journee==null) return false;
-        this.journees.put(journee.getId(),journee);
-        return true;
-    }
-
 
     @Override
     public int getPenaliteCumulee(Championnat championnat) {
@@ -59,8 +56,8 @@ public class ContraintePauseGlobale extends Contrainte{
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("ContraintePauseGlobale{");
-        sb.append("journees=").append(journees.values()).append(", ");
-        sb.append("equipes=").append(equipes.values()).append(", ");
+        sb.append("journees=").append(journees).append(", ");
+        sb.append("equipes=").append(equipes).append(", ");
         sb.append("max=").append(max).append(", ");
         sb.append("penalite=").append(penalite).append(", ");
         sb.append("dure=").append(estDure()).append("}");

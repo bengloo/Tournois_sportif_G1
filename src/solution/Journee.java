@@ -1,7 +1,5 @@
 package solution;
 
-import instance.modele.Rencontre;
-
 import java.util.HashMap;
 import java.util.Objects;
 

@@ -1,4 +1,4 @@
-package instance.modele;
+package solution;
 
 import java.util.Objects;
 
@@ -36,6 +36,6 @@ public class Rencontre {
     }
     @Override
     public String toString() {
-        return exterieur.getId()+","+domicile.getId();
+        return exterieur.getId()+"-"+domicile.getId();
     }
 }

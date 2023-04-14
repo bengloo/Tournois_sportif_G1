@@ -48,20 +48,20 @@ public class InstanceReader {
      * @throws ReaderException lorsque les donnees dans le fichier d'instance
      * sont manquantes ou au mauvais format.
      */
-    public Instance readInstance(HashMap<Integer, Journee> journees) throws ReaderException {
+    public Instance readInstance() throws ReaderException {
         try{
             FileReader f = new FileReader(this.instanceFile.getAbsolutePath());
             BufferedReader br = new BufferedReader(f);
             String nom = lireNom(br);
             int nbEquipes = lireNbEquipes(br);
 
-            Instance i = new Instance(nom,nbEquipes,journees);
+            Instance i = new Instance(nom,nbEquipes);
             //System.out.println(i);
 
             // TO CHECK : constructeur de la classe Instance
             this.lireContraintesDures(br, i);
             this.lireContraintesSouples(br, i);
-            System.out.println(i);
+            //System.out.println(i);
 
             br.close();
             f.close();
@@ -152,16 +152,16 @@ public class InstanceReader {
             if (estSouple) {
                 penaliteStr = tokens[4].split("=")[1];
                 penalite = Integer.parseInt(penaliteStr);
-                contraintePlacement = new ContraintePlacement(instance.getEquipesById(idEquipe), castModeToTypeEnum(mode), max, penalite);
+                contraintePlacement = new ContraintePlacement(idEquipe, castModeToTypeEnum(mode), max, penalite);
             } else {
-                contraintePlacement = new ContraintePlacement(instance.getEquipesById(idEquipe), castModeToTypeEnum(mode), max);
+                contraintePlacement = new ContraintePlacement(idEquipe, castModeToTypeEnum(mode), max);
             }
 
             tokensJours = idJour.split(";");
 
             for (int j = 0; j < tokensJours.length; j++) {
                 //TODO return false si erreur d'ajout
-             contraintePlacement.addJournee(instance.getJourneeById(Integer.parseInt(tokensJours[j])));
+             contraintePlacement.addJournee(Integer.parseInt(tokensJours[j]));
 
             }
 
@@ -208,9 +208,9 @@ public class InstanceReader {
             if (estSouple) {
                 penaliteStr = tokens[4].split("=")[1];
                 penalite = Integer.parseInt(penaliteStr);
-                contrainteHBClassement = new ContrainteHBClassement(instance.getEquipesById(idEquipe), castModeToTypeEnum(mode), max, penalite);
+                contrainteHBClassement = new ContrainteHBClassement(idEquipe, castModeToTypeEnum(mode), max, penalite);
             } else {
-                contrainteHBClassement = new ContrainteHBClassement(instance.getEquipesById(idEquipe), castModeToTypeEnum(mode), max);
+                contrainteHBClassement = new ContrainteHBClassement(idEquipe, castModeToTypeEnum(mode), max);
             }
 
             tokensJours = idJour.split(";");
@@ -218,12 +218,12 @@ public class InstanceReader {
 
             for (int j = 0; j < tokensJours.length; j++) {
                 //TODO return false si erreur d'ajout
-                contrainteHBClassement.addJournee(instance.getJourneeById(Integer.parseInt(tokensJours[j])));
+                contrainteHBClassement.addJournee(Integer.parseInt(tokensJours[j]));
             }
 
             for (int k = 0; k < tokensEA.length; k++) {
                 //TODO return false si erreur d'ajout
-                contrainteHBClassement.addEquipeAdverse(instance.getEquipesById(Integer.parseInt(tokensEA[k])));
+                contrainteHBClassement.addEquipeAdverse(Integer.parseInt(tokensEA[k]));
             }
 
             instance.addContrainte(contrainteHBClassement);
@@ -280,12 +280,12 @@ public class InstanceReader {
 
             for (int j = 0; j < tokensJours.length; j++) {
                 //TODO return false si erreur d'ajout
-                contrainteRencontres.addJournee(instance.getJourneeById(Integer.parseInt(tokensJours[j])));
+                contrainteRencontres.addJournee(Integer.parseInt(tokensJours[j]));
             }
 
             for (int k = 0; k < tokensRencontres.length; k++) {
                 //TODO return false si erreur d'ajout
-                contrainteRencontres.addRencontre(instance.getRencontreById(tokensRencontres[k]));
+                contrainteRencontres.addRencontre(tokensRencontres[k].replace(',','-'));
             }
 
             instance.addContrainte(contrainteRencontres);
@@ -328,16 +328,16 @@ public class InstanceReader {
             if (estSouple) {
                 penaliteStr = tokens[4].split("=")[1];
                 penalite = Integer.parseInt(penaliteStr);
-                contraintePauseEquipe = new ContraintePauseEquipe(instance.getEquipesById(idEquipe), castModeToTypeEnum(mode), max, penalite);
+                contraintePauseEquipe = new ContraintePauseEquipe(idEquipe, castModeToTypeEnum(mode), max, penalite);
             } else {
-                contraintePauseEquipe = new ContraintePauseEquipe(instance.getEquipesById(idEquipe), castModeToTypeEnum(mode), max);
+                contraintePauseEquipe = new ContraintePauseEquipe(idEquipe, castModeToTypeEnum(mode), max);
             }
 
             tokensJours = idJour.split(";");
 
             for (int j = 0; j < tokensJours.length; j++) {
                 //TODO return false si erreur d'ajout
-                contraintePauseEquipe.addJournee(instance.getJourneeById(Integer.parseInt(tokensJours[j])));
+                contraintePauseEquipe.addJournee(Integer.parseInt(tokensJours[j]));
             }
 
             instance.addContrainte(contraintePauseEquipe);
@@ -384,12 +384,12 @@ public class InstanceReader {
                 penaliteStr = tokens[3].split("=")[1];
                 penalite = Integer.parseInt(penaliteStr);
                 contraintePauseGlobale = new ContraintePauseGlobale(max, penalite);
-                System.out.println(estSouple);
-                System.out.println(penalite);
+                //System.out.println(estSouple);
+                //System.out.println(penalite);
             } else {
                 contraintePauseGlobale = new ContraintePauseGlobale(max);
-                System.out.println(estSouple);
-                System.out.println(penalite);
+                //System.out.println(estSouple);
+                //System.out.println(penalite);
             }
 
             tokensJours = idJour.split(";");
@@ -397,12 +397,12 @@ public class InstanceReader {
 
             for (int j = 0; j < tokensJours.length; j++) {
                 //TODO return false si erreur d'ajout
-                contraintePauseGlobale.addJournee(instance.getJourneeById(Integer.parseInt(tokensJours[j])));
+                contraintePauseGlobale.addJournee((Integer.parseInt(tokensJours[j])));
             }
 
             for (int k = 0; k < tokensE.length; k++) {
                 //TODO return false si erreur d'ajout
-                contraintePauseGlobale.addEquipe(instance.getEquipesById(Integer.parseInt(tokensE[k])));
+                contraintePauseGlobale.addEquipe((Integer.parseInt(tokensE[k])));
             }
 
             instance.addContrainte(contraintePauseGlobale);
@@ -457,12 +457,12 @@ public class InstanceReader {
 
             for (int j = 0; j < tokensJours.length; j++) {
                 //TODO return false si erreur d'ajout
-                contrainteEquite.addJournee(instance.getJourneeById(Integer.parseInt(tokensJours[j])));
+                contrainteEquite.addJournee((Integer.parseInt(tokensJours[j])));
             }
 
             for (int k = 0; k < tokensE.length; k++) {
                 //TODO return false si erreur d'ajout
-                contrainteEquite.addEquipe(instance.getEquipesById(Integer.parseInt(tokensE[k])));
+                contrainteEquite.addEquipe((Integer.parseInt(tokensE[k])));
             }
 
             instance.addContrainte(contrainteEquite);
@@ -512,7 +512,7 @@ public class InstanceReader {
 
             for (int k = 0; k < tokensE.length; k++) {
                 //TODO return false si erreur d'ajout
-                contrainteSeparation.addEquipe(instance.getEquipesById(Integer.parseInt(tokensE[k])));
+                contrainteSeparation.addEquipe((Integer.parseInt(tokensE[k])));
             }
 
             instance.addContrainte(contrainteSeparation);

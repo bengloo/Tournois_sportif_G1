@@ -1,7 +1,7 @@
 package Tests;
 
+import instance.Instance;
 import io.InstanceReader;
-import io.JourneeReader;
 import io.exception.ReaderException;
 import solution.Journee;
 
@@ -12,10 +12,8 @@ public class TestReader {
         String path="instances/instance_ITC2021_Test_4.txt";
         try {
             InstanceReader reader = new InstanceReader(path);
-            JourneeReader readerJ = new JourneeReader(path);
-            HashMap<Integer, Journee> journees = new HashMap<>();
-            journees= readerJ.readJournees();
-            reader.readInstance(journees);
+            Instance i= reader.readInstance();
+            System.out.println(i);
             System.out.println("Instance lue avec success !");
         } catch (ReaderException ex) {
             System.out.println(ex.getMessage());

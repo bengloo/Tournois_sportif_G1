@@ -2,7 +2,6 @@ package Tests;
 
 import instance.Instance;
 import io.InstanceReader;
-import io.JourneeReader;
 import io.exception.ReaderException;
 import solution.Championnat;
 import solution.Journee;
@@ -14,11 +13,10 @@ public class TestChampionnat {
         String path="instances/instance_ITC2021_Test_4.txt";
         try {
             InstanceReader reader = new InstanceReader(path);
-            JourneeReader readerJ = new JourneeReader(path);
-            HashMap<Integer, Journee> journees = new HashMap<>();
-            journees= readerJ.readJournees();
-            Instance i= reader.readInstance(journees);
-            Championnat c= new Championnat(i,journees);
+            Instance i= reader.readInstance();
+            //System.out.println(i);
+            Championnat c= new Championnat(i);
+            System.out.println(c.toString());
         } catch (ReaderException ex) {
             System.out.println(ex.getMessage());
         }

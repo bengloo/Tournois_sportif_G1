@@ -1,42 +1,38 @@
 package instance.modele.contrainte;
 
-import instance.modele.Equipe;
-import instance.modele.Rencontre;
+import solution.Equipe;
 import operateur.Operateur;
 import solution.Championnat;
 import solution.Journee;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeSet;
 
 public class ContraintePlacement extends Contrainte{
-    private Equipe equipe;
-    private Map<Integer, Journee> journees;
+    private Integer equipe;
+    private TreeSet<Integer> journees;
     private TypeMode mode;
     private Integer max;
 
-    public ContraintePlacement(Equipe equipe,TypeMode mode,Integer max) {
+    public ContraintePlacement(Integer equipe,TypeMode mode,Integer max) {
         super();
         this.equipe=equipe;
-        this.journees = new HashMap<>();
+        this.journees = new TreeSet<>();
         this.mode = mode;
         this.max = max;
     }
 
-    public ContraintePlacement(Equipe equipe,TypeMode mode,Integer max, Integer penalite) {
+    public ContraintePlacement(Integer equipe,TypeMode mode,Integer max, Integer penalite) {
         super(penalite);
         this.equipe=equipe;
-        this.journees = new HashMap<>();
+        this.journees = new TreeSet<>();
         this.mode = mode;
         this.max = max;
     }
-
-    public boolean addJournee(Journee journee){
-        if(journee==null) return false;
-        this.journees.put(journee.getId(),journee);
-        return true;
+    public boolean addJournee(Integer id){
+        return journees.add(id);
     }
-
 
     @Override
     public TypeContrainte getTypeContrainte() {
@@ -66,7 +62,7 @@ public class ContraintePlacement extends Contrainte{
         StringBuilder sb = new StringBuilder();
         sb.append("ContraintePlacement{");
         sb.append("equipe=").append(equipe).append(", ");
-        sb.append("journees=").append(journees.values()).append(", ");
+        sb.append("journees=").append(journees).append(", ");
         sb.append("mode=").append(mode).append(", ");
         sb.append("max=").append(max).append(", ");
         sb.append("penalite=").append(penalite).append(", ");

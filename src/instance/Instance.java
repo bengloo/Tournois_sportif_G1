@@ -1,7 +1,7 @@
 package instance;
 
-import instance.modele.Equipe;
-import instance.modele.Rencontre;
+import solution.Equipe;
+import solution.Rencontre;
 import instance.modele.contrainte.*;
 import solution.Journee;
 
@@ -12,11 +12,12 @@ import java.util.Map;
 public class Instance {
 
     private String nom;
-    private Map<Integer, Equipe> equipes;
+    private int nbEquipes;
+    /*private Map<Integer, Equipe> equipes;
 
     private Map<String, Rencontre> rencontres;
 
-    private Map<Integer, Journee> journees;
+    private Map<Integer, Journee> journees;*/
 
     private LinkedList<ContraintePlacement> contraintesPlacement;
     private LinkedList<ContrainteEquite> contraintesEquite;
@@ -26,22 +27,9 @@ public class Instance {
     private LinkedList<ContrainteHBClassement>contraintesHBClassement;
     private LinkedList<ContrainteSeparation>contraintesSeparation;
 
-    public Instance(String nom,int nbEquipe,HashMap<Integer,Journee>journees) {
+    public Instance(String nom,int nbEquipes) {
         this.nom = nom;
-        equipes =new HashMap<>();
-        for(int id=0;id<nbEquipe;id++){
-            addEquipe(id);
-        }
-        rencontres =new HashMap<>();
-        for(int id=0;id<nbEquipe;id++){
-            for(int idAdverse=0;idAdverse<nbEquipe;idAdverse++){
-                if(id!=idAdverse){
-                    addRencontre(this.getEquipesById(id),this.getEquipesById(idAdverse));
-                }
-            }
-        }
-        System.out.println(journees);
-        this.journees=journees;
+        this.nbEquipes=nbEquipes;
         contraintesEquite =new LinkedList<>();
         contraintesHBClassement =new LinkedList<>();
         contraintesRencontre =new LinkedList<>();
@@ -51,24 +39,10 @@ public class Instance {
         contraintesSeparation =new LinkedList<>();
     }
 
-    public boolean addEquipe(int id){
-        if(id < 0 ||this.equipes.containsKey(id))return false;
-        this.equipes.put(id, new Equipe(id));
-        return true;
-    }
-    public boolean addRencontre(Equipe equipe,Equipe equipeAdverse){
 
-        if(equipe==null||equipeAdverse==null)return false;
-        String id= equipe.getId()+","+equipeAdverse.getId();
-        if(this.rencontres.containsKey(id))return false;
-        this.rencontres.put(id, new Rencontre(equipe,equipeAdverse));
-        return true;
-    }
 
-    public boolean addJournee(int id){
-        if(id < 0 ||this.journees.containsKey(id))return false;
-        this.journees.put(id, new Journee(id));
-        return true;
+    public int getNbEquipes() {
+        return nbEquipes;
     }
 
     public boolean addContrainte(Contrainte contrainteToAdd){
@@ -92,23 +66,6 @@ public class Instance {
         }
     }
 
-    public Map<Integer, Equipe> getEquipes() {
-        return equipes;
-    }
-
-    public Map<Integer, Journee> getJournees() {
-        return journees;
-    }
-    public Equipe getEquipesById(int id){
-        return this.equipes.get(id);
-    }
-    public Rencontre getRencontreById(String id){
-        return this.rencontres.get(id);
-    }
-    public Journee getJourneeById(int id){
-        return this.journees.get(id);
-    }
-
     public LinkedList<? extends Contrainte> getContraintes(TypeContrainte type){
         switch (type ){
             case EQUITE:
@@ -128,17 +85,16 @@ public class Instance {
             default: return null;
         }
     }
+
+    public String getNom() {
+        return nom;
+    }
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Instance{\n");
         sb.append("\tnom=").append(nom).append("\n");
-        sb.append("\tequipes=").append(equipes.values()).append("\n");
-        sb.append("\trencontres=[");
-        for (Rencontre r : rencontres.values()) {
-            sb.append(r).append(" | ");
-        }
-        sb.append("]\n\tjournees=").append(journees.values()).append("\n");
+        sb.append("\tnbEquipes=").append(nom).append("\n");
 
         sb.append("\n\tcontraintesPlacement=").append(contraintesPlacement.size()).append("[\n");
         for (ContraintePlacement contrainte : contraintesPlacement) {

@@ -1,4 +1,4 @@
-package instance.modele;
+package solution;
 
 public class Equipe {
     private Integer id;
