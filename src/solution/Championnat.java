@@ -12,6 +12,8 @@ public class Championnat {
     private Map<Integer, Journee> journees;
     private Map<String, Rencontre> rencontres;
     private Map<Integer, Equipe> equipes;
+
+    private Integer coutTotal;
     private Map<Contrainte,Integer> coutContraintes;
 
     public Championnat(Instance instance) {
@@ -39,6 +41,7 @@ public class Championnat {
             }
         }
 
+        coutTotal=0;
         //Les opeartion impacterons la penalitee total de chaque contrainte.
         this.coutContraintes = new HashMap<>();
         for(TypeContrainte type:TypeContrainte.values()) {
@@ -108,7 +111,12 @@ public class Championnat {
         sb.append("\tInstance=").append(getInstance().getNom()).append("\n");
         sb.append("\tequipes=").append(equipes.values()).append("\n");
         sb.append("\trencontres=").append(rencontres.values()).append("\n");
-        sb.append("\tjournees=").append(journees.values()).append("\n");
+        sb.append("\tjournees=[").append("\n");
+        for(Journee j:journees.values()){
+            sb.append("\t\t").append(j.toString()).append("\n");
+        }
+        sb.append("\t]").append("\n");
+        sb.append("\tcoutTotal=").append(coutTotal).append("\n");
         sb.append("\tcoutContraintes=[").append("\n");
         for(TypeContrainte type:TypeContrainte.values()){
             LinkedList<? extends Contrainte> contraintes= getInstance().getContraintes(type);

@@ -53,6 +53,9 @@ public class Journee {
 
     @Override
     public String toString() {
-        return id.toString();
+        return "Journee{" +
+                "id=" + id +
+                ", rencontres=" + rencontres.values() +
+                '}';
     }
 }
