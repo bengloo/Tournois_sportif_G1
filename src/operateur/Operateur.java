@@ -1,18 +1,22 @@
 package operateur;
 
 import solution.Journee;
+import solution.Rencontre;
 
 public abstract class Operateur {
     Journee journee;
+
+    Rencontre rencontre;
     Integer penalitee;
 
     public Operateur() {
         this.penalitee = Integer.MAX_VALUE;
     }
 
-    public Operateur(Journee j) {
+    public Operateur(Journee j,Rencontre r) {
         this.journee = j;
-        this.penalitee = Integer.MAX_VALUE;
+        this.rencontre=r;
+        this.penalitee = evalDeltaPenalite();
     }
 
     public int getDeltaPenalite() {
@@ -39,6 +43,14 @@ public abstract class Operateur {
         return this.penalitee<0;
     }
 
+    public Journee getJournee() {
+        return journee;
+    }
+
+    public Integer getPenalitee() {
+        return penalitee;
+    }
+
     @Override
     public String toString() {
         return "Operateur{" +
@@ -46,4 +58,5 @@ public abstract class Operateur {
                 ", penalitee=" + penalitee +
                 '}';
     }
+
 }

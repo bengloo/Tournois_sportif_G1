@@ -78,6 +78,7 @@ public class ContraintePlacement extends Contrainte{
 
     @Override
     public int evalDeltatPenalite(Championnat championnat, Operateur o) {
+        //TODO definir valc dans championat pour pouvoir s'y referer
         return 0;
     }
 
