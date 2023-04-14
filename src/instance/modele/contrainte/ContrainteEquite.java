@@ -11,7 +11,6 @@ public class ContrainteEquite extends Contrainte {
 
     private Map<Integer, Equipe> equipes;
     private Map<Integer, Journee> journees;
-    private Map<Integer, Equipe> equipesAdverses;
     private Integer max;
     private Integer penalite;
 
@@ -21,7 +20,6 @@ public class ContrainteEquite extends Contrainte {
         this.penalite = penalite;
         this.equipes = new HashMap<>();
         this.journees = new HashMap<>();
-        this.equipesAdverses = new HashMap<>();
         this.max = max;
 
     }
@@ -37,11 +35,6 @@ public class ContrainteEquite extends Contrainte {
         return true;
     }
 
-    public boolean addEquipeAdverse(Equipe equipe){
-        if(equipe==null) return false;
-        this.equipesAdverses.put(equipe.getId(),equipe);
-        return true;
-    }
 
     @Override
     public int getPenaliteCumulee(Championnat championnat) {
