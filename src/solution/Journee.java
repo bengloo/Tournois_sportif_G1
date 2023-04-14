@@ -48,6 +48,11 @@ public class Journee {
                 "id=" + id +
                 '}';
     }
+
+    public HashMap<String, Rencontre> getRencontres() {
+        return rencontres;
+    }
+
     @Override
     public String toString() {
         return id.toString();

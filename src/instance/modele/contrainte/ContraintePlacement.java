@@ -1,6 +1,7 @@
 package instance.modele.contrainte;
 
 import instance.modele.Equipe;
+import instance.modele.Rencontre;
 import operateur.Operateur;
 import solution.Championnat;
 import solution.Journee;
@@ -44,7 +45,15 @@ public class ContraintePlacement extends Contrainte{
 
     @Override
     public int getPenaliteCumulee(Championnat championnat) {
+        //le nombre de rencontres jouées par l’équipe e selon le mode mode sur l’ensemble des journées
+        int valc=0;
+        //TODO
+        if(valc>this.max) {
+            if (estDure()) return Integer.MAX_VALUE;
+            return this.penalite *(valc-this.max);
+        }
         return 0;
+
     }
 
     @Override
