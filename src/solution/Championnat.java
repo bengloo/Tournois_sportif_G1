@@ -54,12 +54,12 @@ public class Championnat {
         return IDequipeDomicile+"-"+IDequipeExterne;
     }
 
-    public boolean addEquipe(int id){
+    private boolean addEquipe(int id){
         if(id < 0 ||this.equipes.containsKey(id))return false;
         this.equipes.put(id, new Equipe(id));
         return true;
     }
-    public boolean addRencontre(Equipe equipe,Equipe equipeAdverse){
+    private boolean addRencontre(Equipe equipe,Equipe equipeAdverse){
 
         if(equipe==null||equipeAdverse==null)return false;
         String id= getIDRencontre(equipe.getId(),equipeAdverse.getId());
@@ -68,7 +68,7 @@ public class Championnat {
         return true;
     }
 
-    public boolean addJournee(int id){
+    private boolean addJournee(int id){
         if(id < 0 ||this.journees.containsKey(id))return false;
         this.journees.put(id, new Journee(id));
         return true;
@@ -91,6 +91,26 @@ public class Championnat {
 
     public int getNBEquipe(){
         return getInstance().getNbEquipes();
+    }
+
+    public Map<Integer, Journee> getJournees() {
+        return journees;
+    }
+
+    public Map<String, Rencontre> getRencontres() {
+        return rencontres;
+    }
+
+    public Map<Integer, Equipe> getEquipes() {
+        return equipes;
+    }
+
+    public Integer getCoutTotal() {
+        return coutTotal;
+    }
+
+    public Map<Contrainte, Integer> getCoutContraintes() {
+        return coutContraintes;
     }
 
     /*

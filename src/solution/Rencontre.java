@@ -15,6 +15,14 @@ public class Rencontre {
         return this.domicile.getId().toString()+"-"+this.exterieur.getId().toString();
     }
 
+    public Equipe getExterieur() {
+        return exterieur;
+    }
+
+    public Equipe getDomicile() {
+        return domicile;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

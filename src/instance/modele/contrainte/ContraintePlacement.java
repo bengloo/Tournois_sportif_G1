@@ -4,6 +4,7 @@ import solution.Equipe;
 import operateur.Operateur;
 import solution.Championnat;
 import solution.Journee;
+import solution.Rencontre;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -39,11 +40,34 @@ public class ContraintePlacement extends Contrainte{
         return TypeContrainte.PLACEMENT;
     }
 
+
     @Override
     public int getPenaliteCumulee(Championnat championnat) {
         //le nombre de rencontres jouées par l’équipe e selon le mode mode sur l’ensemble des journées
         int valc=0;
-        //TODO
+
+        for(Rencontre r:championnat.getRencontres().values()){
+            for(Integer jID:journees) {
+                switch (mode) {
+                    case DOMICILE:
+                        if (r.getDomicile().equals(equipe)&&championnat.getJournees().get(jID).getRencontres().containsKey(r)) {
+                            valc++;
+                        }
+                        break;
+                    case EXTERIEUR:
+                        if (r.getExterieur().equals(equipe)&&championnat.getJournees().get(jID).getRencontres().containsKey(r)){
+                            valc++;
+                        }
+                        break;
+                    case INDEFINI:
+                        if ((r.getDomicile().equals(equipe) || r.getDomicile().equals(equipe))&&championnat.getJournees().get(jID).getRencontres().containsKey(r)){
+                            valc++;
+                        }
+                    default:
+                        //TODO interup process error
+                }
+            }
+        }
         if(valc>this.max) {
             if (estDure()) return Integer.MAX_VALUE;
             return this.penalite *(valc-this.max);
