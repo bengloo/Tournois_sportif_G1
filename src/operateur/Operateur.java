@@ -50,6 +50,14 @@ public abstract class Operateur {
         return journee;
     }
 
+    public Rencontre getRencontre() {
+        return rencontre;
+    }
+
+    public void setRencontre(Rencontre rencontre) {
+        this.rencontre = rencontre;
+    }
+
     public Integer getCout() {
         return cout;
     }

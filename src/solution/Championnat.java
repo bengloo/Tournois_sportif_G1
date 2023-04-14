@@ -2,8 +2,6 @@ package solution;
 
 import instance.Instance;
 import instance.modele.contrainte.*;
-
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -16,6 +14,8 @@ public class Championnat {
 
     private Integer coutTotal;
     private Map<Contrainte,Integer> coutContraintes;
+
+    private Map<Contrainte,Integer> coefContraintes;
 
     public Championnat(Instance instance) {
         this.instance = instance;
@@ -43,12 +43,21 @@ public class Championnat {
         }
 
         coutTotal=0;
-        //Les opeartion impacterons la penalitee total de chaque contrainte.
+        //Les opeartion impacterons le cout total de chaque contrainte.
+        //potentielement à supprimé pour priviligier les coef on calculais le cout sur les coef à chaque fois
         this.coutContraintes = new HashMap<>();
         for(TypeContrainte type:TypeContrainte.values()) {
             for (Contrainte contrainte : instance.getContraintes(type)){
                 coutContraintes.put(contrainte,0);
-            };
+            }
+        }
+
+        //le calcule du cout total par contrainte n'est par continus vis à vias des coef de la contrainte comme valc
+        this.coefContraintes = new HashMap<>();
+        for(TypeContrainte type:TypeContrainte.values()) {
+            for (Contrainte contrainte : instance.getContraintes(type)){
+                coefContraintes.put(contrainte,0);
+            }
         }
     }
     public String getIDRencontre(Integer IDequipeDomicile,Integer IDequipeExterne){
@@ -114,10 +123,15 @@ public class Championnat {
         return coutContraintes;
     }
 
+    public Map<Contrainte, Integer> getCoefContraintes() {
+        return coefContraintes;
+    }
+
     public LinkedList<? extends Contrainte>  getContraintes(TypeContrainte type){
         return instance.getContraintes(type);
     }
 
+    /*TODO sa serait bien si sa marche sa factoriserait du code à droite a gauche
     public LinkedList<? extends Contrainte>  getContraintes(){
         LinkedList<? extends Contrainte> contraintesAll= new LinkedList<>();
         for(TypeContrainte type:TypeContrainte.values()){
@@ -126,6 +140,7 @@ public class Championnat {
         }
         return contraintesAll;
     }
+     */
 
     /*
     * check quantiativement les journee et rencontre creer
