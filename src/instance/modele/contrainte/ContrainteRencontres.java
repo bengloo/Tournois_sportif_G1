@@ -16,7 +16,7 @@ public class ContrainteRencontres extends Contrainte{
     private Integer penalite;
 
     public ContrainteRencontres(Integer min,Integer max) {
-        super(false);
+        super(true);
         this.journees = new HashMap<>();
         this.rencontres = new LinkedList<>();
         this.min = max;
@@ -53,12 +53,14 @@ public class ContrainteRencontres extends Contrainte{
 
     @Override
     public String toString() {
-        return "ContrainteRencontres{" +
-                "journees=" + journees +
-                ", rencontres=" + rencontres +
-                ", min=" + min +
-                ", max=" + max +
-                ", dure=" + dure +
-                '}';
+        StringBuilder sb = new StringBuilder();
+        sb.append("ContrainteRencontres{");
+        sb.append("journees=").append(journees.values()).append(", ");
+        sb.append("rencontres=").append(rencontres).append(", ");
+        sb.append("min=").append(min).append(", ");
+        sb.append("max=").append(max).append(", ");
+        sb.append("penalite=").append(penalite).append(", ");
+        sb.append("dure=").append(dure).append("}");
+        return sb.toString();
     }
 }

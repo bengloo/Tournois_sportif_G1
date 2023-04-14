@@ -15,13 +15,11 @@ public class ContrainteEquite extends Contrainte {
     private Integer penalite;
 
     public ContrainteEquite(Integer max, Integer penalite) {
-
         super(false);
         this.penalite = penalite;
         this.equipes = new HashMap<>();
         this.journees = new HashMap<>();
         this.max = max;
-
     }
 
     public boolean addEquipe(Equipe equipe){
@@ -43,13 +41,12 @@ public class ContrainteEquite extends Contrainte {
 
     @Override
     public String toString() {
-        return "ContrainteEquite{" +
-                "equipes=" + equipes +
-                ", journees=" + journees +
-                ", equipesAdverses=" + equipesAdverses +
-                ", max=" + max +
-                ", penalite=" + penalite +
-                ", dure=" + dure +
-                '}';
+        StringBuilder sb = new StringBuilder();
+        sb.append("ContrainteEquite{");
+        sb.append("equipes=").append(equipes.values()).append(", ");
+        sb.append("journees=").append(journees.values()).append(", ");
+        sb.append("max=").append(max).append(", ");
+        sb.append("penalite=").append(penalite).append("}");
+        return sb.toString();
     }
 }

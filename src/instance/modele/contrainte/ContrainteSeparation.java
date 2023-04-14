@@ -37,11 +37,11 @@ public class ContrainteSeparation extends Contrainte{
 
     @Override
     public String toString() {
-        return "ContrainteSeparation{" +
-                "equipes=" + equipes +
-                ", min=" + min +
-                ", penalite=" + penalite +
-                ", dure=" + dure +
-                '}';
+        StringBuilder sb = new StringBuilder();
+        sb.append("ContrainteSeparation{");
+        sb.append("equipes=").append(equipes.values()).append(", ");
+        sb.append("min=").append(min).append(", ");
+        sb.append("penalite=").append(penalite).append("}");
+        return sb.toString();
     }
 }

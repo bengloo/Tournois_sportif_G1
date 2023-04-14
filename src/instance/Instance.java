@@ -130,18 +130,53 @@ public class Instance {
     }
     @Override
     public String toString() {
-        return "Instance{" +
-                "\nnom='" + nom + '\'' +
-                "\n\tequipes=" + equipes +
-                "\n\trencontres=" + rencontres +
-                "\n\tjournees=" + journees +
-                "\n\tcontraintesPlacement=" + contraintesPlacement +
-                "\n\tcontraintesEquite=" + contraintesEquite +
-                "\n\tcontraintesRencontre=" + contraintesRencontre +
-                "\n\tcontraintesPauseEquipe=" + contraintesPauseEquipe +
-                "\n\tcontraintesPauseGlobale=" + contraintesPauseGlobale +
-                "\n\tcontraintesHBClassement=" + contraintesHBClassement +
-                "\n\tcontraintesSeparation=" + contraintesSeparation +
-                "\n}";
+        StringBuilder sb = new StringBuilder();
+        sb.append("Instance{\n");
+        sb.append("\tnom=").append(nom).append("\n");
+        sb.append("\tequipes=").append(equipes.values()).append("\n");
+        sb.append("\trencontres=[");
+        for (Rencontre r : rencontres.values()) {
+            sb.append(r).append(" | ");
+        }
+        sb.append("]\n\tjournees=").append(journees.values()).append("\n");
+
+        sb.append("\n\tcontraintesPlacement=").append(contraintesPlacement.size()).append("[\n");
+        for (ContraintePlacement contrainte : contraintesPlacement) {
+            sb.append("\t\t").append(contrainte.toString()).append("\n");
+        }
+
+        sb.append("\n\tcontraintesHBClassement=").append(contraintesHBClassement.size()).append("[\n");
+        for (ContrainteHBClassement contrainte : contraintesHBClassement) {
+            sb.append("\t\t").append(contrainte.toString()).append("\n");
+        }
+
+        sb.append("\n\tcontraintesRencontre=").append(contraintesRencontre.size()).append("[\n");
+        for (ContrainteRencontres contrainte : contraintesRencontre) {
+            sb.append("\t\t").append(contrainte.toString()).append("\n");
+        }
+
+        sb.append("\n\tcontraintesPauseEquipe=").append(contraintesPauseEquipe.size()).append("[\n");
+        for (ContraintePauseEquipe contrainte : contraintesPauseEquipe) {
+            sb.append("\t\t").append(contrainte.toString()).append("\n");
+        }
+
+        sb.append("\n\tcontraintesPauseGlobale=").append(contraintesPauseGlobale.size()).append("[\n");
+        for (ContraintePauseGlobale contrainte : contraintesPauseGlobale) {
+            sb.append("\t\t").append(contrainte.toString()).append("\n");
+        }
+
+        sb.append("\n\tcontraintesEquite=").append(contraintesEquite.size()).append("[\n");
+        for (ContrainteEquite contrainte : contraintesEquite) {
+            sb.append("\t\t").append(contrainte.toString()).append("\n");
+        }
+
+        sb.append("\n\tcontraintesSeparation=").append(contraintesSeparation.size()).append("[\n");
+        for (ContrainteSeparation contrainte : contraintesSeparation) {
+            sb.append("\t\t").append(contrainte.toString()).append("\n");
+        }
+
+        sb.append("\t]").append("\n");
+        sb.append("}");
+        return sb.toString();
     }
 }

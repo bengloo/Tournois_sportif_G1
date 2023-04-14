@@ -381,7 +381,7 @@ public class InstanceReader {
 
             // Seulement si la contrainte est souple
             if (estSouple) {
-                penaliteStr = tokens[4].split("=")[1];
+                penaliteStr = tokens[3].split("=")[1];
                 penalite = Integer.parseInt(penaliteStr);
                 contraintePauseGlobale = new ContraintePauseGlobale(max, penalite);
                 System.out.println(estSouple);
@@ -562,9 +562,10 @@ public class InstanceReader {
      * @param commentaire
      */
     private void lecture(BufferedReader br, String ligne, String commentaire) throws IOException {
-        while(!ligne.contains(commentaire)) {
+        while (!ligne.contains(commentaire)) {
             ligne = br.readLine();
         }
     }
+
 }
 

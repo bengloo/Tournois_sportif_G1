@@ -15,7 +15,7 @@ public class ContraintePlacement extends Contrainte{
     private Integer penalite;
 
     public ContraintePlacement(Equipe equipe,TypeMode mode,Integer max) {
-        super(false);
+        super(true);
         this.equipe=equipe;
         this.journees = new HashMap<>();
         this.mode = mode;
@@ -46,13 +46,14 @@ public class ContraintePlacement extends Contrainte{
 
     @Override
     public String toString() {
-        return "ContraintePlacement{" +
-                "equipe=" + equipe +
-                ", journees=" + journees +
-                ", mode=" + mode +
-                ", max=" + max +
-                ", penalite=" + penalite +
-                ", dure=" + dure +
-                '}';
+        StringBuilder sb = new StringBuilder();
+        sb.append("ContraintePlacement{");
+        sb.append("equipe=").append(equipe).append(", ");
+        sb.append("journees=").append(journees.values()).append(", ");
+        sb.append("mode=").append(mode).append(", ");
+        sb.append("max=").append(max).append(", ");
+        sb.append("penalite=").append(penalite).append(", ");
+        sb.append("dure=").append(dure).append("}");
+        return sb.toString();
     }
 }

@@ -15,7 +15,7 @@ public class ContraintePauseGlobale extends Contrainte{
     private Integer penalite;
 
     public ContraintePauseGlobale(Integer max) {
-        super(false);
+        super(true);
         this.journees = new HashMap<>();
         this.equipes = new HashMap<>();
         this.max = max;
@@ -48,12 +48,13 @@ public class ContraintePauseGlobale extends Contrainte{
 
     @Override
     public String toString() {
-        return "ContraintePauseGlobale{" +
-                "journees=" + journees +
-                ", equipes=" + equipes +
-                ", max=" + max +
-                ", penalite=" + penalite +
-                ", dure=" + dure +
-                '}';
+        StringBuilder sb = new StringBuilder();
+        sb.append("ContraintePauseGlobale{");
+        sb.append("journees=").append(journees.values()).append(", ");
+        sb.append("equipes=").append(equipes.values()).append(", ");
+        sb.append("max=").append(max).append(", ");
+        sb.append("penalite=").append(penalite).append(", ");
+        sb.append("dure=").append(dure).append("}");
+        return sb.toString();
     }
 }

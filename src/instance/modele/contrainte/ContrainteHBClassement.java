@@ -53,14 +53,15 @@ public class ContrainteHBClassement  extends Contrainte{
 
     @Override
     public String toString() {
-        return "ContrainteHBClassement{" +
-                "equipe=" + equipe +
-                ", journees=" + journees +
-                ", equipesAdverses=" + equipesAdverses +
-                ", mode=" + mode +
-                ", max=" + max +
-                ", penalite=" + penalite +
-                ", dure=" + dure +
-                '}';
+        StringBuilder sb = new StringBuilder();
+        sb.append("ContrainteHBClassement{");
+        sb.append("equipe=").append(equipe).append(", ");
+        sb.append("journees=").append(journees.values()).append(", ");
+        sb.append("equipesAdverses=").append(equipesAdverses.values()).append(", ");
+        sb.append("mode=").append(mode).append(", ");
+        sb.append("max=").append(max).append(", ");
+        sb.append("penalite=").append(penalite).append(", ");
+        sb.append("dure=").append(dure).append("}");
+        return sb.toString();
     }
 }
