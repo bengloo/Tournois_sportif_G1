@@ -96,6 +96,7 @@ public class Instance {
         sb.append("\tnom=").append(nom).append("\n");
         sb.append("\tnbEquipes=").append(nom).append("\n");
 
+        //TODO on peux boucler sur le type de contrainte sa serais plus propre voir le tostring de championnat
         sb.append("\n\tcontraintesPlacement=").append(contraintesPlacement.size()).append("[\n");
         for (ContraintePlacement contrainte : contraintesPlacement) {
             sb.append("\t\t").append(contrainte.toString()).append("\n");
