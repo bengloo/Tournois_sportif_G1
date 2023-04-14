@@ -46,10 +46,13 @@ public class ContraintePlacement extends Contrainte{
         //le nombre de rencontres jouées par l’équipe e selon le mode mode sur l’ensemble des journées
         int valc=0;
 
+        //pour toute les rencontres
         for(Rencontre r:championnat.getRencontres().values()){
+            //pour toutes les journees concerné par la contraintes
             for(Integer jID:journees) {
                 switch (mode) {
                     case DOMICILE:
+                        //si l'equipe concerné par la contrainte est celle de la rencontre et  la journee courante contient la rencontre
                         if (r.getDomicile().equals(equipe)&&championnat.getJournees().get(jID).getRencontres().containsKey(r)) {
                             valc++;
                         }

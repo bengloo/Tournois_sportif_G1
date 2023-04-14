@@ -3,6 +3,7 @@ package solution;
 import instance.Instance;
 import instance.modele.contrainte.*;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -111,6 +112,19 @@ public class Championnat {
 
     public Map<Contrainte, Integer> getCoutContraintes() {
         return coutContraintes;
+    }
+
+    public LinkedList<? extends Contrainte>  getContraintes(TypeContrainte type){
+        return instance.getContraintes(type);
+    }
+
+    public LinkedList<? extends Contrainte>  getContraintes(){
+        LinkedList<? extends Contrainte> contraintesAll= new LinkedList<>();
+        for(TypeContrainte type:TypeContrainte.values()){
+            LinkedList<? extends Contrainte> contraintes = instance.getContraintes(type);
+            //contraintesAll.addAll(contraintes);
+        }
+        return contraintesAll;
     }
 
     /*

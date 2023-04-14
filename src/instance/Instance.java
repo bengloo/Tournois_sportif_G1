@@ -86,6 +86,7 @@ public class Instance {
         }
     }
 
+
     public String getNom() {
         return nom;
     }

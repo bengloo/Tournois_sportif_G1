@@ -1,37 +1,40 @@
 package operateur;
 
+import solution.Championnat;
 import solution.Journee;
 import solution.Rencontre;
 
 public abstract class Operateur {
     Journee journee;
-
     Rencontre rencontre;
-    Integer penalitee;
+
+    Championnat championnat;
+    Integer cout;
 
     public Operateur() {
-        this.penalitee = Integer.MAX_VALUE;
+        this.cout = Integer.MAX_VALUE;
     }
 
-    public Operateur(Journee j,Rencontre r) {
+    public Operateur(Championnat c,Journee j,Rencontre r) {
+        this.championnat=c;
         this.journee = j;
         this.rencontre=r;
-        this.penalitee = evalDeltaPenalite();
+        this.cout = evalDeltaCout();
     }
 
-    public int getDeltaPenalite() {
-        return this.penalitee;
+    public int getDeltaCout() {
+        return this.cout;
     }
 
     public boolean isMouvementRealisable() {
-        return this.penalitee < Integer.MAX_VALUE;
+        return this.cout < Integer.MAX_VALUE;
     }
 
     public boolean isMeilleur(Operateur op) {
-        return this.penalitee < op.getDeltaPenalite();
+        return this.cout < op.getDeltaCout();
     }
 
-    protected abstract int evalDeltaPenalite();
+    protected abstract int evalDeltaCout();
 
     protected abstract boolean doMouvement();
 
@@ -40,22 +43,22 @@ public abstract class Operateur {
         return false;
     }
     public boolean isMouvementAmeliorant(){
-        return this.penalitee<0;
+        return this.cout<0;
     }
 
     public Journee getJournee() {
         return journee;
     }
 
-    public Integer getPenalitee() {
-        return penalitee;
+    public Integer getCout() {
+        return cout;
     }
 
     @Override
     public String toString() {
         return "Operateur{" +
                 "journee=" + journee +
-                ", penalitee=" + penalitee +
+                ", cout=" + cout +
                 '}';
     }
 
