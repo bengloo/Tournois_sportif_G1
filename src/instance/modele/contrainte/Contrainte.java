@@ -1,31 +1,26 @@
 package instance.modele.contrainte;
 
+import operateur.Operateur;
 import solution.Championnat;
 
 public abstract class Contrainte {
 
-    protected final boolean dure;
+    protected Integer penalite;
 
-    public Contrainte(boolean dure) {
-        this.dure=dure;
+    public Contrainte(Integer penalite) {
+        this.penalite=penalite;
+    }
+    public Contrainte() {
+        this.penalite=Integer.MAX_VALUE;
     }
 
-    public TypeContrainte getTypeContrainte(){
-        if(this instanceof ContrainteEquite)return TypeContrainte.EQUITE;
-        if(this instanceof ContrainteHBClassement)return TypeContrainte.HBCLASSEMENT;
-        if(this instanceof ContraintePauseEquipe)return TypeContrainte.PAUSEEQUIPE;
-        if(this instanceof ContraintePauseGlobale)return TypeContrainte.PAUSEGLOBALE;
-        if(this instanceof ContraintePlacement)return TypeContrainte.PLACEMENT;
-        if(this instanceof ContrainteRencontres)return TypeContrainte.RENCONTRES;
-        if(this instanceof ContrainteSeparation)return TypeContrainte.SEPARATION;
-        return null;
-    }
+    public abstract TypeContrainte getTypeContrainte();
 
     public boolean estDure(){
-        return dure;
+        return penalite==Integer.MAX_VALUE;
     }
     public boolean estSouple(){
-        return !dure;
+        return penalite!=Integer.MAX_VALUE;
     }
 
     /**
@@ -34,6 +29,13 @@ public abstract class Contrainte {
      *
      **/
     public abstract int getPenaliteCumulee(Championnat championnat);
+
+    /**
+     * @param championnat la solution
+     * @return le delat de penalité pour une operation faite sur le championat , retourne max integer si la contrainte est dure
+     *
+     **/
+    public abstract int evalDeltatPenalite(Championnat championnat, Operateur o);
 
     /**
      *

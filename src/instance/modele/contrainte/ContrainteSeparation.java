@@ -1,6 +1,7 @@
 package instance.modele.contrainte;
 
 import instance.modele.Equipe;
+import operateur.Operateur;
 import solution.Championnat;
 
 import java.util.HashMap;
@@ -12,12 +13,9 @@ public class ContrainteSeparation extends Contrainte{
 
     private Integer min;
 
-    private Integer penalite;
-
     public ContrainteSeparation(Integer min, Integer penalite) {
 
-        super(false);
-        this.penalite = penalite;
+        super(penalite);
         this.equipes = new HashMap<>();
         this.min = min;
 
@@ -31,7 +29,17 @@ public class ContrainteSeparation extends Contrainte{
 
 
     @Override
+    public TypeContrainte getTypeContrainte() {
+        return TypeContrainte.SEPARATION;
+    }
+
+    @Override
     public int getPenaliteCumulee(Championnat championnat) {
+        return 0;
+    }
+
+    @Override
+    public int evalDeltatPenalite(Championnat championnat, Operateur o) {
         return 0;
     }
 
@@ -41,7 +49,8 @@ public class ContrainteSeparation extends Contrainte{
         sb.append("ContrainteSeparation{");
         sb.append("equipes=").append(equipes.values()).append(", ");
         sb.append("min=").append(min).append(", ");
-        sb.append("penalite=").append(penalite).append("}");
+        sb.append("penalite=").append(penalite).append(", ");
+        sb.append("dure=").append(estDure()).append("}");
         return sb.toString();
     }
 }

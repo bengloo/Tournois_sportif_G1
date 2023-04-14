@@ -1,6 +1,7 @@
 package instance.modele.contrainte;
 
 import instance.modele.Equipe;
+import operateur.Operateur;
 import solution.Championnat;
 import solution.Journee;
 
@@ -12,23 +13,20 @@ public class ContraintePauseEquipe extends Contrainte{
     private Map<Integer, Journee> journees;
     private TypeMode mode;
     private Integer max;
-    private Integer penalite;
 
     public ContraintePauseEquipe(Equipe equipe,TypeMode mode,Integer max) {
-        super(true);
+        super();
         this.equipe=equipe;
         this.journees = new HashMap<>();
         this.mode = mode;
         this.max = max;
-        this.penalite = -1;
     }
     public ContraintePauseEquipe(Equipe equipe,TypeMode mode,Integer max, Integer penalite) {
-        super(false);
+        super(penalite);
         this.equipe=equipe;
         this.journees = new HashMap<>();
         this.mode = mode;
         this.max = max;
-        this.penalite = penalite;
     }
 
     public boolean addJournee(Journee journee){
@@ -38,7 +36,17 @@ public class ContraintePauseEquipe extends Contrainte{
     }
 
     @Override
+    public TypeContrainte getTypeContrainte() {
+        return TypeContrainte.PAUSEEQUIPE;
+    }
+
+    @Override
     public int getPenaliteCumulee(Championnat championnat) {
+        return 0;
+    }
+
+    @Override
+    public int evalDeltatPenalite(Championnat championnat, Operateur o) {
         return 0;
     }
 
@@ -51,7 +59,7 @@ public class ContraintePauseEquipe extends Contrainte{
         sb.append("mode=").append(mode).append(", ");
         sb.append("max=").append(max).append(", ");
         sb.append("penalite=").append(penalite).append(", ");
-        sb.append("dure=").append(dure).append("}");
+        sb.append("dure=").append(estDure()).append("}");
         return sb.toString();
     }
 }

@@ -19,7 +19,6 @@ public class TestChampionnat {
             journees= readerJ.readJournees();
             Instance i= reader.readInstance(journees);
             Championnat c= new Championnat(i,journees);
-            System.out.println("Instance lue avec success !");
         } catch (ReaderException ex) {
             System.out.println(ex.getMessage());
         }

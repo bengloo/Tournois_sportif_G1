@@ -1,6 +1,7 @@
 package instance.modele.contrainte;
 
 import instance.modele.Equipe;
+import operateur.Operateur;
 import solution.Championnat;
 import solution.Journee;
 
@@ -12,21 +13,24 @@ public class ContraintePauseGlobale extends Contrainte{
     private Map<Integer, Journee> journees;
     private Map<Integer, Equipe> equipes;
     private Integer max;
-    private Integer penalite;
 
     public ContraintePauseGlobale(Integer max) {
-        super(true);
+        super();
         this.journees = new HashMap<>();
         this.equipes = new HashMap<>();
         this.max = max;
-        this.penalite = -1;
     }
+
+    @Override
+    public TypeContrainte getTypeContrainte() {
+        return TypeContrainte.PAUSEGLOBALE;
+    }
+
     public ContraintePauseGlobale(Integer max, Integer penalite) {
-        super(false);
+        super(penalite);
         this.journees = new HashMap<>();
         this.equipes = new HashMap<>();
         this.max = max;
-        this.penalite = penalite;
     }
 
     public boolean addEquipe(Equipe equipe){
@@ -47,6 +51,11 @@ public class ContraintePauseGlobale extends Contrainte{
     }
 
     @Override
+    public int evalDeltatPenalite(Championnat championnat, Operateur o) {
+        return 0;
+    }
+
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("ContraintePauseGlobale{");
@@ -54,7 +63,7 @@ public class ContraintePauseGlobale extends Contrainte{
         sb.append("equipes=").append(equipes.values()).append(", ");
         sb.append("max=").append(max).append(", ");
         sb.append("penalite=").append(penalite).append(", ");
-        sb.append("dure=").append(dure).append("}");
+        sb.append("dure=").append(estDure()).append("}");
         return sb.toString();
     }
 }

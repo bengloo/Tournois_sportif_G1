@@ -1,6 +1,7 @@
 package instance.modele.contrainte;
 
 import instance.modele.Rencontre;
+import operateur.Operateur;
 import solution.Journee;
 import solution.Championnat;
 import java.util.HashMap;
@@ -13,24 +14,21 @@ public class ContrainteRencontres extends Contrainte{
     private Integer min;
     private Integer max;
 
-    private Integer penalite;
-
     public ContrainteRencontres(Integer min,Integer max) {
-        super(true);
+        super();
         this.journees = new HashMap<>();
         this.rencontres = new LinkedList<>();
         this.min = max;
         this.max = max;
-        this.penalite = -1;
+        this.penalite = Integer.MAX_VALUE;
     }
 
     public ContrainteRencontres(Integer min,Integer max, Integer penalite) {
-        super(false);
+        super(penalite);
         this.journees = new HashMap<>();
         this.rencontres = new LinkedList<>();
         this.min = max;
         this.max = max;
-        this.penalite = penalite;
     }
 
     public boolean addJournee(Journee journee){
@@ -47,7 +45,17 @@ public class ContrainteRencontres extends Contrainte{
 
 
     @Override
+    public TypeContrainte getTypeContrainte() {
+        return TypeContrainte.RENCONTRES;
+    }
+
+    @Override
     public int getPenaliteCumulee(Championnat championnat) {
+        return 0;
+    }
+
+    @Override
+    public int evalDeltatPenalite(Championnat championnat, Operateur o) {
         return 0;
     }
 
@@ -60,7 +68,7 @@ public class ContrainteRencontres extends Contrainte{
         sb.append("min=").append(min).append(", ");
         sb.append("max=").append(max).append(", ");
         sb.append("penalite=").append(penalite).append(", ");
-        sb.append("dure=").append(dure).append("}");
+        sb.append("dure=").append(estDure()).append("}");
         return sb.toString();
     }
 }
