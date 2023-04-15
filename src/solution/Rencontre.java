@@ -15,6 +15,10 @@ public class Rencontre {
         return this.domicile.getId().toString()+"-"+this.exterieur.getId().toString();
     }
 
+    public String getLabelRetour(){
+        return this.exterieur.getId().toString()+"-"+this.domicile.getId().toString();
+    }
+
     public Equipe getExterieur() {
         return exterieur;
     }

@@ -145,12 +145,40 @@ public class Championnat {
     /*
     * check quantiativement les journee et rencontre creer
     * */
-    public boolean checkIntegriteeChampiona(){
+
+    public void addCoefCoutContrainte(Contrainte c,Integer DeltaCoef,Integer delatCout){
+        //update du coef contrainte
+        coutContraintes.put(c,coefContraintes.get(c)+DeltaCoef);
+        //update du cout contrainte
+        coutContraintes.put(c,coutContraintes.get(c)+delatCout);
+
+    }
+
+    public boolean checkIntegriteeChampionat(){
         return false;
     }
 
     public boolean checkAllContrainte(){
-        return false;
+        for(Journee j :journees.values()){
+            if(j.getRencontres().size()!=getNBRencontre()/getNbJournee()){
+                System.out.println("La journee "+j.getId()+" n'à pas le bon nombre de rencontres: "+j.getRencontres().toString());
+                return false;
+            }
+        }
+        //TODO tester si les rencontre respecte les phase
+        for(TypeContrainte type:TypeContrainte.values()){
+            for(Contrainte c:getContraintes(type)){
+                if(!c.checkContrainte(this)){
+                    System.out.println("contrainte non respecté: "+c.toString());
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public void addCoutTotal(Integer cout) {
+        this.coutTotal += cout;
     }
 
     @Override

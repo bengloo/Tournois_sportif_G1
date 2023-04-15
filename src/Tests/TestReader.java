@@ -15,7 +15,7 @@ public class TestReader {
         File[] liste = dir.listFiles();
         System.out.println(liste.toString());
         for(File item : liste){
-            if(item.isFile()&&!item.getName().equals("readMe.txt"))
+            if(item.isFile()&&item.getName().contains("Test")&&!item.getName().equals("readMe.txt"))
             {
                 System.out.format("Nom du fichier: %s%n", item.getName());
                 String path=item.getName();

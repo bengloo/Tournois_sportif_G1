@@ -1,12 +1,8 @@
 package instance.modele.contrainte;
 
-import solution.Equipe;
 import operateur.Operateur;
 import solution.Championnat;
-import solution.Journee;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.TreeSet;
 
 public class ContraintePauseEquipe extends Contrainte{
@@ -40,12 +36,17 @@ public class ContraintePauseEquipe extends Contrainte{
     }
 
     @Override
-    public int getPenaliteCumulee(Championnat championnat) {
+    public int getCoutTotal(Championnat championnat) {
         return 0;
     }
 
     @Override
-    public int evalDeltatPenalite(Championnat championnat, Operateur o) {
+    public int evalDeltatCoef(Championnat championnat, Operateur o) {
+        return 0;
+    }
+
+    @Override
+    public int evalDeltatCout(Championnat championnat, Operateur o) {
         return 0;
     }
 

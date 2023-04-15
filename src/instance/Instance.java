@@ -95,7 +95,7 @@ public class Instance {
         StringBuilder sb = new StringBuilder();
         sb.append("Instance{\n");
         sb.append("\tnom=").append(nom).append("\n");
-        sb.append("\tnbEquipes=").append(nom).append("\n");
+        sb.append("\tnbEquipes=").append(nbEquipes).append("\n");
 
         //TODO on peux boucler sur le type de contrainte sa serais plus propre voir le tostring de championnat
         sb.append("\n\tcontraintesPlacement=").append(contraintesPlacement.size()).append("[\n");

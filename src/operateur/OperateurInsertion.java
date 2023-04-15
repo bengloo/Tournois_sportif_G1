@@ -3,22 +3,45 @@ package operateur;
 import instance.modele.contrainte.Contrainte;
 import instance.modele.contrainte.TypeContrainte;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class OperateurInsertion extends Operateur{
     @Override
-    protected int evalDeltaCout() {
-        int delta=0;
+    protected int evalDeltaCout(Map<Contrainte, Integer> delatCoef) {
+        int deltaCout=0;
         for(TypeContrainte type:TypeContrainte.values()){
-            for(Contrainte c:championnat.getContraintes(type)){
-                delta+=c.evalDeltatPenalite(championnat,this);
+            for(Contrainte c: getChampionnat().getContraintes(type)){
+                deltaCout+=c.evalDeltatCout(getChampionnat(),this);
             }
         }
-        return delta;
+        return deltaCout;
+    }
+
+    @Override
+    protected Map<Contrainte, Integer> evalDeltaCoefs() {
+        Map<Contrainte, Integer> delatCoefs = new HashMap<>();
+        for(TypeContrainte type:TypeContrainte.values()){
+            for(Contrainte c: getChampionnat().getContraintes(type)){
+                int deltaCoef = c.evalDeltatCoef(getChampionnat(),this);
+                if(deltaCoef!=0)delatCoefs.put(c,deltaCoef);
+            }
+        }
+        return delatCoefs;
     }
 
     @Override
     protected boolean doMouvement() {
-
-
-        return false;
+        Map<Contrainte, Integer> DeltaCoefs= evalDeltaCoefs();
+        //TODO y'a peut étre moyen de mieux parcour un hashmap à moindre temps
+        //pour chaque contrainte impacté par l'operation
+        for(Contrainte c:DeltaCoefs.keySet()){
+            //on update le cout et les coef des contraintes
+            getChampionnat().addCoefCoutContrainte(c,DeltaCoefs.get(c),c.evalDeltatCout(getChampionnat(),this,DeltaCoefs.get(c)));
+        }
+        //on update le cout total
+        getChampionnat().addCoutTotal(this.getCout());
+        //on affect la rencontre à la journee
+        return getChampionnat().getJournees().get(this.getJournee()).addRencontre(this.getRencontre());
     }
 }

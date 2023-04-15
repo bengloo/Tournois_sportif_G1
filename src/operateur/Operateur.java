@@ -1,15 +1,29 @@
 package operateur;
 
+import instance.modele.contrainte.Contrainte;
 import solution.Championnat;
 import solution.Journee;
 import solution.Rencontre;
 
-public abstract class Operateur {
-    Journee journee;
-    Rencontre rencontre;
+import java.util.HashMap;
+import java.util.Map;
 
-    Championnat championnat;
-    Integer cout;
+public abstract class Operateur {
+
+    //TODO protected ou private pour ces atribut à réflechire
+    private Journee journee;
+    private Rencontre rencontre;
+
+    private Championnat championnat;
+
+    //delat cout totale de toutes les contraintes pour une operation donné on se baseras sur les coefDesContrainte pour ne par recalculer entierement les fonction objectives de l'entiereter de la solution dejas etablie
+    private Integer cout;
+
+    /*
+    //TODO serait t'il judicieux de ne pas le garder en memoir et de le recalculer uniquement pour l'operation appliqué par do movement?
+    //contient les deltatCoef des contrainte impacté par l'operation
+    private Map<Contrainte,Integer> deltatCoefContraintes;
+    */
 
     public Operateur() {
         this.cout = Integer.MAX_VALUE;
@@ -19,7 +33,8 @@ public abstract class Operateur {
         this.championnat=c;
         this.journee = j;
         this.rencontre=r;
-        this.cout = evalDeltaCout();
+        this.cout = evalDeltaCout(evalDeltaCoefs());
+
     }
 
     public int getDeltaCout() {
@@ -34,7 +49,9 @@ public abstract class Operateur {
         return this.cout < op.getDeltaCout();
     }
 
-    protected abstract int evalDeltaCout();
+    protected abstract int evalDeltaCout(Map<Contrainte, Integer> deltaCoef);
+
+    protected abstract Map<Contrainte,Integer> evalDeltaCoefs();
 
     protected abstract boolean doMouvement();
 
@@ -70,4 +87,7 @@ public abstract class Operateur {
                 '}';
     }
 
+    protected Championnat getChampionnat() {
+        return championnat;
+    }
 }

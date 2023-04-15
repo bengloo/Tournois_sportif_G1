@@ -43,7 +43,7 @@ public class ContraintePlacement extends Contrainte{
 
 
     @Override
-    public int getPenaliteCumulee(Championnat championnat) {
+    public int getCoutTotal(Championnat championnat) {
         //le nombre de rencontres jouées par l’équipe e selon le mode mode sur l’ensemble des journées
         int valc=0;
 
@@ -81,32 +81,55 @@ public class ContraintePlacement extends Contrainte{
     }
 
     @Override
-    public int evalDeltatPenalite(Championnat championnat, Operateur o) {
+    public int evalDeltatCoef(Championnat championnat, Operateur o) {
         int valcDelta=0;
-
-        if(o instanceof OperateurInsertion){
-            Rencontre r=o.getRencontre();
-            for(Integer jID:journees) {
+        if(o instanceof OperateurInsertion) {
+            Rencontre r = o.getRencontre();
+            for (Integer jID : journees) {
                 switch (mode) {
                     case DOMICILE:
                         //si l'equipe concerné par la contrainte est celle de la rencontre et  la journee courante contient la rencontre
-                        if (r.getDomicile().equals(equipe)&&championnat.getJournees().get(jID).getRencontres().containsKey(r)) {
+                        if (r.getDomicile().equals(equipe) && championnat.getJournees().get(jID).getRencontres().containsKey(r)) {
                             valcDelta++;
                         }
                         break;
                     case EXTERIEUR:
-                        if (r.getExterieur().equals(equipe)&&championnat.getJournees().get(jID).getRencontres().containsKey(r)){
+                        if (r.getExterieur().equals(equipe) && championnat.getJournees().get(jID).getRencontres().containsKey(r)) {
                             valcDelta++;
                         }
                         break;
                     case INDEFINI:
-                        if ((r.getDomicile().equals(equipe) || r.getDomicile().equals(equipe))&&championnat.getJournees().get(jID).getRencontres().containsKey(r)){
+                        if ((r.getDomicile().equals(equipe) || r.getDomicile().equals(equipe)) && championnat.getJournees().get(jID).getRencontres().containsKey(r)) {
                             valcDelta++;
                         }
                     default:
                         //TODO interup process error
                 }
             }
+        }
+        return valcDelta;
+    }
+
+    @Override
+    public int evalDeltatCout(Championnat championnat, Operateur o) {
+        Integer valcDelta=evalDeltatCoef(championnat,o);
+
+        if(o instanceof OperateurInsertion){
+
+            if(championnat.getCoefContraintes().get(this)+valcDelta>max){
+                if (estDure()) return Integer.MAX_VALUE;
+                //au dela du max le cout suit une relation lineaire le deltat cout est donc proportionel
+                return this.penalite *(valcDelta);
+            }else return 0;
+        }
+        //TODO d'autre operation implique d'autre cout
+        return 0;
+    }
+
+    @Override
+    public int evalDeltatCout(Championnat championnat, Operateur o,Integer valcDelta) {
+        if(o instanceof OperateurInsertion){
+
             if(championnat.getCoefContraintes().get(this)+valcDelta>max){
                 if (estDure()) return Integer.MAX_VALUE;
                 //au dela du max le cout suit une relation lineaire le deltat cout est donc proportionel

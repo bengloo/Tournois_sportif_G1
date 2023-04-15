@@ -47,12 +47,17 @@ public class ContrainteHBClassement  extends Contrainte{
     }
 
     @Override
-    public int getPenaliteCumulee(Championnat championnat) {
+    public int getCoutTotal(Championnat championnat) {
         return 0;
     }
 
     @Override
-    public int evalDeltatPenalite(Championnat championnat, Operateur o) {
+    public int evalDeltatCoef(Championnat championnat, Operateur o) {
+        return 0;
+    }
+
+    @Override
+    public int evalDeltatCout(Championnat championnat, Operateur o) {
         return 0;
     }
 
