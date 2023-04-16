@@ -53,6 +53,6 @@ public abstract class Contrainte {
      * @return si la contrainte conserve la viabilité de la solution
      */
     public boolean checkContrainte(Championnat championnat){
-        return getCoutTotal(championnat)!=Integer.MAX_VALUE;
+        return estDure()&&getCoutTotal(championnat)!=Integer.MAX_VALUE;
     }
 }

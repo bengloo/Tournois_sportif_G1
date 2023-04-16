@@ -35,6 +35,7 @@ public class ContraintePauseEquipe extends Contrainte{
         return TypeContrainte.PAUSEEQUIPE;
     }
 
+    //TODO implementer les fonction de calcule de cout en sinspirent de la contrainte de placement, réflechire si on ne peux pas factoriser du code sout des fonction comune aux contraintes
     @Override
     public int getCoutTotal(Championnat championnat) {
         return 0;
@@ -47,6 +48,11 @@ public class ContraintePauseEquipe extends Contrainte{
 
     @Override
     public int evalDeltatCout(Championnat championnat, Operateur o) {
+        return 0;
+    }
+
+    @Override
+    public int evalDeltatCout(Championnat championnat, Operateur o, Integer deltaCoef) {
         return 0;
     }
 

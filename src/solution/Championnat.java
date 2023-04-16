@@ -160,8 +160,8 @@ public class Championnat {
 
     public boolean checkAllContrainte(){
         for(Journee j :journees.values()){
-            if(j.getRencontres().size()!=getNBRencontre()/getNbJournee()){
-                System.out.println("La journee "+j.getId()+" n'à pas le bon nombre de rencontres: "+j.getRencontres().toString());
+            if(j.getRencontres().size()<=getNBRencontre()/getNbJournee()){
+                System.out.println("La journee "+j.getId()+" à un nombre de rencontre execif: "+j.getRencontres().toString());
                 return false;
             }
         }
