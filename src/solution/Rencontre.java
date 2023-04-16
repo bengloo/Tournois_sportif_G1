@@ -6,6 +6,8 @@ public class Rencontre {
     private Equipe exterieur;
     private Equipe domicile;
 
+    //TODO renseigné reciproquement la journee à la rencontre pour facilité les accés voir le code de l'anné dernierre sur les afectation reciproque de menierre securisé et retrocative en cas d'echec.
+
     public Rencontre(Equipe exterieur, Equipe domicile) {
         this.exterieur = exterieur;
         this.domicile = domicile;

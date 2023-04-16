@@ -34,6 +34,8 @@ public class Journee {
     public boolean addRencontre(Rencontre rencontreToADD){
         if(rencontreToADD == null)return false;
         return  this.rencontres.put(rencontreToADD.getLabel(),rencontreToADD) != null;
+        //TODO checker interupt
+        //TODO add journee to rencontre
     }
 
     public boolean checkIntegriteeChampionatf(){
