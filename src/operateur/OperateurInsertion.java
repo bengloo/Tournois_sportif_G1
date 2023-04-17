@@ -42,6 +42,10 @@ public class OperateurInsertion extends Operateur{
         //on update le cout total
         getChampionnat().addCoutTotal(this.getCout());
         //on affect la rencontre à la journee
-        return getChampionnat().getJournees().get(this.getJournee()).addRencontre(this.getRencontre());
+        try {
+            return getChampionnat().getJournees().get(this.getJournee()).addRencontre(this.getRencontre());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

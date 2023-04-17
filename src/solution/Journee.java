@@ -31,12 +31,11 @@ public class Journee {
         return Objects.hash(getId());
     }
 
-    public boolean addRencontre(Rencontre rencontreToADD){
+   /* public boolean addRencontre(Rencontre rencontreToADD){
         if(rencontreToADD == null)return false;
         return  this.rencontres.put(rencontreToADD.getLabel(),rencontreToADD) != null;
         //TODO checker interupt
-        //TODO add journee to rencontre
-    }
+    }*/
 
     public boolean checkIntegriteeChampionatf(){
         return false;
