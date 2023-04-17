@@ -46,7 +46,7 @@ public class ContraintePlacement extends Contrainte{
     public int getCoutTotal(Championnat championnat) {
         //TODO tchequer contrainte inerante si oui renvoyer max integer
 
-        //le nombre de rencontres jouées par l’équipe e selon le mode mode sur l’ensemble des journées
+        //le nombre de rencontres jouées par l’équipe de la contrainte selon un mode sur l’ensemble des journées
         int valc=0;
 
         //pour toute les rencontres
@@ -54,12 +54,12 @@ public class ContraintePlacement extends Contrainte{
             //pour toutes les journees concerné par la contraintes
             valc += parcoursJournees(championnat, r);
         }
+
         if(valc>this.max) {
             if (estDure()) return Integer.MAX_VALUE;
             return this.penalite *(valc-this.max);
         }
         return 0;
-
     }
 
     @Override
@@ -67,26 +67,32 @@ public class ContraintePlacement extends Contrainte{
         int valcDelta=0;
         if(o instanceof OperateurInsertion) {
             Rencontre r = o.getRencontre();
-            for (Integer jID : journees) {
-                switch (mode) {
-                    case DOMICILE:
-                        //si l'equipe concerné par la contrainte est celle de la rencontre et  la journee courante contient la rencontre
-                        if (r.getDomicile().equals(equipe) && championnat.getJournees().get(jID).getRencontres().containsKey(r)) {
-                            valcDelta++;
-                        }
-                        break;
-                    case EXTERIEUR:
-                        if (r.getExterieur().equals(equipe) && championnat.getJournees().get(jID).getRencontres().containsKey(r)) {
-                            valcDelta++;
-                        }
-                        break;
-                    case INDEFINI:
-                        if ((r.getDomicile().equals(equipe) || r.getDomicile().equals(equipe)) && championnat.getJournees().get(jID).getRencontres().containsKey(r)) {
-                            valcDelta++;
-                        }
-                    default:
-                        //TODO interup process error
-                }
+            valcDelta = parcoursJournees(championnat, r);
+        }
+        return valcDelta;
+    }
+
+    private int parcoursJournees(Championnat championnat, Rencontre r) { //Factorisation du code
+        int valcDelta=0;
+        for (Integer jID : this.journees) {
+            switch (this.mode) {
+                case DOMICILE:
+                    //si l'equipe concerné par la contrainte est celle de la rencontre et  la journee courante contient la rencontre
+                    if (r.getDomicile().equals(this.equipe) && championnat.getJournees().get(jID).getRencontres().containsKey(r)) {
+                        valcDelta++;
+                    }
+                    break;
+                case EXTERIEUR:
+                    if (r.getExterieur().equals(this.equipe) && championnat.getJournees().get(jID).getRencontres().containsKey(r)) {
+                        valcDelta++;
+                    }
+                    break;
+                case INDEFINI:
+                    if ((r.getDomicile().equals(this.equipe) || r.getExterieur().equals(this.equipe)) && championnat.getJournees().get(jID).getRencontres().containsKey(r)) {
+                        valcDelta++;
+                    }
+                default:
+                    //TODO interup process error
             }
         }
         return valcDelta;
@@ -95,17 +101,7 @@ public class ContraintePlacement extends Contrainte{
     @Override
     public int evalDeltatCout(Championnat championnat, Operateur o) {
         Integer valcDelta=evalDeltatCoef(championnat,o);
-
-        if(o instanceof OperateurInsertion){
-
-            if(championnat.getCoefContraintes().get(this)+valcDelta>max){
-                if (estDure()) return Integer.MAX_VALUE;
-                //au dela du max le cout suit une relation lineaire le deltat cout est donc proportionel
-                return this.penalite *(valcDelta);
-            }else return 0;
-        }
-        //TODO d'autre operation implique d'autre cout
-        return 0;
+        return evalDeltatCout(championnat, o, valcDelta);
     }
 
     @Override
