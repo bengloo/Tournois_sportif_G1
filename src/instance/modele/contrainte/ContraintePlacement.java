@@ -52,27 +52,7 @@ public class ContraintePlacement extends Contrainte{
         //pour toute les rencontres
         for(Rencontre r:championnat.getRencontres().values()){
             //pour toutes les journees concerné par la contraintes
-            for(Integer jID:journees) {
-                switch (mode) {
-                    case DOMICILE:
-                        //si l'equipe concerné par la contrainte est celle de la rencontre et  la journee courante contient la rencontre
-                        if (r.getDomicile().equals(equipe)&&championnat.getJournees().get(jID).getRencontres().containsKey(r)) {
-                            valc++;
-                        }
-                        break;
-                    case EXTERIEUR:
-                        if (r.getExterieur().equals(equipe)&&championnat.getJournees().get(jID).getRencontres().containsKey(r)){
-                            valc++;
-                        }
-                        break;
-                    case INDEFINI:
-                        if ((r.getDomicile().equals(equipe) || r.getDomicile().equals(equipe))&&championnat.getJournees().get(jID).getRencontres().containsKey(r)){
-                            valc++;
-                        }
-                    default:
-                        //TODO interup process error
-                }
-            }
+            valc += parcoursJournees(championnat, r);
         }
         if(valc>this.max) {
             if (estDure()) return Integer.MAX_VALUE;
