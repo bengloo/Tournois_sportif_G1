@@ -42,11 +42,58 @@ public class Journee {
         return false;
     }
 
+    /*
+    ajoute une rencontre a une journee
+    */
+    public boolean addRencontre(Rencontre rencontre) throws Exception{
+        if(rencontre==null){
+            System.err.println("rencontre est null");
+            return false;
+        }
+        if(rencontres.containsKey(rencontre.getLabel())){
+            System.err.println("contains");
+            return false;
+        }
+
+        rencontres.put(rencontre.getLabel(), rencontre);//add
+
+
+        if(rencontre.setJournee(this)){
+
+            return true;
+        }else{
+            System.err.println("On remove");
+            rencontres.remove(rencontre.getLabel());//remove
+            return false;
+        }
+    }
+
+
+    public boolean removeRencontre(Rencontre rencontre) throws Exception{
+        if(rencontre==null){
+            throw new Exception("rencontre is null");
+        }
+        if(rencontre.isInJournee(this)){
+            throw new Exception("isInJournee");
+            //return false;
+        }
+
+        rencontres.remove(rencontre.getLabel());//remove
+        return true;
+    }
+
 
     public String toStringLong() {
         return "Journee{" +
                 "id=" + id +
                 '}';
+    }
+
+    /*
+     *return true si la journee contient la rencontre spécifié
+     */
+    public boolean isPresent(Rencontre r){
+        return getRencontres().containsKey(r);
     }
 
     public HashMap<String, Rencontre> getRencontres() {

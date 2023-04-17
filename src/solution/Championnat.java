@@ -16,9 +16,6 @@ public class Championnat {
     private Integer coutTotal;
 
 
-    //TODO usless ?
-    private Map<Contrainte,Integer> coutContraintes;
-
     private Map<Contrainte,Integer> coefContraintes;
 
     public Championnat(Instance instance) {
@@ -47,14 +44,7 @@ public class Championnat {
         }
 
         coutTotal=0;
-        //Les opeartion impacterons le cout total de chaque contrainte.
-        //potentielement à supprimé pour priviligier les coef on calculais le cout sur les coef à chaque fois
-        this.coutContraintes = new HashMap<>();
-        for(TypeContrainte type:TypeContrainte.values()) {
-            for (Contrainte contrainte : instance.getContraintes(type)){
-                coutContraintes.put(contrainte,0);
-            }
-        }
+
 
         //le calcule du cout total par contrainte n'est par continus vis à vias des coef de la contrainte comme valc
         this.coefContraintes = new HashMap<>();
@@ -123,9 +113,6 @@ public class Championnat {
         return coutTotal;
     }
 
-    public Map<Contrainte, Integer> getCoutContraintes() {
-        return coutContraintes;
-    }
 
     public Map<Contrainte, Integer> getCoefContraintes() {
         return coefContraintes;
@@ -152,9 +139,9 @@ public class Championnat {
 
     public void addCoefCoutContrainte(Contrainte c,Integer DeltaCoef,Integer delatCout){
         //update du coef contrainte
-        coutContraintes.put(c,coefContraintes.get(c)+DeltaCoef);
+        coefContraintes.put(c,coefContraintes.get(c)+DeltaCoef);
         //update du cout contrainte
-        coutContraintes.put(c,coutContraintes.get(c)+delatCout);
+        coutTotal+=delatCout;
 
     }
 
@@ -203,7 +190,7 @@ public class Championnat {
             LinkedList<? extends Contrainte> contraintes= getInstance().getContraintes(type);
             sb.append("\t\t"+type+"\n");
             for(Contrainte c:contraintes){
-                sb.append("\t\t\tcout="+this.coutContraintes.get(c)+" <= ").append(c.toString()).append("\n");
+                sb.append("\t\t\tcout="+this.coefContraintes.get(c)+" <= ").append(c.toString()).append("\n");
             }
         }
         sb.append("\t]").append("\n");
