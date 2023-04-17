@@ -12,7 +12,11 @@ public class Championnat {
     private Map<String, Rencontre> rencontres;
     private Map<Integer, Equipe> equipes;
 
+    //update Journee.addRencontre
     private Integer coutTotal;
+
+
+    //TODO usless ?
     private Map<Contrainte,Integer> coutContraintes;
 
     private Map<Contrainte,Integer> coefContraintes;

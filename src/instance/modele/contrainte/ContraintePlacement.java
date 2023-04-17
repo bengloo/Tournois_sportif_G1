@@ -44,6 +44,8 @@ public class ContraintePlacement extends Contrainte{
 
     @Override
     public int getCoutTotal(Championnat championnat) {
+        //TODO tchequer contrainte inerante si oui renvoyer max integer
+
         //le nombre de rencontres jouées par l’équipe e selon le mode mode sur l’ensemble des journées
         int valc=0;
 
@@ -128,6 +130,7 @@ public class ContraintePlacement extends Contrainte{
 
     @Override
     public int evalDeltatCout(Championnat championnat, Operateur o,Integer valcDelta) {
+        //TODO tchequer contrainte inerante si oui renvoyer max integer
         if(o instanceof OperateurInsertion){
 
             if(championnat.getCoefContraintes().get(this)+valcDelta>max){

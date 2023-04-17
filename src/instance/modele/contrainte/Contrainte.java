@@ -36,6 +36,7 @@ public abstract class Contrainte {
      * @return le delat du coef de la fonction objective de la contrainte
      *
      **/
+    //TODO deltat sans t
     public abstract int evalDeltatCoef(Championnat championnat, Operateur o);
 
     /**

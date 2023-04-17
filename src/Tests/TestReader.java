@@ -10,7 +10,8 @@ import java.util.HashMap;
 
 public class TestReader {
     public static void main(String[] args) {
-        File dir  = new File("/home/bengloo/IdeaProjects/Tournois_sportif_G1/instances");
+        //TODO chemin relatif
+        File dir  = new File("./instances");
         System.out.println(dir.toString());
         File[] liste = dir.listFiles();
         System.out.println(liste.toString());
