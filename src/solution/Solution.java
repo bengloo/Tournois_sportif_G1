@@ -76,7 +76,7 @@ public class Solution {
         if(equipe==null||equipeAdverse==null)return false;
         String id= getIDRencontre(equipe.getId(),equipeAdverse.getId());
         if(this.rencontres.containsKey(id))return false;
-        this.rencontres.put(id, new Rencontre(equipe,equipeAdverse));
+        this.rencontres.put(id, new Rencontre(equipeAdverse,equipe));
         return true;
     }
 
@@ -105,7 +105,7 @@ public class Solution {
 
     public Integer getPhase(Journee journee){
         if(journee==null)return null;
-        return journee.getId()>getNbJournee()/2?2:1;
+        return journee.getId()+1>getNbJournee()/2?2:1;
     }
     /**
      * Fonction permettant de recuperer le nombre de journées

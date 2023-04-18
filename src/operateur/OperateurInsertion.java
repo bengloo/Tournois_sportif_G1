@@ -50,6 +50,11 @@ public class OperateurInsertion extends Operateur{
             return false;
         }
         if(getChampionnat().getPhase(getJournee())==getChampionnat().getPhase(getChampionnat().getRencontres().get(getRencontre().getLabelRetour()).getJournee())){
+            int a=getChampionnat().getPhase(getJournee());
+            Journee j=getJournee();
+            int b=getChampionnat().getPhase(getChampionnat().getRencontres().get(getRencontre().getLabelRetour()).getJournee());
+            Journee j2=getChampionnat().getRencontres().get(getRencontre().getLabelRetour()).getJournee();
+
             return false;
         }
 
