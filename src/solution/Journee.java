@@ -91,13 +91,6 @@ public class Journee {
         rencontres.remove(rencontre.getLabel());
         return true;
     }
-/*
-
-    public String toStringShort() {
-        return "Journee{" +
-                "id=" + id +
-                '}';
-    }*/
 
     /**
      * Fonction permettant de savoir si la journée contient  une rencontre spécifié'
