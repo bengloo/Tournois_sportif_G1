@@ -73,7 +73,6 @@ public class ContraintePauseGlobale extends Contrainte{
         int valcDelta=0;
         for (Integer eID : this.equipes) {
             for (Integer jID : this.journees) {
-                //si la journee courante contient la rencontre
                 if (championnat.getEquipes().equals(eID) && championnat.getJournees().equals(jID)) {
                     valcDelta++;
                 }
