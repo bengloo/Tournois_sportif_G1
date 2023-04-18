@@ -1,10 +1,10 @@
 package Solveur;
 
 import instance.Instance;
-import solution.Championnat;
+import solution.Solution;
 
 public interface Solveur {
 
     public String getNom();
-    public Championnat solve(Instance instance);
+    public Solution solve(Instance instance);
 }

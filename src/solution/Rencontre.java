@@ -8,11 +8,10 @@ public class Rencontre {
 
     private Journee journee;
 
-    //TODO renseigné reciproquement la journee à la rencontre pour facilité les accés voir le code de l'anné dernierre sur les afectation reciproque de menierre securisé et retrocative en cas d'echec.
-
     public Rencontre(Equipe exterieur, Equipe domicile) {
         this.exterieur = exterieur;
         this.domicile = domicile;
+        this.journee = null;
     }
 
     public String getLabel(){
@@ -31,12 +30,16 @@ public class Rencontre {
         return domicile;
     }
 
-    public boolean setJournee(Journee j) throws Exception{
+    public Journee getJournee() {
+        return journee;
+    }
+
+    public boolean setJournee(Journee j){
         if(j==null){//on utilise null pour le remove
             this.journee=null;
             return true;
         }
-        if(journee.isPresent(this)){//si il est présent
+        if(j.isPresent(this)){//si il est présent
             Journee lastJournee= this.journee;
             this.journee = j;
             if(lastJournee!=null){

@@ -2,11 +2,21 @@ package operateur;
 
 import instance.modele.contrainte.Contrainte;
 import instance.modele.contrainte.TypeContrainte;
+import solution.Journee;
+import solution.Rencontre;
+import solution.Solution;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class OperateurInsertion extends Operateur{
+
+    public OperateurInsertion() {
+    }
+    public OperateurInsertion(Solution c, Journee j, Rencontre r) {
+        super(c, j, r);
+    }
+
     @Override
     protected int evalDeltaCout(Map<Contrainte, Integer> delatCoef) {
         int deltaCout=0;
@@ -43,7 +53,7 @@ public class OperateurInsertion extends Operateur{
         getChampionnat().addCoutTotal(this.getCout());
         //on affect la rencontre à la journee
         try {
-            return getChampionnat().getJournees().get(this.getJournee()).addRencontre(this.getRencontre());
+            return getChampionnat().getJournees().get(this.getJournee().getId()).addRencontre(this.getRencontre());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

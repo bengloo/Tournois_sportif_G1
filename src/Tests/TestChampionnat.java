@@ -3,11 +3,15 @@ package Tests;
 import instance.Instance;
 import io.InstanceReader;
 import io.exception.ReaderException;
-import solution.Championnat;
-import solution.Journee;
+import solution.Solution;
 
-import java.util.HashMap;
-
+/** Class permettant de tester notre class championnat.
+ * @author Engloo Benjamin
+ * @author Morcq Alexandre
+ * @author Sueur Jeanne
+ * @author Lux Hugo
+ * @version 0.5
+ */
 public class TestChampionnat {
     public static void main(String[] args) {
         String path="instances/instance_ITC2021_Test_4.txt";
@@ -15,10 +19,12 @@ public class TestChampionnat {
             InstanceReader reader = new InstanceReader(path);
             Instance i= reader.readInstance();
             //System.out.println(i);
-            Championnat c= new Championnat(i);
+            Solution c= new Solution(i);
             System.out.println(c.toString());
+            System.out.println(c.getContraintes().toString());
         } catch (ReaderException ex) {
             System.out.println(ex.getMessage());
         }
+
     }
 }

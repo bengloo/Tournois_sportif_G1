@@ -1,14 +1,10 @@
 package instance.modele.contrainte;
 
 import operateur.OperateurInsertion;
-import solution.Equipe;
 import operateur.Operateur;
-import solution.Championnat;
-import solution.Journee;
+import solution.Solution;
 import solution.Rencontre;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.TreeSet;
 
 public class ContraintePlacement extends Contrainte{
@@ -43,7 +39,7 @@ public class ContraintePlacement extends Contrainte{
 
 
     @Override
-    public int getCoutTotal(Championnat championnat) {
+    public int getCoutTotal(Solution championnat) {
         //TODO tchequer contrainte inerante si oui renvoyer max integer
 
         //le nombre de rencontres jouées par l’équipe de la contrainte selon un mode sur l’ensemble des journées
@@ -63,7 +59,7 @@ public class ContraintePlacement extends Contrainte{
     }
 
     @Override
-    public int evalDeltatCoef(Championnat championnat, Operateur o) {
+    public int evalDeltatCoef(Solution championnat, Operateur o) {
         int valcDelta=0;
         if(o instanceof OperateurInsertion) {
             Rencontre r = o.getRencontre();
@@ -72,7 +68,7 @@ public class ContraintePlacement extends Contrainte{
         return valcDelta;
     }
 
-    private int parcoursJournees(Championnat championnat, Rencontre r) { //Factorisation du code
+    private int parcoursJournees(Solution championnat, Rencontre r) { //Factorisation du code
         int valcDelta=0;
         for (Integer jID : this.journees) {
             switch (this.mode) {
@@ -99,13 +95,13 @@ public class ContraintePlacement extends Contrainte{
     }
 
     @Override
-    public int evalDeltatCout(Championnat championnat, Operateur o) {
+    public int evalDeltatCout(Solution championnat, Operateur o) {
         Integer valcDelta=evalDeltatCoef(championnat,o);
         return evalDeltatCout(championnat, o, valcDelta);
     }
 
     @Override
-    public int evalDeltatCout(Championnat championnat, Operateur o,Integer valcDelta) {
+    public int evalDeltatCout(Solution championnat, Operateur o, Integer valcDelta) {
         //TODO tchequer contrainte inerante si oui renvoyer max integer
         if(o instanceof OperateurInsertion){
 

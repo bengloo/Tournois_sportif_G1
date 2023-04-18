@@ -1,7 +1,7 @@
 package instance.modele.contrainte;
 
 import operateur.Operateur;
-import solution.Championnat;
+import solution.Solution;
 
 public abstract class Contrainte {
 
@@ -28,7 +28,7 @@ public abstract class Contrainte {
      * @return a chaque fois que la contrainte est verifier cumule les penalité cumulé si la contrainte verifier est dure retourné Max integer sin retourner O
      *
      **/
-    public abstract int getCoutTotal(Championnat championnat);
+    public abstract int getCoutTotal(Solution championnat);
 
 
     /**
@@ -37,23 +37,23 @@ public abstract class Contrainte {
      *
      **/
     //TODO deltat sans t
-    public abstract int evalDeltatCoef(Championnat championnat, Operateur o);
+    public abstract int evalDeltatCoef(Solution championnat, Operateur o);
 
     /**
      * @param championnat la solution
      * @return le delat de penalité pour une operation faite sur le championat , retourne max integer si la contrainte est dure
      *
      **/
-    public abstract int evalDeltatCout(Championnat championnat, Operateur o);
+    public abstract int evalDeltatCout(Solution championnat, Operateur o);
 
-    public abstract int evalDeltatCout(Championnat championnat, Operateur o,Integer deltaCoef);
+    public abstract int evalDeltatCout(Solution championnat, Operateur o, Integer deltaCoef);
 
     /**
      *
      * @param championnat
      * @return si la contrainte conserve la viabilité de la solution
      */
-    public boolean checkContrainte(Championnat championnat){
+    public boolean checkContrainte(Solution championnat){
         return estDure()&&getCoutTotal(championnat)!=Integer.MAX_VALUE;
     }
 }

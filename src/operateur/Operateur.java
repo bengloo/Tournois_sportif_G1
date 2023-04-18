@@ -1,11 +1,10 @@
 package operateur;
 
 import instance.modele.contrainte.Contrainte;
-import solution.Championnat;
+import solution.Solution;
 import solution.Journee;
 import solution.Rencontre;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public abstract class Operateur {
@@ -14,7 +13,7 @@ public abstract class Operateur {
     private Journee journee;
     private Rencontre rencontre;
 
-    private Championnat championnat;
+    private Solution championnat;
 
     //delat cout totale de toutes les contraintes pour une operation donné on se baseras sur les coefDesContrainte pour ne par recalculer entierement les fonction objectives de l'entiereter de la solution dejas etablie
     private Integer cout;
@@ -29,7 +28,7 @@ public abstract class Operateur {
         this.cout = Integer.MAX_VALUE;
     }
 
-    public Operateur(Championnat c,Journee j,Rencontre r) {
+    public Operateur(Solution c, Journee j, Rencontre r) {
         this.championnat=c;
         this.journee = j;
         this.rencontre=r;
@@ -83,11 +82,12 @@ public abstract class Operateur {
     public String toString() {
         return "Operateur{" +
                 "journee=" + journee +
+                ", rencontre=" + rencontre +
                 ", cout=" + cout +
                 '}';
     }
 
-    protected Championnat getChampionnat() {
+    protected Solution getChampionnat() {
         return championnat;
     }
 }

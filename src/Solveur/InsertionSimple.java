@@ -1,8 +1,17 @@
 package Solveur;
 
 import instance.Instance;
-import solution.Championnat;
+import solution.Rencontre;
+import solution.Solution;
 
+
+/** Class definissant InsertionSimple.
+ * @author Engloo Benjamin
+ * @author Morcq Alexandre
+ * @author Sueur Jeanne
+ * @author Lux Hugo
+ * @version 0.5
+ */
 public class InsertionSimple implements Solveur{
     @Override
     public String getNom() {
@@ -10,9 +19,13 @@ public class InsertionSimple implements Solveur{
     }
 
     @Override
-    public Championnat solve(Instance instance) {
-        //TODO insert sucessivement la premierre insertion realisable
-        //Attention potentielement bloquant sur certaine instance.
-        return null;
+    public Solution solve(Instance instance) {
+        Solution solution = new Solution(instance);
+        for(Rencontre r:solution.getRencontres().values()){
+            System.out.println(solution.toString());
+            solution.getPremiereInsertion(r).doMouvementIfRealisable();
+        }
+        if(!solution.check()) return null;
+        return solution;
     }
 }

@@ -1,7 +1,7 @@
 package Solveur;
 
 import instance.Instance;
-import solution.Championnat;
+import solution.Solution;
 
 public class MeilleurInsertion implements Solveur{
     @Override
@@ -10,7 +10,7 @@ public class MeilleurInsertion implements Solveur{
     }
 
     @Override
-    public Championnat solve(Instance instance) {
+    public Solution solve(Instance instance) {
         //TODO inserre sucessivement les meilleur Insertion
         return null;
     }

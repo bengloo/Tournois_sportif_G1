@@ -1,12 +1,8 @@
 package instance.modele.contrainte;
 
-import solution.Rencontre;
 import operateur.Operateur;
-import solution.Journee;
-import solution.Championnat;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
+import solution.Solution;
+
 import java.util.TreeSet;
 
 public class ContrainteRencontres extends Contrainte{
@@ -46,22 +42,22 @@ public class ContrainteRencontres extends Contrainte{
 
     //TODO implementer les fonction de calcule de cout en sinspirent de la contrainte de placement, réflechire si on ne peux pas factoriser du code sout des fonction comune aux contraintes
     @Override
-    public int getCoutTotal(Championnat championnat) {
+    public int getCoutTotal(Solution championnat) {
         return 0;
     }
 
     @Override
-    public int evalDeltatCoef(Championnat championnat, Operateur o) {
+    public int evalDeltatCoef(Solution championnat, Operateur o) {
         return 0;
     }
 
     @Override
-    public int evalDeltatCout(Championnat championnat, Operateur o) {
+    public int evalDeltatCout(Solution championnat, Operateur o) {
         return 0;
     }
 
     @Override
-    public int evalDeltatCout(Championnat championnat, Operateur o, Integer deltaCoef) {
+    public int evalDeltatCout(Solution championnat, Operateur o, Integer deltaCoef) {
         return 0;
     }
 

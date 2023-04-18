@@ -2,11 +2,19 @@ package solution;
 
 import instance.Instance;
 import instance.modele.contrainte.*;
+import operateur.OperateurInsertion;
+
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
-
-public class Championnat {
+/** Class definissant Solution(Championnat).
+ * @author Engloo Benjamin
+ * @author Morcq Alexandre
+ * @author Sueur Jeanne
+ * @author Lux Hugo
+ * @version 0.5
+ */
+public class Solution {
     private static Instance instance;
     private Map<Integer, Journee> journees;
     private Map<String, Rencontre> rencontres;
@@ -18,7 +26,7 @@ public class Championnat {
 
     private Map<Contrainte,Integer> coefContraintes;
 
-    public Championnat(Instance instance) {
+    public Solution(Instance instance) {
         this.instance = instance;
 
         //on pouras faire des operation par equipes
@@ -78,6 +86,19 @@ public class Championnat {
         return true;
     }
 
+    /**
+     * Fonction permettant de recuperer la rencontre retour en passant
+     * en paramètre la rencontre allée
+     * @Param r la rencontre ciblée
+     * @return  la rencontre du match retour.
+     */
+    public Rencontre getMatchRencontre(Rencontre r){
+        return this.rencontres.get(r.getLabelRetour());
+    }
+    /**
+     * Fonction permettant de recuperer l'instance
+     * @return  une instance.
+     */
     public static Instance getInstance() {
         return instance;
     }
@@ -85,30 +106,52 @@ public class Championnat {
     public int getPhase(Journee journee){
         return journee.getId()>getNbJournee()/2?2:1;
     }
+    /**
+     * Fonction permettant de recuperer le nombre de journées
+     * @return  le nombre de journées.
+     */
     public int getNbJournee(){
         return getNBEquipe()*2-2;
     }
-
+    /**
+     * Fonction permettant de recuperer le nombre de rencontres
+     * @return  le nombre de rencontres.
+     */
     public int getNBRencontre(){
         return getNBEquipe()*6-6;
     }
-
+    /**
+     * Fonction permettant de recuperer le nombre d'équipes
+     * @return  le nombre d'équipes.
+     */
     public int getNBEquipe(){
         return getInstance().getNbEquipes();
     }
-
+    /**
+     * Fonction permettant de recuperer les journées
+     * @return  l'ensemble des journée sous un Map.
+     */
     public Map<Integer, Journee> getJournees() {
         return journees;
     }
-
+    /**
+     * Fonction permettant de recuperer les rencontres
+     * @return  l'ensemble des rencontres sous un Map.
+     */
     public Map<String, Rencontre> getRencontres() {
         return rencontres;
     }
-
+    /**
+     * Fonction permettant de recuperer les équipes
+     * @return  l'ensemble des équipes sous un Map.
+     */
     public Map<Integer, Equipe> getEquipes() {
         return equipes;
     }
-
+    /**
+     * Fonction permettant de recuperer le cout total
+     * @return  le cout .
+     */
     public Integer getCoutTotal() {
         return coutTotal;
     }
@@ -122,16 +165,9 @@ public class Championnat {
         return instance.getContraintes(type);
     }
 
-    /*TODO sa serait bien si sa marche sa factoriserait du code à droite a gauche
-    public LinkedList<? extends Contrainte>  getContraintes(){
-        LinkedList<? extends Contrainte> contraintesAll= new LinkedList<>();
-        for(TypeContrainte type:TypeContrainte.values()){
-            LinkedList<? extends Contrainte> contraintes = instance.getContraintes(type);
-            //contraintesAll.addAll(contraintes);
-        }
-        return contraintesAll;
+    public LinkedList<Contrainte>  getContraintes(){
+        return instance.getContraintes();
     }
-     */
 
     /*
     * check quantiativement les journee et rencontre creer
@@ -145,31 +181,70 @@ public class Championnat {
 
     }
 
-    public boolean checkIntegriteeChampionat(){
-        return false;
+    public boolean check(){
+        if(!checkIntegriteeChampionat())return false;
+        return checkAllContrainte();
     }
 
-    public boolean checkAllContrainte(){
+    public boolean checkIntegriteeChampionat(){
         for(Journee j :journees.values()){
             if(j.getRencontres().size()<=getNBRencontre()/getNbJournee()){
-                System.out.println("La journee "+j.getId()+" à un nombre de rencontre execif: "+j.getRencontres().toString());
+                System.err.println("La journee "+j.getId()+" à un nombre de rencontre execif: "+j.getRencontres().toString());
                 return false;
             }
         }
-        //TODO tester si les rencontre respecte les phase
-        for(TypeContrainte type:TypeContrainte.values()){
-            for(Contrainte c:getContraintes(type)){
-                if(!c.checkContrainte(this)){
-                    System.out.println("contrainte non respecté: "+c.toString());
-                    return false;
-                }
+        for(Rencontre r:rencontres.values()){
+            if(getPhase(r.getJournee())==getPhase(rencontres.get(r.getLabelRetour()).getJournee())){
+                System.err.println("la rencontre :"+r.toString()+"à son matche retour dans la même phase");
+                return false;
             }
         }
         return true;
     }
 
+    public boolean checkAllContrainte(){
+        for(Contrainte c:getContraintes()){
+            if(!c.checkContrainte(this)){
+                System.err.println("contrainte non respecté: "+c.toString());
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     public void addCoutTotal(Integer cout) {
         this.coutTotal += cout;
+    }
+            /**
+             * Fonction permettant de recuperer la meilleure insertion
+             * @Param r la rencontre ciblée
+             * @return  un Operateur Insertion.
+             */
+    public OperateurInsertion getMeilleureInsertion(Rencontre r) {
+        OperateurInsertion bestInsertion = new OperateurInsertion();
+        for(Journee j: this.journees.values()) {
+            OperateurInsertion o = new OperateurInsertion(this,j,r);
+            if(o != null && o.isMouvementRealisable() && o.isMeilleur(bestInsertion)) {
+                bestInsertion = o;
+            }
+        }
+        return bestInsertion;
+    }
+    /**
+     * Fonction permettant de recuperer la première insertion
+     * @Param r la rencontre ciblée
+     * @return  un Operateur Insertion.
+     */
+    public OperateurInsertion getPremiereInsertion(Rencontre r) {
+        for(Journee j: this.journees.values()) {
+            OperateurInsertion o = new OperateurInsertion(this,j,r);
+            if(o != null && o.isMouvementRealisable()) {
+                return o;
+            }
+        }
+        System.err.println("il n'y a plus d'insertion valide");
+        return null;
     }
 
     @Override
@@ -185,12 +260,12 @@ public class Championnat {
         }
         sb.append("\t]").append("\n");
         sb.append("\tcoutTotal=").append(coutTotal).append("\n");
-        sb.append("\tcoutContraintes=[").append("\n");
+        sb.append("\tcoefContraintes=[").append("\n");
         for(TypeContrainte type:TypeContrainte.values()){
             LinkedList<? extends Contrainte> contraintes= getInstance().getContraintes(type);
             sb.append("\t\t"+type+"\n");
             for(Contrainte c:contraintes){
-                sb.append("\t\t\tcout="+this.coefContraintes.get(c)+" <= ").append(c.toString()).append("\n");
+                sb.append("\t\t\tcoef="+this.coefContraintes.get(c)+" <= ").append(c.toString()).append("\n");
             }
         }
         sb.append("\t]").append("\n");

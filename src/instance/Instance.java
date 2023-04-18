@@ -86,6 +86,15 @@ public class Instance {
         }
     }
 
+    public LinkedList<Contrainte>  getContraintes(){
+        LinkedList<Contrainte> contraintesAll= new LinkedList<>();
+        for(TypeContrainte type:TypeContrainte.values()){
+            LinkedList<? extends Contrainte> contraintes = getContraintes(type);
+            contraintesAll.addAll(contraintes);
+        }
+        return contraintesAll;
+    }
+
 
     public String getNom() {
         return nom;
@@ -97,7 +106,14 @@ public class Instance {
         sb.append("\tnom=").append(nom).append("\n");
         sb.append("\tnbEquipes=").append(nbEquipes).append("\n");
 
-        //TODO on peux boucler sur le type de contrainte sa serais plus propre voir le tostring de championnat
+        for(TypeContrainte type:TypeContrainte.values()){
+            LinkedList<? extends Contrainte> contraintes=getContraintes(type);
+            sb.append("\t\t"+type+"\n");
+            for(Contrainte c:contraintes){
+                sb.append("\t\t\t").append(c.toString()).append("\n");
+            }
+        }
+        /*
         sb.append("\n\tcontraintesPlacement=").append(contraintesPlacement.size()).append("[\n");
         for (ContraintePlacement contrainte : contraintesPlacement) {
             sb.append("\t\t").append(contrainte.toString()).append("\n");
@@ -131,7 +147,7 @@ public class Instance {
         sb.append("\n\tcontraintesSeparation=").append(contraintesSeparation.size()).append("[\n");
         for (ContrainteSeparation contrainte : contraintesSeparation) {
             sb.append("\t\t").append(contrainte.toString()).append("\n");
-        }
+        }*/
 
         sb.append("\t]").append("\n");
         sb.append("}");

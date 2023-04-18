@@ -31,20 +31,16 @@ public class Journee {
         return Objects.hash(getId());
     }
 
-   /* public boolean addRencontre(Rencontre rencontreToADD){
-        if(rencontreToADD == null)return false;
-        return  this.rencontres.put(rencontreToADD.getLabel(),rencontreToADD) != null;
-        //TODO checker interupt
-    }*/
-
     public boolean checkIntegriteeChampionatf(){
         return false;
     }
 
-    /*
-    ajoute une rencontre a une journee
-    */
-    public boolean addRencontre(Rencontre rencontre) throws Exception{
+    /**
+     * Fonction permettant d'ajouter une rencontre'
+     * @Param rencontre la rencontre a ajouter
+     * @return  un boolean pour la confirmation de l'ajout.
+     */
+    public boolean addRencontre(Rencontre rencontre){
         if(rencontre==null){
             System.err.println("rencontre est null");
             return false;
@@ -53,22 +49,30 @@ public class Journee {
             System.err.println("contains");
             return false;
         }
+        rencontres.put(rencontre.getLabel(), rencontre);
+        try {
+            if(rencontre.setJournee(this)){
 
-        rencontres.put(rencontre.getLabel(), rencontre);//add
-
-
-        if(rencontre.setJournee(this)){
-
-            return true;
-        }else{
-            System.err.println("On remove");
-            rencontres.remove(rencontre.getLabel());//remove
+                return true;
+            }else{
+                //System.err.println("On remove");
+                rencontres.remove(rencontre.getLabel());
+                return false;
+            }
+        } catch (Exception e) {
+            System.err.println("La rencontre:"+rencontre.toString()+
+                    "n'a pas été assigné à la journée:"+this.toString());
+            System.exit(-1);
             return false;
         }
     }
 
-
-    public boolean removeRencontre(Rencontre rencontre) throws Exception{
+    /**
+     * Fonction permettant de retirer une rencontre'
+     * @Param rencontre la rencontre a retirer
+     * @return  un boolean pour la confirmation du retrait.
+     */
+    public boolean removeRencontre(Rencontre rencontre){
         if(rencontre==null){
             throw new Exception("rencontre is null");
         }

@@ -1,14 +1,10 @@
 package instance.modele.contrainte;
 
 import operateur.OperateurInsertion;
-import solution.Equipe;
 import operateur.Operateur;
-import solution.Championnat;
-import solution.Journee;
+import solution.Solution;
 import solution.Rencontre;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.TreeSet;
 
 public class ContraintePauseGlobale extends Contrainte{
@@ -46,7 +42,7 @@ public class ContraintePauseGlobale extends Contrainte{
 
     //TODO implementer les fonction de calcule de cout en sinspirent de la contrainte de placement, réflechire si on ne peux pas factoriser du code sout des fonction comune aux contraintes
     @Override
-    public int getCoutTotal(Championnat championnat) {
+    public int getCoutTotal(Solution championnat) {
         //TODO tchequer contrainte inerante si oui renvoyer max integer
 
         //le nombre de rencontres jouées par l’équipe de la contrainte selon un mode sur l’ensemble des journées
@@ -63,7 +59,7 @@ public class ContraintePauseGlobale extends Contrainte{
     }
 
     @Override
-    public int evalDeltatCoef(Championnat championnat, Operateur o) {
+    public int evalDeltatCoef(Solution championnat, Operateur o) {
         int valcDelta=0;
         if(o instanceof OperateurInsertion) {
             Rencontre r = o.getRencontre();
@@ -73,7 +69,7 @@ public class ContraintePauseGlobale extends Contrainte{
     }
 
 
-    private int parcoursJournees(Championnat championnat) { //Factorisation du code
+    private int parcoursJournees(Solution championnat) { //Factorisation du code
         int valcDelta=0;
         for (Integer eID : this.equipes) {
             for (Integer jID : this.journees) {
@@ -87,13 +83,13 @@ public class ContraintePauseGlobale extends Contrainte{
     }
 
     @Override
-    public int evalDeltatCout(Championnat championnat, Operateur o) {
+    public int evalDeltatCout(Solution championnat, Operateur o) {
         Integer valcDelta=evalDeltatCoef(championnat,o);
         return evalDeltatCout(championnat, o, valcDelta);
     }
 
     @Override
-    public int evalDeltatCout(Championnat championnat, Operateur o, Integer valcDelta) {
+    public int evalDeltatCout(Solution championnat, Operateur o, Integer valcDelta) {
         //TODO tchequer contrainte inerante si oui renvoyer max integer
         if(o instanceof OperateurInsertion){
 
