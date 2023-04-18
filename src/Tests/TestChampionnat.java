@@ -14,7 +14,8 @@ import solution.Solution;
  */
 public class TestChampionnat {
     public static void main(String[] args) {
-        String path="instances/instance_ITC2021_Test_4.txt";
+        //String path="instances/instance_ITC2021_Test_4.txt";
+        String path="instances/instance_test_sansContrainte_2Equipe.txt";
         try {
             InstanceReader reader = new InstanceReader(path);
             Instance i= reader.readInstance();

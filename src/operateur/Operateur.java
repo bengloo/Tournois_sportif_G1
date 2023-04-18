@@ -52,6 +52,8 @@ public abstract class Operateur {
 
     protected abstract Map<Contrainte,Integer> evalDeltaCoefs();
 
+    protected abstract boolean isRealisableInital();
+
     protected abstract boolean doMouvement();
 
     public boolean doMouvementIfRealisable() {

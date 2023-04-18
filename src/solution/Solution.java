@@ -103,7 +103,8 @@ public class Solution {
         return instance;
     }
 
-    public int getPhase(Journee journee){
+    public Integer getPhase(Journee journee){
+        if(journee==null)return null;
         return journee.getId()>getNbJournee()/2?2:1;
     }
     /**
@@ -117,8 +118,8 @@ public class Solution {
      * Fonction permettant de recuperer le nombre de rencontres
      * @return  le nombre de rencontres.
      */
-    public int getNBRencontre(){
-        return getNBEquipe()*6-6;
+    public int getNBRencontreJournee(){
+        return getNBEquipe()/2;
     }
     /**
      * Fonction permettant de recuperer le nombre d'équipes
@@ -188,13 +189,16 @@ public class Solution {
 
     public boolean checkIntegriteeChampionat(){
         for(Journee j :journees.values()){
-            if(j.getRencontres().size()<=getNBRencontre()/getNbJournee()){
+            if(j.getRencontres().size()>getNBRencontreJournee()){
                 System.err.println("La journee "+j.getId()+" à un nombre de rencontre execif: "+j.getRencontres().toString());
                 return false;
             }
         }
         for(Rencontre r:rencontres.values()){
             if(getPhase(r.getJournee())==getPhase(rencontres.get(r.getLabelRetour()).getJournee())){
+                int a=getPhase(r.getJournee());
+                int b= getPhase(rencontres.get(r.getLabelRetour()).getJournee());
+                Rencontre ra=rencontres.get(r.getLabelRetour());
                 System.err.println("la rencontre :"+r.toString()+"à son matche retour dans la même phase");
                 return false;
             }

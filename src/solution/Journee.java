@@ -59,7 +59,6 @@ public class Journee {
         rencontres.put(rencontre.getLabel(), rencontre);
         try {
             if(rencontre.setJournee(this)){
-
                 return true;
             }else{
                 //System.err.println("On remove");
@@ -105,7 +104,7 @@ public class Journee {
      * @return  un boolean pour la confirmation de la présence ou non.
      */
     public boolean isPresent(Rencontre r){
-        return getRencontres().containsKey(r);
+        return getRencontres().containsKey(r.getLabel());
     }
 
     public HashMap<String, Rencontre> getRencontres() {
