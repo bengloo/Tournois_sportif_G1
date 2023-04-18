@@ -1,7 +1,13 @@
 package solution;
 
 import java.util.Objects;
-
+/** Class definissant .
+ * @author Engloo Benjamin
+ * @author Morcq Alexandre
+ * @author Sueur Jeanne
+ * @author Lux Hugo
+ * @version 0.5
+ */
 public class Rencontre {
     private Equipe exterieur;
     private Equipe domicile;
@@ -77,7 +83,14 @@ public class Rencontre {
                 '}';
     }
     @Override
-    public String toString() {
+   /* public String toString() {
         return exterieur.getId()+"-"+domicile.getId();
-    }
+    }*/
+    public String toString() {
+     return "Rencontre{" +
+             "exterieur=" + exterieur +
+            ", domicile=" + domicile +
+             ", journee=" + (journee==null?"null":journee.getId().toString())+
+            '}';
+}
 }

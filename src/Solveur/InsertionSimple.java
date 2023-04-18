@@ -18,6 +18,10 @@ public class InsertionSimple implements Solveur{
         return "InsertionSimple";
     }
 
+    /**
+     * Implementation du solve du Solveur
+     * @Param instance l'instance a traiter
+     */
     @Override
     public Solution solve(Instance instance) {
         Solution solution = new Solution(instance);

@@ -1,8 +1,15 @@
 package solution;
 
+import javax.sound.midi.Soundbank;
 import java.util.HashMap;
 import java.util.Objects;
-
+/** Class definissant Journee.
+ * @author Engloo Benjamin
+ * @author Morcq Alexandre
+ * @author Sueur Jeanne
+ * @author Lux Hugo
+ * @version 0.5
+ */
 public class Journee {
     private final Integer id;
     private HashMap<String,Rencontre> rencontres;
@@ -74,26 +81,28 @@ public class Journee {
      */
     public boolean removeRencontre(Rencontre rencontre){
         if(rencontre==null){
-            throw new Exception("rencontre is null");
+            System.err.println("rencontre is null");
+            System.exit(-1);
         }
-        if(rencontre.isInJournee(this)){
-            throw new Exception("isInJournee");
-            //return false;
+        if(!rencontre.isInJournee(this)){
+            System.err.println("isInJournee");
+            System.exit(-1);
         }
-
-        rencontres.remove(rencontre.getLabel());//remove
+        rencontres.remove(rencontre.getLabel());
         return true;
     }
+/*
 
-
-    public String toStringLong() {
+    public String toStringShort() {
         return "Journee{" +
                 "id=" + id +
                 '}';
-    }
+    }*/
 
-    /*
-     *return true si la journee contient la rencontre spécifié
+    /**
+     * Fonction permettant de savoir si la journée contient  une rencontre spécifié'
+     * @Param rencontre la rencontre ciblée
+     * @return  un boolean pour la confirmation de la présence ou non.
      */
     public boolean isPresent(Rencontre r){
         return getRencontres().containsKey(r);
