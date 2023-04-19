@@ -32,6 +32,7 @@ public class SolveurRecursif implements Solveur{
         //soit r la premierre rencontre ayant journnee à null
         //si r==null retune solprec
         //solution bestsolution
+        //TODO exclure les solution evoluant vers un coups trops fort (le cout doit evolué exponentielement au nombre de rencontre dejas inseré)
         //pour toute les journee j ayant rencontres.size<NbRencontreJournee
             //si insertion j r valide sur solprec
                 //Solution newsolution(solution) //constructeur par copy , l'instance et equipe ont les même reference mais pas rencontres journees
