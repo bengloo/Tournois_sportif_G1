@@ -35,13 +35,6 @@ public abstract class Contrainte {
         return penalite==Integer.MAX_VALUE;
     }
 
-    /**
-     * Indique si la contrainte courante est dure ou souple
-     * @return true si la contrainte est souple, false sinon
-     */
-    public boolean estSouple(){
-        return penalite!=Integer.MAX_VALUE;
-    }
 
     /**
      * Indique le coût total engendré par la contrainte (à chaque fois que la contrainte est vérifiée, cumule les pénalités)

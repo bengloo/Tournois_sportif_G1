@@ -67,7 +67,7 @@ public class ContraintePauseEquipe extends Contrainte{
         }
         return 0;
     }
-
+    
     @Override
     public int evalDeltaCoef(Solution championnat, Operateur o) {
         int valcDelta=0;
@@ -111,14 +111,14 @@ public class ContraintePauseEquipe extends Contrainte{
     }
 
     @Override
-    public int evalDeltatCout(Solution championnat, Operateur o) {
-        Integer valcDelta=evalDeltatCoef(championnat,o);
-        return evalDeltatCout(championnat, o, valcDelta);
+    public int evalDeltaCout(Solution championnat, Operateur o) {
+        Integer valcDelta=evalDeltaCoef(championnat,o);
+        return evalDeltaCout(championnat, o, valcDelta);
     }
 
 
     @Override
-    public int evalDeltatCout(Solution championnat, Operateur o, Integer valcDelta) {
+    public int evalDeltaCout(Solution championnat, Operateur o, Integer valcDelta) {
         //TODO tchequer contrainte inerante si oui renvoyer max integer
         if(o instanceof OperateurInsertion){
 

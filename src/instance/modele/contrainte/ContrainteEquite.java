@@ -100,9 +100,9 @@ public class ContrainteEquite extends Contrainte {
     }
 
     @Override
-    public int evalDeltatCout(Solution championnat, Operateur o) {
-        Integer valcDelta=evalDeltatCoef(championnat,o);
-        return evalDeltatCout(championnat, o, valcDelta);
+    public int evalDeltaCout(Solution championnat, Operateur o) {
+        Integer valcDelta=evalDeltaCoef(championnat,o);
+        return evalDeltaCout(championnat, o, valcDelta);
     }
 
     @Override

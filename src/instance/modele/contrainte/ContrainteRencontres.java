@@ -77,7 +77,7 @@ public class ContrainteRencontres extends Contrainte{
     }
 
     @Override
-    public int evalDeltatCoef(Solution championnat, Operateur o) {
+    public int evalDeltaCoef(Solution championnat, Operateur o) {
         int valcDelta=0;
         if(o instanceof OperateurInsertion) {
             Rencontre r = o.getRencontre();
@@ -116,14 +116,14 @@ public class ContrainteRencontres extends Contrainte{
     }
 
     @Override
-    public int evalDeltatCout(Solution championnat, Operateur o) {
-        Integer valcDelta=evalDeltatCoef(championnat,o);
-        return evalDeltatCout(championnat, o, valcDelta);
+    public int evalDeltaCout(Solution championnat, Operateur o) {
+        Integer valcDelta=evalDeltaCoef(championnat,o);
+        return evalDeltaCout(championnat, o, valcDelta);
     }
 
 
     @Override
-    public int evalDeltatCout(Solution championnat, Operateur o, Integer valcDelta) {
+    public int evalDeltaCout(Solution championnat, Operateur o, Integer valcDelta) {
         //TODO tchequer contrainte inerante si oui renvoyer max integer
         if(o instanceof OperateurInsertion){
 

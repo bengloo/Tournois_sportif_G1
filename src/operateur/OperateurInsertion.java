@@ -30,7 +30,7 @@ public class OperateurInsertion extends Operateur{
         int deltaCout=0;
         for(TypeContrainte type:TypeContrainte.values()){
             for(Contrainte c: getChampionnat().getContraintes(type)){
-                deltaCout+=c.evalDeltatCout(getChampionnat(),this);
+                deltaCout+=c.evalDeltaCout(getChampionnat(),this);
             }
         }
         return deltaCout;
@@ -43,7 +43,7 @@ public class OperateurInsertion extends Operateur{
 
         for(TypeContrainte type:TypeContrainte.values()){
             for(Contrainte c: getChampionnat().getContraintes(type)){
-                int deltaCoef = c.evalDeltatCoef(getChampionnat(),this);
+                int deltaCoef = c.evalDeltaCoef(getChampionnat(),this);
                 if(deltaCoef!=0)delatCoefs.put(c,deltaCoef);
             }
         }
@@ -75,7 +75,7 @@ public class OperateurInsertion extends Operateur{
         //pour chaque contrainte impacté par l'operation
         for(Contrainte c:DeltaCoefs.keySet()){
             //on update le cout et les coef des contraintes
-            getChampionnat().addCoefCoutContrainte(c,DeltaCoefs.get(c),c.evalDeltatCout(getChampionnat(),this,DeltaCoefs.get(c)));
+            getChampionnat().addCoefCoutContrainte(c,DeltaCoefs.get(c),c.evalDeltaCout(getChampionnat(),this,DeltaCoefs.get(c)));
         }
         //on update le cout total
         getChampionnat().addCoutTotal(this.getCout());

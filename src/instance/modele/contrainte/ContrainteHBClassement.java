@@ -69,8 +69,10 @@ public class ContrainteHBClassement extends Contrainte{
 
         //pour toute les rencontres
         for(Rencontre r:championnat.getRencontres().values()){
-            //pour toutes les journees concerné par la contraintes
-            valc += parcoursJournees(championnat, r);
+            // à chaque équipe adverse de la liste rencontrée
+            if (this.equipesAdverses.contains(r.getDomicile()) || this.equipesAdverses.contains(r.getExterieur())) {
+                valc += parcoursJournees(championnat, r);
+            }
         }
 
         if(valc>this.max) {
@@ -81,7 +83,7 @@ public class ContrainteHBClassement extends Contrainte{
     }
 
     @Override
-    public int evalDeltatCoef(Solution championnat, Operateur o) {
+    public int evalDeltaCoef(Solution championnat, Operateur o) {
         int valcDelta=0;
         if(o instanceof OperateurInsertion) {
             Rencontre r = o.getRencontre();
@@ -123,9 +125,9 @@ public class ContrainteHBClassement extends Contrainte{
     }
 
     @Override
-    public int evalDeltatCout(Solution championnat, Operateur o) {
-        Integer valcDelta=evalDeltatCoef(championnat,o);
-        return evalDeltatCout(championnat, o, valcDelta);
+    public int evalDeltaCout(Solution championnat, Operateur o) {
+        Integer valcDelta=evalDeltaCoef(championnat,o);
+        return evalDeltaCout(championnat, o, valcDelta);
     }
 
     @Override
