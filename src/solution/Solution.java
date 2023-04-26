@@ -169,12 +169,41 @@ public class Solution {
         return IDequipeDomicile+"-"+IDequipeExterne;
     }
 
+    public String getIDRencontre(Equipe eDomicile,Equipe eExterne){
+        return eDomicile.getId()+"-"+eExterne.getId();
+    }
+    public Equipe getEquipeByID(int id){
+        return this.equipes.get(id);
+    }
+    public Journee getJourneeByID(int id){
+        return this.journees.get(id);
+    }
+    public Rencontre getRencontreByID(String id){
+        return this.rencontres.get(id);
+    }
+    public Rencontre getRencontreByEquipes(Equipe eDomicile,Equipe eExterne){
+        return this.rencontres.get(getIDRencontre(eDomicile,eExterne));
+    }
+    public Rencontre getRencontreByEquipes(int eDomicile,int eExterne){
+        return this.rencontres.get(getIDRencontre(eDomicile,eExterne));
+    }
+    public Journee getJourneeRencontreByEquipes(int eDomicile,int eExterne){
+        return this.rencontres.get(getIDRencontre(eDomicile,eExterne)).getJournee();
+    }
+    public boolean isRJPresent(int jId,Rencontre r){
+        return  this.journees.get(jId).isPresent(r);
+    }
+
+
+
+
+
     /**
      * Indique toutes les rencontres jouées par l'équipe passée en paramètre
      * @param IDequipe l'ID de l'équipe en question
      * @return la liste chaînée des rencontres
      */
-    public LinkedList<Rencontre> getRencontresEquipe(Integer IDequipe){
+    public LinkedList<Rencontre> getRencontresByEquipe(Integer IDequipe){
         LinkedList<Rencontre> rencontresEquipe = new LinkedList<Rencontre>();
 
         // Parcours de toutes les rencontres du championnat

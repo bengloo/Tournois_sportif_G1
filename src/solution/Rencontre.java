@@ -1,5 +1,7 @@
 package solution;
 
+import instance.modele.contrainte.TypeMode;
+
 import java.util.Objects;
 
 /** classe définissant Rencontre
@@ -18,6 +20,25 @@ public class Rencontre {
         this.exterieur = exterieur;
         this.domicile = domicile;
         this.journee = null;
+    }
+
+    /**
+     *
+     * @param e équipeciblé
+     * @param mode mode ciblé
+     * @return un bolean indiquant si l'équipe ciblé fait partie de la rencontre est dans le mode précisé
+     */
+    public boolean isConcerne(Equipe e, TypeMode mode){
+        switch (mode) {
+            case DOMICILE:
+                return this.domicile.equals(e);
+            case EXTERIEUR:
+                return this.exterieur.equals(e);
+            case INDEFINI:
+                return this.domicile.equals(e)||this.exterieur.equals(e);
+            default:
+                return false;
+        }
     }
 
     /**

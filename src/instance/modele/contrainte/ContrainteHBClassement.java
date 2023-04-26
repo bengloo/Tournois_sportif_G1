@@ -66,7 +66,6 @@ public class ContrainteHBClassement extends Contrainte{
     public int getCoutTotal(Solution championnat) {
         //le nombre de rencontres jouées par l’équipe de la contrainte selon un mode sur l’ensemble des journées
         int valc=0;
-
         //pour toute les rencontres
         for(Rencontre r:championnat.getRencontres().values()){
             // à chaque équipe adverse de la liste rencontrée

@@ -53,6 +53,16 @@ public class ContraintePlacement extends Contrainte{
 
     @Override
     public int getCoutTotal(Solution championnat) {
+        //pseudo code
+            //coef=0
+            //pour r dans toutes les rencontre de la solution
+                //pour j dans toute les journee de la contrainte
+                    //Pour le mode de la contrainte
+                        //si r verifie le mode concerné avec l'équipe de la contrainte
+                            //coef++
+        //appliqué fonction objective au coef
+
+
         //le nombre de rencontres jouées par l’équipe de la contrainte selon un mode sur l’ensemble des journées
         int valc=0;
 
@@ -88,7 +98,9 @@ public class ContraintePlacement extends Contrainte{
     private int parcoursJournees(Solution championnat, Rencontre r) { //Factorisation du code
         int valcDelta=0;
         for (Integer jID : this.journees) {
-            switch (this.mode) {
+            if(r.isConcerne(championnat.getEquipes().get(this.equipe), this.mode)&&championnat.isRJPresent(jID,r));
+                valcDelta++;
+            /*switch (this.mode) {
                 case DOMICILE:
                     //si l'équipe concernée par la contrainte est celle de la rencontre et la journée courante contient la rencontre
                     if (jID != null && r.getDomicile().equals(this.equipe) && championnat.getJournees().get(jID).getRencontres().containsKey(r)) {
@@ -106,7 +118,7 @@ public class ContraintePlacement extends Contrainte{
                     }
                 default:
                     //TODO interup process error
-            }
+            }*/
         }
         return valcDelta;
     }

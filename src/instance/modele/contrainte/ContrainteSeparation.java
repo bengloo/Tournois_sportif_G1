@@ -46,7 +46,7 @@ public class ContrainteSeparation extends Contrainte{
         LinkedList<Rencontre> rencontresEquipe = null;
 
         for (Integer e1 : this.equipes) {
-            rencontresEquipe = championnat.getRencontresEquipe(e1);
+            rencontresEquipe = championnat.getRencontresByEquipe(e1);
 
             for (Rencontre r1 : rencontresEquipe) {
                 r2 = championnat.getMatchRetour(r1);

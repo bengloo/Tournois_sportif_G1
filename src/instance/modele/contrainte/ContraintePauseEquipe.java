@@ -86,7 +86,16 @@ public class ContraintePauseEquipe extends Contrainte{
      */
     private int parcoursJournees(Solution championnat, Rencontre r) { //Factorisation du code
         int valcDelta=0;
-        for (Integer jID : this.journees) {
+        //TODO codé corectement en sinspirant de se pseudo code
+        //coef=0 //(nombre de pause compté )
+        //pour j dans l'interval l'interval de la contrainte
+            //lastMode = mode du match de l'equipe de la contrainte au j-1 (null si n'existe pas)
+            //curentMode = mode du match de l'equipe de la contrainte au jour j (un truc diferant de null si n'existe pas)
+            //si lastMode == currentMode
+                //coef++
+        //apliqué la fonction objective
+
+        /*for (Integer jID : this.journees) {
             switch (this.mode) {
                 case DOMICILE:
                     //si l'équipe concernée par la contrainte est celle de la rencontre et la journee courante contient la rencontre
@@ -106,7 +115,7 @@ public class ContraintePauseEquipe extends Contrainte{
                 default:
                     //TODO interup process error
             }
-        }
+        }*/
         return valcDelta;
     }
 
