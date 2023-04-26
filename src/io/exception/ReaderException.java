@@ -6,8 +6,12 @@
 package io.exception;
 
 /**
- *
  * @author mogier01
+ * @author Engloo Benjamin
+ * @author Morcq Alexandre
+ * @author Sueur Jeanne
+ * @author Lux Hugo
+ * @version 1.3
  */
 public class ReaderException extends Exception {
     private String infos;

@@ -7,14 +7,19 @@ import solution.Rencontre;
 
 import java.util.TreeSet;
 
+/** classe définissant ContrainteHBClassement (hérite de Contrainte)
+ * @author Engloo Benjamin
+ * @author Morcq Alexandre
+ * @author Sueur Jeanne
+ * @author Lux Hugo
+ * @version 1.0
+ */
 public class ContrainteHBClassement  extends Contrainte{
     private Integer equipe;
     private TreeSet<Integer> journees;
     private TreeSet<Integer>  equipesAdverses;
     private TypeMode mode;
     private Integer max;
-
-
 
     public ContrainteHBClassement(Integer equipe,TypeMode mode,Integer max) {
         super();
@@ -33,12 +38,24 @@ public class ContrainteHBClassement  extends Contrainte{
         this.max = max;
     }
 
+    /**
+     * Ajoute une journée à la liste des journées de la contrainte
+     * @param id l'ID de la journée à ajouter
+     * @return true si l'ajout a réussi, false sinon
+     */
     public boolean addJournee(Integer id){
         return journees.add(id);
     }
+
+    /**
+     * Ajoute une équipe à la liste des équipes adverses de la contrainte
+     * @param id l'ID de l'équipe à ajouter
+     * @return true si l'ajout a réussi, false sinon
+     */
     public boolean addEquipeAdverse(Integer id){
         return equipesAdverses.add(id);
     }
+
     @Override
     public TypeContrainte getTypeContrainte() {
         return TypeContrainte.HBCLASSEMENT;
@@ -75,13 +92,18 @@ public class ContrainteHBClassement  extends Contrainte{
         return valcDelta;
     }
 
-
+    /**
+     * Parcourt les journées de la contrainte pour incrémenter un compteur à chaque fois que son équipe fait partie de la rencontre
+     * @param championnat la solution
+     * @param r la rencontre concernée
+     * @return le nombre entier du compteur
+     */
     private int parcoursJournees(Solution championnat, Rencontre r) { //Factorisation du code
         int valcDelta=0;
         for (Integer jID : this.journees) {
             switch (this.mode) {
                 case DOMICILE:
-                    //si l'equipe concerné par la contrainte est celle de la rencontre et  la journee courante contient la rencontre
+                    //si l'équipe concernée par la contrainte est celle de la rencontre et la journee courante contient la rencontre
                     if (r.getDomicile().equals(this.equipe) && championnat.getJournees().get(jID).getRencontres().containsKey(r)) {
                         valcDelta++;
                     }

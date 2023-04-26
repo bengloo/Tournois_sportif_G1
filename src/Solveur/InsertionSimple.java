@@ -4,24 +4,20 @@ import instance.Instance;
 import solution.Rencontre;
 import solution.Solution;
 
-
-/** Class definissant InsertionSimple.
+/** classe définissant InsertionSimple (implémentant l'interface Solveur)
  * @author Engloo Benjamin
  * @author Morcq Alexandre
  * @author Sueur Jeanne
  * @author Lux Hugo
- * @version 0.5
+ * @version 1.0
  */
 public class InsertionSimple implements Solveur{
+
     @Override
     public String getNom() {
         return "InsertionSimple";
     }
 
-    /**
-     * Implementation du solve du Solveur
-     * @Param instance l'instance a traiter
-     */
     @Override
     public Solution solve(Instance instance) {
         Solution solution = new Solution(instance);

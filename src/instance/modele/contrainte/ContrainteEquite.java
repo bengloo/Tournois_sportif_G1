@@ -7,6 +7,13 @@ import solution.Solution;
 
 import java.util.TreeSet;
 
+/** classe définissant ContrainteEquite (hérite de Contrainte)
+ * @author Engloo Benjamin
+ * @author Morcq Alexandre
+ * @author Sueur Jeanne
+ * @author Lux Hugo
+ * @version 1.0
+ */
 public class ContrainteEquite extends Contrainte {
 
     private TreeSet<Integer> equipes;
@@ -19,10 +26,21 @@ public class ContrainteEquite extends Contrainte {
         this.journees = new TreeSet<>();
         this.max = max;
     }
+
+    /**
+     * Ajoute une équipe à la liste des équipes de la contrainte
+     * @param id l'ID de l'équipe à ajouter
+     * @return true si l'ajout a réussi, false sinon
+     */
     public boolean addEquipe(Integer id){
         return equipes.add(id);
     }
 
+    /**
+     * Ajoute une journée à la liste des journées de la contrainte
+     * @param id l'ID de la journée à ajouter
+     * @return true si l'ajout a réussi, false sinon
+     */
     public boolean addJournee(Integer id){
         return journees.add(id);
     }
@@ -60,7 +78,12 @@ public class ContrainteEquite extends Contrainte {
         return valcDelta;
     }
 
-
+    /**
+     * Parcourt les journées pour chaque équipe de la contrainte, afin de déterminer les écarts de rencontre à domicile ou en extérieur
+     * @param championnat la solution
+     * @param r la rencontre concernée
+     * @return la différence entre le maximum rencontré et le minimum rencontré de rencontres à domicile
+     */
     private int parcoursJournees(Solution championnat, Rencontre r) { //Factorisation du code
         int maxDomicile=0;
         int minDomicile=Integer.MAX_VALUE;

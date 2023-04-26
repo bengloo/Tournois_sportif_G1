@@ -18,6 +18,13 @@ import java.util.HashMap;
 
 import static instance.modele.contrainte.TypeMode.*;
 
+/** classe définissant InstanceReader pour lire une instance
+ * @author Engloo Benjamin
+ * @author Morcq Alexandre
+ * @author Sueur Jeanne
+ * @author Lux Hugo
+ * @version 1.3
+ */
 public class InstanceReader {
     /**
      * Le fichier contenant l'instance.
@@ -25,11 +32,9 @@ public class InstanceReader {
     private File instanceFile;
 
     /**
-     * Constructeur par donnee du chemin du fichier d'instance.
-     * @param inputPath le chemin du fichier d'instance, qui doit se terminer
-     * par l'extension du fichier (.xml).
-     * @throws ReaderException lorsque le fichier n'est pas au bon format ou
-     * ne peut pas etre ouvert.
+     * Constructeur par donnée du chemin du fichier d'instance.
+     * @param inputPath le chemin du fichier d'instance, qui doit se terminer par l'extension du fichier (.txt).
+     * @throws ReaderException lorsque le fichier n'est pas au bon format ou ne peut pas etre ouvert.
      */
     public InstanceReader(String inputPath) throws ReaderException {
         if (inputPath == null) {
@@ -45,8 +50,7 @@ public class InstanceReader {
     /**
      * Methode principale pour lire le fichier d'instance.
      * @return l'instance lue
-     * @throws ReaderException lorsque les donnees dans le fichier d'instance
-     * sont manquantes ou au mauvais format.
+     * @throws ReaderException lorsque les donnees dans le fichier d'instance sont manquantes ou au mauvais format.
      */
     public Instance readInstance() throws ReaderException {
         try{
@@ -75,7 +79,7 @@ public class InstanceReader {
 
     /**
      * Lecture du nom de l'instance.
-     * La ligne dans le fichier doit commencer par "NAME :"
+     * La ligne dans le fichier doit commencer par "// Nom"
      * @param br lecteur courant du fichier d'instance
      * @return le nom de l'instance
      * @throws IOException
@@ -87,7 +91,12 @@ public class InstanceReader {
         return ligne;
     }
 
-
+    /**
+     * Lecture des contraintes dures du fichier .txt
+     * @param br lecteur courant du fichier d'instance
+     * @param i l'instance à laquelle on va ajouter les contraintes dures en fonction du texte lu
+     * @throws IOException
+     */
     private void lireContraintesDures(BufferedReader br, Instance i) throws IOException {
         String ligne = br.readLine();
         lecture(br, ligne, "// Contraintes dures");
@@ -99,9 +108,14 @@ public class InstanceReader {
         lireContraintesRencontres(br,i,false);
         lireContraintesPauseEquipes(br,i,false);
         lireContraintesPauseGlobale(br,i,false);
-
     }
 
+    /**
+     * Lecture des contraintes souples du fichier .txt
+     * @param br lecteur courant du fichier d'instance
+     * @param i l'instance à laquelle on va ajouter les contraintes souples en fonction du texte lu
+     * @throws IOException
+     */
     private void lireContraintesSouples(BufferedReader br, Instance i) throws IOException {
         String ligne = br.readLine();
         lecture(br, ligne, "// Contraintes souples");
@@ -116,8 +130,14 @@ public class InstanceReader {
         lireContraintesSeparation(br,i);
     }
 
-
-    private void lireContraintesPlacement(BufferedReader br,Instance instance, boolean estSouple) throws IOException {
+    /**
+     * Lecture des contraintes de placement pour les ajouter à l'instance
+     * @param br lecteur courant du fichier d'instance
+     * @param instance l'instance à laquelle on va ajouter les contraintes en fonction du texte lu
+     * @param estSouple booléen déterminant la nature des contraintes à lire pour prendre en compte les pénalités ou non
+     * @throws IOException
+     */
+    private void lireContraintesPlacement(BufferedReader br, Instance instance, boolean estSouple) throws IOException {
         String ligne = br.readLine();
         String[] tokens, tokensJours;
         int idEquipe, max, nbContraintesPlacement, penalite = Integer.MAX_VALUE;
@@ -144,7 +164,6 @@ public class InstanceReader {
             mode = tokens[2].split("=")[1];
             maxStr = tokens[3].split("=")[1];
 
-
             idEquipe = Integer.parseInt(equipeStr);
             max = Integer.parseInt(maxStr);
 
@@ -156,21 +175,23 @@ public class InstanceReader {
             } else {
                 contraintePlacement = new ContraintePlacement(idEquipe, castModeToTypeEnum(mode), max);
             }
-
             tokensJours = idJour.split(";");
 
             for (int j = 0; j < tokensJours.length; j++) {
                 //TODO return false si erreur d'ajout
-             contraintePlacement.addJournee(Integer.parseInt(tokensJours[j]));
-
+                contraintePlacement.addJournee(Integer.parseInt(tokensJours[j]));
             }
-
             instance.addContrainte(contraintePlacement);
-
         }
-
     }
 
+    /**
+     * Lecture des contraintes de haut et bas de classement pour les ajouter à l'instance
+     * @param br lecteur courant du fichier d'instance
+     * @param instance l'instance à laquelle on va ajouter les contraintes en fonction du texte lu
+     * @param estSouple booléen déterminant la nature des contraintes à lire pour prendre en compte les pénalités ou non
+     * @throws IOException
+     */
     private void lireContraintesHBClassement(BufferedReader br, Instance instance, boolean estSouple) throws IOException {
         String ligne = br.readLine();
         int nbContraintesHBClassement, idEquipe, max, penalite  = Integer.MAX_VALUE;
@@ -192,7 +213,7 @@ public class InstanceReader {
 
         for(int i =0; i<nbContraintesHBClassement;i++){
             ligne = br.readLine();
-          //  System.out.println(ligne);
+            //  System.out.println(ligne);
 
             tokens = ligne.split("\t");
             equipeStr = tokens[0].split("=")[1];
@@ -212,7 +233,6 @@ public class InstanceReader {
             } else {
                 contrainteHBClassement = new ContrainteHBClassement(idEquipe, castModeToTypeEnum(mode), max);
             }
-
             tokensJours = idJour.split(";");
             tokensEA = idEquipeAdverse.split(";");
 
@@ -225,13 +245,17 @@ public class InstanceReader {
                 //TODO return false si erreur d'ajout
                 contrainteHBClassement.addEquipeAdverse(Integer.parseInt(tokensEA[k]));
             }
-
             instance.addContrainte(contrainteHBClassement);
-
         }
-
     }
 
+    /**
+     * Lecture des contraintes de rencontres pour les ajouter à l'instance
+     * @param br lecteur courant du fichier d'instance
+     * @param instance l'instance à laquelle on va ajouter les contraintes en fonction du texte lu
+     * @param estSouple booléen déterminant la nature des contraintes à lire pour prendre en compte les pénalités ou non
+     * @throws IOException
+     */
     private void lireContraintesRencontres(BufferedReader br, Instance instance, boolean estSouple) throws IOException {
         String ligne = br.readLine();
         int nbContraintesRencontre, max, min,penalite = Integer.MAX_VALUE;
@@ -264,7 +288,6 @@ public class InstanceReader {
             min = Integer.parseInt(minStr);
             max = Integer.parseInt(maxStr);
 
-
             // Seulement si la contrainte est souple
             if (estSouple) {
                 penaliteStr = tokens[4].split("=")[1];
@@ -273,8 +296,6 @@ public class InstanceReader {
             } else {
                 contrainteRencontres = new ContrainteRencontres(min, max);
             }
-
-
             tokensJours = idJour.split(";");
             tokensRencontres = idRencontre.split(";");
 
@@ -287,13 +308,17 @@ public class InstanceReader {
                 //TODO return false si erreur d'ajout
                 contrainteRencontres.addRencontre(tokensRencontres[k].replace(',','-'));
             }
-
             instance.addContrainte(contrainteRencontres);
-
         }
-
     }
 
+    /**
+     * Lecture des contraintes de pause par équipes pour les ajouter à l'instance
+     * @param br lecteur courant du fichier d'instance
+     * @param instance l'instance à laquelle on va ajouter les contraintes en fonction du texte lu
+     * @param estSouple booléen déterminant la nature des contraintes à lire pour prendre en compte les pénalités ou non
+     * @throws IOException
+     */
     private void lireContraintesPauseEquipes(BufferedReader br, Instance instance, boolean estSouple) throws IOException {
         String ligne = br.readLine();
         int nbContraintesPauseEquipes, max, idEquipe, penalite = Integer.MAX_VALUE;
@@ -312,7 +337,7 @@ public class InstanceReader {
 
         for(int i =0; i<nbContraintesPauseEquipes;i++){
             ligne = br.readLine();
-          //  System.out.println(ligne);
+            //  System.out.println(ligne);
 
             tokens = ligne.split("\t");
 
@@ -332,22 +357,23 @@ public class InstanceReader {
             } else {
                 contraintePauseEquipe = new ContraintePauseEquipe(idEquipe, castModeToTypeEnum(mode), max);
             }
-
             tokensJours = idJour.split(";");
 
             for (int j = 0; j < tokensJours.length; j++) {
                 //TODO return false si erreur d'ajout
                 contraintePauseEquipe.addJournee(Integer.parseInt(tokensJours[j]));
             }
-
             instance.addContrainte(contraintePauseEquipe);
-
-
         }
-
-
     }
 
+    /**
+     * Lecture des contraintes de pause globale pour les ajouter à l'instance
+     * @param br lecteur courant du fichier d'instance
+     * @param instance l'instance à laquelle on va ajouter les contraintes en fonction du texte lu
+     * @param estSouple booléen déterminant la nature des contraintes à lire pour prendre en compte les pénalités ou non
+     * @throws IOException
+     */
     private void lireContraintesPauseGlobale(BufferedReader br, Instance instance, boolean estSouple) throws IOException {
         String ligne = br.readLine();
         int nbContraintesPauseGlobale, max, penalite = Integer.MAX_VALUE;
@@ -366,16 +392,15 @@ public class InstanceReader {
 
         lecture(br,ligne,"// Contraintes");
 
-        for(int i =0; i<nbContraintesPauseGlobale;i++){
+        for(int i =0; i<nbContraintesPauseGlobale;i++) {
             ligne = br.readLine();
-          //  System.out.println(ligne);
+            //  System.out.println(ligne);
 
             tokens = ligne.split("\t");
 
             equipeStr = tokens[0].split("=")[1];
             idJour = tokens[1].split("=")[1];
             maxStr = tokens[2].split("=")[1];
-
 
             max = Integer.parseInt(maxStr);
 
@@ -391,7 +416,6 @@ public class InstanceReader {
                 //System.out.println(estSouple);
                 //System.out.println(penalite);
             }
-
             tokensJours = idJour.split(";");
             tokensE = equipeStr.split(";");
 
@@ -404,17 +428,17 @@ public class InstanceReader {
                 //TODO return false si erreur d'ajout
                 contraintePauseGlobale.addEquipe((Integer.parseInt(tokensE[k])));
             }
-
             instance.addContrainte(contraintePauseGlobale);
-
-
         }
-
-
     }
 
-
-    private void lireContraintesEquite(BufferedReader br,Instance instance) throws IOException {
+    /**
+     * Lecture des contraintes d'équité pour les ajouter à l'instance
+     * @param br lecteur courant du fichier d'instance
+     * @param instance l'instance à laquelle on va ajouter les contraintes en fonction du texte lu
+     * @throws IOException
+     */
+    private void lireContraintesEquite(BufferedReader br, Instance instance) throws IOException {
         String ligne = br.readLine();
         int nbContraintesRencontre, max, penalite;
         String idJour,maxStr, equipeStr, penaliteStr;
@@ -429,9 +453,7 @@ public class InstanceReader {
         ligne = ligne.trim();
         nbContraintesRencontre = Integer.parseInt(ligne);
 
-
         lecture(br,ligne, "// Contraintes");
-
 
         for(int i =0; i<nbContraintesRencontre;i++){
             ligne = br.readLine();
@@ -444,13 +466,10 @@ public class InstanceReader {
             maxStr = tokens[2].split("=")[1];
             penaliteStr = tokens[3].split("=")[1];
 
-
-
             max = Integer.parseInt(maxStr);
             penalite = Integer.parseInt(penaliteStr);
 
             contrainteEquite = new ContrainteEquite(max, penalite);
-
 
             tokensJours = idJour.split(";");
             tokensE = equipeStr.split(";");
@@ -464,15 +483,16 @@ public class InstanceReader {
                 //TODO return false si erreur d'ajout
                 contrainteEquite.addEquipe((Integer.parseInt(tokensE[k])));
             }
-
             instance.addContrainte(contrainteEquite);
-
-
         }
     }
 
-
-
+    /**
+     * Lecture des contraintes de séparation pour les ajouter à l'instance
+     * @param br lecteur courant du fichier d'instance
+     * @param instance l'instance à laquelle on va ajouter les contraintes en fonction du texte lu
+     * @throws IOException
+     */
     private void lireContraintesSeparation(BufferedReader br,Instance instance) throws IOException {
         String ligne = br.readLine();
         int nbContraintesRencontre, min,penalite;
@@ -487,7 +507,6 @@ public class InstanceReader {
         ligne = br.readLine();
         ligne = ligne.trim();
         nbContraintesRencontre = Integer.parseInt(ligne);
-
 
         lecture(br,ligne, "// Contraintes");
 
@@ -509,19 +528,14 @@ public class InstanceReader {
 
             tokensE = equipeStr.split(";");
 
-
             for (int k = 0; k < tokensE.length; k++) {
                 //TODO return false si erreur d'ajout
                 contrainteSeparation.addEquipe((Integer.parseInt(tokensE[k])));
             }
 
             instance.addContrainte(contrainteSeparation);
-
         }
     }
-
-
-
 
     /**
      * Lecture du nombre d'équipes.
@@ -539,6 +553,11 @@ public class InstanceReader {
         return nbEquipes;
     }
 
+    /**
+     * Convertit la chaîne de caractères du mode extraite du fichier .txt en TypeMode (ENUM)
+     * @param mode de la rencontre (domicile, extérieur ou indéfini)
+     * @return le mode converti en TypeMode (ENUM)
+     */
     private TypeMode castModeToTypeEnum(String mode) {
         TypeMode typeMode = null;
 
@@ -557,15 +576,16 @@ public class InstanceReader {
     }
 
     /**
-     * Lecture d'un commentaire de l'instance
-     * @param br
-     * @param commentaire
+     * Lecture d'un commentaire spécifique d'une ligne du fichier d'instance sous format .txt
+     * @param br le lecteur courant du fichier d'instance
+     * @param ligne marquant la position actuelle de parcours du fichier
+     * @param commentaire commençant par "//"
+     * @throws IOException
      */
     private void lecture(BufferedReader br, String ligne, String commentaire) throws IOException {
         while (!ligne.contains(commentaire)) {
             ligne = br.readLine();
         }
     }
-
 }
 

@@ -6,12 +6,12 @@ import io.InstanceReader;
 import io.exception.ReaderException;
 import solution.Solution;
 
-/** Class permettant de tester notre Insertion.
+/** classe définissant TestInsertionSimple (pour tester la classe InsertionSimple)
  * @author Engloo Benjamin
  * @author Morcq Alexandre
  * @author Sueur Jeanne
  * @author Lux Hugo
- * @version 0.5
+ * @version 1.0
  */
 public class TestInsertionSimple {
     public static void main(String[] args) {
@@ -28,7 +28,5 @@ public class TestInsertionSimple {
         } catch (ReaderException ex) {
             System.out.println(ex.getMessage());
         }
-
-
     }
 }

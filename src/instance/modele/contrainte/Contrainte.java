@@ -3,6 +3,13 @@ package instance.modele.contrainte;
 import operateur.Operateur;
 import solution.Solution;
 
+/** classe définissant Contrainte (classe abstraite)
+ * @author Engloo Benjamin
+ * @author Morcq Alexandre
+ * @author Sueur Jeanne
+ * @author Lux Hugo
+ * @version 1.0
+ */
 public abstract class Contrainte {
 
     protected Integer penalite;
@@ -14,44 +21,66 @@ public abstract class Contrainte {
         this.penalite=Integer.MAX_VALUE;
     }
 
+    /**
+     * Indique le type de la contrainte courante
+     * @return le type ENUM correspondant au type de contrainte
+     */
     public abstract TypeContrainte getTypeContrainte();
 
+    /**
+     * Indique si la contrainte courante est dure ou souple
+     * @return true si la contrainte est dure, false sinon
+     */
     public boolean estDure(){
         return penalite==Integer.MAX_VALUE;
     }
+
+    /**
+     * Indique si la contrainte courante est dure ou souple
+     * @return true si la contrainte est souple, false sinon
+     */
     public boolean estSouple(){
         return penalite!=Integer.MAX_VALUE;
     }
 
     /**
+     * Indique le coût total engendré par la contrainte (à chaque fois que la contrainte est vérifiée, cumule les pénalités)
      * @param championnat la solution
-     * @return a chaque fois que la contrainte est verifier cumule les penalité cumulé si la contrainte verifier est dure retourné Max integer sin retourner O
-     *
+     * @return l'entier associé au coût (ou Max.INTEGER si la contrainte vérifiée est dure)
      **/
     public abstract int getCoutTotal(Solution championnat);
 
 
     /**
+     * Indique le delta du coeff de la fonction objective de la contrainte
      * @param championnat la solution
-     * @return le delat du coef de la fonction objective de la contrainte
-     *
+     * @param o l'opérateur
+     * @return le delta du coeff
      **/
     //TODO deltat sans t
     public abstract int evalDeltatCoef(Solution championnat, Operateur o);
 
     /**
+     * Indique le delta de penalité pour une opération faite sur le championnat
      * @param championnat la solution
-     * @return le delat de penalité pour une operation faite sur le championat , retourne max integer si la contrainte est dure
-     *
+     * @param o l'opérateur
+     * @return le delta (ou Max.INTEGER si la contrainte est dure)
      **/
     public abstract int evalDeltatCout(Solution championnat, Operateur o);
 
+    /**
+     * Indique le delta de penalité pour une opération faite sur le championnat
+     * @param championnat la solution
+     * @param o l'opérateur
+     * @param deltaCoef le coefficient deltay
+     * @return le delta (ou Max.INTEGER si la contrainte est dure)
+     **/
     public abstract int evalDeltatCout(Solution championnat, Operateur o, Integer deltaCoef);
 
     /**
-     *
+     * Indique si la contrainte conserve la viabilité de la solution
      * @param championnat
-     * @return si la contrainte conserve la viabilité de la solution
+     * @return true si la solution est faisable, false sinon
      */
     public boolean checkContrainte(Solution championnat){
         return estDure()&&getCoutTotal(championnat)!=Integer.MAX_VALUE;

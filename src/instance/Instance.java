@@ -9,8 +9,14 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
+/** classe définissant Instance (complétée à la lecture du fichier)
+ * @author Engloo Benjamin
+ * @author Morcq Alexandre
+ * @author Sueur Jeanne
+ * @author Lux Hugo
+ * @version 1.0
+ */
 public class Instance {
-
     private String nom;
     private int nbEquipes;
     /*private Map<Integer, Equipe> equipes;
@@ -40,11 +46,19 @@ public class Instance {
     }
 
 
-
+    /**
+     * Récupère le nombre d'équipes contenues dans l'instance
+     * @return le nombre d'équipes
+     */
     public int getNbEquipes() {
         return nbEquipes;
     }
 
+    /**
+     * Ajoute une contrainte à l'instance courante
+     * @param contrainteToAdd la contrainte à ajouter
+     * @return true si l'ajout a été fait, false sinon (type de contrainte non reconnu ou ajout échoué)
+     */
     public boolean addContrainte(Contrainte contrainteToAdd){
         if(contrainteToAdd == null) return false;
         switch ( contrainteToAdd.getTypeContrainte()){
@@ -66,6 +80,11 @@ public class Instance {
         }
     }
 
+    /**
+     * Retourne la liste des contraintes d'un certain type de l'instance
+     * @param type le type de contrainte à récupérer
+     * @return la liste chaînée de contraintes du type demandé
+     */
     public LinkedList<? extends Contrainte> getContraintes(TypeContrainte type){
         switch (type ){
             case EQUITE:
@@ -86,6 +105,10 @@ public class Instance {
         }
     }
 
+    /**
+     * Retourne la liste des contraintes de l'instance sans disctinction de type
+     * @return la liste chaînée de contraintes
+     */
     public LinkedList<Contrainte>  getContraintes(){
         LinkedList<Contrainte> contraintesAll= new LinkedList<>();
         for(TypeContrainte type:TypeContrainte.values()){
@@ -95,10 +118,14 @@ public class Instance {
         return contraintesAll;
     }
 
-
+    /**
+     * Retourne le nom de l'instance
+     * @return la chaîne de caractères du nom
+     */
     public String getNom() {
         return nom;
     }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

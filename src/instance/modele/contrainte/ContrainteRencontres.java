@@ -7,6 +7,13 @@ import solution.Solution;
 
 import java.util.TreeSet;
 
+/** classe définissant ContrainteRencontres (hérite de Contrainte)
+ * @author Engloo Benjamin
+ * @author Morcq Alexandre
+ * @author Sueur Jeanne
+ * @author Lux Hugo
+ * @version 1.0
+ */
 public class ContrainteRencontres extends Contrainte{
     private TreeSet<Integer> journees;
     private TreeSet<String>  rencontres;
@@ -30,13 +37,24 @@ public class ContrainteRencontres extends Contrainte{
         this.max = max;
     }
 
+    /**
+     * Ajoute une journée à la liste des journées de la contrainte
+     * @param id l'ID de la journée à ajouter
+     * @return true si l'ajout est réussi, false sinon
+     */
     public boolean addJournee(Integer id){
         return journees.add(id);
     }
 
+    /**
+     * Ajoute une rencontre à la liste des rencontres de la contrainte
+     * @param id l'ID de la rencontre à ajouter
+     * @return true si l'ajout est réussi, false sinon
+     */
     public boolean addRencontre(String id){
         return rencontres.add(id);
     }
+
     @Override
     public TypeContrainte getTypeContrainte() {
         return TypeContrainte.RENCONTRES;
@@ -60,7 +78,6 @@ public class ContrainteRencontres extends Contrainte{
         return 0;
     }
 
-
     @Override
     public int evalDeltatCoef(Solution championnat, Operateur o) {
         int valcDelta=0;
@@ -71,7 +88,12 @@ public class ContrainteRencontres extends Contrainte{
         return valcDelta;
     }
 
-
+    /**
+     * Parcourt les journées de la contrainte pour incrémenter un compteur à chaque fois qu'une certaine rencontre a lieu sur la journée concernée
+     * @param championnat la solution
+     * @param r la rencontre concernée
+     * @return le nombre entier du compteur
+     */
     private int parcoursJournees(Solution championnat, Rencontre r) { //Factorisation du code
         int valcDelta=0;
 

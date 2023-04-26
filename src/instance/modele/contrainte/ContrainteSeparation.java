@@ -7,10 +7,15 @@ import solution.Solution;
 
 import java.util.TreeSet;
 
+/** classe définissant ContrainteSeparation (hérite de Contrainte)
+ * @author Engloo Benjamin
+ * @author Morcq Alexandre
+ * @author Sueur Jeanne
+ * @author Lux Hugo
+ * @version 1.0
+ */
 public class ContrainteSeparation extends Contrainte{
-
     private TreeSet<Integer> equipes;
-
     private Integer min;
 
     public ContrainteSeparation(Integer min, Integer penalite) {
@@ -21,10 +26,14 @@ public class ContrainteSeparation extends Contrainte{
 
     }
 
+    /**
+     * Ajoute une équipe à la liste des équipes de la contrainte
+     * @param id l'ID de l'équipe à ajouter
+     * @return true si l'ajout a réussi, false sinon
+     */
     public boolean addEquipe(Integer id){
         return equipes.add(id);
     }
-
 
     @Override
     public TypeContrainte getTypeContrainte() {
@@ -60,7 +69,12 @@ public class ContrainteSeparation extends Contrainte{
         return 0;
     }
 
-
+    /**
+     * ??????????? TODO: compléter
+     * @param championnat la solution
+     * @param r la rencontre concernée
+     * @return le nombre entier du compteur
+     */
     private int parcoursJournees(Solution championnat, Rencontre r) { //Factorisation du code
         /*int valcDelta=0;
         // TODO: réunion de groupe pour discuter de la manière dont cela va être développé

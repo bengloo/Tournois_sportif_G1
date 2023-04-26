@@ -1,29 +1,38 @@
 package solution;
 
-import javax.sound.midi.Soundbank;
 import java.util.HashMap;
 import java.util.Objects;
-/** Class definissant Journee.
+
+/** classe définissant Journée
  * @author Engloo Benjamin
  * @author Morcq Alexandre
  * @author Sueur Jeanne
  * @author Lux Hugo
- * @version 0.5
+ * @version 1.0
  */
 public class Journee {
     private final Integer id;
     private HashMap<String,Rencontre> rencontres;
 
-
-
-
     public Journee(Integer id) {
         this.id = id;
         this.rencontres = new HashMap<>();
-
     }
+
+    /**
+     * Indique l'ID de la journée courante
+     * @return l'ID en question
+     */
     public Integer getId() {
         return this.id;
+    }
+
+    /**
+     * Indique le tableau des rencontres de la journée courante
+     * @return le tableau en question
+     */
+    public HashMap<String, Rencontre> getRencontres() {
+        return rencontres;
     }
 
     @Override
@@ -38,14 +47,18 @@ public class Journee {
         return Objects.hash(getId());
     }
 
+    /**
+     * ??? TODO: compléter ?
+     * @return booléen
+     */
     public boolean checkIntegriteeChampionatf(){
         return false;
     }
 
     /**
-     * Fonction permettant d'ajouter une rencontre'
-     * @Param rencontre la rencontre a ajouter
-     * @return  un boolean pour la confirmation de l'ajout.
+     * Méthode permettant d'ajouter une rencontre qui se déroulera sur la journée courante
+     * @param rencontre à ajouter
+     * @return true si la rencontre a été ajoutée avec succès, false sinon
      */
     public boolean addRencontre(Rencontre rencontre){
         if(rencontre==null){
@@ -67,16 +80,16 @@ public class Journee {
             }
         } catch (Exception e) {
             System.err.println("La rencontre:"+rencontre.toString()+
-                    "n'a pas été assigné à la journée:"+this.toString());
+                    "n'a pas été assignée à la journée:"+this.toString());
             System.exit(-1);
             return false;
         }
     }
 
     /**
-     * Fonction permettant de retirer une rencontre'
-     * @Param rencontre la rencontre a retirer
-     * @return  un boolean pour la confirmation du retrait.
+     * Méthode permettant de retirer une rencontre de la journée courante
+     * @param rencontre à retirer
+     * @return true si la rencontre a été supprimée avec succès, false sinon
      */
     public boolean removeRencontre(Rencontre rencontre){
         if(rencontre==null){
@@ -92,16 +105,12 @@ public class Journee {
     }
 
     /**
-     * Fonction permettant de savoir si la journée contient  une rencontre spécifié'
-     * @Param rencontre la rencontre ciblée
-     * @return  un boolean pour la confirmation de la présence ou non.
+     * Méthode permettant de savoir si la journée contient une rencontre spécifiée
+     * @param r la rencontre ciblée
+     * @return true si la rencontre est bien présente, false sinon
      */
     public boolean isPresent(Rencontre r){
         return getRencontres().containsKey(r.getLabel());
-    }
-
-    public HashMap<String, Rencontre> getRencontres() {
-        return rencontres;
     }
 
     @Override

@@ -1,17 +1,17 @@
 package solution;
 
 import java.util.Objects;
-/** Class definissant .
+
+/** classe définissant Rencontre
  * @author Engloo Benjamin
  * @author Morcq Alexandre
  * @author Sueur Jeanne
  * @author Lux Hugo
- * @version 0.5
+ * @version 1.0
  */
 public class Rencontre {
     private Equipe exterieur;
     private Equipe domicile;
-
     private Journee journee;
 
     public Rencontre(Equipe exterieur, Equipe domicile) {
@@ -20,26 +20,53 @@ public class Rencontre {
         this.journee = null;
     }
 
+    /**
+     * Indique l'équipe jouant en extérieur de la rencontre courante
+     * @return l'ID de l'équipe en question
+     */
+    public Equipe getExterieur() {
+        return this.exterieur;
+    }
+
+    /**
+     * Indique l'équipe jouant à domicile de la rencontre courante
+     * @return l'ID de l'équipe en question
+     */
+    public Equipe getDomicile() {
+        return this.domicile;
+    }
+
+    /**
+     * Indique la journée sur laquelle a lieu la rencontre courante
+     * @return la journée en question
+     */
+    public Journee getJournee() {
+        return this.journee;
+    }
+
+    /**
+     * Indique à la fois l'ID de l'équipe jouant à domicile suivi de celui de l'équipe jouant en extérieur
+     * Par exemple, si l'équipe 0 joue à domicile contre l'équipe 1, on aura "0-1"
+     * @return la chaîne de caractères correspondante
+     */
     public String getLabel(){
         return this.domicile.getId().toString()+"-"+this.exterieur.getId().toString();
     }
 
+    /**
+     * Indique à la fois l'ID de l'équipe jouant en extérieur suivi de celui de l'équipe jouant à domicile
+     * Par exemple, si l'équipe 0 joue à domicile contre l'équipe 1, on aura "1-0"
+     * @return la chaîne de caractères correspondante
+     */
     public String getLabelRetour(){
         return this.exterieur.getId().toString()+"-"+this.domicile.getId().toString();
     }
 
-    public Equipe getExterieur() {
-        return exterieur;
-    }
-
-    public Equipe getDomicile() {
-        return domicile;
-    }
-
-    public Journee getJournee() {
-        return journee;
-    }
-
+    /**
+     * Mise à jour de la journée sur laquelle a lieu la rencontre courante
+     * @param j la journée à appliquer
+     * @return true si la mise à jour a été effectuée avec succès, false sinon
+     */
     public boolean setJournee(Journee j){
         if(j==null){//on utilise null pour le remove
             this.journee=null;
@@ -53,16 +80,10 @@ public class Rencontre {
             }
             return true;
         }
-        System.err.println("echec d'a jout Rencontre/Journee");
+        System.err.println("échec d'ajout Rencontre/Journee");
         return false;
     }
 
-    public boolean isInJournee(Journee j){
-        if(j==null||this.journee==null){return false;}
-        else{
-            return this.journee.equals(j);
-        }
-    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -75,22 +96,39 @@ public class Rencontre {
         return Objects.hash(exterieur, domicile);
     }
 
+    /**
+     * Indique si la rencontre courante est incluse dans une certaine journée
+     * @param j la journée concernée
+     * @return true si la rencontre est incluse, false sinon
+     */
+    public boolean isInJournee(Journee j){
+        if(j==null||this.journee==null){return false;}
+        else{
+            return this.journee.equals(j);
+        }
+    }
 
+    /**
+     * Renvoie une chaîne de caractères longue qui caractérise une rencontre
+     * @return la chaîne de caractères avec les équipes jouant à domicile et en extérieur de la rencontre
+     */
     public String toStringLong() {
         return "Rencontre{" +
                 "exterieur=" + exterieur +
                 ", domicile=" + domicile +
                 '}';
     }
+
     @Override
    /* public String toString() {
         return exterieur.getId()+"-"+domicile.getId();
     }*/
+
     public String toString() {
-     return "Rencontre{" +
-             "exterieur=" + exterieur +
-            ", domicile=" + domicile +
-             ", journee=" + (journee==null?"null":journee.getId().toString())+
-            '}';
-}
+         return "Rencontre{" +
+                 "exterieur=" + exterieur +
+                ", domicile=" + domicile +
+                 ", journee=" + (journee==null?"null":journee.getId().toString())+
+                '}';
+    }
 }

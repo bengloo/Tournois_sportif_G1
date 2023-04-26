@@ -7,8 +7,14 @@ import solution.Rencontre;
 
 import java.util.TreeSet;
 
+/** classe définissant ContraintePauseGlobale (hérite de Contrainte)
+ * @author Engloo Benjamin
+ * @author Morcq Alexandre
+ * @author Sueur Jeanne
+ * @author Lux Hugo
+ * @version 1.0
+ */
 public class ContraintePauseGlobale extends Contrainte{
-
     private TreeSet<Integer> journees;
     private TreeSet<Integer>  equipes;
     private Integer max;
@@ -27,10 +33,20 @@ public class ContraintePauseGlobale extends Contrainte{
         this.max = max;
     }
 
+    /**
+     * Ajoute une équipe à la liste des équipes de la contrainte
+     * @param id l'ID de l'équipe à ajouter
+     * @return true si l'ajout a réussi, false sinon
+     */
     public boolean addEquipe(Integer id){
         return equipes.add(id);
     }
 
+    /**
+     * Ajoute une journée à la liste des journées de la contrainte
+     * @param id l'ID de la journée à ajouter
+     * @return true si l'ajout a réussi, false sinon
+     */
     public boolean addJournee(Integer id){
         return journees.add(id);
     }
@@ -68,7 +84,11 @@ public class ContraintePauseGlobale extends Contrainte{
         return valcDelta;
     }
 
-
+    /**
+     * Parcourt les journées pour chaque équipe de la contrainte, afin d'incrémenter un compteur à chaque fois que l'on trouve cette équipe jouer lors d'une journée
+     * @param championnat la solution
+     * @return le nombre entier du compteur
+     */
     private int parcoursJournees(Solution championnat) { //Factorisation du code
         int valcDelta=0;
         for (Integer eID : this.equipes) {

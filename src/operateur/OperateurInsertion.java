@@ -9,6 +9,13 @@ import solution.Solution;
 import java.util.HashMap;
 import java.util.Map;
 
+/** classe définissant OperateurInsertion (hérite de Operateur)
+ * @author Engloo Benjamin
+ * @author Morcq Alexandre
+ * @author Sueur Jeanne
+ * @author Lux Hugo
+ * @version 1.0
+ */
 public class OperateurInsertion extends Operateur{
 
     public OperateurInsertion() {

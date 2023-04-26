@@ -8,9 +8,15 @@ import solution.Journee;
 import java.io.File;
 import java.util.HashMap;
 
+/** classe définissant TestReader (pour tester la classe InstanceReader)
+ * @author Engloo Benjamin
+ * @author Morcq Alexandre
+ * @author Sueur Jeanne
+ * @author Lux Hugo
+ * @version 1.0
+ */
 public class TestReader {
     public static void main(String[] args) {
-        //TODO chemin relatif
         File dir  = new File("./instances");
         System.out.println(dir.toString());
         File[] liste = dir.listFiles();
@@ -29,9 +35,6 @@ public class TestReader {
                     System.out.println(ex.getMessage());
                 }
             }
-            }
-
         }
-
-
+    }
 }

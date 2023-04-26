@@ -3,6 +3,13 @@ package Solveur;
 import instance.Instance;
 import solution.Solution;
 
+/** classe définissant SolveurRecursif (implémentant l'interface Solveur)
+ * @author Engloo Benjamin
+ * @author Morcq Alexandre
+ * @author Sueur Jeanne
+ * @author Lux Hugo
+ * @version 1.0
+ */
 public class SolveurRecursif implements Solveur{
 
     @Override
@@ -26,7 +33,11 @@ public class SolveurRecursif implements Solveur{
         return null;
     }
 
-
+    /**
+     * Méthode permettant de résoudre la solution récursivement, en tenant compte de la solution précédente
+     * @param solprec la solution précédente
+     * @return la meilleure solution finale
+     */
     public Solution solveRec(Solution solprec) {
 
         //soit r la premierre rencontre ayant journnee à null
