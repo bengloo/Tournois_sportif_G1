@@ -63,8 +63,6 @@ public class ContrainteRencontres extends Contrainte{
     //TODO implementer les fonction de calcule de cout en sinspirent de la contrainte de placement, réflechire si on ne peux pas factoriser du code sout des fonction comune aux contraintes
     @Override
     public int getCoutTotal(Solution championnat) {
-        //TODO tchequer contrainte inerante si oui renvoyer max integer
-
         //le nombre de rencontres jouées par l’équipe de la contrainte selon un mode sur l’ensemble des journées
         int valc=0;
 
@@ -101,7 +99,7 @@ public class ContrainteRencontres extends Contrainte{
             for (Integer jID : this.journees) {
                 for (String rencontre : this.rencontres) {
                     //si la journee courante contient la rencontre
-                    if (championnat.getJournees().get(jID).getRencontres().containsKey(rencontre)) { // inutile ?? -------> && championnat.getJournees().equals(jID)
+                    if (jID != null && championnat.getJournees().get(jID).getRencontres().containsKey(rencontre)) { // inutile ?? -------> && championnat.getJournees().equals(jID)
                         valcDelta++;
                     }
                 }
@@ -109,7 +107,7 @@ public class ContrainteRencontres extends Contrainte{
         } else {
             for (Integer jID : this.journees) {
                 //si la journee courante contient la rencontre
-                if (championnat.getJournees().get(jID).getRencontres().containsKey(r)) { // inutile ?? -------> && championnat.getJournees().equals(jID)
+                if (jID != null && championnat.getJournees().get(jID).getRencontres().containsKey(r)) { // inutile ?? -------> && championnat.getJournees().equals(jID)
                     valcDelta++;
                 }
             }

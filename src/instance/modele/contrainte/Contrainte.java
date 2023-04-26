@@ -57,8 +57,7 @@ public abstract class Contrainte {
      * @param o l'opérateur
      * @return le delta du coeff
      **/
-    //TODO deltat sans t
-    public abstract int evalDeltatCoef(Solution championnat, Operateur o);
+    public abstract int evalDeltaCoef(Solution championnat, Operateur o);
 
     /**
      * Indique le delta de penalité pour une opération faite sur le championnat
@@ -66,7 +65,7 @@ public abstract class Contrainte {
      * @param o l'opérateur
      * @return le delta (ou Max.INTEGER si la contrainte est dure)
      **/
-    public abstract int evalDeltatCout(Solution championnat, Operateur o);
+    public abstract int evalDeltaCout(Solution championnat, Operateur o);
 
     /**
      * Indique le delta de penalité pour une opération faite sur le championnat
@@ -75,7 +74,7 @@ public abstract class Contrainte {
      * @param deltaCoef le coefficient deltay
      * @return le delta (ou Max.INTEGER si la contrainte est dure)
      **/
-    public abstract int evalDeltatCout(Solution championnat, Operateur o, Integer deltaCoef);
+    public abstract int evalDeltaCout(Solution championnat, Operateur o, Integer deltaCoef);
 
     /**
      * Indique si la contrainte conserve la viabilité de la solution

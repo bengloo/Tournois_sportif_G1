@@ -13,7 +13,7 @@ import java.util.Map;
  * @author Morcq Alexandre
  * @author Sueur Jeanne
  * @author Lux Hugo
- * @version 1.0
+ * @version 1.1
  */
 public class Solution {
     private static Instance instance;
@@ -170,6 +170,23 @@ public class Solution {
     }
 
     /**
+     * Indique toutes les rencontres jouées par l'équipe passée en paramètre
+     * @param IDequipe l'ID de l'équipe en question
+     * @return la liste chaînée des rencontres
+     */
+    public LinkedList<Rencontre> getRencontresEquipe(Integer IDequipe){
+        LinkedList<Rencontre> rencontresEquipe = new LinkedList<Rencontre>();
+
+        // Parcours de toutes les rencontres du championnat
+        for (Rencontre r : this.rencontres.values()) {
+            if (r.getDomicile().equals(IDequipe) || r.getExterieur().equals(IDequipe)) {
+                rencontresEquipe.add(r);
+            }
+        }
+        return rencontresEquipe;
+    }
+
+    /**
      * Ajoute une équipe à la solution finale (championnat)
      * @param id l'ID de l'équipe à ajouter
      * @return true si l'ajout a été effectué avec succès, false sinon
@@ -218,7 +235,7 @@ public class Solution {
      * @param r la rencontre ciblée
      * @return la rencontre du match retour
      */
-    public Rencontre getMatchRencontre(Rencontre r){
+    public Rencontre getMatchRetour(Rencontre r){
         return this.rencontres.get(r.getLabelRetour());
     }
 

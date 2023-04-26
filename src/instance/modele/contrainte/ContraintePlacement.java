@@ -53,8 +53,6 @@ public class ContraintePlacement extends Contrainte{
 
     @Override
     public int getCoutTotal(Solution championnat) {
-        //TODO tchequer contrainte inerante si oui renvoyer max integer
-
         //le nombre de rencontres jouées par l’équipe de la contrainte selon un mode sur l’ensemble des journées
         int valc=0;
 
@@ -72,7 +70,7 @@ public class ContraintePlacement extends Contrainte{
     }
 
     @Override
-    public int evalDeltatCoef(Solution championnat, Operateur o) {
+    public int evalDeltaCoef(Solution championnat, Operateur o) {
         int valcDelta=0;
         if(o instanceof OperateurInsertion) {
             Rencontre r = o.getRencontre();
@@ -93,17 +91,17 @@ public class ContraintePlacement extends Contrainte{
             switch (this.mode) {
                 case DOMICILE:
                     //si l'équipe concernée par la contrainte est celle de la rencontre et la journée courante contient la rencontre
-                    if (r.getDomicile().equals(this.equipe) && championnat.getJournees().get(jID).getRencontres().containsKey(r)) {
+                    if (jID != null && r.getDomicile().equals(this.equipe) && championnat.getJournees().get(jID).getRencontres().containsKey(r)) {
                         valcDelta++;
                     }
                     break;
                 case EXTERIEUR:
-                    if (r.getExterieur().equals(this.equipe) && championnat.getJournees().get(jID).getRencontres().containsKey(r)) {
+                    if (jID != null && r.getExterieur().equals(this.equipe) && championnat.getJournees().get(jID).getRencontres().containsKey(r)) {
                         valcDelta++;
                     }
                     break;
                 case INDEFINI:
-                    if ((r.getDomicile().equals(this.equipe) || r.getExterieur().equals(this.equipe)) && championnat.getJournees().get(jID).getRencontres().containsKey(r)) {
+                    if (jID != null && (r.getDomicile().equals(this.equipe) || r.getExterieur().equals(this.equipe)) && championnat.getJournees().get(jID).getRencontres().containsKey(r)) {
                         valcDelta++;
                     }
                 default:

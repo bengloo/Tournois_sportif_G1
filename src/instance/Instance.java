@@ -109,7 +109,7 @@ public class Instance {
      * Retourne la liste des contraintes de l'instance sans disctinction de type
      * @return la liste chaînée de contraintes
      */
-    public LinkedList<Contrainte>  getContraintes(){
+    public LinkedList<Contrainte> getContraintes(){
         LinkedList<Contrainte> contraintesAll= new LinkedList<>();
         for(TypeContrainte type:TypeContrainte.values()){
             LinkedList<? extends Contrainte> contraintes = getContraintes(type);

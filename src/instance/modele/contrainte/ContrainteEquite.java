@@ -15,7 +15,6 @@ import java.util.TreeSet;
  * @version 1.0
  */
 public class ContrainteEquite extends Contrainte {
-
     private TreeSet<Integer> equipes;
     private TreeSet<Integer> journees;
     private Integer max;
@@ -54,9 +53,6 @@ public class ContrainteEquite extends Contrainte {
     //TODO implementer les fonction de calcule de cout en sinspirent de la contrainte de placement, réflechire si on ne peux pas factoriser du code sout des fonction comune aux contraintes
     @Override
     public int getCoutTotal(Solution championnat) {
-        //TODO tchequer contrainte inerante si oui renvoyer max integer
-
-        //le nombre de rencontres jouées par l’équipe de la contrainte selon un mode sur l’ensemble des journées
         int valc=0;
 
         //pour toutes les rencontres
@@ -69,7 +65,7 @@ public class ContrainteEquite extends Contrainte {
     }
 
     @Override
-    public int evalDeltatCoef(Solution championnat, Operateur o) {
+    public int evalDeltaCoef(Solution championnat, Operateur o) {
         int valcDelta=0;
         if(o instanceof OperateurInsertion) {
             Rencontre r = o.getRencontre();
@@ -93,7 +89,7 @@ public class ContrainteEquite extends Contrainte {
             flag=0;
             for (Integer jID : this.journees) {
                 //si notre équipe courante joue à domicile sur cette rencontre et que la journee courante contient la rencontre
-                if (r.getDomicile().equals(eID) && championnat.getJournees().get(jID).getRencontres().containsKey(r)) {
+                if (jID != null && r.getDomicile().equals(eID) && championnat.getJournees().get(jID).getRencontres().containsKey(r)) {
                     flag++;
                 }
             }
@@ -110,8 +106,7 @@ public class ContrainteEquite extends Contrainte {
     }
 
     @Override
-    public int evalDeltatCout(Solution championnat, Operateur o, Integer valcDelta) {
-        //TODO tchequer contrainte inerante si oui renvoyer max integer
+    public int evalDeltaCout(Solution championnat, Operateur o, Integer valcDelta) {
         if(o instanceof OperateurInsertion){
 
             if(championnat.getCoefContraintes().get(this)+valcDelta>max){
