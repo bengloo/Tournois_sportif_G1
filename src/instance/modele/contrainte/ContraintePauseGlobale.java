@@ -12,7 +12,7 @@ import java.util.TreeSet;
  * @author Morcq Alexandre
  * @author Sueur Jeanne
  * @author Lux Hugo
- * @version 1.0
+ * @version 1.1
  */
 public class ContraintePauseGlobale extends Contrainte{
     private TreeSet<Integer> journees;
@@ -59,15 +59,25 @@ public class ContraintePauseGlobale extends Contrainte{
     //TODO implementer les fonction de calcule de cout en sinspirent de la contrainte de placement, réflechire si on ne peux pas factoriser du code sout des fonction comune aux contraintes
     @Override
     public int getCoutTotal(Solution championnat) {
-        //le nombre de rencontres jouées par l’équipe de la contrainte selon un mode sur l’ensemble des journées
-        int valc=0;
+        int valc = 0;
 
-        //pour toutes les journees concernées par la contrainte
-        valc = parcoursJournees(championnat);
+        for (Integer e : this.equipes) {
+            for (Integer j : this.journees) {
+                Rencontre rEquipe = null;
+                // Pour chaque rencontre de la journée courante, on prend celles de l'équipe de la contrainte
+                for (Rencontre r : championnat.getJourneeByID(j).getRencontres().values()) {
+                    if(r.isConcerne(championnat.getEquipes().get(e), TypeMode.INDEFINI)) {
+                        rEquipe = r;
+                        break;
+                    }
+                }
+                valc = this.traitementModes(championnat, j, rEquipe);
+            }
+        }
 
-        if(valc>this.max) {
+        if(valc > this.max) {
             if (estDure()) return Integer.MAX_VALUE;
-            return this.penalite *(valc-this.max);
+            return this.penalite * (valc-this.max);
         }
         return 0;
     }
@@ -76,27 +86,41 @@ public class ContraintePauseGlobale extends Contrainte{
     public int evalDeltaCoef(Solution championnat, Operateur o) {
         int valcDelta=0;
         if(o instanceof OperateurInsertion) {
-            Rencontre r = o.getRencontre();
-            valcDelta = parcoursJournees(championnat);
+            for (Integer e : this.equipes) {
+                for (Integer j : this.journees) {
+                    Rencontre rEquipe = null;
+                    Rencontre r = o.getRencontre();
+                    if (r.isConcerne(championnat.getEquipes().get(e), TypeMode.INDEFINI)) {
+                        rEquipe = r;
+                    }
+                    valcDelta = this.traitementModes(championnat, j, rEquipe);
+                }
+            }
         }
         return valcDelta;
     }
 
     /**
-     * Parcourt les journées pour chaque équipe de la contrainte, afin d'incrémenter un compteur à chaque fois que l'on trouve cette équipe jouer lors d'une journée
-     * @param championnat la solution
-     * @return le nombre entier du compteur
+     * ???
+     * @param ...
+     * @return ...
      */
-    private int parcoursJournees(Solution championnat) { //Factorisation du code
-        int valcDelta=0;
-        for (Integer eID : this.equipes) {
-            for (Integer jID : this.journees) {
-                if (jID != null && championnat.getEquipes().equals(eID) && championnat.getJournees().equals(jID)) {
-                    valcDelta++;
-                }
+    private int traitementModes(Solution championnat, Integer journee, Rencontre rEquipe) {
+        int valc = 0;
+        boolean lastPresence = false, currentPresence = false;
+
+        if (rEquipe != null) {
+            if (championnat.isRJPresent(journee - 1, rEquipe)) {
+                lastPresence = championnat.isRJPresent(journee - 1, rEquipe);
+            }
+            if (championnat.isRJPresent(journee, rEquipe)) {
+                currentPresence = championnat.isRJPresent(journee, rEquipe);
+            }
+            if (lastPresence == currentPresence && (lastPresence != false || currentPresence != false)) {
+                valc++;
             }
         }
-        return valcDelta;
+        return valc;
     }
 
     @Override

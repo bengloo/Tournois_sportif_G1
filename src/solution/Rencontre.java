@@ -135,8 +135,8 @@ public class Rencontre {
      */
     public String toStringLong() {
         return "Rencontre{" +
-                "exterieur=" + exterieur +
-                ", domicile=" + domicile +
+                "domicile=" + domicile +
+                ", exterieur=" + exterieur +
                 '}';
     }
 
@@ -147,8 +147,8 @@ public class Rencontre {
 
     public String toString() {
          return "Rencontre{" +
-                 "exterieur=" + exterieur +
-                ", domicile=" + domicile +
+                 "domicile=" + domicile +
+                ", exterieur=" + exterieur +
                  ", journee=" + (journee==null?"null":journee.getId().toString())+
                 '}';
     }

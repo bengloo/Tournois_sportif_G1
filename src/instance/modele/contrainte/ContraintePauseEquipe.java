@@ -12,7 +12,7 @@ import java.util.TreeSet;
  * @author Morcq Alexandre
  * @author Sueur Jeanne
  * @author Lux Hugo
- * @version 1.0
+ * @version 1.1
  */
 public class ContraintePauseEquipe extends Contrainte{
     private Integer equipe;
@@ -52,55 +52,68 @@ public class ContraintePauseEquipe extends Contrainte{
     //TODO implementer les fonction de calcule de cout en sinspirent de la contrainte de placement, réflechire si on ne peux pas factoriser du code sout des fonction comune aux contraintes
     @Override
     public int getCoutTotal(Solution championnat) {
-        //TODO codé corectement en sinspirant de se pseudo code
-        //coef=0 //(nombre de pause compté )
-        //pour j dans l'interval l'interval de la contrainte
+        // Nombre de pause comptées
+        int valc = 0;
+
+        for (Integer j : this.journees) {
+            Rencontre rEquipe = null;
+            // Pour chaque rencontre de la journée courante, on prend celles de l'équipe de la contrainte
+            for (Rencontre r : championnat.getJourneeByID(j).getRencontres().values()) {
+                if(r.isConcerne(championnat.getEquipes().get(this.equipe), TypeMode.INDEFINI)) {
+                    rEquipe = r;
+                    break;
+                }
+            }
+            valc = this.traitementModes(championnat, j, rEquipe);
+        }
+
+        if(valc > this.max) {
+            if (estDure()) return Integer.MAX_VALUE;
+            return this.penalite * (valc-this.max);
+        }
+        return 0;
+    }
+
+    @Override
+    public int evalDeltaCoef(Solution championnat, Operateur o) {
+        int valcDelta = 0;
+        if(o instanceof OperateurInsertion) {
+            //coef=0 //(nombre de pause compté )
+            //pour j la journee d'insertion de la rencontre à j+1
             //lastMode = mode du match de l'equipe de la contrainte au j-1 (null si n'existe pas)
             //curentMode = mode du match de l'equipe de la contrainte au jour j (un truc diferant de null si n'existe pas)
             //si lastMode == currentMode
-                //coef++
-        //apliqué la fonction objective
-
-        // Nombre de pause comptées
-        int valc = 0;
-        TypeMode lastMode;
-
-        for (Integer j : this.journees) {
-
-        }
-
-
-
-        //le nombre de rencontres jouées par l’équipe de la contrainte selon un mode sur l’ensemble des journées
-        /*int valc=0;
-
-        //pour toute les rencontres
-        for(Rencontre r:championnat.getRencontres().values()){
-            //pour toutes les journees concerné par la contraintes
-            valc += parcoursJournees(championnat, r);
-        }
-
-        if(valc>this.max) {
-            if (estDure()) return Integer.MAX_VALUE;
-            return this.penalite *(valc-this.max);
-        }*/
-        return 0;
-    }
-    
-    @Override
-    public int evalDeltaCoef(Solution championnat, Operateur o) {
-
-        int valcDelta=0;
-        if(o instanceof OperateurInsertion) {
-            //coef=0 //(nombre de pause compté )
-                //pour j la journee d'insertion de la rencontre à j+1
-                //lastMode = mode du match de l'equipe de la contrainte au j-1 (null si n'existe pas)
-                //curentMode = mode du match de l'equipe de la contrainte au jour j (un truc diferant de null si n'existe pas)
-                //si lastMode == currentMode
-                    //coef++
+            //coef++
             //apliqué la fonction objective
+
+            for (Integer j : this.journees) {
+                Rencontre rEquipe = null;
+                Rencontre r = o.getRencontre();
+                if(r.isConcerne(championnat.getEquipes().get(this.equipe), TypeMode.INDEFINI)) {
+                    rEquipe = r;
+                }
+                valcDelta = this.traitementModes(championnat, j, rEquipe);
+            }
         }
         return valcDelta;
+    }
+
+    private int traitementModes(Solution championnat, Integer journee, Rencontre rEquipe) {
+        int valc = 0;
+        TypeMode lastMode = null, currentMode = null;
+
+        if (rEquipe != null) {
+            if (rEquipe.isConcerne(championnat.getEquipes().get(this.equipe), this.mode) && championnat.isRJPresent(journee - 1, rEquipe)) {
+                lastMode = this.mode;
+            }
+            if (rEquipe.isConcerne(championnat.getEquipes().get(this.equipe), this.mode) && championnat.isRJPresent(journee, rEquipe)) {
+                currentMode = this.mode;
+            }
+            if (lastMode.equals(currentMode) && (lastMode != null || currentMode != null)) {
+                valc++;
+            }
+        }
+        return valc;
     }
 
     @Override

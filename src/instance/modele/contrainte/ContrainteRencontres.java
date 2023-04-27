@@ -12,7 +12,7 @@ import java.util.TreeSet;
  * @author Morcq Alexandre
  * @author Sueur Jeanne
  * @author Lux Hugo
- * @version 1.0
+ * @version 1.1
  */
 public class ContrainteRencontres extends Contrainte{
     private TreeSet<Integer> journees;

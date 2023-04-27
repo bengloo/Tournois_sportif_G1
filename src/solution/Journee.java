@@ -51,7 +51,7 @@ public class Journee {
      * ??? TODO: compléter ?
      * @return booléen
      */
-    public boolean checkIntegriteeChampionatf(){
+    public boolean checkIntegriteChampionat(){
         return false;
     }
 

@@ -102,7 +102,7 @@ public class ContrainteHBClassement extends Contrainte{
     private int parcoursJournees(Solution championnat, Rencontre r) { //Factorisation du code
         int valcDelta=0;
         for (Integer jID : this.journees) {
-            if(r.isConcerne(championnat.getEquipes().get(this.equipe), this.mode)&&championnat.isRJPresent(jID,r));
+            if(r.isConcerne(championnat.getEquipes().get(this.equipe), this.mode) && championnat.isRJPresent(jID,r));
             valcDelta++;
         }
         return valcDelta;

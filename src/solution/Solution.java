@@ -13,7 +13,7 @@ import java.util.Map;
  * @author Morcq Alexandre
  * @author Sueur Jeanne
  * @author Lux Hugo
- * @version 1.1
+ * @version 1.2
  */
 public class Solution {
     private static Instance instance;
@@ -28,34 +28,34 @@ public class Solution {
         this.instance = instance;
 
         //on pouras faire des operation par equipes
-        equipes =new HashMap<>();
+        this.equipes =new HashMap<>();
         for(int id=0;id<getNBEquipe();id++){
             addEquipe(id);
         }
 
         //on pouras faire des operation par journee
-        journees =new HashMap<>();
+        this.journees =new HashMap<>();
         for(int id=0;id<getNbJournee();id++){
             addJournee(id);
         }
 
         //on pouras faire des operation par rencontres
-        rencontres =new HashMap<>();
+        this.rencontres =new HashMap<>();
         for(int id=0;id<getNBEquipe();id++){
             for(int idAdverse=0;idAdverse<getNBEquipe();idAdverse++){
                 if(id!=idAdverse){
-                    addRencontre(equipes.get(id),equipes.get(idAdverse));
+                    addRencontre(this.equipes.get(id),this.equipes.get(idAdverse));
                 }
             }
         }
 
-        coutTotal=0;
+        this.coutTotal=0;
 
         //le calcule du cout total par contrainte n'est par continus vis à vias des coef de la contrainte comme valc
         this.coefContraintes = new HashMap<>();
         for(TypeContrainte type:TypeContrainte.values()) {
             for (Contrainte contrainte : instance.getContraintes(type)){
-                coefContraintes.put(contrainte,0);
+                this.coefContraintes.put(contrainte,0);
             }
         }
     }
@@ -299,18 +299,34 @@ public class Solution {
      * @return true si ces paramètres sont réalisables, false sinon
      */
     public boolean checkIntegriteeChampionat(){
-        for(Journee j :journees.values()){
+        int compt;
+
+        for(Journee j : this.journees.values()){
+            // Vérification du nombre de rencontres sur une journée
             if(j.getRencontres().size()>getNBRencontreJournee()){
                 System.err.println("La journée "+j.getId()+" a un nombre de rencontres égal à: "+j.getRencontres().toString());
                 return false;
+            }
+            // Vérification que le nombre de rencontres d'une équipe sur une journée soit égal à 1
+            for (Equipe e : this.equipes.values()) {
+                compt = 0;
+                for (Rencontre r : this.rencontres.values()) {
+                    if (j.isPresent(r) && (r.getDomicile().equals(e) || r.getExterieur().equals(e))) {
+                        compt++;
+                    }
+                }
+                if (compt != 1) {
+                    System.err.println("L'équipe "+e+" a un nombre de rencontres égal à: "+compt+" sur la journée "+j);
+                    return false;
+                }
             }
         }
         for(Rencontre r:rencontres.values()){
             if(getPhase(r.getJournee())==getPhase(rencontres.get(r.getLabelRetour()).getJournee())){
                 int a=getPhase(r.getJournee());
-                int b= getPhase(rencontres.get(r.getLabelRetour()).getJournee());
-                Rencontre ra=rencontres.get(r.getLabelRetour());
-                System.err.println("La rencontre "+r.toString()+"a son match retour dans la même phase");
+                int b= getPhase(this.rencontres.get(r.getLabelRetour()).getJournee());
+                Rencontre ra=this.rencontres.get(r.getLabelRetour());
+                System.err.println("La rencontre "+r.toString()+" a son match retour dans la même phase");
                 return false;
             }
         }
