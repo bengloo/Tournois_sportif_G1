@@ -67,7 +67,9 @@ public class ContrainteRencontres extends Contrainte{
         int valc=0;
 
         //pour toutes les journees concernées par la contrainte
-        valc = parcoursJournees(championnat, null);
+        for (String rencontre : this.rencontres) {
+            valc += parcoursJournees(championnat, rencontre);
+        }
 
         if(valc>this.max || valc < this.min) {
             if (estDure()) return Integer.MAX_VALUE;
@@ -92,26 +94,15 @@ public class ContrainteRencontres extends Contrainte{
      * @param r la rencontre concernée
      * @return le nombre entier du compteur
      */
-    private int parcoursJournees(Solution championnat, Rencontre r) { //Factorisation du code
+    private int parcoursJournees(Solution championnat, String r) { //Factorisation du code
         int valcDelta=0;
 
-        if (r == null) {
-            for (Integer jID : this.journees) {
-                for (String rencontre : this.rencontres) {
-                    //si la journee courante contient la rencontre
-                    if (jID != null && championnat.getJournees().get(jID).getRencontres().containsKey(rencontre)) { // inutile ?? -------> && championnat.getJournees().equals(jID)
-                        valcDelta++;
-                    }
-                }
-            }
-        } else {
             for (Integer jID : this.journees) {
                 //si la journee courante contient la rencontre
-                if (jID != null && championnat.getJournees().get(jID).getRencontres().containsKey(r)) { // inutile ?? -------> && championnat.getJournees().equals(jID)
+                if (jID != null && championnat.getJourneeByID(jID).getRencontres().containsKey(r)) { // inutile ?? -------> && championnat.getJournees().equals(jID)
                     valcDelta++;
                 }
             }
-        }
         return valcDelta;
     }
 
