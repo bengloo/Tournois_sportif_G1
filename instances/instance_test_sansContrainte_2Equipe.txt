@@ -1,8 +1,8 @@
 // Nom
-Test Instance sans contrainte 2 equipe
+Test Instance sans contrainte 4 equipe
 
 // Nombre d'equipes
-2
+4
 
 // Contraintes dures
 

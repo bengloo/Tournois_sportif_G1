@@ -194,6 +194,9 @@ public class Solution {
         return  this.journees.get(jId).isPresent(r);
     }
 
+    /*public boolean isRJPresent(int jId,String rID){
+        return  this.journees.get(jId).isPresent(rID);
+    }*/
 
 
 
@@ -321,8 +324,9 @@ public class Solution {
                 }
             }
         }
-        for(Rencontre r:rencontres.values()){
-            if(getPhase(r.getJournee())==getPhase(rencontres.get(r.getLabelRetour()).getJournee())){
+
+        for(Rencontre r : this.rencontres.values()){
+            if(getPhase(r.getJournee())==getPhase(this.rencontres.get(r.getLabelRetour()).getJournee())){
                 int a=getPhase(r.getJournee());
                 int b= getPhase(this.rencontres.get(r.getLabelRetour()).getJournee());
                 Rencontre ra=this.rencontres.get(r.getLabelRetour());
