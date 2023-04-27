@@ -100,25 +100,6 @@ public class ContraintePlacement extends Contrainte{
         for (Integer jID : this.journees) {
             if(r.isConcerne(championnat.getEquipes().get(this.equipe), this.mode)&&championnat.isRJPresent(jID,r));
                 valcDelta++;
-            /*switch (this.mode) {
-                case DOMICILE:
-                    //si l'équipe concernée par la contrainte est celle de la rencontre et la journée courante contient la rencontre
-                    if (jID != null && r.getDomicile().equals(this.equipe) && championnat.getJournees().get(jID).getRencontres().containsKey(r)) {
-                        valcDelta++;
-                    }
-                    break;
-                case EXTERIEUR:
-                    if (jID != null && r.getExterieur().equals(this.equipe) && championnat.getJournees().get(jID).getRencontres().containsKey(r)) {
-                        valcDelta++;
-                    }
-                    break;
-                case INDEFINI:
-                    if (jID != null && (r.getDomicile().equals(this.equipe) || r.getExterieur().equals(this.equipe)) && championnat.getJournees().get(jID).getRencontres().containsKey(r)) {
-                        valcDelta++;
-                    }
-                default:
-                    //TODO interup process error
-            }*/
         }
         return valcDelta;
     }

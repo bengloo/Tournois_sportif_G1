@@ -86,7 +86,9 @@ public class ContrainteHBClassement extends Contrainte{
         int valcDelta=0;
         if(o instanceof OperateurInsertion) {
             Rencontre r = o.getRencontre();
-            valcDelta = parcoursJournees(championnat, r);
+            if (this.equipesAdverses.contains(r.getDomicile()) || this.equipesAdverses.contains(r.getExterieur())) {
+                valcDelta = parcoursJournees(championnat, r);
+            }
         }
         return valcDelta;
     }
@@ -100,25 +102,8 @@ public class ContrainteHBClassement extends Contrainte{
     private int parcoursJournees(Solution championnat, Rencontre r) { //Factorisation du code
         int valcDelta=0;
         for (Integer jID : this.journees) {
-            switch (this.mode) {
-                case DOMICILE:
-                    //si l'équipe concernée par la contrainte est celle de la rencontre et la journee courante contient la rencontre
-                    if (jID != null && r.getDomicile().equals(this.equipe) && championnat.getJournees().get(jID).getRencontres().containsKey(r)) {
-                        valcDelta++;
-                    }
-                    break;
-                case EXTERIEUR:
-                    if (jID != null && r.getExterieur().equals(this.equipe) && championnat.getJournees().get(jID).getRencontres().containsKey(r)) {
-                        valcDelta++;
-                    }
-                    break;
-                case INDEFINI:
-                    if (jID != null && (r.getDomicile().equals(this.equipe) || r.getExterieur().equals(this.equipe)) && championnat.getJournees().get(jID).getRencontres().containsKey(r)) {
-                        valcDelta++;
-                    }
-                default:
-                    //TODO interup process error
-            }
+            if(r.isConcerne(championnat.getEquipes().get(this.equipe), this.mode)&&championnat.isRJPresent(jID,r));
+            valcDelta++;
         }
         return valcDelta;
     }

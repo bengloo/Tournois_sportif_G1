@@ -52,8 +52,27 @@ public class ContraintePauseEquipe extends Contrainte{
     //TODO implementer les fonction de calcule de cout en sinspirent de la contrainte de placement, réflechire si on ne peux pas factoriser du code sout des fonction comune aux contraintes
     @Override
     public int getCoutTotal(Solution championnat) {
+        //TODO codé corectement en sinspirant de se pseudo code
+        //coef=0 //(nombre de pause compté )
+        //pour j dans l'interval l'interval de la contrainte
+            //lastMode = mode du match de l'equipe de la contrainte au j-1 (null si n'existe pas)
+            //curentMode = mode du match de l'equipe de la contrainte au jour j (un truc diferant de null si n'existe pas)
+            //si lastMode == currentMode
+                //coef++
+        //apliqué la fonction objective
+
+        // Nombre de pause comptées
+        int valc = 0;
+        TypeMode lastMode;
+
+        for (Integer j : this.journees) {
+
+        }
+
+
+
         //le nombre de rencontres jouées par l’équipe de la contrainte selon un mode sur l’ensemble des journées
-        int valc=0;
+        /*int valc=0;
 
         //pour toute les rencontres
         for(Rencontre r:championnat.getRencontres().values()){
@@ -64,58 +83,23 @@ public class ContraintePauseEquipe extends Contrainte{
         if(valc>this.max) {
             if (estDure()) return Integer.MAX_VALUE;
             return this.penalite *(valc-this.max);
-        }
+        }*/
         return 0;
     }
     
     @Override
     public int evalDeltaCoef(Solution championnat, Operateur o) {
+
         int valcDelta=0;
         if(o instanceof OperateurInsertion) {
-            Rencontre r = o.getRencontre();
-            valcDelta = parcoursJournees(championnat, r);
+            //coef=0 //(nombre de pause compté )
+                //pour j la journee d'insertion de la rencontre à j+1
+                //lastMode = mode du match de l'equipe de la contrainte au j-1 (null si n'existe pas)
+                //curentMode = mode du match de l'equipe de la contrainte au jour j (un truc diferant de null si n'existe pas)
+                //si lastMode == currentMode
+                    //coef++
+            //apliqué la fonction objective
         }
-        return valcDelta;
-    }
-
-    /**
-     * Parcourt les journées de la contrainte pour incrémenter un compteur à chaque fois que son équipe fait partie de la rencontre
-     * @param championnat la solution
-     * @param r la rencontre concernée
-     * @return le nombre entier du compteur
-     */
-    private int parcoursJournees(Solution championnat, Rencontre r) { //Factorisation du code
-        int valcDelta=0;
-        //TODO codé corectement en sinspirant de se pseudo code
-        //coef=0 //(nombre de pause compté )
-        //pour j dans l'interval l'interval de la contrainte
-            //lastMode = mode du match de l'equipe de la contrainte au j-1 (null si n'existe pas)
-            //curentMode = mode du match de l'equipe de la contrainte au jour j (un truc diferant de null si n'existe pas)
-            //si lastMode == currentMode
-                //coef++
-        //apliqué la fonction objective
-
-        /*for (Integer jID : this.journees) {
-            switch (this.mode) {
-                case DOMICILE:
-                    //si l'équipe concernée par la contrainte est celle de la rencontre et la journee courante contient la rencontre
-                    if (jID != null && r.getDomicile().equals(this.equipe) && championnat.getJournees().get(jID).getRencontres().containsKey(r)) {
-                        valcDelta++;
-                    }
-                    break;
-                case EXTERIEUR:
-                    if (jID != null && r.getExterieur().equals(this.equipe) && championnat.getJournees().get(jID).getRencontres().containsKey(r)) {
-                        valcDelta++;
-                    }
-                    break;
-                case INDEFINI:
-                    if (jID != null && (r.getDomicile().equals(this.equipe) || r.getExterieur().equals(this.equipe)) && championnat.getJournees().get(jID).getRencontres().containsKey(r)) {
-                        valcDelta++;
-                    }
-                default:
-                    //TODO interup process error
-            }
-        }*/
         return valcDelta;
     }
 
