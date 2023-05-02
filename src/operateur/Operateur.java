@@ -36,7 +36,7 @@ public abstract class Operateur {
         this.championnat=c;
         this.journee = j;
         this.rencontre=r;
-        this.cout = evalDeltaCout(evalDeltaCoefs());
+        this.cout = evalDeltaCout();
 
     }
 
@@ -62,7 +62,7 @@ public abstract class Operateur {
      * @param deltaCoef
      * @return Max.INTEGER si deltaCoef est nul, la somme des deltas de pénalité sinon
      */
-    protected abstract int evalDeltaCout(Map<Contrainte, Integer> deltaCoef);
+    protected abstract int evalDeltaCout();
 
     /**
      * Ajoute dans un tableau tous les deltas du coeff de la fonction objective de toutes les contraintes du championnat

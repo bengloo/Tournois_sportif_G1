@@ -37,4 +37,17 @@ public class Equipe {
     public String toString(){
         return id.toString();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Equipe equipe = (Equipe) o;
+        return Objects.equals(id, equipe.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

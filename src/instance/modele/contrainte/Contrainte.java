@@ -75,6 +75,6 @@ public abstract class Contrainte {
      * @return true si la solution est faisable, false sinon
      */
     public boolean checkContrainte(Solution championnat){
-        return estDure()&&getCoutTotal(championnat)!=Integer.MAX_VALUE;
+        return getCoutTotal(championnat)!=Integer.MAX_VALUE;
     }
 }

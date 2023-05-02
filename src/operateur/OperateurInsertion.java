@@ -2,6 +2,7 @@ package operateur;
 
 import instance.modele.contrainte.Contrainte;
 import instance.modele.contrainte.TypeContrainte;
+import instance.modele.contrainte.TypeMode;
 import solution.Journee;
 import solution.Rencontre;
 import solution.Solution;
@@ -25,13 +26,14 @@ public class OperateurInsertion extends Operateur{
     }
 
     @Override
-    protected int evalDeltaCout(Map<Contrainte, Integer> deltaCoef) {
-        if(deltaCoef==null)return Integer.MAX_VALUE;
+    protected int evalDeltaCout() {
+        //if(deltaCoef==null)return Integer.MAX_VALUE;
         int deltaCout=0;
-
+        if(!isRealisableInital())return Integer.MAX_VALUE;
         for(TypeContrainte type:TypeContrainte.values()){
             for(Contrainte c: getChampionnat().getContraintes(type)){
-                deltaCout+=c.evalDeltaCout(getChampionnat(),this);
+                int deltaCoef = c.evalDeltaCoef(getChampionnat(),this);
+                if(deltaCoef!=0)deltaCout+=c.evalDeltaCout(getChampionnat(),this,deltaCoef);
             }
         }
         return deltaCout;
@@ -58,7 +60,9 @@ public class OperateurInsertion extends Operateur{
             return false;
         }
         //check un match par jr
-
+        for(Rencontre r:getJournee().getRencontres().values()){
+            if(r.isConcerne(getRencontre().getDomicile(), TypeMode.INDEFINI) || r.isConcerne(getRencontre().getExterieur(), TypeMode.INDEFINI))return false;
+        }
 
         //match aller ou retour par phase si il existe
         if(getChampionnat().getPhase(getJournee())==getChampionnat().getPhase(getChampionnat().getRencontres().get(getRencontre().getLabelRetour()).getJournee())){
@@ -82,7 +86,7 @@ public class OperateurInsertion extends Operateur{
             getChampionnat().addCoefCoutContrainte(c,deltaCoefs.get(c),c.evalDeltaCout(getChampionnat(),this,deltaCoefs.get(c)));
         }
         //on update le cout total
-        getChampionnat().addCoutTotal(this.getCout());
+        //getChampionnat().addCoutTotal(this.getCout());
         //on affect la rencontre à la journee
         try {
             return getChampionnat().getJournees().get(this.getJournee().getId()).addRencontre(this.getRencontre());

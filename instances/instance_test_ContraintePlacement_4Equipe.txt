@@ -8,8 +8,9 @@ Test Instance sans contrainte 4 equipe
 
 // Contraintes de placement
 // Nombre
-0
+1
 // Contraintes
+equipe=0	jours=0	mode=D	max=0
 
 // Contraintes d'equipes en haut et bas de classement
 // Nombre
@@ -36,9 +37,10 @@ Test Instance sans contrainte 4 equipe
 
 // Contraintes de placement
 // Nombre
-1
+2
 // Contraintes
-equipe=0	jours=1;2;3;4	mode=D	max=1	penalite=1
+equipe=0	jours=0;1;2;3	mode=D	max=1	penalite=1
+equipe=1	jours=0;1;2;3	mode=D	max=1	penalite=1
 
 // Contraintes d'equipes en haut et bas de classement
 // Nombre

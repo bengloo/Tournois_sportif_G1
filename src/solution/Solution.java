@@ -283,6 +283,7 @@ public class Solution {
      */
     public void addCoefCoutContrainte(Contrainte c,Integer deltaCoef,Integer deltaCout){
         //update du coef contrainte
+        System.out.println("Deltacoef pour cette insert"+deltaCoef);
         coefContraintes.put(c,coefContraintes.get(c)+deltaCoef);
         //update du cout contrainte
         coutTotal+=deltaCout;

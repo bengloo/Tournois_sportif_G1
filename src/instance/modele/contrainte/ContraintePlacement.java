@@ -70,6 +70,7 @@ public class ContraintePlacement extends Contrainte{
         for(Rencontre r:championnat.getRencontres().values()){
             //pour toutes les journees concerné par la contraintes
             valc += parcoursJournees(championnat, r);
+            System.out.println("coef contrainte placement get cout tt:"+valc);
         }
 
         if(valc>this.max) {
@@ -84,7 +85,9 @@ public class ContraintePlacement extends Contrainte{
         int valcDelta=0;
         if(o instanceof OperateurInsertion) {
             Rencontre r = o.getRencontre();
-            valcDelta = parcoursJournees(championnat, r);
+
+            if(this.journees.contains(o.getJournee().getId())&&o.getRencontre().isConcerne(championnat.getEquipeByID(equipe),mode))
+                valcDelta = 1;
         }
         return valcDelta;
     }
