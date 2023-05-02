@@ -59,6 +59,7 @@ public class OperateurInsertion extends Operateur{
         }
         //check un match par jr
 
+
         //match aller ou retour par phase si il existe
         if(getChampionnat().getPhase(getJournee())==getChampionnat().getPhase(getChampionnat().getRencontres().get(getRencontre().getLabelRetour()).getJournee())){
             /*int a=getChampionnat().getPhase(getJournee());
