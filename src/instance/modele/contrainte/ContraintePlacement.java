@@ -98,8 +98,10 @@ public class ContraintePlacement extends Contrainte{
     private int parcoursJournees(Solution championnat, Rencontre r) { //Factorisation du code
         int valcDelta=0;
         for (Integer jID : this.journees) {
-            if(r.isConcerne(championnat.getEquipes().get(this.equipe), this.mode)&&championnat.isRJPresent(jID,r));
+            if(r.isConcerne(championnat.getEquipes().get(this.equipe), this.mode)&&championnat.isRJPresent(jID,r)) {
+                System.out.println("deltacoef++ evaldeltacoef coef:"+valcDelta);
                 valcDelta++;
+            }
         }
         return valcDelta;
     }

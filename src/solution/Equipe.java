@@ -1,5 +1,7 @@
 package solution;
 
+import java.util.Objects;
+
 /** classe définissant Equipe
  * @author Engloo Benjamin
  * @author Morcq Alexandre

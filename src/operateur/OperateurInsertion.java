@@ -74,12 +74,12 @@ public class OperateurInsertion extends Operateur{
 
     @Override
     protected boolean doMouvement() {
-        Map<Contrainte, Integer> DeltaCoefs= evalDeltaCoefs();
+        Map<Contrainte, Integer> deltaCoefs= evalDeltaCoefs();
         //TODO y'a peut étre moyen de mieux parcour un hashmap à moindre temps
         //pour chaque contrainte impacté par l'operation
-        for(Contrainte c:DeltaCoefs.keySet()){
+        for(Contrainte c:deltaCoefs.keySet()){
             //on update le cout et les coef des contraintes
-            getChampionnat().addCoefCoutContrainte(c,DeltaCoefs.get(c),c.evalDeltaCout(getChampionnat(),this,DeltaCoefs.get(c)));
+            getChampionnat().addCoefCoutContrainte(c,deltaCoefs.get(c),c.evalDeltaCout(getChampionnat(),this,deltaCoefs.get(c)));
         }
         //on update le cout total
         getChampionnat().addCoutTotal(this.getCout());

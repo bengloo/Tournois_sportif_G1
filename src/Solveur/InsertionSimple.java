@@ -22,7 +22,7 @@ public class InsertionSimple implements Solveur{
     public Solution solve(Instance instance) {
         Solution solution = new Solution(instance);
         for(Rencontre r:solution.getRencontres().values()){
-            System.out.println(solution.toString());
+            System.out.println(solution);
             solution.getPremiereInsertion(r).doMouvementIfRealisable();
         }
         if(!solution.check()) return null;
