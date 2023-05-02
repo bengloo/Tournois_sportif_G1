@@ -28,6 +28,7 @@ public class OperateurInsertion extends Operateur{
     protected int evalDeltaCout(Map<Contrainte, Integer> delatCoef) {
         if(delatCoef==null)return Integer.MAX_VALUE;
         int deltaCout=0;
+
         for(TypeContrainte type:TypeContrainte.values()){
             for(Contrainte c: getChampionnat().getContraintes(type)){
                 deltaCout+=c.evalDeltaCout(getChampionnat(),this);
@@ -52,16 +53,19 @@ public class OperateurInsertion extends Operateur{
 
     @Override
     protected boolean isRealisableInital() {
-
+        //check nb rencontre journee
         if(this.getJournee().getRencontres().size()+1>getChampionnat().getNBRencontreJournee()){
             return false;
         }
+        //check un match par jr
+
+        //match aller ou retour par phase si il existe
         if(getChampionnat().getPhase(getJournee())==getChampionnat().getPhase(getChampionnat().getRencontres().get(getRencontre().getLabelRetour()).getJournee())){
-            int a=getChampionnat().getPhase(getJournee());
+            /*int a=getChampionnat().getPhase(getJournee());
             Journee j=getJournee();
             int b=getChampionnat().getPhase(getChampionnat().getRencontres().get(getRencontre().getLabelRetour()).getJournee());
             Journee j2=getChampionnat().getRencontres().get(getRencontre().getLabelRetour()).getJournee();
-
+            */
             return false;
         }
 

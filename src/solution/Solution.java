@@ -314,7 +314,7 @@ public class Solution {
             for (Equipe e : this.equipes.values()) {
                 compt = 0;
                 for (Rencontre r : this.rencontres.values()) {
-                    if (j.isPresent(r) && (r.getDomicile().equals(e) || r.getExterieur().equals(e))) {
+                    if ( j.isPresent(r) && (r.getDomicile().equals(e) || r.getExterieur().equals(e))) {
                         compt++;
                     }
                 }
@@ -327,9 +327,9 @@ public class Solution {
 
         for(Rencontre r : this.rencontres.values()){
             if(getPhase(r.getJournee())==getPhase(this.rencontres.get(r.getLabelRetour()).getJournee())){
-                int a=getPhase(r.getJournee());
-                int b= getPhase(this.rencontres.get(r.getLabelRetour()).getJournee());
-                Rencontre ra=this.rencontres.get(r.getLabelRetour());
+                //int a=getPhase(r.getJournee());
+                //int b= getPhase(this.rencontres.get(r.getLabelRetour()).getJournee());
+                //Rencontre ra=this.rencontres.get(r.getLabelRetour());
                 System.err.println("La rencontre "+r.toString()+" a son match retour dans la même phase");
                 return false;
             }
