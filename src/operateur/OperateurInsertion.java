@@ -34,6 +34,7 @@ public class OperateurInsertion extends Operateur{
             for(Contrainte c: getChampionnat().getContraintes(type)){
                 int deltaCoef = c.evalDeltaCoef(getChampionnat(),this);
                 if(deltaCoef!=0)deltaCout+=c.evalDeltaCout(getChampionnat(),this,deltaCoef);
+                if(deltaCout==Integer.MAX_VALUE)return Integer.MAX_VALUE;
             }
         }
         return deltaCout;

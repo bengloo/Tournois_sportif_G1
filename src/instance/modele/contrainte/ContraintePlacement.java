@@ -121,7 +121,9 @@ public class ContraintePlacement extends Contrainte{
         if(o instanceof OperateurInsertion){
 
             if(championnat.getCoefContraintes().get(this)+valcDelta>max){
-                if (estDure()) return Integer.MAX_VALUE;
+                if (estDure()){
+                    return Integer.MAX_VALUE;
+                };
                 //au dela du max le cout suit une relation lineaire le deltat cout est donc proportionel
                 return this.penalite *(valcDelta);
             }else return 0;
