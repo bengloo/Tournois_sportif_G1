@@ -324,7 +324,7 @@ public class Solution {
                 }
             }
         }
-
+        // Vérification que les matchs aller et retour ne sont pas dans la même phase
         for(Rencontre r : this.rencontres.values()){
             if(getPhase(r.getJournee())==getPhase(this.rencontres.get(r.getLabelRetour()).getJournee())){
                 //int a=getPhase(r.getJournee());

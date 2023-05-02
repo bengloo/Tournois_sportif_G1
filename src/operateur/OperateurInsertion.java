@@ -25,8 +25,8 @@ public class OperateurInsertion extends Operateur{
     }
 
     @Override
-    protected int evalDeltaCout(Map<Contrainte, Integer> delatCoef) {
-        if(delatCoef==null)return Integer.MAX_VALUE;
+    protected int evalDeltaCout(Map<Contrainte, Integer> deltaCoef) {
+        if(deltaCoef==null)return Integer.MAX_VALUE;
         int deltaCout=0;
 
         for(TypeContrainte type:TypeContrainte.values()){
@@ -40,15 +40,15 @@ public class OperateurInsertion extends Operateur{
     @Override
     protected Map<Contrainte, Integer> evalDeltaCoefs() {
         if(!isRealisableInital())return null;
-        Map<Contrainte, Integer> delatCoefs = new HashMap<>();
+        Map<Contrainte, Integer> deltaCoefs = new HashMap<>();
 
         for(TypeContrainte type:TypeContrainte.values()){
             for(Contrainte c: getChampionnat().getContraintes(type)){
                 int deltaCoef = c.evalDeltaCoef(getChampionnat(),this);
-                if(deltaCoef!=0)delatCoefs.put(c,deltaCoef);
+                if(deltaCoef!=0)deltaCoefs.put(c,deltaCoef);
             }
         }
-        return delatCoefs;
+        return deltaCoefs;
     }
 
     @Override
@@ -68,7 +68,6 @@ public class OperateurInsertion extends Operateur{
             */
             return false;
         }
-
         return true;
     }
 
