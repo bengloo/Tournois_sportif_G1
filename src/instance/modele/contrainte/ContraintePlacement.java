@@ -84,10 +84,9 @@ public class ContraintePlacement extends Contrainte{
     public int evalDeltaCoef(Solution championnat, Operateur o) {
         int valcDelta=0;
         if(o instanceof OperateurInsertion) {
-            Rencontre r = o.getRencontre();
-
-            if(this.journees.contains(o.getJournee().getId())&&o.getRencontre().isConcerne(championnat.getEquipeByID(equipe),mode))
+            if(this.journees.contains(o.getJournee().getId())&&o.getRencontre().isConcerne(championnat.getEquipeByID(equipe),mode)) {
                 valcDelta = 1;
+            }
         }
         return valcDelta;
     }

@@ -7,6 +7,8 @@ import solution.Rencontre;
 
 import java.util.TreeSet;
 
+import static instance.modele.contrainte.TypeMode.*;
+
 /** classe définissant ContrainteHBClassement (hérite de Contrainte)
  * @author Engloo Benjamin
  * @author Morcq Alexandre
@@ -69,7 +71,7 @@ public class ContrainteHBClassement extends Contrainte{
         //pour toute les rencontres
         for(Rencontre r:championnat.getRencontres().values()){
             // à chaque équipe adverse de la liste rencontrée
-            if (this.equipesAdverses.contains(r.getDomicile()) || this.equipesAdverses.contains(r.getExterieur())) {
+            if (this.equipesAdverses.contains(r.getDomicile().getId()) || this.equipesAdverses.contains(r.getExterieur().getId())) {
                 valc += parcoursJournees(championnat, r);
             }
         }
@@ -85,9 +87,25 @@ public class ContrainteHBClassement extends Contrainte{
     public int evalDeltaCoef(Solution championnat, Operateur o) {
         int valcDelta=0;
         if(o instanceof OperateurInsertion) {
-            Rencontre r = o.getRencontre();
-            if (this.equipesAdverses.contains(r.getDomicile()) || this.equipesAdverses.contains(r.getExterieur())) {
+            /*if (this.equipesAdverses.contains(r.getDomicile().getId()) || this.equipesAdverses.contains(r.getExterieur().getId())) {
                 valcDelta = parcoursJournees(championnat, r);
+            }*/
+            switch(this.mode) {
+                case DOMICILE:
+                    if(this.journees.contains(o.getJournee().getId()) && this.equipesAdverses.contains(o.getRencontre().getExterieur().getId()) && o.getRencontre().isConcerne(championnat.getEquipeByID(equipe),mode)) {
+                        valcDelta = 1;
+                    }
+                    break;
+                case EXTERIEUR:
+                    if(this.journees.contains(o.getJournee().getId()) && this.equipesAdverses.contains(o.getRencontre().getDomicile().getId()) && o.getRencontre().isConcerne(championnat.getEquipeByID(equipe),mode)) {
+                        valcDelta = 1;
+                    }
+                    break;
+                case INDEFINI:
+                    if(this.journees.contains(o.getJournee().getId()) && (this.equipesAdverses.contains(o.getRencontre().getDomicile().getId()) || this.equipesAdverses.contains(o.getRencontre().getExterieur().getId())) && o.getRencontre().isConcerne(championnat.getEquipeByID(equipe),mode)) {
+                        valcDelta = 1;
+                    }
+                    break;
             }
         }
         return valcDelta;
@@ -102,8 +120,25 @@ public class ContrainteHBClassement extends Contrainte{
     private int parcoursJournees(Solution championnat, Rencontre r) { //Factorisation du code
         int valcDelta=0;
         for (Integer jID : this.journees) {
-            if(r.isConcerne(championnat.getEquipes().get(this.equipe), this.mode) && championnat.isRJPresent(jID,r));
-            valcDelta++;
+            /*if(r.isConcerne(championnat.getEquipes().get(this.equipe), this.mode) && championnat.isRJPresent(jID,r));
+            valcDelta++;*/
+            switch(this.mode) {
+                case DOMICILE:
+                    if(r.isConcerne(championnat.getEquipes().get(this.equipe), this.mode) && this.equipesAdverses.contains(r.getExterieur().getId()) && championnat.isRJPresent(jID,r)) {
+                        valcDelta++;
+                    }
+                    break;
+                case EXTERIEUR:
+                    if(r.isConcerne(championnat.getEquipes().get(this.equipe), this.mode) && this.equipesAdverses.contains(r.getDomicile().getId()) && championnat.isRJPresent(jID,r)) {
+                        valcDelta++;
+                    }
+                    break;
+                case INDEFINI:
+                    if(r.isConcerne(championnat.getEquipes().get(this.equipe), this.mode) && (this.equipesAdverses.contains(r.getDomicile().getId()) || this.equipesAdverses.contains(r.getExterieur().getId())) && championnat.isRJPresent(jID,r)) {
+                        valcDelta++;
+                    }
+                    break;
+            }
         }
         return valcDelta;
     }

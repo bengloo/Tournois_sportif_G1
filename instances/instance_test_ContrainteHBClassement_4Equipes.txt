@@ -1,0 +1,74 @@
+// Nom
+Test Instance Contrainte HBClassement 4 equipe
+
+// Nombre d'equipes
+4
+
+// Contraintes dures
+
+// Contraintes de placement
+// Nombre
+0
+// Contraintes
+
+// Contraintes d'equipes en haut et bas de classement
+// Nombre
+1
+// Contraintes
+equipe=0	jours=0	equipesAdverses=1;2	mode=DE	max=0
+
+// Contraintes de rencontres
+// Nombre
+0
+// Contraintes
+
+// Contraintes de pause par equipe
+// Nombre
+0
+// Contraintes
+
+// Contraintes de pause globale
+// Nombre
+0
+// Contraintes
+
+
+// Contraintes souples
+
+// Contraintes de placement
+// Nombre
+0
+// Contraintes
+
+// Contraintes d'equipes en haut et bas de classement
+// Nombre
+3
+// Contraintes
+equipe=0	jours=0;1	equipesAdverses=1;2	mode=D	max=1	penalite=1
+equipe=2	jours=2;3	equipesAdverses=1;3	mode=E	max=1	penalite=1
+equipe=3	jours=0;3	equipesAdverses=1;2	mode=DE	max=1	penalite=1
+
+// Contraintes de rencontres
+// Nombre
+0
+// Contraintes
+
+// Contraintes de pause par equipe
+// Nombre
+0
+// Contraintes
+
+// Contraintes de pause globale
+// Nombre
+0
+// Contraintes
+
+// Contraintes d'equite
+// Nombre
+0
+// Contraintes
+
+// Contraintes de separation
+// Nombre
+0
+// Contraintes

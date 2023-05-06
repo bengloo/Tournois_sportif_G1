@@ -16,7 +16,8 @@ import solution.Solution;
 public class TestInsertionSimple {
     public static void main(String[] args) {
         //String path="instances/instance_ITC2021_Test_4.txt";
-        String path="instances/instance_test_ContraintePlacement_4Equipe.txt";
+        //String path="instances/instance_test_ContraintePlacement_4Equipe.txt";
+        String path="instances/instance_test_ContrainteHBClassement_4Equipes.txt";
         try {
             InstanceReader reader = new InstanceReader(path);
             Instance i= reader.readInstance();
