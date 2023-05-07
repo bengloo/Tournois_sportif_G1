@@ -1,4 +1,4 @@
-package Solveur;
+package solveur;
 
 /** classe définissant RechercheLocale (implémentant l'interface Solveur)
  * @author Engloo Benjamin

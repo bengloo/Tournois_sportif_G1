@@ -191,6 +191,7 @@ public class Solution {
         return this.rencontres.get(getIDRencontre(eDomicile,eExterne)).getJournee();
     }
     public boolean isRJPresent(int jId, Rencontre r){
+        if(!this.journees.containsKey(jId))return false;
         return this.journees.get(jId).isPresent(r);
     }
 

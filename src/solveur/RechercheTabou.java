@@ -1,4 +1,4 @@
-package Solveur;
+package solveur;
 
 /** classe définissant RechercheTabou (implémentant l'interface Solveur)
  * @author Engloo Benjamin

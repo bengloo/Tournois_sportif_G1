@@ -1,6 +1,7 @@
-package Solveur;
+package solveur;
 
 import instance.Instance;
+import operateur.OperateurInsertion;
 import solution.Rencontre;
 import solution.Solution;
 
@@ -23,7 +24,12 @@ public class InsertionSimple implements Solveur{
         Solution solution = new Solution(instance);
         for(Rencontre r:solution.getRencontres().values()){
             System.out.println(solution);
-            solution.getPremiereInsertion(r).doMouvementIfRealisable();
+            OperateurInsertion o= solution.getPremiereInsertion(r);
+            if(o==null){
+                return solution;//l'insertion simple peux ammener à une situation bloquante on transmet alor la solution incomplete
+            }else{
+                o.doMouvementIfRealisable();
+            }
         }
         if(!solution.check()) return null;
         return solution;

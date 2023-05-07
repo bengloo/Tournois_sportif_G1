@@ -1,10 +1,9 @@
-package Tests;
+package tests;
 
-import Solveur.InsertionSimple;
+import solveur.InsertionSimple;
 import instance.Instance;
 import io.InstanceReader;
 import io.exception.ReaderException;
-import solution.Solution;
 
 /** classe définissant TestInsertionSimple (pour tester la classe InsertionSimple)
  * @author Engloo Benjamin

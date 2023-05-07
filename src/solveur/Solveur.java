@@ -1,4 +1,4 @@
-package Solveur;
+package solveur;
 
 import instance.Instance;
 import solution.Solution;

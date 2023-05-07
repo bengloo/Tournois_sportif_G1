@@ -1,4 +1,4 @@
-package Tests;
+package tests;
 
 import instance.Instance;
 import io.InstanceReader;

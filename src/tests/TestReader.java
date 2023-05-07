@@ -1,12 +1,10 @@
-package Tests;
+package tests;
 
 import instance.Instance;
 import io.InstanceReader;
 import io.exception.ReaderException;
-import solution.Journee;
 
 import java.io.File;
-import java.util.HashMap;
 
 /** classe définissant TestReader (pour tester la classe InstanceReader)
  * @author Engloo Benjamin
