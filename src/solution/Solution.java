@@ -4,6 +4,10 @@ import instance.Instance;
 import instance.modele.contrainte.*;
 import operateur.OperateurInsertion;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -372,7 +376,7 @@ public class Solution {
     /**
      * Méthode permettant de récupérer la première tentative d'insertion d'une rencontre dans le championnat
      * @param r la rencontre ciblée
-     * @return le premier opérateur d'insertion s'il est valide, null sinon
+     * @return le premier opérateur d'insertion valide, null sinon
      */
     public OperateurInsertion getPremiereInsertion(Rencontre r) {
         for(Journee j: this.journees.values()) {
@@ -383,6 +387,38 @@ public class Solution {
         }
         System.err.println("Il n'y a plus d'insertion valide");
         return null;
+    }
+
+    public void writeSolution(String repSolveur){
+        File folder = new File("resultats/"+repSolveur);
+        //on crer un dossier propre au solveur si besoin
+        if (!folder.exists()) {
+            folder.mkdirs();
+        }
+        try {
+            File file = new File("resultats/" + repSolveur + "/" + instance.getNom()+".txt");
+            FileWriter fw = new FileWriter(file, false);
+            BufferedWriter bw = new BufferedWriter(fw);
+
+
+            bw.write("// Solution");
+            bw.newLine();
+            bw.write("// Instance "+instance.getNom());
+            bw.newLine();
+            for (Journee j : this.journees.values()) {
+                bw.newLine();
+                bw.write("// Journee "+j.getId().toString());
+                bw.newLine();
+                for (Rencontre r : j.getRencontres().values()) {
+                    bw.write(r.getDomicile().getId().toString()+"   "+r.getExterieur().getId().toString());
+                    bw.newLine();
+                }
+            }
+            bw.close();
+            fw.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

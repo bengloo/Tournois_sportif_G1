@@ -1,9 +1,11 @@
 package tests;
 
+import solution.Solution;
 import solveur.InsertionSimple;
 import instance.Instance;
 import io.InstanceReader;
 import io.exception.ReaderException;
+import solveur.Solveur;
 
 /** classe définissant TestInsertionSimple (pour tester la classe InsertionSimple)
  * @author Engloo Benjamin
@@ -24,8 +26,9 @@ public class TestInsertionSimple {
             //System.out.println(i);
 
             InsertionSimple solveur = new InsertionSimple();
-
-            System.out.println(solveur.solve(i).toString());
+            Solution s = solveur.solve(i);
+            s.writeSolution(solveur.getNom());
+            System.out.println(s.toString());
         } catch (ReaderException ex) {
             System.out.println(ex.getMessage());
         }
