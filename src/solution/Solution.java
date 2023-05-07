@@ -396,7 +396,7 @@ public class Solution {
             folder.mkdirs();
         }
         try {
-            File file = new File("resultats/" + repSolveur + "/" + instance.getNom()+".txt");
+            File file = new File("resultats/" + repSolveur + "/" + instance.getNom()+"_sol.txt");
             FileWriter fw = new FileWriter(file, false);
             BufferedWriter bw = new BufferedWriter(fw);
 

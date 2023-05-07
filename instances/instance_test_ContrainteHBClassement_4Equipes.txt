@@ -1,5 +1,5 @@
 // Nom
-Test Instance Contrainte HBClassement 4 equipe
+Contrainte HBClassement 4 equipe
 
 // Nombre d'equipes
 4

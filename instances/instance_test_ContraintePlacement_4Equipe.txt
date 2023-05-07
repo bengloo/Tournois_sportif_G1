@@ -1,5 +1,5 @@
 // Nom
-Test Instance sans contrainte 4 equipe
+contrainte placement 4 equipe
 
 // Nombre d'equipes
 4

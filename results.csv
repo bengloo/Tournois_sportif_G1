@@ -1,8 +1,8 @@
 ;InsertionSimple;;
 ;cout;tps(ms);valide ?
-Test Instance Contrainte Rencontres 4 équipes;2;45;true
-Test Instance sans contrainte 4 equipe;1;15;true
-Test Instance sans contrainte 4 equipe;0;4;true
-Test Instance Contrainte HBClassement 4 equipe;0;7;true
+Contrainte Rencontres 4 équipes;2;48;true
+contrainte placement 4 equipe;1;9;true
+sans contrainte 4 equipe;0;4;true
+Contrainte HBClassement 4 equipe;0;5;true
 
-SOMME;3;71;true
+SOMME;3;66;true
