@@ -125,7 +125,6 @@ public class ContraintePauseEquipe extends Contrainte{
 
     @Override
     public int evalDeltaCout(Solution championnat, Operateur o, Integer valcDelta) {
-        //TODO tchequer contrainte inerante si oui renvoyer max integer
         if(o instanceof OperateurInsertion){
 
             if(championnat.getCoefContraintes().get(this)+valcDelta>max){

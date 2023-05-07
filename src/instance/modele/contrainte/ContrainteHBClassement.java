@@ -151,9 +151,7 @@ public class ContrainteHBClassement extends Contrainte{
 
     @Override
     public int evalDeltaCout(Solution championnat, Operateur o, Integer valcDelta) {
-        //TODO tchequer contrainte inerante si oui renvoyer max integer
         if(o instanceof OperateurInsertion){
-
             if(championnat.getCoefContraintes().get(this)+valcDelta>max){
                 if (estDure()) return Integer.MAX_VALUE;
                 //au dela du max le cout suit une relation lineaire le deltat cout est donc proportionel
