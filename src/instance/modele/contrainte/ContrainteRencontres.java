@@ -24,7 +24,7 @@ public class ContrainteRencontres extends Contrainte{
         super();
         this.journees = new TreeSet<>();
         this.rencontres = new TreeSet<>();
-        this.min = max;
+        this.min = min;
         this.max = max;
         this.penalite = Integer.MAX_VALUE;
     }
@@ -33,7 +33,7 @@ public class ContrainteRencontres extends Contrainte{
         super(penalite);
         this.journees = new TreeSet<>();
         this.rencontres = new TreeSet<>();
-        this.min = max;
+        this.min = min;
         this.max = max;
     }
 
@@ -65,7 +65,6 @@ public class ContrainteRencontres extends Contrainte{
     public int getCoutTotal(Solution championnat) {
         //le nombre de rencontres jouées par l’équipe de la contrainte selon un mode sur l’ensemble des journées
         int valc=0;
-
         //pour toutes les journees concernées par la contrainte
         for (String rencontre : this.rencontres) {
             valc += parcoursJournees(championnat, rencontre);
@@ -80,10 +79,15 @@ public class ContrainteRencontres extends Contrainte{
 
     @Override
     public int evalDeltaCoef(Solution championnat, Operateur o) {
+        // TODO: passage 2x dans la méthode c'est normal ??? Faites le test avec System.out.println()
         int valcDelta=0;
         if(o instanceof OperateurInsertion) {
-            Rencontre r = o.getRencontre();
-            valcDelta = parcoursJournees(championnat, r.getLabel());
+            /*Rencontre r = o.getRencontre();
+            valcDelta = parcoursJournees(championnat, r.getLabel());*/
+            System.out.println(this.rencontres.contains(o.getRencontre().getLabel()));
+            if(this.journees.contains(o.getJournee().getId()) && this.rencontres.contains(o.getRencontre().getLabel())) {
+                valcDelta = 1;
+            }
         }
         return valcDelta;
     }
@@ -99,7 +103,7 @@ public class ContrainteRencontres extends Contrainte{
 
             for (Integer jID : this.journees) {
                 //si la journee courante contient la rencontre
-                if (jID != null && championnat.getJourneeByID(jID).getRencontres().containsKey(r)) { // inutile ?? -------> && championnat.getJournees().equals(jID)
+                if (jID != null && championnat.getJourneeByID(jID).getRencontres().containsKey(r)) { // TODO enlever inutile ?? -------> && championnat.getJournees().equals(jID)
                     valcDelta++;
                 }
             }

@@ -190,8 +190,8 @@ public class Solution {
     public Journee getJourneeRencontreByEquipes(int eDomicile,int eExterne){
         return this.rencontres.get(getIDRencontre(eDomicile,eExterne)).getJournee();
     }
-    public boolean isRJPresent(int jId,Rencontre r){
-        return  this.journees.get(jId).isPresent(r);
+    public boolean isRJPresent(int jId, Rencontre r){
+        return this.journees.get(jId).isPresent(r);
     }
 
     /*public boolean isRJPresent(int jId,String rID){
