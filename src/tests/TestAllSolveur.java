@@ -161,6 +161,7 @@ public class TestAllSolveur {
             // TO CHECK : resolution de l'instance avec le solveur
             Solution sol = solveur.solve(inst);
             long time = System.currentTimeMillis() - start;
+            sol.writeSolution(solveur.getNom());
             // TO CHECK : recperer le cout total de la solution, et savoir si
             // la solution est valide
             Resultat result = new Resultat(sol.getCoutTotal(), time, sol.check());
