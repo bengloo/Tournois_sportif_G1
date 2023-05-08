@@ -5,6 +5,8 @@ import operateur.OperateurInsertion;
 import solution.Rencontre;
 import solution.Solution;
 
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.TreeSet;
 
 /** classe définissant ContrainteEquite (hérite de Contrainte)
@@ -66,16 +68,36 @@ public class ContrainteEquite extends Contrainte {
 
     @Override
     public int evalDeltaCoef(Solution championnat, Operateur o) {
-        int valcDelta=0;
+        //TreeMap<Integer, Integer> valcDelta = new TreeMap<>();
+        int valcDelta = 0;
+        // int diff, totalDiff = 0;
+
         if(o instanceof OperateurInsertion) {
-            Rencontre r = o.getRencontre();
-            valcDelta = parcoursJournees(championnat, r);
+            // NOTRE ANCIEN CODE
+            /*Rencontre r = o.getRencontre();
+            valcDelta = parcoursJournees(championnat, r);*/
+
+            // A chaque fois qu'une des équipes de la contrainte joue sur une de ses journées
+            if (this.equipes.contains(o.getRencontre().getDomicile().getId()) && this.journees.contains(o.getJournee().getId())) {
+                //valcDelta.put(o.getRencontre().getDomicile().getId(),1);
+                valcDelta = 1;
+            }
+
+            /*for (Integer e : this.equipes) {
+                //System.out.println("Test e & e+1 valeurs non nulles : " + valcDelta.get(e) != null && valcDelta.get(e+1) != null);
+                if (valcDelta.get(e) != null && valcDelta.get(e+1) != null) {
+                    diff = Math.abs(valcDelta.get(e) - valcDelta.get(e+1));
+                    totalDiff += diff;
+                }
+            }*/
         }
+        /*System.out.println("valcDelta.get(0) = "+valcDelta.get(0));
+        System.out.println("valcDelta.get(1) = "+valcDelta.get(1));*/
         return valcDelta;
     }
 
     /**
-     * Parcourt les journées pour chaque équipe de la contrainte, afin de déterminer les écarts de rencontre à domicile ou en extérieur
+     * Parcourt les journées pour chaque équipe de la contrainte, afin de déterminer les écarts de rencontre à domicile
      * @param championnat la solution
      * @param r la rencontre concernée
      * @return la différence entre le maximum rencontré et le minimum rencontré de rencontres à domicile
