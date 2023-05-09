@@ -84,7 +84,7 @@ public class ContraintePlacement extends Contrainte{
     public int evalDeltaCoef(Solution championnat, Operateur o) {
         int valcDelta=0;
         if(o instanceof OperateurInsertion) {
-            if(this.journees.contains(o.getJournee().getId())&&o.getRencontre().isConcerne(championnat.getEquipeByID(equipe),mode)) {
+            if(this.journees.contains(o.getJournee().getId()) && o.getRencontre().isConcerne(championnat.getEquipeByID(equipe),mode)) {
                 valcDelta = 1;
             }
         }
@@ -100,7 +100,7 @@ public class ContraintePlacement extends Contrainte{
     private int parcoursJournees(Solution championnat, Rencontre r) { //Factorisation du code
         int valcDelta=0;
         for (Integer jID : this.journees) {
-            if(r.isConcerne(championnat.getEquipes().get(this.equipe), this.mode)&&championnat.isRJPresent(jID,r)) {
+            if(r.isConcerne(championnat.getEquipes().get(this.equipe), this.mode) && championnat.isRJPresent(jID,r)) {
                 System.out.println("deltacoef++ evaldeltacoef coef:"+valcDelta);
                 valcDelta++;
             }

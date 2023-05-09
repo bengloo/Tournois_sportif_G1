@@ -69,7 +69,7 @@ public class ContraintePauseEquipe extends Contrainte{
 
         if(valc > this.max) {
             if (estDure()) return Integer.MAX_VALUE;
-            return this.penalite * (valc-this.max);
+            return (this.penalite * valc-this.max);
         }
         return 0;
     }
@@ -92,7 +92,14 @@ public class ContraintePauseEquipe extends Contrainte{
                 if(r.isConcerne(championnat.getEquipes().get(this.equipe), TypeMode.INDEFINI)) {
                     rEquipe = r;
                 }
-                valcDelta = this.traitementModes(championnat, j, rEquipe);
+                //valcDelta = this.traitementModes(championnat, j, rEquipe);
+                // TODO: marche pas si l'équipe joue 2 jours de suite dans des modes différents (erreur mémorisation de lastMode dans traitementModes)
+                if (this.journees.contains(o.getJournee().getId()) &&
+                        this.journees.contains(o.getJournee().getId() - 1) &&
+                        o.getRencontre().isConcerne(championnat.getEquipeByID(equipe),mode)) {
+                    //valcDelta = 1;
+                    valcDelta = this.traitementModes(championnat, j, rEquipe);
+                }
             }
         }
         return valcDelta;
@@ -103,13 +110,18 @@ public class ContraintePauseEquipe extends Contrainte{
         TypeMode lastMode = null, currentMode = null;
 
         if (rEquipe != null) {
-            if (rEquipe.isConcerne(championnat.getEquipes().get(this.equipe), this.mode) && championnat.isRJPresent(journee - 1, rEquipe)) {
+            //if (rEquipe.isConcerne(championnat.getEquipeByID(this.equipe), this.mode) && championnat.isRJPresent(journee - 1, rEquipe)) {
+            if (rEquipe.isConcerne(championnat.getEquipes().get(this.equipe), this.mode) && this.journees.contains(journee - 1)) {
                 lastMode = this.mode;
             }
-            if (rEquipe.isConcerne(championnat.getEquipes().get(this.equipe), this.mode) && championnat.isRJPresent(journee, rEquipe)) {
+            //if (rEquipe.isConcerne(championnat.getEquipeByID(this.equipe), this.mode) && championnat.isRJPresent(journee, rEquipe)) {
+            if (rEquipe.isConcerne(championnat.getEquipes().get(this.equipe), this.mode) && this.journees.contains(journee)) {
                 currentMode = this.mode;
             }
-            if (lastMode.equals(currentMode) && (lastMode != null || currentMode != null)) {
+            System.out.println("lastMode = "+lastMode);
+            System.out.println("currentMode = "+currentMode);
+            //if ((lastMode != null || currentMode != null) && lastMode.equals(currentMode)) {
+            if ((lastMode != null || currentMode != null) && lastMode == currentMode) {
                 valc++;
             }
         }
@@ -126,7 +138,6 @@ public class ContraintePauseEquipe extends Contrainte{
     @Override
     public int evalDeltaCout(Solution championnat, Operateur o, Integer valcDelta) {
         if(o instanceof OperateurInsertion){
-
             if(championnat.getCoefContraintes().get(this)+valcDelta>max){
                 if (estDure()) return Integer.MAX_VALUE;
                 //au dela du max le cout suit une relation lineaire le deltat cout est donc proportionel

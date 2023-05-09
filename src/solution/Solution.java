@@ -424,7 +424,7 @@ public class Solution {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Championat{\n");
+        sb.append("Championnat{\n");
         sb.append("\tInstance=").append(getInstance().getNom()).append("\n");
         sb.append("\tequipes=").append(equipes.values()).append("\n");
         sb.append("\trencontres=").append(rencontres.values()).append("\n");
