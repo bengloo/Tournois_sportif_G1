@@ -2,6 +2,7 @@ package instance.modele.contrainte;
 
 import operateur.Operateur;
 import operateur.OperateurInsertion;
+import solution.Journee;
 import solution.Solution;
 import solution.Rencontre;
 
@@ -81,6 +82,7 @@ public class ContraintePauseEquipe extends Contrainte{
 
         if(o instanceof OperateurInsertion) {
             //coef=0 //(nombre de pause compté )
+            //Pour chaque équipe de la rencontre (donc deux équipes):
             //si equipe operation != equipe contrainte && journne opertion nest pas dans journees contrainte
                 //return 0
             //curentMode = mode du match de l'equipe de la contrainte au jour j de l'insertion
@@ -129,7 +131,7 @@ public class ContraintePauseEquipe extends Contrainte{
                 coeff = this.traitementModes(championnat, j, rEquipe);
             }*/
         }
-        return valcDelta;
+        return coeff;
     }
 
     private int traitementModes(Solution championnat, Integer journee, Rencontre rEquipe) {
@@ -154,6 +156,16 @@ public class ContraintePauseEquipe extends Contrainte{
         }
         return valc;
     }
+
+
+    private Journee nextJournee(Solution championnat, Journee journee){
+        return championnat.getJourneeByID(journee.getId()+1);
+    }
+
+    private Journee precJournee(Solution championnat, Journee journee){
+        return championnat.getJourneeByID(journee.getId()-1);
+    }
+
 
     @Override
     public int evalDeltaCout(Solution championnat, Operateur o) {
