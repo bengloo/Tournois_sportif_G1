@@ -24,9 +24,9 @@ public class Rencontre {
 
     /**
      *
-     * @param e équipeciblé
+     * @param e équipe ciblée
      * @param mode mode ciblé
-     * @return un bolean indiquant si l'équipe ciblé fait partie de la rencontre est dans le mode précisé
+     * @return un bolean indiquant si l'équipe ciblée fait partie de la rencontre dans le mode précisé
      */
     public boolean isConcerne(Equipe e, TypeMode mode){
         switch (mode) {
@@ -38,6 +38,22 @@ public class Rencontre {
                 return this.domicile.equals(e)||this.exterieur.equals(e);
             default:
                 return false;
+        }
+    }
+
+    public TypeMode getModeEquipe(Equipe e) {
+        if (this.isConcerne(e, TypeMode.DOMICILE)) {
+            return TypeMode.DOMICILE;
+        } else {
+            return TypeMode.EXTERIEUR;
+        }
+    }
+
+    public TypeMode getModeEquipe(Journee j, Equipe e) {
+        if (j.getRencontres().get(this).isConcerne(e, TypeMode.DOMICILE)) {
+            return TypeMode.DOMICILE;
+        } else {
+            return TypeMode.EXTERIEUR;
         }
     }
 

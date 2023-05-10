@@ -76,7 +76,9 @@ public class ContraintePauseEquipe extends Contrainte{
 
     @Override
     public int evalDeltaCoef(Solution championnat, Operateur o) {
-        int valcDelta = 0;
+        int coeff = 0;
+        TypeMode currentMode, nextMode, lastMode;
+
         if(o instanceof OperateurInsertion) {
             //coef=0 //(nombre de pause compté )
             //si equipe operation != equipe contrainte && journne opertion nest pas dans journees contrainte
@@ -84,8 +86,8 @@ public class ContraintePauseEquipe extends Contrainte{
             //curentMode = mode du match de l'equipe de la contrainte au jour j de l'insertion
             //if j+1 est dans l'ensemble contraintes.journees
                 //pour j la journee d'insertion de la rencontre à j+1
-                    //nextMode = mode du match de l'equipe de la contrainte au j-1 (null si n'existe pas)
-                    //si lastMode == currentMode
+                    //nextMode = mode du match de l'equipe de la contrainte au j+1 (null si n'existe pas)
+                    //si nextMode == currentMode
                         //coef++
             //if j-1 est dans l'ensemble contraintes.journees
                 //pour j la journee d'insertion de la rencontre à j-1
@@ -94,21 +96,38 @@ public class ContraintePauseEquipe extends Contrainte{
                         //coef++
             //appliqué la fonction objective
 
-            for (Integer j : this.journees) {
-                Rencontre rEquipe = null;
-                Rencontre r = o.getRencontre();
-                if(r.isConcerne(championnat.getEquipes().get(this.equipe), TypeMode.INDEFINI)) {
-                    rEquipe = r;
-                }
-                //valcDelta = this.traitementModes(championnat, j, rEquipe);
-                // TODO: marche pas si l'équipe joue 2 jours de suite dans des modes différents (erreur mémorisation de lastMode dans traitementModes)
-                if (this.journees.contains(o.getJournee().getId()) &&
-                        this.journees.contains(o.getJournee().getId() - 1) &&
-                        o.getRencontre().isConcerne(championnat.getEquipeByID(equipe),mode)) {
-                    //valcDelta = 1;
-                    valcDelta = this.traitementModes(championnat, j, rEquipe);
+            if ((o.getRencontre().getDomicile() != championnat.getEquipes().get(this.equipe) && o.getRencontre().getExterieur() != championnat.getEquipes().get(this.equipe)) || !this.journees.contains(o.getJournee().getId()) || !this.mode.equals(o.getRencontre().getModeEquipe(championnat.getEquipes().get(this.equipe)))) {
+                return 0;
+            }
+            currentMode = this.mode;
+
+            if (this.journees.contains(this.nextJournee(championnat, o.getJournee()))) {
+                nextMode = o.getRencontre().getModeEquipe(this.nextJournee(championnat, o.getJournee()), championnat.getEquipes().get(this.equipe));
+                if (nextMode.equals(currentMode)) {
+                    coeff++;
                 }
             }
+
+            if (this.journees.contains(this.precJournee(championnat, o.getJournee()))) {
+                lastMode = o.getRencontre().getModeEquipe(this.precJournee(championnat, o.getJournee()), championnat.getEquipes().get(this.equipe));
+                if (lastMode.equals(currentMode)) {
+                    coeff++;
+                }
+            }
+
+            /*Rencontre rEquipe = null;
+            Rencontre r = o.getRencontre();
+            if(r.isConcerne(championnat.getEquipes().get(this.equipe), TypeMode.INDEFINI)) {
+                rEquipe = r;
+            }
+            //valcDelta = this.traitementModes(championnat, j, rEquipe);
+            // TODO: marche pas si l'équipe joue 2 jours de suite dans des modes différents (erreur mémorisation de lastMode dans traitementModes)
+            if (this.journees.contains(o.getJournee().getId()) &&
+                    this.journees.contains(o.getJournee().getId() - 1) &&
+                    o.getRencontre().isConcerne(championnat.getEquipeByID(equipe),mode)) {
+                //valcDelta = 1;
+                coeff = this.traitementModes(championnat, j, rEquipe);
+            }*/
         }
         return valcDelta;
     }
