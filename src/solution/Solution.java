@@ -24,9 +24,9 @@ public class Solution {
     private Map<Integer, Journee> journees;
     private Map<String, Rencontre> rencontres;
     private Map<Integer, Equipe> equipes;
-    //update Journee.addRencontre
     private Integer coutTotal;
     private Map<Contrainte,Integer> coefContraintes;
+    private Map<Contrainte, Map<Integer,Integer>> coefContraintesEquite;
 
     public Solution(Instance instance) {
         this.instance = instance;
@@ -57,9 +57,17 @@ public class Solution {
 
         //le calcule du cout total par contrainte n'est par continus vis à vias des coef de la contrainte comme valc
         this.coefContraintes = new HashMap<>();
+        this.coefContraintesEquite = new HashMap<>();
         for(TypeContrainte type:TypeContrainte.values()) {
             for (Contrainte contrainte : instance.getContraintes(type)){
-                this.coefContraintes.put(contrainte,0);
+                if(contrainte instanceof ContrainteEquite){
+                    this.coefContraintesEquite.put(contrainte,new HashMap<>());//Integer par default
+                    for(int e:((ContrainteEquite) contrainte).getEquipes()){
+                       this.coefContraintesEquite.get(contrainte).put(e,0);
+                    }
+                }else{
+                    this.coefContraintes.put(contrainte,0);
+                }
             }
         }
     }
@@ -276,10 +284,6 @@ public class Solution {
         return this.rencontres.get(r.getLabelRetour());
     }
 
-    /*
-    * check quantiativement les journee et rencontre creer
-    * */
-
     /**
      * Méthode permettant d'ajouter le coeff du coût de la contrainte au coût total de la solution
      * @param c la contrainte en question
@@ -288,7 +292,7 @@ public class Solution {
      */
     public void addCoefCoutContrainte(Contrainte c,Integer deltaCoef,Integer deltaCout){
         //update du coef contrainte
-        System.out.println("Deltacoef pour cette insert"+deltaCoef);
+        //System.out.println("Deltacoef pour cette insert"+deltaCoef);
         coefContraintes.put(c,coefContraintes.get(c)+deltaCoef);
         //update du cout contrainte
         coutTotal+=deltaCout;

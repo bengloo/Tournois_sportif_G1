@@ -79,12 +79,20 @@ public class ContraintePauseEquipe extends Contrainte{
         int valcDelta = 0;
         if(o instanceof OperateurInsertion) {
             //coef=0 //(nombre de pause compté )
-            //pour j la journee d'insertion de la rencontre à j+1
-            //lastMode = mode du match de l'equipe de la contrainte au j-1 (null si n'existe pas)
-            //curentMode = mode du match de l'equipe de la contrainte au jour j (un truc diferant de null si n'existe pas)
-            //si lastMode == currentMode
-            //coef++
-            //apliqué la fonction objective
+            //si equipe operation != equipe contrainte && journne opertion nest pas dans journees contrainte
+                //return 0
+            //curentMode = mode du match de l'equipe de la contrainte au jour j de l'insertion
+            //if j+1 est dans l'ensemble contraintes.journees
+                //pour j la journee d'insertion de la rencontre à j+1
+                    //nextMode = mode du match de l'equipe de la contrainte au j-1 (null si n'existe pas)
+                    //si lastMode == currentMode
+                        //coef++
+            //if j-1 est dans l'ensemble contraintes.journees
+                //pour j la journee d'insertion de la rencontre à j-1
+                    //lastMode = mode du match de l'equipe de la contrainte au j-1 (null si n'existe pas)
+                    //si lastMode == currentMode
+                        //coef++
+            //appliqué la fonction objective
 
             for (Integer j : this.journees) {
                 Rencontre rEquipe = null;

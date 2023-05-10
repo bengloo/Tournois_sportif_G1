@@ -96,6 +96,10 @@ public class ContrainteEquite extends Contrainte {
         return valcDelta;
     }
 
+    public TreeSet<Integer> getEquipes() {
+        return equipes;
+    }
+
     /**
      * Parcourt les journées pour chaque équipe de la contrainte, afin de déterminer les écarts de rencontre à domicile
      * @param championnat la solution
