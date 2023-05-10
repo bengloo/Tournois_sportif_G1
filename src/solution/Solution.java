@@ -31,19 +31,19 @@ public class Solution {
     public Solution(Instance instance) {
         this.instance = instance;
 
-        //on pouras faire des operation par equipes
+        //on pourra faire des operation par equipes
         this.equipes =new HashMap<>();
         for(int id=0;id<getNBEquipe();id++){
             addEquipe(id);
         }
 
-        //on pouras faire des operation par journee
+        //on pourra faire des operation par journee
         this.journees =new HashMap<>();
         for(int id=0;id<getNbJournee();id++){
             addJournee(id);
         }
 
-        //on pouras faire des operation par rencontres
+        //on pourra faire des operation par rencontres
         this.rencontres =new HashMap<>();
         for(int id=0;id<getNBEquipe();id++){
             for(int idAdverse=0;idAdverse<getNBEquipe();idAdverse++){

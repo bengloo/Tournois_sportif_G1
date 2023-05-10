@@ -70,7 +70,7 @@ public abstract class Contrainte {
     public abstract int evalDeltaCout(Solution championnat, Operateur o, Integer deltaCoef);
 
     /**
-     * Indique si la contrainte conserve la viabilité de la solution (coût non égal à l'infini)
+     * Indique si la contrainte conserve la viabilité de la solution (coût non égale à l'infini)
      * @param championnat
      * @return true si la solution est faisable, false sinon
      */
