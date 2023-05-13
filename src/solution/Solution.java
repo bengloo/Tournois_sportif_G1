@@ -25,8 +25,8 @@ public class Solution {
     private Map<String, Rencontre> rencontres;
     private Map<Integer, Equipe> equipes;
     private Integer coutTotal;
-    private Map<Contrainte,Integer> coefContraintes;
-    private Map<Contrainte, Map<Integer,Integer>> coefContraintesEquite;
+    private Map<Contrainte,Object> coefContraintes;
+
 
     public Solution(Instance instance) {
         this.instance = instance;
@@ -57,13 +57,12 @@ public class Solution {
 
         //le calcule du cout total par contrainte n'est par continus vis à vias des coef de la contrainte comme valc
         this.coefContraintes = new HashMap<>();
-        this.coefContraintesEquite = new HashMap<>();
         for(TypeContrainte type:TypeContrainte.values()) {
             for (Contrainte contrainte : instance.getContraintes(type)){
                 if(contrainte instanceof ContrainteEquite){
-                    this.coefContraintesEquite.put(contrainte,new HashMap<>());//Integer par default
+                    this.coefContraintes.put(contrainte,new HashMap<>());//Integer par default
                     for(int e:((ContrainteEquite) contrainte).getEquipes()){
-                       this.coefContraintesEquite.get(contrainte).put(e,0);
+                        ((HashMap<Integer,Integer>)this.coefContraintes.get(contrainte)).put(e,0);
                     }
                 }else{
                     this.coefContraintes.put(contrainte,0);
@@ -150,7 +149,7 @@ public class Solution {
      * Méthode permettant de récupérer le coeff des contraintes de la solution
      * @return le tableau de l'ensemble des coeffs de contraintes
      */
-    public Map<Contrainte, Integer> getCoefContraintes() {
+    public Map<Contrainte, Object> getCoefContraintes() {
         return this.coefContraintes;
     }
 
@@ -290,10 +289,16 @@ public class Solution {
      * @param deltaCoef le delta du coeff
      * @param deltaCout le coût associé
      */
-    public void addCoefCoutContrainte(Contrainte c,Integer deltaCoef,Integer deltaCout){
+    public void addCoefCoutContrainte(Contrainte c,Object deltaCoef,Integer deltaCout){
         //update du coef contrainte
         //System.out.println("Deltacoef pour cette insert"+deltaCoef);
-        coefContraintes.put(c,coefContraintes.get(c)+deltaCoef);
+        if(c instanceof ContrainteEquite){
+            for(Integer e:((HashMap<Integer,Integer>)deltaCoef).keySet()){
+                ((HashMap<Integer,Integer>)coefContraintes.get(c)).put(e,((HashMap<Integer,Integer>)coefContraintes.get(c)).get(e)+((HashMap<Integer,Integer>)deltaCoef).get(e));
+            }
+        }else {
+            coefContraintes.put(c, (Integer)coefContraintes.get(c) + (Integer)deltaCoef);
+        }
         //update du cout contrainte
         coutTotal+=deltaCout;
     }

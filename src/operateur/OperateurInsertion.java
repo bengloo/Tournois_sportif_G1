@@ -9,6 +9,7 @@ import solution.Solution;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /** classe définissant OperateurInsertion (hérite de Operateur)
  * @author Engloo Benjamin
@@ -32,8 +33,8 @@ public class OperateurInsertion extends Operateur{
         if(!isRealisableInital())return Integer.MAX_VALUE;
         for(TypeContrainte type:TypeContrainte.values()){
             for(Contrainte c: getChampionnat().getContraintes(type)){
-                int deltaCoef = c.evalDeltaCoef(getChampionnat(),this);
-                if(deltaCoef!=0)deltaCout+=c.evalDeltaCout(getChampionnat(),this,deltaCoef);
+                Object deltaCoef = c.evalDeltaCoef(getChampionnat(),this);
+                if(isNotDelatcoefNull(type,deltaCoef))deltaCout+=c.evalDeltaCout(getChampionnat(),this,deltaCoef);
                 if(deltaCout==Integer.MAX_VALUE)return Integer.MAX_VALUE;
             }
         }
@@ -41,17 +42,33 @@ public class OperateurInsertion extends Operateur{
     }
 
     @Override
-    protected Map<Contrainte, Integer> evalDeltaCoefs() {
+    protected Map<Contrainte, Object> evalDeltaCoefs() {
         if(!isRealisableInital())return null;
-        Map<Contrainte, Integer> deltaCoefs = new HashMap<>();
+        Map<Contrainte, Object> deltaCoefs = new HashMap<>();
 
         for(TypeContrainte type:TypeContrainte.values()){
             for(Contrainte c: getChampionnat().getContraintes(type)){
-                int deltaCoef = c.evalDeltaCoef(getChampionnat(),this);
-                if(deltaCoef!=0)deltaCoefs.put(c,deltaCoef);
+                Object deltaCoef = c.evalDeltaCoef(getChampionnat(),this);
+                if(isNotDelatcoefNull(type,deltaCoef)){
+                    deltaCoefs.put(c,deltaCoef);
+                }
+
             }
         }
         return deltaCoefs;
+    }
+
+    protected boolean isNotDelatcoefNull(TypeContrainte type,Object deltaCoef){
+        if(type != TypeContrainte.EQUITE){
+            if((Integer) deltaCoef!=0){
+                return true;
+            }
+        }else{
+            if(((HashMap<Integer,Integer>)deltaCoef).size()!=0){
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -79,7 +96,7 @@ public class OperateurInsertion extends Operateur{
 
     @Override
     protected boolean doMouvement() {
-        Map<Contrainte, Integer> deltaCoefs= evalDeltaCoefs();
+        Map<Contrainte, Object> deltaCoefs= evalDeltaCoefs();
         //TODO y'a peut étre moyen de mieux parcour un hashmap à moindre temps
         //pour chaque contrainte impacté par l'operation
         for(Contrainte c:deltaCoefs.keySet()){

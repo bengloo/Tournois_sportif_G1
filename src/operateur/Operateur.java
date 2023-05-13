@@ -59,7 +59,7 @@ public abstract class Operateur {
 
     /**
      * Indique la somme des deltas de pénalité pour l'opération courante, sur toutes les contraintes du championnat
-     * @param deltaCoef
+     * @param
      * @return Max.INTEGER si deltaCoef est nul, la somme des deltas de pénalité sinon
      */
     protected abstract int evalDeltaCout();
@@ -68,7 +68,7 @@ public abstract class Operateur {
      * Ajoute dans un tableau tous les deltas du coeff de la fonction objective de toutes les contraintes du championnat
      * @return un tableau de deltaCoefs
      */
-    protected abstract Map<Contrainte,Integer> evalDeltaCoefs();
+    protected abstract Map<Contrainte,Object> evalDeltaCoefs();
 
     /**
      * ??? TODO: compléter (pas compris)

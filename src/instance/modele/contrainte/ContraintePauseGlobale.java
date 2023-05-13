@@ -83,7 +83,7 @@ public class ContraintePauseGlobale extends Contrainte{
     }
 
     @Override
-    public int evalDeltaCoef(Solution championnat, Operateur o) {
+    public Object evalDeltaCoef(Solution championnat, Operateur o) {
         int valcDelta=0;
         if(o instanceof OperateurInsertion) {
             for (Integer e : this.equipes) {
@@ -102,7 +102,7 @@ public class ContraintePauseGlobale extends Contrainte{
 
     /**
      * ???
-     * @param ...
+     * @param
      * @return ...
      */
     private int traitementModes(Solution championnat, Integer journee, Rencontre rEquipe) {
@@ -125,18 +125,18 @@ public class ContraintePauseGlobale extends Contrainte{
 
     @Override
     public int evalDeltaCout(Solution championnat, Operateur o) {
-        Integer valcDelta=evalDeltaCoef(championnat,o);
+        Integer valcDelta= (Integer) evalDeltaCoef(championnat,o);
         return evalDeltaCout(championnat, o, valcDelta);
     }
 
     @Override
-    public int evalDeltaCout(Solution championnat, Operateur o, Integer valcDelta) {
+    public int evalDeltaCout(Solution championnat, Operateur o, Object valcDelta) {
         if(o instanceof OperateurInsertion){
 
-            if(championnat.getCoefContraintes().get(this)+valcDelta>max){
+            if((Integer)championnat.getCoefContraintes().get(this)+(Integer) valcDelta>max){
                 if (estDure()) return Integer.MAX_VALUE;
                 //au dela du max le cout suit une relation lineaire le deltat cout est donc proportionel
-                return this.penalite *(valcDelta);
+                return this.penalite *((Integer)valcDelta);
             }else return 0;
         }
         //TODO d'autre operation implique d'autre cout

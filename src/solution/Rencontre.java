@@ -57,6 +57,19 @@ public class Rencontre {
         }
     }
 
+    public boolean isConcerne(int eid, TypeMode mode){
+        switch (mode) {
+            case DOMICILE:
+                return this.domicile.getId()==eid;
+            case EXTERIEUR:
+                return this.exterieur.getId()==eid;
+            case INDEFINI:
+                return this.domicile.getId()==eid||this.exterieur.getId()==eid;
+            default:
+                return false;
+        }
+    }
+
     /**
      * Indique l'équipe jouant en extérieur de la rencontre courante
      * @return l'ID de l'équipe en question

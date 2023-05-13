@@ -78,7 +78,7 @@ public class ContrainteRencontres extends Contrainte{
     }
 
     @Override
-    public int evalDeltaCoef(Solution championnat, Operateur o) {
+    public Object evalDeltaCoef(Solution championnat, Operateur o) {
         // TODO: passage 2x dans la méthode c'est normal ??? Faites le test avec System.out.println()
         int valcDelta=0;
         if(o instanceof OperateurInsertion) {
@@ -112,19 +112,19 @@ public class ContrainteRencontres extends Contrainte{
 
     @Override
     public int evalDeltaCout(Solution championnat, Operateur o) {
-        Integer valcDelta=evalDeltaCoef(championnat,o);
+        Integer valcDelta= (Integer) evalDeltaCoef(championnat,o);
         return evalDeltaCout(championnat, o, valcDelta);
     }
 
 
     @Override
-    public int evalDeltaCout(Solution championnat, Operateur o, Integer valcDelta) {
+    public int evalDeltaCout(Solution championnat, Operateur o, Object valcDelta) {
         if(o instanceof OperateurInsertion){
 
-            if(championnat.getCoefContraintes().get(this)+valcDelta>max || championnat.getCoefContraintes().get(this)+valcDelta < min){
+            if((Integer)championnat.getCoefContraintes().get(this)+(Integer) valcDelta>max || (Integer)championnat.getCoefContraintes().get(this)+ (Integer) valcDelta < min){
                 if (estDure()) return Integer.MAX_VALUE;
                 //au dela du max ou en-dessous du min le cout suit une relation lineaire le deltat cout est donc proportionel
-                return this.penalite *(valcDelta);
+                return this.penalite *((Integer)valcDelta);
             }else return 0;
         }
         //TODO d'autre operation implique d'autre cout

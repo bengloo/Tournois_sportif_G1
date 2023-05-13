@@ -2,6 +2,7 @@ package instance.modele.contrainte;
 
 import operateur.Operateur;
 import operateur.OperateurInsertion;
+import solution.Journee;
 import solution.Rencontre;
 import solution.Solution;
 
@@ -41,17 +42,17 @@ public class ContrainteSeparation extends Contrainte{
 
     @Override
     public int getCoutTotal(Solution championnat) {
-        int valc = 0;
-        Rencontre r2 = null;
-        LinkedList<Rencontre> rencontresEquipe = null;
-
-        for (Integer e1 : this.equipes) {
-            rencontresEquipe = championnat.getRencontresByEquipe(e1);
-
-            for (Rencontre r1 : rencontresEquipe) {
-                r2 = championnat.getMatchRetour(r1);
-                if (r1.getJournee() != null && r2.getJournee() != null && (r1.getJournee().getId() < r2.getJournee().getId() || (r1.getJournee().getId() == r2.getJournee().getId()) && r1.getLabel().compareTo(r2.getLabel()) > r2.getLabel().compareTo(r1.getLabel()))) {
-                    valc += Math.max(0, this.min - (r2.getJournee().getId() - r1.getJournee().getId() - 1));
+        int valc =0;
+        //pour tout les couple déquipes sans doublont
+        for (Integer equipe1 : equipes) {
+            for (Integer equipe2 : equipes) {
+                if (equipe1 < equipe2) {
+                   Journee j1=championnat.getRencontreByEquipes(equipe1,equipe2).getJournee();
+                    Journee j2=championnat.getRencontreByEquipes(equipe2,equipe1).getJournee();
+                    if(j1!=null && j2!=null){
+                        int separation= min - Math.abs(j1.getId()-j2.getId())-1;
+                        if(separation>0)valc+=separation;
+                    }
                 }
             }
         }
@@ -59,13 +60,15 @@ public class ContrainteSeparation extends Contrainte{
     }
 
     @Override
-    public int evalDeltaCoef(Solution championnat, Operateur o) {
-        if(o instanceof OperateurInsertion) {
-            Rencontre r2=championnat.getMatchRetour(o.getRencontre());
-            if(r2.getJournee()!=null){
-                return Math.max(0, this.min - (Math.abs(r2.getJournee().getId() - o.getJournee().getId()) - 1));
-            }else{
-                return 0;
+    public Object evalDeltaCoef(Solution championnat, Operateur o) {
+        if(this.equipes.contains(o.getRencontre().getDomicile().getId())&&this.equipes.contains(o.getRencontre().getExterieur().getId())){
+            Journee j1 = o.getJournee();
+            Journee j2 = championnat.getMatchRetour(o.getRencontre()).getJournee();
+            System.out.println(j1);
+            System.out.println(j2);
+            if (j2 != null) {
+                int separation = min - (Math.abs(j1.getId() - j2.getId()) - 1);
+                if (separation > 0) return separation;
             }
         }
         return 0;
@@ -73,15 +76,15 @@ public class ContrainteSeparation extends Contrainte{
 
     @Override
     public int evalDeltaCout(Solution championnat, Operateur o) {
-        Integer valcDelta=evalDeltaCoef(championnat,o);
+        Integer valcDelta=(Integer) evalDeltaCoef(championnat,o);
         return evalDeltaCout(championnat, o, valcDelta);
     }
 
     @Override
-    public int evalDeltaCout(Solution championnat, Operateur o, Integer valcDelta) {
+    public int evalDeltaCout(Solution championnat, Operateur o, Object valcDelta) {
         if(o instanceof OperateurInsertion){
             if (estDure()) return Integer.MAX_VALUE;
-            return this.penalite *(valcDelta);
+            return this.penalite *((Integer)valcDelta);
         }
         //TODO d'autre operation implique d'autre cout*/
         return 0;

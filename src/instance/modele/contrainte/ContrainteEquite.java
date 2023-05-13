@@ -5,9 +5,7 @@ import operateur.OperateurInsertion;
 import solution.Rencontre;
 import solution.Solution;
 
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.TreeSet;
+import java.util.*;
 
 /** classe définissant ContrainteEquite (hérite de Contrainte)
  * @author Engloo Benjamin
@@ -55,19 +53,35 @@ public class ContrainteEquite extends Contrainte {
     //TODO implementer les fonction de calcule de cout en sinspirent de la contrainte de placement, réflechire si on ne peux pas factoriser du code sout des fonction comune aux contraintes
     @Override
     public int getCoutTotal(Solution championnat) {
-        int valc=0;
-
-        //pour toutes les rencontres
-        for(Rencontre r:championnat.getRencontres().values()){
-            //pour toutes les équpes et journees concernées par la contrainte
-            valc += Math.max(0, parcoursJournees(championnat, r) - this.max);
+        //on calcule le nombre de rencontre a domicile pour les equipes de la contrainte sur les jour de la contrainte
+        HashMap<Integer,Integer> coefs=new HashMap<>();
+        for(int eid:this.equipes) {
+            coefs.put(eid, 0);
         }
-
-        return this.penalite * valc;
+        for(int jid:this.journees){
+            for(Rencontre r:championnat.getJourneeByID(jid).getRencontres().values()){
+                if(this.equipes.contains(r.getDomicile().getId())){
+                    coefs.put(r.getDomicile().getId(),coefs.get(r.getDomicile().getId())+1);
+                }
+            }
+        }
+        //on calcule les deltat de chaque paire d'equipe
+        int pena=0;
+        for(int e1:this.equipes){
+            for(int e2:this.equipes){
+                if(e1>e2){
+                    int valc= Math.abs(coefs.get(e1)-coefs.get(e2))-this.max;
+                    if(valc>0){
+                        pena+=this.penalite*valc;
+                    }
+                }
+            }
+        }
+        return pena;
     }
 
     @Override
-    public int evalDeltaCoef(Solution championnat, Operateur o) {
+    public Object evalDeltaCoef(Solution championnat, Operateur o) {
         //TreeMap<Integer, Integer> valcDelta = new TreeMap<>();
         int valcDelta = 0;
         // int diff, totalDiff = 0;
@@ -127,20 +141,12 @@ public class ContrainteEquite extends Contrainte {
 
     @Override
     public int evalDeltaCout(Solution championnat, Operateur o) {
-        Integer valcDelta=evalDeltaCoef(championnat,o);
+        Object valcDelta=evalDeltaCoef(championnat,o);
         return evalDeltaCout(championnat, o, valcDelta);
     }
 
     @Override
-    public int evalDeltaCout(Solution championnat, Operateur o, Integer valcDelta) {
-        if(o instanceof OperateurInsertion){
-
-            if(championnat.getCoefContraintes().get(this)+valcDelta>max){
-                if (estDure()) return Integer.MAX_VALUE;
-                //au dela du max le cout suit une relation lineaire le deltat cout est donc proportionel
-                return this.penalite *(valcDelta);
-            }else return 0;
-        }
+    public int evalDeltaCout(Solution championnat, Operateur o, Object valcDelta) {
         //TODO d'autre operation implique d'autre cout
         return 0;
     }

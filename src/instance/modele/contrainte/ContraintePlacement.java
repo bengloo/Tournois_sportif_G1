@@ -5,6 +5,7 @@ import operateur.Operateur;
 import solution.Solution;
 import solution.Rencontre;
 
+import java.util.Objects;
 import java.util.TreeSet;
 
 /** classe définissant ContraintePlacement (hérite de Contrainte)
@@ -81,8 +82,8 @@ public class ContraintePlacement extends Contrainte{
     }
 
     @Override
-    public int evalDeltaCoef(Solution championnat, Operateur o) {
-        int valcDelta=0;
+    public Object evalDeltaCoef(Solution championnat, Operateur o) {
+        Integer valcDelta=0;
         if(o instanceof OperateurInsertion) {
             if(this.journees.contains(o.getJournee().getId()) && o.getRencontre().isConcerne(championnat.getEquipeByID(equipe),mode)) {
                 valcDelta = 1;
@@ -110,20 +111,20 @@ public class ContraintePlacement extends Contrainte{
 
     @Override
     public int evalDeltaCout(Solution championnat, Operateur o) {
-        Integer valcDelta=evalDeltaCoef(championnat,o);
+        Integer valcDelta= (Integer) evalDeltaCoef(championnat,o);
         return evalDeltaCout(championnat, o, valcDelta);
     }
 
     @Override
-    public int evalDeltaCout(Solution championnat, Operateur o, Integer valcDelta) {
+    public int evalDeltaCout(Solution championnat, Operateur o, Object valcDelta) {
         if(o instanceof OperateurInsertion){
 
-            if(championnat.getCoefContraintes().get(this)+valcDelta>max){
+            if((Integer)championnat.getCoefContraintes().get(this)+(Integer) valcDelta>max){
                 if (estDure()){
                     return Integer.MAX_VALUE;
                 };
                 //au dela du max le cout suit une relation lineaire le deltat cout est donc proportionel
-                return this.penalite *(valcDelta);
+                return this.penalite *((Integer)valcDelta);
             }else return 0;
         }
         //TODO d'autre operation implique d'autre cout

@@ -1,5 +1,5 @@
 // Nom
-contrainte placement 4 equipe
+Contrainte separation 4 equipe
 
 // Nombre d'equipes
 4
@@ -51,9 +51,8 @@ contrainte placement 4 equipe
 
 // Contraintes de pause par equipe
 // Nombre
-1
+0
 // Contraintes
-equipe=0	jours=0;1;2;3	mode=E	max=1	penalite=1
 
 // Contraintes de pause globale
 // Nombre
@@ -64,8 +63,10 @@ equipe=0	jours=0;1;2;3	mode=E	max=1	penalite=1
 // Nombre
 0
 // Contraintes
+0
 
 // Contraintes de separation
 // Nombre
-0
+1
 // Contraintes
+equipes=0;1	min=3	penalite=1
