@@ -2,6 +2,7 @@ package instance.modele.contrainte;
 
 import operateur.Operateur;
 import operateur.OperateurInsertion;
+import solution.Equipe;
 import solution.Rencontre;
 import solution.Solution;
 
@@ -82,61 +83,19 @@ public class ContrainteEquite extends Contrainte {
 
     @Override
     public Object evalDeltaCoef(Solution championnat, Operateur o) {
-        //TreeMap<Integer, Integer> valcDelta = new TreeMap<>();
-        int valcDelta = 0;
-        // int diff, totalDiff = 0;
+        HashMap<Integer,Integer> valcDelta =new HashMap<>();
 
         if(o instanceof OperateurInsertion) {
-            // NOTRE ANCIEN CODE
-            /*Rencontre r = o.getRencontre();
-            valcDelta = parcoursJournees(championnat, r);*/
-
-            // A chaque fois qu'une des équipes de la contrainte joue sur une de ses journées
-            if (this.equipes.contains(o.getRencontre().getDomicile().getId()) && this.journees.contains(o.getJournee().getId())) {
-                //valcDelta.put(o.getRencontre().getDomicile().getId(),1);
-                valcDelta = 1;
+            if(this.journees.contains(o.getJournee().getId())&&this.equipes.contains(o.getRencontre().getDomicile().getId())){
+                valcDelta.put(o.getRencontre().getDomicile().getId(),1);
             }
-
-            /*for (Integer e : this.equipes) {
-                //System.out.println("Test e & e+1 valeurs non nulles : " + valcDelta.get(e) != null && valcDelta.get(e+1) != null);
-                if (valcDelta.get(e) != null && valcDelta.get(e+1) != null) {
-                    diff = Math.abs(valcDelta.get(e) - valcDelta.get(e+1));
-                    totalDiff += diff;
-                }
-            }*/
         }
-        /*System.out.println("valcDelta.get(0) = "+valcDelta.get(0));
-        System.out.println("valcDelta.get(1) = "+valcDelta.get(1));*/
+
         return valcDelta;
     }
 
     public TreeSet<Integer> getEquipes() {
         return equipes;
-    }
-
-    /**
-     * Parcourt les journées pour chaque équipe de la contrainte, afin de déterminer les écarts de rencontre à domicile
-     * @param championnat la solution
-     * @param r la rencontre concernée
-     * @return la différence entre le maximum rencontré et le minimum rencontré de rencontres à domicile
-     */
-    private int parcoursJournees(Solution championnat, Rencontre r) { //Factorisation du code
-        int maxDomicile=0;
-        int minDomicile=Integer.MAX_VALUE;
-        int flag;
-
-        for (Integer eID : this.equipes) {
-            flag=0;
-            for (Integer jID : this.journees) {
-                //si notre équipe courante joue à domicile sur cette rencontre et que la journee courante contient la rencontre
-                if (jID != null && r.getDomicile().equals(eID) && championnat.getJournees().get(jID).getRencontres().containsKey(r)) {
-                    flag++;
-                }
-            }
-            if (flag > maxDomicile) maxDomicile = flag;
-            if (flag < minDomicile) minDomicile = flag;
-        }
-        return (maxDomicile-minDomicile);
     }
 
     @Override
@@ -147,8 +106,25 @@ public class ContrainteEquite extends Contrainte {
 
     @Override
     public int evalDeltaCout(Solution championnat, Operateur o, Object valcDelta) {
-        //TODO d'autre operation implique d'autre cout
-        return 0;
+        int deltaCout=0;
+        for(Integer e1:((HashMap<Integer,Integer>)valcDelta).keySet()){
+            for(Integer e2:this.equipes){
+                if(e1!=e2){
+                    deltaCout += deltatDomicile(championnat.getCoefEquite(this, e1)+this.getDelatCoef(valcDelta,e1), championnat.getCoefEquite(this, e2)+this.getDelatCoef(valcDelta,e2));
+                    deltaCout -= deltatDomicile(championnat.getCoefEquite(this, e1), championnat.getCoefEquite(this, e2));
+                }
+            }
+        }
+        return deltaCout;
+    }
+    private int getDelatCoef(Object valcDelta,Integer equipe){
+        Integer val= ((HashMap<Integer,Integer>)valcDelta).get(equipe);
+        if(val==null)return 0;
+        return val;
+    }
+
+    private int deltatDomicile(int coefe1,int coefe2){
+        return Math.max(0,Math.abs(coefe1-coefe2)-this.max);
     }
 
     @Override

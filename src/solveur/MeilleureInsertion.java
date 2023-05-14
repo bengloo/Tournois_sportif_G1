@@ -1,6 +1,8 @@
 package solveur;
 
 import instance.Instance;
+import operateur.OperateurInsertion;
+import solution.Rencontre;
 import solution.Solution;
 
 /** classe définissant MeilleureInsertion (implémentant l'interface Solveur)
@@ -18,7 +20,17 @@ public class MeilleureInsertion implements Solveur{
 
     @Override
     public Solution solve(Instance instance) {
-        //TODO inserre sucessivement les meilleur Insertion
-        return null;
+        Solution solution = new Solution(instance);
+        for(Rencontre r:solution.getRencontres().values()){
+            System.out.println(solution);
+            OperateurInsertion o= solution.getMeilleureInsertion(r);
+            if(o==null){
+                return solution;//la meilleur simple peux ammener à une situation bloquante on transmet alor la solution incomplete
+            }else{
+                o.doMouvementIfRealisable();
+            }
+        }
+        if(!solution.check()) return null;
+        return solution;
     }
 }

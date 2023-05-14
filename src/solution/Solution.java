@@ -3,6 +3,8 @@ package solution;
 import instance.Instance;
 import instance.modele.contrainte.*;
 import operateur.OperateurInsertion;
+import operateur.OperateurLocal;
+import operateur.TypeOperateurLocal;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -69,6 +71,18 @@ public class Solution {
                 }
             }
         }
+    }
+
+    public Solution(Solution sol){
+        //TODO constructeur par copie
+            //l'instance et l'equipe sont referé par adresse
+            //le reste doit étre copié entierrement
+                //TODO faire des constructeur par copie de journne et rencontre
+    }
+
+    public boolean isMeilleure(Solution sol){
+        if(sol==null)return true;
+        return sol.getCoutTotal()>this.getCoutTotal();
     }
 
     /**
@@ -303,6 +317,14 @@ public class Solution {
         coutTotal+=deltaCout;
     }
 
+    public Integer getCoefEquite(Contrainte c,Integer equipe){
+        return ( ((HashMap<Integer,Integer>)coefContraintes.get(c)).get(equipe));
+    }
+
+    public void addCoefEquite(Contrainte c,Integer equipe,Integer deltatCoef){
+        ((HashMap<Integer,Integer>)coefContraintes.get(c)).put(equipe,((HashMap<Integer,Integer>)coefContraintes.get(c)).get(equipe)+deltatCoef);
+    }
+
     /**
      * Méthode permettant de vérifier la faisabilité de l'entièreté de la solution (avec les contraintes + planning)
      * @return true si la solution est réalisable, false sinon
@@ -428,6 +450,22 @@ public class Solution {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public boolean doMouvementRechercheLocale(OperateurLocal infos){
+        if(infos==null||!infos.doMouvementIfRealisable())return false;
+        this.coutTotal+= infos.getDeltaCout();
+        if(!this.check()) {
+            System.out.println(infos);
+            System.out.println(this);
+            System.exit(-1);
+        }
+        return true;
+    }
+    public OperateurLocal getMeilleureOperateurLocal(TypeOperateurLocal type){
+        OperateurLocal best = OperateurLocal.getOperateurLocal(type);
+        //TODO
+        return best;
     }
 
     @Override

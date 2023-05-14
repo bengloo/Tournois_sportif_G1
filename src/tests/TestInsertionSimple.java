@@ -20,7 +20,7 @@ public class TestInsertionSimple {
         //String path="instances/instance_test_ContraintePlacement_4Equipe.txt";
         //String path="instances/instance_test_ContrainteHBClassement_4Equipes.txt";
         //String path="instances/instance_test_ContrainteRencontres_4Equipes.txt";
-        String path="instances/instance_test_ContrainteSepartion_4Equipes.txt";
+        String path="instances/instance_test_ContrainteEquite_4Equipes.txt";
         try {
             InstanceReader reader = new InstanceReader(path);
             Instance i= reader.readInstance();

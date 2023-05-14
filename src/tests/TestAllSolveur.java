@@ -12,6 +12,7 @@ import io.InstanceReader;
 import io.exception.ReaderException;
 import solution.Solution;
 import solveur.InsertionSimple;
+import solveur.MeilleureInsertion;
 import solveur.Solveur;
 import java.io.File;
 import java.io.IOException;
@@ -84,6 +85,7 @@ public class TestAllSolveur {
         // TO CHECK : constructeur par defaut de la classe InsertionSimple
 
         solveurs.add(new InsertionSimple());
+        solveurs.add(new MeilleureInsertion());
         // TO ADD : par la suite vous ajouterez ici les autres solveurs a tester
         // solveurs.add(new AutreSolveurATester());
     }
