@@ -503,19 +503,27 @@ public class Solution {
 
     public void updateMageJournee(OperateurInsertion o){
         for(int i=0;0<getNBEquipe();i++){
+
+
+            //pour toute les rencontre ayant la même equipe domicile
             if(i!=o.getRencontre().getDomicile().getId()){
                 if(i==o.getRencontre().getExterieur().getId()){
+                    //si c'est la rencontre de l'operation on ne garde que la journné concerné
                     margeJournees[o.getRencontre().getDomicile().getId()][i]=new ArrayList<>();
                     margeJournees[o.getRencontre().getDomicile().getId()][i].add(o.getJournee().getId());
                 }else {
+                    //ces rencontre ne peuvent plus étre placé dans la même journee
                     margeJournees[o.getRencontre().getDomicile().getId()][i].remove(o.getJournee().getId());
                 }
             }
+            //pour toute les rencontre ayant la même equipe exterieur
             if(i!=o.getRencontre().getExterieur().getId()){
                 if (i == o.getRencontre().getDomicile().getId()) {
+                    //si c'est la rencontre de l'operation on ne garde que la journné concerné
                     margeJournees[i][o.getRencontre().getExterieur().getId()] = new ArrayList<>();
                     margeJournees[i][o.getRencontre().getExterieur().getId()].add(o.getJournee().getId());
                 } else {
+                    //ces rencontre ne peuvent plus étre placé dans la même journee
                     margeJournees[i][o.getRencontre().getExterieur().getId()].remove(o.getJournee().getId());
                 }
             }

@@ -38,7 +38,7 @@ public class MeilleureInsertion implements Solveur{
                     System.err.println("situation blocante2");
                     return solution;
                 }else{
-                    //solution.updateMageJournee(o);
+                    solution.updateMageJournee(o);
                     System.out.println(solution.nbMargineString());
                 };
             }
