@@ -2,6 +2,7 @@ package instance.modele.contrainte;
 
 import operateur.OperateurInsertion;
 import operateur.Operateur;
+import solution.Journee;
 import solution.Solution;
 import solution.Rencontre;
 
@@ -61,7 +62,7 @@ public class ContraintePauseGlobale extends Contrainte{
     public int getCoutTotal(Solution championnat) {
         int valc = 0;
 
-        for (Integer e : this.equipes) {
+        /*for (Integer e : this.equipes) {
             for (Integer j : this.journees) {
                 Rencontre rEquipe = null;
                 // Pour chaque rencontre de la journée courante, on prend celles de l'équipe de la contrainte
@@ -71,10 +72,26 @@ public class ContraintePauseGlobale extends Contrainte{
                         break;
                     }
                 }
-                valc = this.traitementModes(championnat, j, rEquipe);
+                valc += this.traitementModes(championnat, j, rEquipe);
             }
         }
 
+        if(valc > this.max) {
+            if (estDure()) return Integer.MAX_VALUE;
+            return this.penalite * (valc-this.max);
+        }
+        return 0;*/
+
+        for (Integer j : this.journees) {
+            for (Rencontre r : championnat.getJourneeByID(j).getRencontres().values()) {
+                if(this.equipes.contains(r.getDomicile().getId())){
+                    valc+=traitementModes(championnat,r,TypeMode.DOMICILE);
+                }
+                if(this.equipes.contains(r.getExterieur().getId())){
+                    valc+=traitementModes(championnat,r,TypeMode.EXTERIEUR);
+                }
+            }
+        }
         if(valc > this.max) {
             if (estDure()) return Integer.MAX_VALUE;
             return this.penalite * (valc-this.max);
@@ -84,43 +101,66 @@ public class ContraintePauseGlobale extends Contrainte{
 
     @Override
     public Object evalDeltaCoef(Solution championnat, Operateur o) {
+        System.out.println("debut");
         int valcDelta=0;
-        if(o instanceof OperateurInsertion) {
-            for (Integer e : this.equipes) {
-                for (Integer j : this.journees) {
-                    Rencontre rEquipe = null;
-                    Rencontre r = o.getRencontre();
-                    if (r.isConcerne(championnat.getEquipes().get(e), TypeMode.INDEFINI)) {
-                        rEquipe = r;
-                    }
-                    valcDelta = this.traitementModes(championnat, j, rEquipe);
+        Journee jprec=championnat.getJourneeByID(o.getJournee().getId()-1);
+        Journee jnext=championnat.getJourneeByID(o.getJournee().getId()+1);
+
+        if(jprec!=null&&this.journees.contains(o.getJournee().getId())){
+
+            System.out.println(jprec.toString());
+            for(Rencontre r:jprec.getRencontres().values()){
+                if(r.isConcerne(o.getRencontre().getDomicile(),TypeMode.DOMICILE)){
+                    System.out.printf("'''''''''''''''''''''''''''''''''''"+r.toString()+"\n");
+                    valcDelta++;
+                };
+                if(r.isConcerne(o.getRencontre().getExterieur(),TypeMode.EXTERIEUR)){
+                    System.out.printf(r.toString()+"\n");
+                    valcDelta++;
                 }
             }
         }
-        return valcDelta;
+        System.out.println("Milieu");
+        if(jnext!=null&&this.journees.contains(jnext.getId())){
+            System.out.println(jnext.toString());
+            for(Rencontre r : jnext.getRencontres().values()){
+                if(r.isConcerne(o.getRencontre().getDomicile(), TypeMode.DOMICILE)){
+                    System.out.printf(r.toString()+"\n");
+                    valcDelta++;
+                }
+                if(r.isConcerne(o.getRencontre().getExterieur(), TypeMode.EXTERIEUR))
+                {
+                    System.out.printf(r.toString()+"\n");
+                    valcDelta++;
+                }
+            }
+        }
+        System.out.println("Fin");
+       return valcDelta;
     }
 
     /**
-     * ???
-     * @param
-     * @return ...
+     * retoune 1 si la rencontre requipe passé en paramètre implique une pause dans le mode sinon 0
+     * @param championnat le championnat dans lequelle rechercher
+     * @param rEquipe la rencontre a utiliser
+     * @return int
      */
-    private int traitementModes(Solution championnat, Integer journee, Rencontre rEquipe) {
-        int valc = 0;
-        boolean lastPresence = false, currentPresence = false;
-
-        if (rEquipe != null) {
-            if (championnat.isRJPresent(journee - 1, rEquipe)) {
-                lastPresence = championnat.isRJPresent(journee - 1, rEquipe);
-            }
-            if (championnat.isRJPresent(journee, rEquipe)) {
-                currentPresence = championnat.isRJPresent(journee, rEquipe);
-            }
-            if (lastPresence == currentPresence && (lastPresence != false || currentPresence != false)) {
-                valc++;
+    private int traitementModes(Solution championnat,Rencontre rEquipe,TypeMode mode) {
+        Journee jprec=championnat.getJourneeByID(rEquipe.getJournee().getId()-1);
+        if(jprec==null)return 0;
+        for(Rencontre rjprec : jprec.getRencontres().values()){
+            switch (mode){
+                case DOMICILE:
+                    if(rjprec.getDomicile().equals(rEquipe.getDomicile())){
+                        return 1;
+                    }
+                case EXTERIEUR:
+                    if(rjprec.getExterieur().equals(rEquipe.getExterieur())){
+                        return 1;
+                    }
             }
         }
-        return valc;
+        return 0;
     }
 
     @Override
