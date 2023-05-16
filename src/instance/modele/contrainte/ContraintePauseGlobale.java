@@ -101,41 +101,40 @@ public class ContraintePauseGlobale extends Contrainte{
 
     @Override
     public Object evalDeltaCoef(Solution championnat, Operateur o) {
-        System.out.println("debut");
+        //System.out.println("debut");
         int valcDelta=0;
         Journee jprec=championnat.getJourneeByID(o.getJournee().getId()-1);
         Journee jnext=championnat.getJourneeByID(o.getJournee().getId()+1);
 
         if(jprec!=null&&this.journees.contains(o.getJournee().getId())){
-
-            System.out.println(jprec.toString());
+            //System.out.println(jprec.toString());
             for(Rencontre r:jprec.getRencontres().values()){
                 if(r.isConcerne(o.getRencontre().getDomicile(),TypeMode.DOMICILE)){
-                    System.out.printf("'''''''''''''''''''''''''''''''''''"+r.toString()+"\n");
+                    //System.out.printf("'''''''''''''''''''''''''''''''''''"+r.toString()+"\n");
                     valcDelta++;
                 };
                 if(r.isConcerne(o.getRencontre().getExterieur(),TypeMode.EXTERIEUR)){
-                    System.out.printf(r.toString()+"\n");
+                    //System.out.printf(r.toString()+"\n");
                     valcDelta++;
                 }
             }
         }
-        System.out.println("Milieu");
+        //System.out.println("Milieu");
         if(jnext!=null&&this.journees.contains(jnext.getId())){
-            System.out.println(jnext.toString());
+            //System.out.println(jnext.toString());
             for(Rencontre r : jnext.getRencontres().values()){
                 if(r.isConcerne(o.getRencontre().getDomicile(), TypeMode.DOMICILE)){
-                    System.out.printf(r.toString()+"\n");
+                    //System.out.printf(r.toString()+"\n");
                     valcDelta++;
                 }
                 if(r.isConcerne(o.getRencontre().getExterieur(), TypeMode.EXTERIEUR))
                 {
-                    System.out.printf(r.toString()+"\n");
+                    //System.out.printf(r.toString()+"\n");
                     valcDelta++;
                 }
             }
         }
-        System.out.println("Fin");
+        //System.out.println("Fin");
        return valcDelta;
     }
 
