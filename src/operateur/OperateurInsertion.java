@@ -27,10 +27,14 @@ public class OperateurInsertion extends Operateur{
     }
 
     @Override
-    protected int evalDeltaCout() {
+    protected Integer evalDeltaCout() {
         //if(deltaCoef==null)return Integer.MAX_VALUE;
-        int deltaCout=0;
-        if(!isRealisableInital())return Integer.MAX_VALUE;
+        Integer deltaCout=0;
+        if(!isRealisableInital()){
+            //System.out.println(this.toString());
+            return Integer.MAX_VALUE;
+
+        }
         for(TypeContrainte type:TypeContrainte.values()){
             for(Contrainte c: getChampionnat().getContraintes(type)){
                 Object deltaCoef = c.evalDeltaCoef(getChampionnat(),this);
@@ -75,11 +79,16 @@ public class OperateurInsertion extends Operateur{
     protected boolean isRealisableInital() {
         //check nb rencontre journee
         if(this.getJournee().getRencontres().size()+1>getChampionnat().getNBRencontreJournee()){
+            //System.out.println("nb max r pour j");
             return false;
         }
         //check un match par jr
         for(Rencontre r:getJournee().getRencontres().values()){
-            if(r.isConcerne(getRencontre().getDomicile(), TypeMode.INDEFINI) || r.isConcerne(getRencontre().getExterieur(), TypeMode.INDEFINI))return false;
+            if(r.isConcerne(getRencontre().getDomicile(), TypeMode.INDEFINI) || r.isConcerne(getRencontre().getExterieur(), TypeMode.INDEFINI)){
+                //System.out.println("nb rencontre par equipe joure >1");
+                return false;
+            }
+
         }
 
         //match aller ou retour par phase si il existe
@@ -89,6 +98,7 @@ public class OperateurInsertion extends Operateur{
             int b=getChampionnat().getPhase(getChampionnat().getRencontres().get(getRencontre().getLabelRetour()).getJournee());
             Journee j2=getChampionnat().getRencontres().get(getRencontre().getLabelRetour()).getJournee();
             */
+            //System.out.println("matche retour même phase");
             return false;
         }
         return true;
@@ -112,4 +122,5 @@ public class OperateurInsertion extends Operateur{
             throw new RuntimeException(e);
         }
     }
+
 }

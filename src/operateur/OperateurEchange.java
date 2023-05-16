@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class OperateurEchange extends OperateurLocal{
     @Override
-    protected int evalDeltaCout() {
+    protected Integer evalDeltaCout() {
         return 0;
     }
 

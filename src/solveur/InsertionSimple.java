@@ -5,6 +5,11 @@ import operateur.OperateurInsertion;
 import solution.Rencontre;
 import solution.Solution;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+
 /** classe définissant InsertionSimple (implémentant l'interface Solveur)
  * @author Engloo Benjamin
  * @author Morcq Alexandre
@@ -22,7 +27,9 @@ public class InsertionSimple implements Solveur{
     @Override
     public Solution solve(Instance instance) {
         Solution solution = new Solution(instance);
-        for(Rencontre r:solution.getRencontres().values()){
+        List<Rencontre> list = new ArrayList<Rencontre>(solution.getRencontres().values());
+        Collections.shuffle(list);
+        for(Rencontre r:list){
             System.out.println(solution);
             OperateurInsertion o= solution.getPremiereInsertion(r);
             if(o==null){
@@ -31,7 +38,7 @@ public class InsertionSimple implements Solveur{
                 o.doMouvementIfRealisable();
             }
         }
-        if(!solution.check()) return null;
+        //if(!solution.check()) return null;
         return solution;
     }
 }

@@ -5,6 +5,10 @@ import operateur.OperateurInsertion;
 import solution.Rencontre;
 import solution.Solution;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 /** classe définissant MeilleureInsertion (implémentant l'interface Solveur)
  * @author Engloo Benjamin
  * @author Morcq Alexandre
@@ -21,16 +25,25 @@ public class MeilleureInsertion implements Solveur{
     @Override
     public Solution solve(Instance instance) {
         Solution solution = new Solution(instance);
-        for(Rencontre r:solution.getRencontres().values()){
+        List<Rencontre> list = new ArrayList<Rencontre>(solution.getRencontres().values());
+        Collections.shuffle(list);
+        for(Rencontre r:list){
             System.out.println(solution);
-            OperateurInsertion o= solution.getMeilleureInsertion(r);
+            OperateurInsertion o= solution.getMeilleureInsertionRencontre(r);
             if(o==null){
-                return solution;//la meilleur simple peux ammener à une situation bloquante on transmet alor la solution incomplete
+                System.err.println("situation blocante");
+                return solution;//la meilleur insertion simple peux ammener à une situation bloquante on transmet alor la solution incomplete
             }else{
-                o.doMouvementIfRealisable();
+                if(!o.doMouvementIfRealisable()){
+                    System.err.println("situation blocante2");
+                    return solution;
+                }else{
+                    //solution.updateMageJournee(o);
+                    System.out.println(solution.nbMargineString());
+                };
             }
         }
-        if(!solution.check()) return null;
+        //if(!solution.check()) return null;
         return solution;
     }
 }

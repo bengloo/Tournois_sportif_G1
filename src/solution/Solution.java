@@ -10,9 +10,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
+import java.util.*;
 
 /** classe définissant Solution
  * @author Engloo Benjamin
@@ -28,6 +26,8 @@ public class Solution {
     private Map<Integer, Equipe> equipes;
     private Integer coutTotal;
     private Map<Contrainte,Object> coefContraintes;
+
+    private List<Integer>[][] margeJournees;
 
 
     public Solution(Instance instance) {
@@ -68,6 +68,17 @@ public class Solution {
                     }
                 }else{
                     this.coefContraintes.put(contrainte,0);
+                }
+            }
+        }
+        margeJournees= new ArrayList[this.getNBEquipe()][this.getNBEquipe()];
+        for (int i = 0; i < margeJournees.length; i++) {
+            for (int j = 0; j < margeJournees[i].length; j++) {
+                margeJournees[i][j] = new ArrayList<>();
+                for(int k =0;k<this.getNbJournee();k++){
+                    if(i!=j) {
+                        margeJournees[i][j].add(k);
+                    }
                 }
             }
         }
@@ -394,12 +405,34 @@ public class Solution {
      * @param r la rencontre à insérer
      * @return le meilleur opérateur d'insertion
      */
-    public OperateurInsertion getMeilleureInsertion(Rencontre r) {
+    public OperateurInsertion getMeilleureInsertionRencontre(Rencontre r) {
         OperateurInsertion bestInsertion = new OperateurInsertion();
-        for(Journee j: this.journees.values()) {
+        List<Journee> list = new ArrayList<Journee>(this.getJournees().values());
+        Collections.shuffle(list);
+        for(Journee j:list){
             OperateurInsertion o = new OperateurInsertion(this,j,r);
-            if(o != null && o.isMouvementRealisable() && o.isMeilleur(bestInsertion)) {
-                bestInsertion = o;
+            if(o != null && o.isMeilleur(bestInsertion)) {
+                if(o.isMouvementRealisable() ){
+                    bestInsertion = o;
+                }else{
+                    //this.margeJournees[r.getDomicile().getId()][r.getExterieur().getId()].remove(j.getId());
+                }
+
+            }
+        }
+        return bestInsertion;
+    }
+
+    public OperateurInsertion getMeilleureInsertion() {
+        OperateurInsertion bestInsertion = new OperateurInsertion();
+        List<Rencontre> list = new ArrayList<Rencontre>(this.getRencontres().values());
+        Collections.shuffle(list);
+        for(Rencontre r:list){
+            OperateurInsertion o= getMeilleureInsertionRencontre(r);
+            if(o != null && o.isMeilleur(bestInsertion)) {
+                if(o.isMouvementRealisable() ){
+                    bestInsertion = o;
+                }
             }
         }
         return bestInsertion;
@@ -468,6 +501,37 @@ public class Solution {
         return best;
     }
 
+    public void updateMageJournee(OperateurInsertion o){
+        for(int i=0;0<getNBEquipe();i++){
+            if(i!=o.getRencontre().getDomicile().getId()){
+                if(i==o.getRencontre().getExterieur().getId()){
+                    margeJournees[o.getRencontre().getDomicile().getId()][i]=new ArrayList<>();
+                    margeJournees[o.getRencontre().getDomicile().getId()][i].add(o.getJournee().getId());
+                }else {
+                    margeJournees[o.getRencontre().getDomicile().getId()][i].remove(o.getJournee().getId());
+                }
+            }
+            if(i!=o.getRencontre().getExterieur().getId()){
+                if (i == o.getRencontre().getDomicile().getId()) {
+                    margeJournees[i][o.getRencontre().getExterieur().getId()] = new ArrayList<>();
+                    margeJournees[i][o.getRencontre().getExterieur().getId()].add(o.getJournee().getId());
+                } else {
+                    margeJournees[i][o.getRencontre().getExterieur().getId()].remove(o.getJournee().getId());
+                }
+            }
+        }
+    }
+
+    public String nbMargineString(){
+        StringBuilder sb = new StringBuilder();
+        for(int i=0;i<getNBEquipe();i++){
+            for(int j=0;j<getNBEquipe();j++){
+                sb.append(margeJournees[i][j].size()+";");
+            }
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

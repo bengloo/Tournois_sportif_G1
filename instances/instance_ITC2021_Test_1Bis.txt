@@ -1,0 +1,105 @@
+// Nom
+Test Instance 1
+
+// Nombre d'equipes
+6
+
+// Contraintes dures
+
+// Contraintes de placement
+// Nombre
+2
+// Contraintes
+equipe=0	jours=6;7;9	mode=D	max=1
+equipe=1	jours=1;2;9	mode=D	max=1
+
+
+// Contraintes d'equipes en haut et bas de classement
+// Nombre
+0
+// Contraintes
+
+// Contraintes de rencontres
+// Nombre
+3
+// Contraintes
+jours=1;7;8	rencontres=2,1;3,2;4,5	min=0	max=1
+jours=0;2;3;7	rencontres=0,5;1,3;4,0;5,0	min=0	max=2
+jours=0;1;7;9	rencontres=0,1;0,4;1,5;3,4	min=0	max=2
+
+// Contraintes de pause par equipe
+// Nombre
+0
+// Contraintes
+
+// Contraintes de pause globale
+// Nombre
+1
+// Contraintes
+equipes=0;1;2;3;4;5	jours=0;1;2;3;4;5;6;7;8;9	max=16
+
+
+// Contraintes souples
+
+// Contraintes de placement
+// Nombre
+17
+// Contraintes
+equipe=4	jours=5	mode=D	max=0	penalite=1
+equipe=5	jours=1;2	mode=D	max=1	penalite=1
+equipe=1	jours=1;7;9	mode=D	max=1	penalite=1
+equipe=0	jours=3;4;7	mode=D	max=1	penalite=1
+equipe=0	jours=4;5;7;8	mode=E	max=1	penalite=1
+equipe=4	jours=2	mode=D	max=0	penalite=1
+equipe=2	jours=0;1;7	mode=D	max=1	penalite=1
+equipe=0	jours=1;9	mode=D	max=1	penalite=1
+equipe=0	jours=2;5	mode=E	max=1	penalite=1
+equipe=2	jours=6	mode=E	max=0	penalite=1
+equipe=0	jours=3	mode=D	max=0	penalite=1
+equipe=2	jours=0;2;9	mode=D	max=1	penalite=1
+equipe=1	jours=5;7;9	mode=D	max=1	penalite=1
+equipe=3	jours=0;1;2;3;4	mode=E	max=1	penalite=1
+equipe=3	jours=7	mode=D	max=0	penalite=1
+equipe=4	jours=3;5;6;9	mode=E	max=1	penalite=1
+equipe=4	jours=1;3;5;9	mode=D	max=1	penalite=1
+
+// Contraintes d'equipes en haut et bas de classement
+// Nombre
+0
+// Contraintes
+
+// Contraintes de rencontres
+// Nombre
+10
+// Contraintes
+jours=1;3;9	rencontres=0,4;2,3;5,3	min=1	max=3	penalite=1
+jours=0;2;3;7	rencontres=5,0;5,4	min=1	max=2	penalite=1
+jours=5	rencontres=2,3	min=0	max=0	penalite=1
+jours=4	rencontres=1,4;3,2;4,1	min=0	max=1	penalite=1
+jours=1	rencontres=2,0;4,5;5,2	min=1	max=3	penalite=1
+jours=2	rencontres=1,3;2,0;3,0	min=0	max=1	penalite=1
+jours=7	rencontres=0,1;1,5;2,1;4,2	min=0	max=2	penalite=1
+jours=5	rencontres=1,5	min=0	max=1	penalite=1
+jours=5	rencontres=1,3;5,4	min=0	max=1	penalite=1
+jours=6	rencontres=0,2;1,2;2,5;3,2	min=2	max=4	penalite=1
+
+// Contraintes de pause par equipe
+// Nombre
+0
+// Contraintes
+
+// Contraintes de pause globale
+// Nombre
+0
+// Contraintes
+
+// Contraintes d'equite
+// Nombre
+0
+// Contraintes
+
+// Contraintes de separation
+// Nombre
+1
+// Contraintes
+equipes=0;1;2;3;4;5	min=10	penalite=10
