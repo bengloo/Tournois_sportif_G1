@@ -114,6 +114,11 @@ public class Solution {
         return journee.getId()+1>getNbJournee()/2?2:1;
     }
 
+    public Integer getPhase(Integer idJournee){
+        if(idJournee==null)return null;
+        return idJournee+1>getNbJournee()/2?2:1;
+    }
+
     /**
      * Méthode permettant de récupérer le nombre de journées qui ont lieu lors du championnat
      * @return l'entier symbolisant le nombre de journées
@@ -407,10 +412,9 @@ public class Solution {
      */
     public OperateurInsertion getMeilleureInsertionRencontre(Rencontre r) {
         OperateurInsertion bestInsertion = new OperateurInsertion();
-        List<Journee> list = new ArrayList<Journee>(this.getJournees().values());
+        List<OperateurInsertion> list = new ArrayList<OperateurInsertion>(this.getInsertRencontreViable(r));
         Collections.shuffle(list);
-        for(Journee j:list){
-            OperateurInsertion o = new OperateurInsertion(this,j,r);
+        for(OperateurInsertion o:list){
             if(o != null && o.isMeilleur(bestInsertion)) {
                 if(o.isMouvementRealisable() ){
                     bestInsertion = o;
@@ -423,9 +427,9 @@ public class Solution {
         return bestInsertion;
     }
 
-    public OperateurInsertion getMeilleureInsertion() {
+    public OperateurInsertion getMeilleureInsertion(ArrayList<Rencontre> rTarget) {
         OperateurInsertion bestInsertion = new OperateurInsertion();
-        List<Rencontre> list = new ArrayList<Rencontre>(this.getRencontres().values());
+        List<Rencontre> list = new ArrayList<Rencontre>(rTarget);
         Collections.shuffle(list);
         for(Rencontre r:list){
             OperateurInsertion o= getMeilleureInsertionRencontre(r);
@@ -502,39 +506,63 @@ public class Solution {
     }
 
     public void updateMageJournee(OperateurInsertion o){
-        for(int i=0;0<getNBEquipe();i++){
-
-
-            //pour toute les rencontre ayant la même equipe domicile
-            if(i!=o.getRencontre().getDomicile().getId()){
-                if(i==o.getRencontre().getExterieur().getId()){
-                    //si c'est la rencontre de l'operation on ne garde que la journné concerné
-                    margeJournees[o.getRencontre().getDomicile().getId()][i]=new ArrayList<>();
-                    margeJournees[o.getRencontre().getDomicile().getId()][i].add(o.getJournee().getId());
-                }else {
-                    //ces rencontre ne peuvent plus étre placé dans la même journee
-                    margeJournees[o.getRencontre().getDomicile().getId()][i].remove(o.getJournee().getId());
-                }
-            }
-            //pour toute les rencontre ayant la même equipe exterieur
-            if(i!=o.getRencontre().getExterieur().getId()){
-                if (i == o.getRencontre().getDomicile().getId()) {
-                    //si c'est la rencontre de l'operation on ne garde que la journné concerné
-                    margeJournees[i][o.getRencontre().getExterieur().getId()] = new ArrayList<>();
-                    margeJournees[i][o.getRencontre().getExterieur().getId()].add(o.getJournee().getId());
-                } else {
-                    //ces rencontre ne peuvent plus étre placé dans la même journee
-                    margeJournees[i][o.getRencontre().getExterieur().getId()].remove(o.getJournee().getId());
-                }
+        //equip domicile
+        int d=o.getRencontre().getDomicile().getId();
+        //equipe exterieur
+        int e=o.getRencontre().getExterieur().getId();
+        //journee insert
+        int j=o.getJournee().getId();
+        for(int i=0;i<getNBEquipe();i++){
+            margeJournees[d][i].removeIf(n->(n==j));
+            margeJournees[e][i].removeIf(n->n==j);
+            margeJournees[i][e].removeIf(n->n==j);
+            margeJournees[i][d].removeIf(n->n==j);
+        }
+        //le match retour ne peux plus étre afecté sur la même phase
+        for(int j2=0;j2<getNbJournee();j2++){
+            if(getPhase(j2)==getPhase(j)){
+                margeJournees[e][d].removeIf(n->n==j);
             }
         }
+        //la rencontre inseré n'a par convention plus aucune journee de marge
+        margeJournees[d][e].clear();
+    }
+    public int getNbMargeJR(Rencontre r){
+        return margeJournees[r.getDomicile().getId()][r.getExterieur().getId()].size();
+    }
+    /**
+     * Methode retournant les rencontre qui n'ont pas encore été inséré et qui on le moins de journee
+     * de marge pour étré inséré
+     */
+    public ArrayList<Rencontre> getRencontresMinMarge(){
+        ArrayList<Rencontre> res= new ArrayList<>();
+        int sizeMin=Integer.MAX_VALUE;
+        for(Rencontre r:rencontres.values()){
+            //si il existe un ensemble d'insert ayant moins de marge
+            if(getNbMargeJR(r)!=0&&getNbMargeJR(r)<sizeMin){
+                res.clear();
+                sizeMin=getNbMargeJR(r);
+            }
+            //completer l'ensemble
+            if(getNbMargeJR(r)==sizeMin){
+                res.add(r);
+            }
+        }
+        return res;
+    }
+    public ArrayList<OperateurInsertion>getInsertRencontreViable(Rencontre r){
+        ArrayList<OperateurInsertion> res= new ArrayList<>();
+        for(int j:margeJournees[r.getDomicile().getId()][r.getExterieur().getId()]){
+            res.add(new OperateurInsertion(this,this.getJourneeByID(j),r));
+        }
+        return res;
     }
 
     public String nbMargineString(){
         StringBuilder sb = new StringBuilder();
         for(int i=0;i<getNBEquipe();i++){
             for(int j=0;j<getNBEquipe();j++){
-                sb.append(margeJournees[i][j].size()+";");
+                sb.append(String.format("%2d", margeJournees[i][j].size())+";");
             }
             sb.append("\n");
         }
@@ -565,5 +593,7 @@ public class Solution {
         sb.append("}");
         return sb.toString();
     }
+
+
 }
 
