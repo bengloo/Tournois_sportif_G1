@@ -7,7 +7,6 @@ import solution.Solution;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 /** classe définissant MeilleureInsertion (implémentant l'interface Solveur)
  * @author Engloo Benjamin
@@ -16,17 +15,17 @@ import java.util.List;
  * @author Lux Hugo
  * @version 1.0
  */
-public class MeilleureInsertion implements Solveur{
+public class MeilleureInsertionV2 implements Solveur{
     @Override
     public String getNom() {
-        return "Meilleure Insertion";
+        return "Meilleure Insertion V2";
     }
 
     @Override
     public Solution solve(Instance instance) {
         Solution solution = new Solution(instance);
-        ArrayList<Rencontre> list = new ArrayList<Rencontre>(solution.getRencontresMinMarge());
-        Collections.shuffle(list);
+        ArrayList<OperateurInsertion> list = new ArrayList<OperateurInsertion>(solution.getInsertionMinMarge());
+        //Collections.shuffle(list);
 
 
         //System.out.println(solution);
@@ -36,7 +35,7 @@ public class MeilleureInsertion implements Solveur{
 
             //System.out.println("RencontrePrioritaire");
             //System.out.println(list.toString());
-            OperateurInsertion o= solution.getMeilleureInsertion(list);
+            OperateurInsertion o= solution.getMeilleureInsertionV2(list);
             //System.out.println("operationRetenus");
             //System.out.println(o.toString());
             if(o==null){
@@ -48,8 +47,8 @@ public class MeilleureInsertion implements Solveur{
                     return solution;
                 }else{
                     solution.updateMageJournee(o);
-                    System.out.println(solution.nbMargineString());
-                    list = new ArrayList<Rencontre>(solution.getRencontresMinMarge());
+                    //System.out.println(solution.nbMargineString());
+                    list = new ArrayList<OperateurInsertion>(solution.getInsertionMinMarge());
                 };
             }
         }

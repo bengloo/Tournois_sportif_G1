@@ -1,8 +1,8 @@
 // Nom
-sans contrainte 20 equipe
+sans contrainte 6 equipe
 
 // Nombre d'equipes
-20
+6
 
 // Contraintes dures
 

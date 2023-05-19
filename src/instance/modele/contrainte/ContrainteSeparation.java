@@ -64,8 +64,8 @@ public class ContrainteSeparation extends Contrainte{
         if(this.equipes.contains(o.getRencontre().getDomicile().getId())&&this.equipes.contains(o.getRencontre().getExterieur().getId())){
             Journee j1 = o.getJournee();
             Journee j2 = championnat.getMatchRetour(o.getRencontre()).getJournee();
-            System.out.println(j1);
-            System.out.println(j2);
+            //System.out.println(j1);
+            //System.out.println(j2);
             if (j2 != null) {
                 int separation = min - (Math.abs(j1.getId() - j2.getId()) - 1);
                 if (separation > 0) return separation;

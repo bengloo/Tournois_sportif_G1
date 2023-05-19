@@ -11,13 +11,14 @@ import instance.Instance;
 import io.InstanceReader;
 import io.exception.ReaderException;
 import solution.Solution;
-import solveur.InsertionSimple;
-import solveur.MeilleureInsertion;
-import solveur.Solveur;
+import solveur.*;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Cette classe permet de tester et comparer les performances de plusieurs 
@@ -83,13 +84,23 @@ public class TestAllSolveur {
      */
     private void addSolveurs() {
         // TO CHECK : constructeur par defaut de la classe InsertionSimple
-
+        System.err.close();
         //solveurs.add(new InsertionSimple());
-        solveurs.add(new MeilleureInsertion());
+        solveurs.add(new SolveurIter(new MeilleureInsertionV2(),3000));
         // TO ADD : par la suite vous ajouterez ici les autres solveurs a tester
         // solveurs.add(new AutreSolveurATester());
     }
-    
+
+    private int extractNumberFromFileName(File file) {
+        Pattern pattern = Pattern.compile("\\d+"); // Expression régulière pour correspondre aux nombres
+        Matcher matcher = pattern.matcher(file.getName());
+        if (matcher.find()) {
+            String numberString = matcher.group(); // Obtenir la sous-chaîne correspondant au nombre
+            return Integer.parseInt(numberString); // Convertir la sous-chaîne en entier
+        } else {
+            return Integer.MAX_VALUE; // Utiliser une valeur maximale si aucun nombre n'est trouvé
+        }
+    }
     /**
      * Lecture de tous les noms des instances a tester.
      * Ces instances se trouvent dans le repertoire pathRepertoire.
@@ -98,6 +109,8 @@ public class TestAllSolveur {
     private void readNomInstances() {
         File folder = new File(pathRepertoire);
         File[] listOfFiles = folder.listFiles();
+        Comparator<File> fileComparator = Comparator.comparingInt(this::extractNumberFromFileName);
+        Arrays.sort(listOfFiles, fileComparator);
         for (File file : listOfFiles) {
             if (file.isFile()&&(!file.getName().equals("readMe.txt"))) {
                 try {

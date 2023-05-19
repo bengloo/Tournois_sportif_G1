@@ -2,10 +2,12 @@ package solution;
 
 import instance.Instance;
 import instance.modele.contrainte.*;
+import operateur.Operateur;
 import operateur.OperateurInsertion;
 import operateur.OperateurLocal;
 import operateur.TypeOperateurLocal;
 
+import javax.sound.midi.Soundbank;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -27,8 +29,12 @@ public class Solution {
     private Integer coutTotal;
     private Map<Contrainte,Object> coefContraintes;
 
+
+    //marge par rencontre(couple equipe) pour les journee viable
     private List<Integer>[][] margeJournees;
 
+    //marge par journee pour les rencontre viable
+    private List<Integer[]>[] margeRencontres;
 
     public Solution(Instance instance) {
         this.instance = instance;
@@ -80,6 +86,13 @@ public class Solution {
                         margeJournees[i][j].add(k);
                     }
                 }
+            }
+        }
+        margeRencontres= new ArrayList[getNbJournee()];
+        for(int i=0;i<margeRencontres.length;i++){
+            margeRencontres[i]=new ArrayList<>();
+            for(Rencontre r:this.rencontres.values()){
+                margeRencontres[i].add(new Integer[]{r.getDomicile().getId(),r.getExterieur().getId()});
             }
         }
     }
@@ -413,13 +426,17 @@ public class Solution {
     public OperateurInsertion getMeilleureInsertionRencontre(Rencontre r) {
         OperateurInsertion bestInsertion = new OperateurInsertion();
         List<OperateurInsertion> list = new ArrayList<OperateurInsertion>(this.getInsertRencontreViable(r));
-        Collections.shuffle(list);
+        long seed = System.currentTimeMillis();
+        Collections.shuffle(list,new Random(seed));
         for(OperateurInsertion o:list){
-            if(o != null && o.isMeilleur(bestInsertion)) {
-                if(o.isMouvementRealisable() ){
-                    bestInsertion = o;
+            if(o != null ) {
+                if(o.isMouvementRealisable()){
+                    if(o.isMeilleur(bestInsertion)){
+                        bestInsertion = o;
+                    }
                 }else{
-                    //this.margeJournees[r.getDomicile().getId()][r.getExterieur().getId()].remove(j.getId());
+                    this.margeJournees[r.getDomicile().getId()][r.getExterieur().getId()].remove(o.getJournee().getId());
+                    this.margeRencontres[o.getJournee().getId()].removeIf(n->(n[0]==r.getDomicile().getId()&&n[1]==r.getExterieur().getId()));
                 }
 
             }
@@ -430,7 +447,8 @@ public class Solution {
     public OperateurInsertion getMeilleureInsertion(ArrayList<Rencontre> rTarget) {
         OperateurInsertion bestInsertion = new OperateurInsertion();
         List<Rencontre> list = new ArrayList<Rencontre>(rTarget);
-        Collections.shuffle(list);
+        long seed = System.currentTimeMillis();
+        Collections.shuffle(list,new Random(seed));
         for(Rencontre r:list){
             OperateurInsertion o= getMeilleureInsertionRencontre(r);
             if(o != null && o.isMeilleur(bestInsertion)) {
@@ -441,6 +459,29 @@ public class Solution {
         }
         return bestInsertion;
     }
+
+    public OperateurInsertion getMeilleureInsertionV2(ArrayList<OperateurInsertion> oTarget) {
+        OperateurInsertion bestInsertion = new OperateurInsertion();
+        long seed = System.currentTimeMillis();
+        Collections.shuffle(oTarget,new Random(seed));
+        for(OperateurInsertion o:oTarget){
+            if(o != null ) {
+                if(o.isMouvementRealisable()){
+                    if(o.isMeilleur(bestInsertion)){
+                        bestInsertion = o;
+                    }
+                }else{
+                    this.margeJournees[o.getRencontre().getDomicile().getId()][o.getRencontre().getExterieur().getId()].remove(o.getJournee().getId());
+                    this.margeRencontres[o.getJournee().getId()].removeIf(n->(n[0]==o.getRencontre().getDomicile().getId()&&n[1]==o.getRencontre().getExterieur().getId()));
+                }
+
+            }
+        }
+        return bestInsertion;
+    }
+
+
+
     /**
      * Méthode permettant de récupérer la première tentative d'insertion d'une rencontre dans le championnat
      * @param r la rencontre ciblée
@@ -493,8 +534,8 @@ public class Solution {
         if(infos==null||!infos.doMouvementIfRealisable())return false;
         this.coutTotal+= infos.getDeltaCout();
         if(!this.check()) {
-            System.out.println(infos);
-            System.out.println(this);
+            //System.out.println(infos);
+            //System.out.println(this);
             System.exit(-1);
         }
         return true;
@@ -512,6 +553,7 @@ public class Solution {
         int e=o.getRencontre().getExterieur().getId();
         //journee insert
         int j=o.getJournee().getId();
+        //les rencontre impliquant les même equipe ne peuvent plus étre inséré sur la même journee
         for(int i=0;i<getNBEquipe();i++){
             margeJournees[d][i].removeIf(n->(n==j));
             margeJournees[e][i].removeIf(n->n==j);
@@ -524,11 +566,41 @@ public class Solution {
                 margeJournees[e][d].removeIf(n->n==j);
             }
         }
-        //la rencontre inseré n'a par convention plus aucune journee de marge
+        //aprés insert la rencontre inseré n'a par convention plus aucune journee de marge
         margeJournees[d][e].clear();
+
+        //la journee ne peux pas recevoir d'autre rencontre impliquant les même equipes
+        margeRencontres[j].removeIf(n->((n[0]==d)||(n[0]==e)||(n[1]==d)||(n[1]==e)));
+
+        for(int j2=0;j2<getNbJournee();j2++){
+            if(getPhase(j2)==getPhase(j)){
+                //les journee de la même phase ne peuvent pas recevoir le match retour
+                margeRencontres[j2].removeIf(n->(n[0]==e&&n[1]==d));
+            }
+            //les autres jounee ne peuvent plus accepter la rencontre inseré
+            margeRencontres[j2].removeIf(n->(n[0]==d&&n[1]==e));
+        }
+        //aprés insert la journe d'insertion n'a par convention plus aucune rencontre de marge si elle est pleine
+        if(o.getJournee().getRencontres().size()==getNBRencontreJournee()){
+            margeRencontres[j].clear();
+        }
+
+
+    }
+
+    public  int getNbMargeRJ(Journee j){
+        return  margeRencontres[j.getId()].size();
     }
     public int getNbMargeJR(Rencontre r){
         return margeJournees[r.getDomicile().getId()][r.getExterieur().getId()].size();
+    }
+    public int getNbMargeGlobal(OperateurInsertion o){
+        int nbMJR=getNbMargeJR(o.getRencontre());
+        int nbMRJ=getNbMargeRJ(o.getJournee());
+        //priorité absolus les operation critique
+        if(nbMRJ==1||nbMJR==1)return 1;
+        if(nbMRJ==2||nbMJR==2)return 2;
+        return nbMJR;
     }
     /**
      * Methode retournant les rencontre qui n'ont pas encore été inséré et qui on le moins de journee
@@ -550,6 +622,29 @@ public class Solution {
         }
         return res;
     }
+
+    public ArrayList<OperateurInsertion> getInsertionMinMarge(){
+        ArrayList<OperateurInsertion> res=new ArrayList<>();
+        int margeMin=Integer.MAX_VALUE;
+        for(int d=0;d<getNBEquipe();d++){
+            for(int e=0;e<getNBEquipe();e++){
+                for(int j:margeJournees[d][e]){
+                    OperateurInsertion o=new OperateurInsertion(this,this.getJourneeByID(j),this.getRencontreByEquipes(d,e));
+                    if(getNbMargeGlobal(o)!=0&&getNbMargeGlobal(o)<margeMin){
+                        res.clear();
+                        margeMin=getNbMargeGlobal(o);
+                    }
+                    if(getNbMargeGlobal(o)==margeMin){
+                        res.add(o);
+                    }
+                }
+            }
+        }
+        return res;
+    }
+
+
+
     public ArrayList<OperateurInsertion>getInsertRencontreViable(Rencontre r){
         ArrayList<OperateurInsertion> res= new ArrayList<>();
         for(int j:margeJournees[r.getDomicile().getId()][r.getExterieur().getId()]){
@@ -566,6 +661,11 @@ public class Solution {
             }
             sb.append("\n");
         }
+        sb.append("\n");
+        for(int i=0;i<getNbJournee();i++){
+            sb.append(String.format("%2d", (margeRencontres[i]).size())+";");
+        }
+        sb.append("\n");
         return sb.toString();
     }
     @Override
@@ -593,7 +693,6 @@ public class Solution {
         sb.append("}");
         return sb.toString();
     }
-
 
 }
 

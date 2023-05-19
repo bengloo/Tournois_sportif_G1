@@ -84,7 +84,7 @@ public class ContrainteRencontres extends Contrainte{
         if(o instanceof OperateurInsertion) {
             /*Rencontre r = o.getRencontre();
             valcDelta = parcoursJournees(championnat, r.getLabel());*/
-            System.out.println(this.rencontres.contains(o.getRencontre().getLabel()));
+            //System.out.println(this.rencontres.contains(o.getRencontre().getLabel()));
             if(this.journees.contains(o.getJournee().getId()) && this.rencontres.contains(o.getRencontre().getLabel())) {
                 valcDelta = 1;
             }
