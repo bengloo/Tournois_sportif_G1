@@ -5,6 +5,7 @@ import io.InstanceReader;
 import io.exception.ReaderException;
 import solution.Solution;
 import solveur.MeilleureInsertion;
+import solveur.MeilleureInsertionV2;
 import solveur.SolveurIter;
 
 /** classe définissant TestInsertionSimple (pour tester la classe InsertionSimple)
@@ -16,13 +17,13 @@ import solveur.SolveurIter;
  */
 public class TestMeilleurInsertionIter {
     public static void main(String[] args) {
-        String path="instances/instance_test_sansContrainte_20Equipe.txt";
+        String path="instances/instance_test_sansContrainte_16Equipe.txt";
         try {
             InstanceReader reader = new InstanceReader(path);
             Instance i= reader.readInstance();
             //System.out.println(i);
 
-            SolveurIter solveur = new SolveurIter(new MeilleureInsertion(),3000);
+            SolveurIter solveur = new SolveurIter(new MeilleureInsertionV2(),200);
             Solution s = solveur.solve(i);
             //System.out.println(s.getNBRencontreJournee());
             s.writeSolution(solveur.getNom());

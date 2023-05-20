@@ -36,6 +36,10 @@ public class Solution {
     //marge par journee pour les rencontre viable
     private List<Integer[]>[] margeRencontres;
 
+    //marge par equipe pour les equipe viable
+    private List<Integer>[] margeEquipe;
+
+
     public Solution(Instance instance) {
         this.instance = instance;
 
@@ -93,6 +97,14 @@ public class Solution {
             margeRencontres[i]=new ArrayList<>();
             for(Rencontre r:this.rencontres.values()){
                 margeRencontres[i].add(new Integer[]{r.getDomicile().getId(),r.getExterieur().getId()});
+            }
+        }
+
+        margeEquipe=new ArrayList[getNbJournee()];
+        for(int i=0;i<margeEquipe.length;i++){
+            margeEquipe[i]=new ArrayList<>();
+            for(int j=0;j<getNBEquipe();j++){
+                margeEquipe[i].add(j);
             }
         }
     }
@@ -585,6 +597,7 @@ public class Solution {
             margeRencontres[j].clear();
         }
 
+        margeEquipe[j].removeIf(n->(n==d||n==e));
 
     }
 
@@ -594,11 +607,18 @@ public class Solution {
     public int getNbMargeJR(Rencontre r){
         return margeJournees[r.getDomicile().getId()][r.getExterieur().getId()].size();
     }
+    public int getNbMargeJE(Journee j){
+        return margeEquipe[j.getId()].size()/2;
+    }
+
+
     public int getNbMargeGlobal(OperateurInsertion o){
         int nbMJR=getNbMargeJR(o.getRencontre());
         int nbMRJ=getNbMargeRJ(o.getJournee());
+        int nbMJE=getNbMargeJE(o.getJournee());
+
         //priorité absolus les operation critique
-        if(nbMRJ==1||nbMJR==1)return 1;
+        if(nbMRJ==1||nbMJR==1||nbMJE==1)return 1;
         if(nbMRJ==2||nbMJR==2)return 2;
         return nbMJR;
     }
@@ -664,6 +684,10 @@ public class Solution {
         sb.append("\n");
         for(int i=0;i<getNbJournee();i++){
             sb.append(String.format("%2d", (margeRencontres[i]).size())+";");
+        }
+        sb.append("\n");
+        for(int i=0;i<getNbJournee();i++){
+            sb.append(String.format("%2d", (margeEquipe[i]).size())+";");
         }
         sb.append("\n");
         return sb.toString();

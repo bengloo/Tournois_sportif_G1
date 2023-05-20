@@ -84,9 +84,10 @@ public class TestAllSolveur {
      */
     private void addSolveurs() {
         // TO CHECK : constructeur par defaut de la classe InsertionSimple
-        System.err.close();
+        //System.err.close();
         //solveurs.add(new InsertionSimple());
-        solveurs.add(new SolveurIter(new MeilleureInsertionV2(),3000));
+        //solveurs.add(new SolveurIterThread(new MeilleureInsertionV2()));
+        solveurs.add(new SolveurIter(new MeilleureInsertionV2(),1000));
         // TO ADD : par la suite vous ajouterez ici les autres solveurs a tester
         // solveurs.add(new AutreSolveurATester());
     }
@@ -176,6 +177,7 @@ public class TestAllSolveur {
             // TO CHECK : resolution de l'instance avec le solveur
             Solution sol = solveur.solve(inst);
             long time = System.currentTimeMillis() - start;
+            System.out.println("|timer: "+time);
             sol.writeSolution(solveur.getNom());
             // TO CHECK : recperer le cout total de la solution, et savoir si
             // la solution est valide

@@ -29,8 +29,7 @@ public class SolveurIter implements Solveur{
             }
             niter++;
         }
-        System.out.println(this.getNom()+" | "+instance.getNom()+" | niter:"+niter);
-        System.out.println();
+        System.out.print(this.getNom()+" | "+instance.getNom()+" | niter:"+niter);
         return this.solveurInitial.solve(instance);
     }
 }
