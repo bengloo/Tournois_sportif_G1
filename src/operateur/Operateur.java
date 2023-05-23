@@ -18,6 +18,9 @@ public abstract class Operateur {
     //TODO protected ou private pour ces atribut à réflechire
     private Journee journee;
     private Rencontre rencontre;
+
+    public Rencontre rencontre2;
+    public Journee journee2;
     private Solution championnat;
     //delat cout totale de toutes les contraintes pour une operation donné on se baseras sur les coefDesContrainte pour ne par recalculer entierement les fonction objectives de l'entiereter de la solution dejas etablie
     private Integer cout;
@@ -32,12 +35,12 @@ public abstract class Operateur {
         this.cout = Integer.MAX_VALUE;
     }
 
-    public Operateur(Solution c, Journee j, Rencontre r) {
-        this.championnat=c;
-        this.journee = j;
-        this.rencontre=r;
-        this.cout = evalDeltaCout();
-
+    public Operateur(Journee journee, Rencontre rencontre, Rencontre rencontre2, Journee journee2, Solution championnat) {
+        this.journee = journee;
+        this.rencontre = rencontre;
+        this.rencontre2 = rencontre2;
+        this.journee2 = journee2;
+        this.championnat = championnat;
     }
 
     /**

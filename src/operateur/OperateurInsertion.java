@@ -23,7 +23,7 @@ public class OperateurInsertion extends Operateur{
     public OperateurInsertion() {
     }
     public OperateurInsertion(Solution c, Journee j, Rencontre r) {
-        super(c, j, r);
+        super( j, r,null,null,c);
     }
 
     @Override

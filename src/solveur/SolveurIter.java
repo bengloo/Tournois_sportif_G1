@@ -26,6 +26,10 @@ public class SolveurIter implements Solveur{
             if(sol.check()){
                 System.out.println(this.getNom()+" | "+instance.getNom()+" | niter:"+niter);
                 return sol;
+            }else{
+                System.out.println(sol.toString());
+                System.out.println(sol.getRencontreSansJournee());
+                System.out.println(sol.nbMargineString());
             }
             niter++;
         }

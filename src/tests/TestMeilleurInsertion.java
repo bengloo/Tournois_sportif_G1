@@ -21,7 +21,7 @@ public class TestMeilleurInsertion {
         //String path="instances/instance_test_ContraintePlacement_4Equipe.txt";
         //String path="instances/instance_test_ContrainteHBClassement_4Equipes.txt";
         //String path="instances/instance_test_ContrainteRencontres_4Equipes.txt";
-        String path="instances/instance_test_sansContrainte_10Equipe.txt";
+        String path="instances/instance_ITC2021_Early_1.txt";
         try {
             InstanceReader reader = new InstanceReader(path);
             Instance i= reader.readInstance();
@@ -31,7 +31,7 @@ public class TestMeilleurInsertion {
             Solution s = solveur.solve(i);
            // System.out.println(s.getNBRencontreJournee());
             s.writeSolution(solveur.getNom());
-            //System.out.println(s.toString());
+            System.out.println(s.toString());
             System.out.println(s.check());
         } catch (ReaderException ex) {
             System.out.println(ex.getMessage());

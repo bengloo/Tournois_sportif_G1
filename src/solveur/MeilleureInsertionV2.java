@@ -24,7 +24,7 @@ public class MeilleureInsertionV2 implements Solveur{
     @Override
     public Solution solve(Instance instance) {
         Solution solution = new Solution(instance);
-        ArrayList<OperateurInsertion> list = new ArrayList<OperateurInsertion>(solution.getInsertionMinMarge());
+        ArrayList<OperateurInsertion> list = new ArrayList<OperateurInsertion>(solution.getInsertionMinMarge(solution.updateMages(null)));
         //Collections.shuffle(list);
 
 
@@ -46,9 +46,10 @@ public class MeilleureInsertionV2 implements Solveur{
                     //System.err.println("situation blocante2");
                     return solution;
                 }else{
-                    solution.updateMageJournee(o);
+                    solution.updateMages(o);
                     //System.out.println(solution.nbMargineString());
-                    list = new ArrayList<OperateurInsertion>(solution.getInsertionMinMarge());
+                    //System.out.println(solution.toString());
+                    list = new ArrayList<OperateurInsertion>(solution.getInsertionMinMarge(solution.updateMages(o)));
                 };
             }
         }

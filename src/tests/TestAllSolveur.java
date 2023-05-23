@@ -84,7 +84,7 @@ public class TestAllSolveur {
      */
     private void addSolveurs() {
         // TO CHECK : constructeur par defaut de la classe InsertionSimple
-        //System.err.close();
+        System.err.close();
         //solveurs.add(new InsertionSimple());
         //solveurs.add(new SolveurIterThread(new MeilleureInsertionV2()));
         solveurs.add(new SolveurIter(new MeilleureInsertionV2(),1000));

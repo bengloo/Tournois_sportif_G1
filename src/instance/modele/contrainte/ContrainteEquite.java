@@ -1,6 +1,7 @@
 package instance.modele.contrainte;
 
 import operateur.Operateur;
+import operateur.OperateurEchange;
 import operateur.OperateurInsertion;
 import solution.Equipe;
 import solution.Rencontre;
@@ -51,7 +52,6 @@ public class ContrainteEquite extends Contrainte {
         return TypeContrainte.EQUITE;
     }
 
-    //TODO implementer les fonction de calcule de cout en sinspirent de la contrainte de placement, réflechire si on ne peux pas factoriser du code sout des fonction comune aux contraintes
     @Override
     public int getCoutTotal(Solution championnat) {
         //on calcule le nombre de rencontre a domicile pour les equipes de la contrainte sur les jour de la contrainte
@@ -89,6 +89,25 @@ public class ContrainteEquite extends Contrainte {
             if(this.journees.contains(o.getJournee().getId())&&this.equipes.contains(o.getRencontre().getDomicile().getId())){
                 valcDelta.put(o.getRencontre().getDomicile().getId(),1);
             }
+        }
+        if(o instanceof OperateurEchange) {
+            if(this.journees.contains(o.getJournee())&&!this.journees.contains(((OperateurEchange) o).getJournee2())){
+                if(this.equipes.contains(o.getRencontre().getDomicile().getId())){
+                    valcDelta.put(o.getRencontre().getDomicile().getId(),-1);
+                }
+                if(this.equipes.contains(((OperateurEchange) o).getRencontre2().getDomicile().getId())) {
+                    valcDelta.put(((OperateurEchange) o).getRencontre2().getDomicile().getId(), 1);
+                }
+            }
+            if(!this.journees.contains(o.getJournee())&&this.journees.contains(((OperateurEchange) o).getJournee2())){
+                if(this.equipes.contains(o.getRencontre().getDomicile().getId())){
+                    valcDelta.put(o.getRencontre().getDomicile().getId(),1);
+                }
+                if(this.equipes.contains(((OperateurEchange) o).getRencontre2().getDomicile().getId())) {
+                    valcDelta.put(((OperateurEchange) o).getRencontre2().getDomicile().getId(), -1);
+                }
+            }
+
         }
 
         return valcDelta;

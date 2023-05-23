@@ -17,7 +17,8 @@ import solveur.SolveurIter;
  */
 public class TestMeilleurInsertionIter {
     public static void main(String[] args) {
-        String path="instances/instance_test_sansContrainte_16Equipe.txt";
+        //String path="instances/instance_ITC2021_Early_1.txt";
+        String path="instances/instance_test_sansContrainte_20Equipe.txt";
         try {
             InstanceReader reader = new InstanceReader(path);
             Instance i= reader.readInstance();
@@ -27,7 +28,7 @@ public class TestMeilleurInsertionIter {
             Solution s = solveur.solve(i);
             //System.out.println(s.getNBRencontreJournee());
             s.writeSolution(solveur.getNom());
-            System.out.println(s.toString());
+            //System.out.println(s.toString());
             System.out.println(s.check());
         } catch (ReaderException ex) {
             System.out.println(ex.getMessage());

@@ -2,12 +2,8 @@ package solution;
 
 import instance.Instance;
 import instance.modele.contrainte.*;
-import operateur.Operateur;
 import operateur.OperateurInsertion;
-import operateur.OperateurLocal;
-import operateur.TypeOperateurLocal;
 
-import javax.sound.midi.Soundbank;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -447,8 +443,8 @@ public class Solution {
                         bestInsertion = o;
                     }
                 }else{
-                    this.margeJournees[r.getDomicile().getId()][r.getExterieur().getId()].remove(o.getJournee().getId());
-                    this.margeRencontres[o.getJournee().getId()].removeIf(n->(n[0]==r.getDomicile().getId()&&n[1]==r.getExterieur().getId()));
+                    //this.margeJournees[r.getDomicile().getId()][r.getExterieur().getId()].remove(o.getJournee().getId());
+                    //this.margeRencontres[o.getJournee().getId()].removeIf(n->(n[0]==r.getDomicile().getId()&&n[1]==r.getExterieur().getId()));
                 }
 
             }
@@ -542,63 +538,78 @@ public class Solution {
         }
     }
 
-    public boolean doMouvementRechercheLocale(OperateurLocal infos){
-        if(infos==null||!infos.doMouvementIfRealisable())return false;
-        this.coutTotal+= infos.getDeltaCout();
-        if(!this.check()) {
-            //System.out.println(infos);
-            //System.out.println(this);
-            System.exit(-1);
-        }
-        return true;
-    }
-    public OperateurLocal getMeilleureOperateurLocal(TypeOperateurLocal type){
-        OperateurLocal best = OperateurLocal.getOperateurLocal(type);
-        //TODO
-        return best;
-    }
 
-    public void updateMageJournee(OperateurInsertion o){
-        //equip domicile
-        int d=o.getRencontre().getDomicile().getId();
-        //equipe exterieur
-        int e=o.getRencontre().getExterieur().getId();
-        //journee insert
-        int j=o.getJournee().getId();
-        //les rencontre impliquant les même equipe ne peuvent plus étre inséré sur la même journee
-        for(int i=0;i<getNBEquipe();i++){
-            margeJournees[d][i].removeIf(n->(n==j));
-            margeJournees[e][i].removeIf(n->n==j);
-            margeJournees[i][e].removeIf(n->n==j);
-            margeJournees[i][d].removeIf(n->n==j);
+    public List<OperateurInsertion> updateMages(OperateurInsertion o){
+
+        if(o!=null) {
+            //Update marge des contraintes inerantes si une operation à été apliqué-----------------------------------------------------------------
+            //equip domicile
+            int d = o.getRencontre().getDomicile().getId();
+            //equipe exterieur
+            int e = o.getRencontre().getExterieur().getId();
+            //journee insert
+            int j = o.getJournee().getId();
+            //les rencontre impliquant les même equipe ne peuvent plus étre inséré sur la même journee
+            for (int i = 0; i < getNBEquipe(); i++) {
+                margeJournees[d][i].removeIf(n -> (n == j));
+                margeJournees[e][i].removeIf(n -> n == j);
+                margeJournees[i][e].removeIf(n -> n == j);
+                margeJournees[i][d].removeIf(n -> n == j);
+            }
+            //le match retour ne peux plus étre afecté sur la même phase
+            for (int j2 = 0; j2 < getNbJournee(); j2++) {
+                if (getPhase(j2) == getPhase(j)) {
+                    int jaux=j2;
+                    margeJournees[e][d].removeIf(n -> n == jaux);
+                }
+            }
+            //aprés insert la rencontre inseré n'a par convention plus aucune journee de marge
+            margeJournees[d][e].clear();
+
+            //la journee ne peux pas recevoir d'autre rencontre impliquant les même equipes
+            margeRencontres[j].removeIf(n -> ((n[0] == d) || (n[0] == e) || (n[1] == d) || (n[1] == e)));
+
+            for (int j2 = 0; j2 < getNbJournee(); j2++) {
+                if (getPhase(j2) == getPhase(j)) {
+                    //les journee de la même phase ne peuvent pas recevoir le match retour
+                    margeRencontres[j2].removeIf(n -> (n[0] == e && n[1] == d));
+                }
+                //les autres jounee ne peuvent plus accepter la rencontre inseré
+                margeRencontres[j2].removeIf(n -> (n[0] == d && n[1] == e));
+            }
+            //aprés insert la journe d'insertion n'a par convention plus aucune rencontre de marge si elle est pleine
+            if (o.getJournee().getRencontres().size() == getNBRencontreJournee()) {
+                margeRencontres[j].clear();
+            }
+            margeEquipe[j].removeIf(n -> (n == d || n == e));
         }
-        //le match retour ne peux plus étre afecté sur la même phase
-        for(int j2=0;j2<getNbJournee();j2++){
-            if(getPhase(j2)==getPhase(j)){
-                margeJournees[e][d].removeIf(n->n==j);
+
+        //update marge contrainte --------------------------------------------------------------------------------
+        List<OperateurInsertion> listInserViable =new ArrayList<>();
+        //pour tous les insert possible restant on verifie qu'il ne declanche pas de contrainte dure
+        for(int di=0;di<getNBEquipe();di++){
+            for(int ei=0;ei<getNBEquipe();ei++){
+                if(di!=ei) {
+                    for(int ji:margeJournees[di][ei]){
+                        OperateurInsertion oi = new OperateurInsertion(this, this.getJourneeByID(ji), this.getRencontreByEquipes(di, ei));
+                        if (!oi.isMouvementRealisable()) {
+                            System.out.println(this);
+                            System.out.println(oi);
+                            //margeJournees[di][ei].removeIf(n -> (n == ji));
+                            System.out.println(nbMargineString());
+                            int daux = di;
+                            int eaux = ei;
+                            margeRencontres[ji].removeIf(n -> (n[0] == daux && n[1] == eaux));
+                        } else {
+                            listInserViable.add(oi);
+                        }
+                    }
+
+                }
             }
         }
-        //aprés insert la rencontre inseré n'a par convention plus aucune journee de marge
-        margeJournees[d][e].clear();
 
-        //la journee ne peux pas recevoir d'autre rencontre impliquant les même equipes
-        margeRencontres[j].removeIf(n->((n[0]==d)||(n[0]==e)||(n[1]==d)||(n[1]==e)));
-
-        for(int j2=0;j2<getNbJournee();j2++){
-            if(getPhase(j2)==getPhase(j)){
-                //les journee de la même phase ne peuvent pas recevoir le match retour
-                margeRencontres[j2].removeIf(n->(n[0]==e&&n[1]==d));
-            }
-            //les autres jounee ne peuvent plus accepter la rencontre inseré
-            margeRencontres[j2].removeIf(n->(n[0]==d&&n[1]==e));
-        }
-        //aprés insert la journe d'insertion n'a par convention plus aucune rencontre de marge si elle est pleine
-        if(o.getJournee().getRencontres().size()==getNBRencontreJournee()){
-            margeRencontres[j].clear();
-        }
-
-        margeEquipe[j].removeIf(n->(n==d||n==e));
-
+    return listInserViable;
     }
 
     public  int getNbMargeRJ(Journee j){
@@ -643,21 +654,16 @@ public class Solution {
         return res;
     }
 
-    public ArrayList<OperateurInsertion> getInsertionMinMarge(){
+    public ArrayList<OperateurInsertion> getInsertionMinMarge(List<OperateurInsertion> listinsert){
         ArrayList<OperateurInsertion> res=new ArrayList<>();
         int margeMin=Integer.MAX_VALUE;
-        for(int d=0;d<getNBEquipe();d++){
-            for(int e=0;e<getNBEquipe();e++){
-                for(int j:margeJournees[d][e]){
-                    OperateurInsertion o=new OperateurInsertion(this,this.getJourneeByID(j),this.getRencontreByEquipes(d,e));
-                    if(getNbMargeGlobal(o)!=0&&getNbMargeGlobal(o)<margeMin){
-                        res.clear();
-                        margeMin=getNbMargeGlobal(o);
-                    }
-                    if(getNbMargeGlobal(o)==margeMin){
-                        res.add(o);
-                    }
-                }
+        for(OperateurInsertion o:listinsert) {
+            if (getNbMargeGlobal(o) != 0 && getNbMargeGlobal(o) < margeMin) {
+                res.clear();
+                margeMin = getNbMargeGlobal(o);
+            }
+            if (getNbMargeGlobal(o) == margeMin) {
+                res.add(o);
             }
         }
         return res;
@@ -669,6 +675,16 @@ public class Solution {
         ArrayList<OperateurInsertion> res= new ArrayList<>();
         for(int j:margeJournees[r.getDomicile().getId()][r.getExterieur().getId()]){
             res.add(new OperateurInsertion(this,this.getJourneeByID(j),r));
+        }
+        return res;
+    }
+
+    public List<String> getRencontreSansJournee(){
+        List<String> res=new ArrayList<>();
+        for(Rencontre r:this.getRencontres().values()){
+            if(r.getJournee()==null){
+                res.add(r.getLabel());
+            }
         }
         return res;
     }
