@@ -117,18 +117,13 @@ public class ContraintePlacement extends Contrainte{
 
     @Override
     public int evalDeltaCout(Solution championnat, Operateur o, Object valcDelta) {
-        if(o instanceof OperateurInsertion){
-
-            if((Integer)championnat.getCoefContraintes().get(this)+(Integer) valcDelta>max){
-                if (estDure()){
-                    return Integer.MAX_VALUE;
-                };
-                //au dela du max le cout suit une relation lineaire le deltat cout est donc proportionel
-                return this.penalite *((Integer)valcDelta);
-            }else return 0;
-        }
-        //TODO d'autre operation implique d'autre cout
-        return 0;
+        if((Integer)championnat.getCoefContraintes().get(this)+(Integer) valcDelta>max){
+            if (estDure()){
+                return Integer.MAX_VALUE;
+            };
+            //au dela du max le cout suit une relation lineaire le deltat cout est donc proportionel
+            return this.penalite *((Integer)valcDelta);
+        }else return 0;
     }
 
     @Override

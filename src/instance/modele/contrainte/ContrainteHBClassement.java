@@ -1,5 +1,6 @@
 package instance.modele.contrainte;
 
+import operateur.OperateurEchange;
 import operateur.OperateurInsertion;
 import operateur.Operateur;
 import solution.Solution;
@@ -86,11 +87,8 @@ public class ContrainteHBClassement extends Contrainte{
 
     @Override
     public Object evalDeltaCoef(Solution championnat, Operateur o) {
-        int valcDelta=0;
         if(o instanceof OperateurInsertion) {
-            /*if (this.equipesAdverses.contains(r.getDomicile().getId()) || this.equipesAdverses.contains(r.getExterieur().getId())) {
-                valcDelta = parcoursJournees(championnat, r);
-            }*/
+            int valcDelta=0;
             switch(this.mode) {
                 case DOMICILE:
                     if(this.journees.contains(o.getJournee().getId()) && this.equipesAdverses.contains(o.getRencontre().getExterieur().getId()) && o.getRencontre().isConcerne(championnat.getEquipeByID(equipe),mode)) {
@@ -108,8 +106,37 @@ public class ContrainteHBClassement extends Contrainte{
                     }
                     break;
             }
+            return valcDelta;
+        }else if(o instanceof OperateurEchange){
+            //la premierre rencontre fait partie des journee de la contrainte?
+            boolean r1inJC=this.journees.contains(o.getJournee().getId());
+            //la seconde rencontre fait partie des journee de la contrainte?
+            boolean r2inJc=this.journees.contains(((OperateurEchange) o).getJournee2().getId());
+            //les equipes de la premierre rencontre verififi la contraine en terme d'équipe
+            boolean r1inEC=false;
+            //les equipes de la seconde rencontre verififi la contraine en terme d'équipe
+            boolean r2inEC=false;
+
+            if(this.mode==DOMICILE||this.mode==INDEFINI){
+                if(o.getRencontre().getDomicile().getId()==this.equipe && this.equipesAdverses.contains(o.getRencontre().getExterieur())){r1inEC=true;}
+                if(((OperateurEchange) o).getRencontre2().getDomicile().getId()==this.equipe && this.equipesAdverses.contains(((OperateurEchange) o).getRencontre2().getExterieur())){r2inEC=true;}
+            }
+            if(this.mode==EXTERIEUR||this.mode==INDEFINI){
+                if(o.getRencontre().getExterieur().getId()==this.equipe && this.equipesAdverses.contains(o.getRencontre().getDomicile())){r1inEC=true;}
+                if(((OperateurEchange) o).getRencontre2().getExterieur().getId()==this.equipe && this.equipesAdverses.contains(((OperateurEchange) o).getRencontre2().getDomicile())){r2inEC=true;}
+            }
+
+            if((!r1inJC && r2inJc && r1inEC && !r2inEC)||(r1inJC && !r2inJc && !r1inEC && r2inEC)){
+                //si l'echange de rencontre ajoute une rencontre a la contrainte :cf table de verité drive
+                return 1;
+            } else if((r1inJC && !r2inJc && r1inEC && !r2inEC)||(!r1inJC && r2inJc && !r1inEC && r2inEC)) {
+                //si l'echange de rencontre sort une rencontre de la contrainte:cf table de verité drive
+                return -1;
+            }
+            return 0;
         }
-        return valcDelta;
+        return Integer.MAX_VALUE;
+
     }
 
     /**

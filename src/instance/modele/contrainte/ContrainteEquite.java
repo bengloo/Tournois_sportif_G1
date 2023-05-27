@@ -89,8 +89,7 @@ public class ContrainteEquite extends Contrainte {
             if(this.journees.contains(o.getJournee().getId())&&this.equipes.contains(o.getRencontre().getDomicile().getId())){
                 valcDelta.put(o.getRencontre().getDomicile().getId(),1);
             }
-        }
-        if(o instanceof OperateurEchange) {
+        }else if(o instanceof OperateurEchange) {
             if(this.journees.contains(o.getJournee())&&!this.journees.contains(((OperateurEchange) o).getJournee2())){
                 if(this.equipes.contains(o.getRencontre().getDomicile().getId())){
                     valcDelta.put(o.getRencontre().getDomicile().getId(),-1);
