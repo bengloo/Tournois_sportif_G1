@@ -350,7 +350,7 @@ public class Solution {
         }else {
             coefContraintes.put(c, (Integer)coefContraintes.get(c) + (Integer)deltaCoef);
         }
-        //update du cout contrainte
+        //update du cout totale
         coutTotal+=deltaCout;
     }
 

@@ -1,5 +1,7 @@
 package solution;
 
+import operateur.OperateurEchange;
+
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -86,6 +88,7 @@ public class Journee {
         }
     }
 
+
     /**
      * Méthode permettant de retirer une rencontre de la journée courante
      * @param rencontre à retirer
@@ -103,6 +106,8 @@ public class Journee {
         rencontres.remove(rencontre.getLabel());
         return true;
     }
+
+
 
     /**
      * Méthode permettant de savoir si la journée contient une rencontre spécifiée

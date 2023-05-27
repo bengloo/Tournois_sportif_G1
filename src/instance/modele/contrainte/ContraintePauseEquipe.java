@@ -83,25 +83,18 @@ public class ContraintePauseEquipe extends Contrainte{
                 //System.out.println(jprec.toString());
                 for (Rencontre r : jprec.getRencontres().values()) {
                     if (r.isConcerne(this.equipe, this.mode)) {
-                        //System.out.printf("'''''''''''''''''''''''''''''''''''"+r.toString()+"\n");
                         valcDelta++;
                     }
-
                 }
             }
-            //System.out.println("Milieu");
             if (jnext != null && this.journees.contains(jnext.getId())) {
-                //System.out.println(jnext.toString());
                 for (Rencontre r : jnext.getRencontres().values()) {
                     if (r.isConcerne(this.equipe, this.mode)) {
-                        //System.out.printf(r.toString()+"\n");
                         valcDelta++;
                     }
-
                 }
             }
         }
-        //System.out.println("Fin");
         return valcDelta;
     }
 

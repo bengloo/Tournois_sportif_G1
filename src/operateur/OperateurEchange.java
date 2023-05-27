@@ -116,10 +116,17 @@ public class OperateurEchange extends Operateur{
         //getChampionnat().addCoutTotal(this.getCout());
         //on affect la rencontre à la journee
         try {
-            return getChampionnat().getJournees().get(this.getJournee().getId()).addRencontre(this.getRencontre());
+            return echangeRencontre(this);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public boolean echangeRencontre(OperateurEchange o){
+        if(o.getJournee().addRencontre(o.getRencontre2())){
+            if(o.getJournee2().addRencontre(o.getRencontre()))return true;
+        }
+        return false;
     }
 
 }
