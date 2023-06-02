@@ -593,8 +593,6 @@ public class Solution {
                     for(int ji:margeJournees[di][ei]){
                         OperateurInsertion oi = new OperateurInsertion(this, this.getJourneeByID(ji), this.getRencontreByEquipes(di, ei));
                         if (!oi.isMouvementRealisable()) {
-                            System.out.println(this);
-                            System.out.println(oi);
                             //margeJournees[di][ei].removeIf(n -> (n == ji));
                             System.out.println(nbMargineString());
                             int daux = di;
@@ -604,7 +602,6 @@ public class Solution {
                             listInserViable.add(oi);
                         }
                     }
-
                 }
             }
         }

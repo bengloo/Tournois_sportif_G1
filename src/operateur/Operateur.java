@@ -41,6 +41,7 @@ public abstract class Operateur {
         this.rencontre2 = rencontre2;
         this.journee2 = journee2;
         this.championnat = championnat;
+        this.cout = evalDeltaCout();
     }
 
     /**

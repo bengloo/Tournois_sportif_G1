@@ -54,6 +54,10 @@ public class Instance {
         return nbEquipes;
     }
 
+    public int getNbJournees(){
+        return getNbEquipes()*2-2;
+    }
+
     /**
      * Ajoute une contrainte à l'instance courante
      * @param contrainteToAdd la contrainte à ajouter

@@ -68,30 +68,7 @@ public class OperateurEchange extends Operateur{
 
     @Override
     protected boolean isRealisableInital() {
-        //check nb rencontre journee
-        if(this.getJournee().getRencontres().size()+1>getChampionnat().getNBRencontreJournee()){
-            //System.out.println("nb max r pour j");
-            return false;
-        }
-        //check un match par jr
-        for(Rencontre r:getJournee().getRencontres().values()){
-            if(r.isConcerne(getRencontre().getDomicile(), TypeMode.INDEFINI) || r.isConcerne(getRencontre().getExterieur(), TypeMode.INDEFINI)){
-                //System.out.println("nb rencontre par equipe joure >1");
-                return false;
-            }
-
-        }
-
-        //match aller ou retour par phase si il existe
-        if(getChampionnat().getPhase(getJournee())==getChampionnat().getPhase(getChampionnat().getRencontres().get(getRencontre().getLabelRetour()).getJournee())){
-            /*int a=getChampionnat().getPhase(getJournee());
-            Journee j=getJournee();
-            int b=getChampionnat().getPhase(getChampionnat().getRencontres().get(getRencontre().getLabelRetour()).getJournee());
-            Journee j2=getChampionnat().getRencontres().get(getRencontre().getLabelRetour()).getJournee();
-            */
-            //System.out.println("matche retour même phase");
-            return false;
-        }
+        if(!this.getRencontre().getLabel().equals(this.rencontre2.getLabelRetour()))return false;
         return true;
     }
 
@@ -123,9 +100,14 @@ public class OperateurEchange extends Operateur{
     }
 
     public boolean echangeRencontre(OperateurEchange o){
+        o.getJournee().removeRencontre(o.getRencontre());
+        o.getJournee2().removeRencontre(o.getRencontre2());
+        o.getRencontre().setJournee(null);
+        o.getRencontre2().setJournee(null);
         if(o.getJournee().addRencontre(o.getRencontre2())){
             if(o.getJournee2().addRencontre(o.getRencontre()))return true;
         }
+
         return false;
     }
 
