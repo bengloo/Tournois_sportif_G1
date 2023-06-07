@@ -87,7 +87,7 @@ public class TestAllSolveur {
         System.err.close();
         //solveurs.add(new InsertionSimple());
         //solveurs.add(new SolveurIterThread(new MeilleureInsertionV2()));
-        solveurs.add(new SolveurIter(new MeilleureInsertionV2(),1000));
+        solveurs.add(new SolveurCplex());
         // TO ADD : par la suite vous ajouterez ici les autres solveurs a tester
         // solveurs.add(new AutreSolveurATester());
     }

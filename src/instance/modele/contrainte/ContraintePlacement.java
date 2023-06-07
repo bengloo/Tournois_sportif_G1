@@ -1,9 +1,13 @@
 package instance.modele.contrainte;
 
+import ilog.concert.IloException;
+import ilog.concert.IloLinearNumExpr;
+import instance.Instance;
 import operateur.OperateurInsertion;
 import operateur.Operateur;
 import solution.Solution;
 import solution.Rencontre;
+import solveur.SolveurCplex;
 
 import java.util.Objects;
 import java.util.TreeSet;
@@ -124,6 +128,38 @@ public class ContraintePlacement extends Contrainte{
             //au dela du max le cout suit une relation lineaire le deltat cout est donc proportionel
             return this.penalite *((Integer)valcDelta);
         }else return 0;
+    }
+
+    /**
+     * @param sCplex
+     */
+    @Override
+    public void initCplexEquation(SolveurCplex sCplex, Instance instance) {
+        if(this.mode==TypeMode.DOMICILE) {
+            try {
+                IloLinearNumExpr expr = sCplex.getCplex().linearNumExpr();
+                for (int i = 0; i < instance.getNbEquipes(); i++) {
+                    for (int j:this.journees) {
+                        if(i!=this.equipe)expr.addTerm(sCplex.getX()[this.equipe][i][j], 1);
+                    }
+                }
+                sCplex.getCplex().addLe(expr, this.max);
+            } catch (IloException e) {
+                throw new RuntimeException(e);
+            }
+        } else if (this.mode==TypeMode.EXTERIEUR){
+            try {
+                IloLinearNumExpr expr = sCplex.getCplex().linearNumExpr();
+                for (int i = 0; i < instance.getNbEquipes(); i++) {
+                    for (int j:this.journees) {
+                        if(i!=this.equipe)expr.addTerm(sCplex.getX()[i][this.equipe][j], 1);
+                    }
+                }
+                sCplex.getCplex().addLe(expr, this.max);
+            } catch (IloException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
     @Override

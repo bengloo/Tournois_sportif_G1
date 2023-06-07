@@ -1,11 +1,13 @@
 package solveur;
 
 import instance.Instance;
+import operateur.OperateurInsertion;
 import solution.Journee;
 import solution.Solution;
 import ilog.concert.*;
 import ilog.cplex.IloCplex;
 
+import java.util.Random;
 
 
 public class SolveurCplex implements Solveur{
@@ -23,7 +25,7 @@ public class SolveurCplex implements Solveur{
     @Override
     public Solution solve(Instance instance) {
         buildModel(instance);
-        return null;
+        return fomatSaveSolution(instance);
     }
 
     private void buildModel(Instance instance) {
@@ -43,7 +45,9 @@ public class SolveurCplex implements Solveur{
             if(cplex.solve()) {
                 // Cplex a trouve une solution realisable !
                 System.out.println(cplex.toString());
+
             } else {
+                System.out.println("Cplex n’a pas trouve de solution realisable");
                 // Cplex n’a pas trouve de solution realisable ...
             }
         } catch (IloException e) {
@@ -54,6 +58,11 @@ public class SolveurCplex implements Solveur{
     }
 
     private void init(Instance instance) {
+        try {
+            cplex.setParam(IloCplex.Param.RandomSeed, new Random().nextInt(Integer.MAX_VALUE));
+        } catch (IloException e) {
+            throw new RuntimeException(e);
+        }
         initVariableDecision(instance);
         initContrainteInerante(instance);
         initContrainte(instance);
@@ -70,9 +79,29 @@ public class SolveurCplex implements Solveur{
     }
 
     private void initContrainteInerante(Instance instance){
-
-        //chaque rencontre n'est afecter que une seul foix à une journee ou 0 pour les rencontre contre sois-même
         int nbEquipe=instance.getNbEquipes();
+
+        //chaque equipe est presente une seul fois par jour
+        for (int j = 0; j < instance.getNbJournees(); j++) {
+            for(int e=0;e<instance.getNbEquipes();e++) {
+                IloLinearNumExpr expr = null;
+                try {
+                    expr = cplex.linearNumExpr();
+                    for(int i=0;i<instance.getNbEquipes();i++) {
+                       if(e!=i){
+                           expr.addTerm(x[e][i][j], 1);
+                           expr.addTerm(x[i][e][j], 1);
+                       }
+                    }
+                    cplex.addEq(expr,1);
+                }catch (IloException ex){
+                    throw new RuntimeException(ex);
+                }
+            }
+        }
+
+        //chaque rencontre n'est afecter que une seul foix sur l'ensemble des journee ou 0 pour les rencontre contre sois-même
+
         for(int d=0;d<instance.getNbEquipes();d++){
             for(int e=0;e<instance.getNbEquipes();e++) {
                 IloLinearNumExpr expr = null;
@@ -92,6 +121,35 @@ public class SolveurCplex implements Solveur{
             }
         }
 
+        // chaque rencontre à son match retour dans une phase différente
+        for(int d=0;d<instance.getNbEquipes();d++) {
+            for (int e = 0; e < instance.getNbEquipes(); e++) {
+                IloLinearNumExpr expr = null;
+                if(d!=e) {
+                    try {
+                        expr = cplex.linearNumExpr();
+                        for (int j = 0; j < instance.getNbJournees() / 2; j++) {
+                            expr.addTerm(x[d][e][j], 1);
+                            expr.addTerm(x[e][d][j], 1);
+                        }
+                        cplex.addEq(expr, 1);
+                    } catch (IloException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                }
+            }
+        }
+
+
+
+    }
+
+    public IloCplex getCplex() {
+        return cplex;
+    }
+
+    public IloIntVar[][][] getX() {
+        return x;
     }
 
     private void initContrainte(Instance instance){
@@ -113,6 +171,27 @@ public class SolveurCplex implements Solveur{
                 }
             }
         }
+    }
+
+    private Solution fomatSaveSolution(Instance instance){
+        Solution s=new Solution(instance);
+        for(int d=0;d<instance.getNbEquipes();d++) {
+            for (int e = 0; e < instance.getNbEquipes(); e++) {
+                if(d!=e) {
+                    for (int j = 0; j < instance.getNbJournees(); j++) {
+                        try {
+                            if(cplex.getValue(x[d][e][j])==1){
+                                OperateurInsertion o=new OperateurInsertion(s,s.getJourneeByID(j),s.getRencontreByEquipes(d,e));
+                                o.doMouvementIfRealisable();
+                            };
+                        } catch (IloException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    }
+                }
+            }
+        }
+        return s;
     }
 
 

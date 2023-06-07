@@ -1,11 +1,13 @@
 package instance.modele.contrainte;
 
+import instance.Instance;
 import operateur.Operateur;
 import operateur.OperateurEchange;
 import operateur.OperateurInsertion;
 import solution.Equipe;
 import solution.Rencontre;
 import solution.Solution;
+import solveur.SolveurCplex;
 
 import java.util.*;
 
@@ -135,6 +137,12 @@ public class ContrainteEquite extends Contrainte {
         }
         return deltaCout;
     }
+
+    @Override
+    public void initCplexEquation(SolveurCplex sCplex, Instance instance) {
+
+    }
+
     private int getDelatCoef(Object valcDelta,Integer equipe){
         Integer val= ((HashMap<Integer,Integer>)valcDelta).get(equipe);
         if(val==null)return 0;

@@ -1,10 +1,12 @@
 package instance.modele.contrainte;
 
+import instance.Instance;
 import operateur.Operateur;
 import operateur.OperateurInsertion;
 import solution.Journee;
 import solution.Rencontre;
 import solution.Solution;
+import solveur.SolveurCplex;
 
 import java.util.LinkedList;
 import java.util.TreeSet;
@@ -88,6 +90,14 @@ public class ContrainteSeparation extends Contrainte{
         }
         //TODO d'autre operation implique d'autre cout*/
         return 0;
+    }
+
+    /**
+     * @param sCplex
+     */
+    @Override
+    public void initCplexEquation(SolveurCplex sCplex, Instance instance) {
+
     }
 
     @Override

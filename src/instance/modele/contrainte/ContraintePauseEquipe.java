@@ -1,10 +1,12 @@
 package instance.modele.contrainte;
 
+import instance.Instance;
 import operateur.Operateur;
 import operateur.OperateurInsertion;
 import solution.Journee;
 import solution.Solution;
 import solution.Rencontre;
+import solveur.SolveurCplex;
 
 import java.util.Objects;
 import java.util.TreeSet;
@@ -144,6 +146,14 @@ public class ContraintePauseEquipe extends Contrainte{
         }
         //TODO d'autre operation implique d'autre cout
         return 0;
+    }
+
+    /**
+     * @param sCplex
+     */
+    @Override
+    public void initCplexEquation(SolveurCplex sCplex, Instance instance) {
+
     }
 
     @Override

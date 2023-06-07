@@ -1,7 +1,9 @@
 package instance.modele.contrainte;
 
+import instance.Instance;
 import operateur.Operateur;
 import solution.Solution;
+import solveur.SolveurCplex;
 
 /** classe définissant Contrainte (classe abstraite)
  * @author Engloo Benjamin
@@ -77,4 +79,6 @@ public abstract class Contrainte {
     public boolean checkContrainte(Solution championnat){
         return getCoutTotal(championnat)!=Integer.MAX_VALUE;
     }
+
+    public abstract void initCplexEquation(SolveurCplex sCplex, Instance instance);
 }

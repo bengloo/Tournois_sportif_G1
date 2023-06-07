@@ -730,6 +730,18 @@ public class Solution {
         sb.append("}");
         return sb.toString();
     }
+    public String toStringSimple(){
+        StringBuilder sb = new StringBuilder();
+        for(Journee j:journees.values()){
+            sb.append("J"+j.getId()+":");
+            for(Rencontre r:j.getRencontres().values()){
+                sb.append(r.getLabel()+" ");
+            }
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
+
 
 }
 

@@ -1,9 +1,13 @@
 package instance.modele.contrainte;
 
+import ilog.concert.IloException;
+import ilog.concert.IloLinearNumExpr;
+import instance.Instance;
 import operateur.Operateur;
 import operateur.OperateurInsertion;
 import solution.Rencontre;
 import solution.Solution;
+import solveur.SolveurCplex;
 
 import java.util.TreeSet;
 
@@ -129,6 +133,31 @@ public class ContrainteRencontres extends Contrainte{
         }
         //TODO d'autre operation implique d'autre cout
         return 0;
+    }
+
+    /**
+     * @param sCplex
+     */
+    @Override
+    public void initCplexEquation(SolveurCplex sCplex, Instance instance) {
+        IloLinearNumExpr expr = null;
+        try {
+            expr = sCplex.getCplex().linearNumExpr();
+            for(String rlabel:this.rencontres){
+                String[] parties = rlabel.split("-");
+                int d = Integer.parseInt(parties[0]);
+                int e = Integer.parseInt(parties[1]);
+                for(int j:this.journees){
+                    expr.addTerm(sCplex.getX()[d][e][j], 1);
+                }
+            }
+            sCplex.getCplex().addLe(expr, this.max);
+            sCplex.getCplex().addGe(expr, this.min);
+
+        } catch (IloException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     @Override
