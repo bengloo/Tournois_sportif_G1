@@ -139,7 +139,7 @@ public class ContrainteEquite extends Contrainte {
     }
 
     @Override
-    public void initCplexEquation(SolveurCplex sCplex, Instance instance) {
+    public void initCplexEquationDure(SolveurCplex sCplex, Instance instance) {
 
     }
 

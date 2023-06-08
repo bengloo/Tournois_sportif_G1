@@ -1,8 +1,8 @@
 package solveur;
 
 import instance.Instance;
+import instance.modele.contrainte.Contrainte;
 import operateur.OperateurInsertion;
-import solution.Journee;
 import solution.Solution;
 import ilog.concert.*;
 import ilog.cplex.IloCplex;
@@ -14,8 +14,8 @@ public class SolveurCplex implements Solveur{
 
     private IloCplex cplex;
     private IloIntVar[][][] x;
-    //private IloNumVar[][] y;
-    //private IloNumVar[][] z;
+    private IloNumVar[][] y;
+    private IloNumVar[][] z;
 
     @Override
     public String getNom() {
@@ -65,7 +65,9 @@ public class SolveurCplex implements Solveur{
         }
         initVariableDecision(instance);
         initContrainteInerante(instance);
+        initContrainteDecision(instance);
         initContrainte(instance);
+        System.out.println("all Contrainte et variable init done");
         // ne pas imprimer les informations sur la console
         // ne pas mettre cette option pendant les tests !
         this.cplex.setOut(null);
@@ -93,7 +95,7 @@ public class SolveurCplex implements Solveur{
                            expr.addTerm(x[i][e][j], 1);
                        }
                     }
-                    cplex.addEq(expr,1);
+                    cplex.addEq(expr,1,"CI1e"+e+"j"+j);
                 }catch (IloException ex){
                     throw new RuntimeException(ex);
                 }
@@ -111,9 +113,9 @@ public class SolveurCplex implements Solveur{
                         expr.addTerm(x[d][e][j],1);
                     }
                     if(d!=e){
-                        cplex.addEq(expr,1);
+                        cplex.addEq(expr,1,"CI2d"+d+"e"+e);
                     }else{
-                        cplex.addEq(expr,0);
+                        cplex.addEq(expr,0,"CI2d"+d+"e"+e);
                     }
                 } catch (IloException ex) {
                     throw new RuntimeException(ex);
@@ -132,18 +134,51 @@ public class SolveurCplex implements Solveur{
                             expr.addTerm(x[d][e][j], 1);
                             expr.addTerm(x[e][d][j], 1);
                         }
-                        cplex.addEq(expr, 1);
+
+                        cplex.addEq(expr, 1,"CI3d"+d+"e"+e);
                     } catch (IloException ex) {
                         throw new RuntimeException(ex);
                     }
                 }
             }
         }
-
-
-
     }
 
+    public void initContrainteDecision(Instance instance){
+        int nbE=instance.getNbEquipes();
+        int nbJ=instance.getNbJournees();
+        for(int e=0;e<nbE;e++){
+            for(int j=1;j<nbJ;j++) {
+                IloLinearNumExpr expry1 = null;
+                IloLinearNumExpr expry2 = null;
+                IloLinearNumExpr exprz1 = null;
+                IloLinearNumExpr exprz2 = null;
+                try {
+                    expry1 = cplex.linearNumExpr();//pause au au jour j-1 d'une equipe en domicile
+                    expry2 = cplex.linearNumExpr();//pause au au jour j d'une equipe en domicile
+                    exprz1 = cplex.linearNumExpr();//pause au au jour j-1 d'une equipe en exterieur
+                    exprz2 = cplex.linearNumExpr();//pause au au jour j d'une equipe en exterieur
+                    for(int i=0;i<nbE;i++){
+                        if(i!=e) {
+                            expry1.addTerm(x[e][i][j - 1], 1);
+                            expry2.addTerm(x[e][i][j], 1);
+                            exprz1.addTerm(x[i][e][j - 1], 1);
+                            exprz2.addTerm(x[i][e][j], 1);
+                        }
+                    }
+                    cplex.addLe(cplex.sum(cplex.sum(expry1,expry2),-1),y[j-1][e],"CNPD1j"+j+"e"+e);
+                    cplex.addLe(cplex.sum(cplex.sum(exprz1,exprz2),-1),z[j-1][e],"CNPE1j"+j+"e"+e);
+                    cplex.addLe(y[j-1][e],expry1,"CNPD2j"+j+"e"+e);
+                    cplex.addLe(y[j-1][e],expry2,"CNPD3j"+j+"e"+e);
+                    cplex.addLe(z[j-1][e],exprz1,"CNPE2j"+j+"e"+e);
+                    cplex.addLe(z[j-1][e],exprz2,"CNPE3j"+j+"e"+e);
+
+                } catch (IloException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        }
+    }
     public IloCplex getCplex() {
         return cplex;
     }
@@ -152,8 +187,19 @@ public class SolveurCplex implements Solveur{
         return x;
     }
 
-    private void initContrainte(Instance instance){
+    public IloNumVar[][] getY() {
+        return y;
+    }
 
+    public IloNumVar[][] getZ() {
+        return z;
+    }
+
+    private void initContrainte(Instance instance){
+        for(Contrainte c:instance.getContraintes()){
+            c.initCplexEquation(this,instance);
+            System.out.println("Contrainte set: "+c.toString());
+        }
     }
 
     private void initVariableDecision(Instance instance){
@@ -171,6 +217,20 @@ public class SolveurCplex implements Solveur{
                 }
             }
         }
+        y= new IloIntVar[nbJ-1][nbE];
+        z= new IloIntVar[nbJ-1][nbE];
+        for(int j=1;j<nbJ;j++){
+            for(int e=0;e<nbE;e++){
+                try {
+                    y[j-1][e]=this.cplex.intVar(0,1,"y"+j+"_"+e);
+                    z[j-1][e]=this.cplex.intVar(0,1,"z"+j+"_"+e);
+                } catch (IloException ex) {
+                    throw new RuntimeException(ex);
+                }
+
+            }
+        }
+
     }
 
     private Solution fomatSaveSolution(Instance instance){
@@ -182,7 +242,9 @@ public class SolveurCplex implements Solveur{
                         try {
                             if(cplex.getValue(x[d][e][j])==1){
                                 OperateurInsertion o=new OperateurInsertion(s,s.getJourneeByID(j),s.getRencontreByEquipes(d,e));
-                                o.doMouvementIfRealisable();
+                                if(!o.doMouvementIfRealisable()){
+                                    System.err.println(o.toString());
+                                };
                             };
                         } catch (IloException ex) {
                             throw new RuntimeException(ex);

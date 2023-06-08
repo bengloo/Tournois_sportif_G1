@@ -2,6 +2,7 @@ package instance.modele.contrainte;
 
 import ilog.concert.IloException;
 import ilog.concert.IloLinearNumExpr;
+import ilog.concert.IloRange;
 import instance.Instance;
 import operateur.OperateurInsertion;
 import operateur.Operateur;
@@ -134,7 +135,11 @@ public class ContraintePlacement extends Contrainte{
      * @param sCplex
      */
     @Override
-    public void initCplexEquation(SolveurCplex sCplex, Instance instance) {
+    public void initCplexEquationDure(SolveurCplex sCplex, Instance instance) {
+
+
+
+
         if(this.mode==TypeMode.DOMICILE) {
             try {
                 IloLinearNumExpr expr = sCplex.getCplex().linearNumExpr();

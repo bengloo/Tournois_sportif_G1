@@ -139,7 +139,7 @@ public class ContrainteRencontres extends Contrainte{
      * @param sCplex
      */
     @Override
-    public void initCplexEquation(SolveurCplex sCplex, Instance instance) {
+    public void initCplexEquationDure(SolveurCplex sCplex, Instance instance) {
         IloLinearNumExpr expr = null;
         try {
             expr = sCplex.getCplex().linearNumExpr();
@@ -151,8 +151,8 @@ public class ContrainteRencontres extends Contrainte{
                     expr.addTerm(sCplex.getX()[d][e][j], 1);
                 }
             }
-            sCplex.getCplex().addLe(expr, this.max);
-            sCplex.getCplex().addGe(expr, this.min);
+            sCplex.getCplex().addLe(expr, this.max,"CR1");
+            sCplex.getCplex().addGe(expr, this.min,"CR2");
 
         } catch (IloException e) {
             throw new RuntimeException(e);

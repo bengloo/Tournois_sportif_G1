@@ -16,7 +16,7 @@ import solveur.SolveurCplex;
  */
 public class TestCplex {
     public static void main(String[] args) {
-        String path="instances/instance_test_sansContrainte_20Equipe.txt";
+        String path="instances/instance_test_ContraintePauseGlobale_4Equipes.txt";
         try {
             InstanceReader reader = new InstanceReader(path);
             Instance i= reader.readInstance();
@@ -27,6 +27,7 @@ public class TestCplex {
             s.writeSolution(solveur.getNom());
             System.out.println(s.toStringSimple());
             System.out.println(s.check());
+            //System.out.println(s.toString());
         } catch (ReaderException ex) {
             System.out.println(ex.getMessage());
         }

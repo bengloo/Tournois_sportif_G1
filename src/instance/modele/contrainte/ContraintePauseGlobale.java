@@ -1,5 +1,7 @@
 package instance.modele.contrainte;
 
+import ilog.concert.IloException;
+import ilog.concert.IloLinearNumExpr;
 import instance.Instance;
 import operateur.OperateurInsertion;
 import operateur.Operateur;
@@ -63,37 +65,19 @@ public class ContraintePauseGlobale extends Contrainte{
     @Override
     public int getCoutTotal(Solution championnat) {
         int valc = 0;
-
-        /*for (Integer e : this.equipes) {
-            for (Integer j : this.journees) {
-                Rencontre rEquipe = null;
-                // Pour chaque rencontre de la journée courante, on prend celles de l'équipe de la contrainte
-                for (Rencontre r : championnat.getJourneeByID(j).getRencontres().values()) {
-                    if(r.isConcerne(championnat.getEquipes().get(e), TypeMode.INDEFINI)) {
-                        rEquipe = r;
-                        break;
-                    }
-                }
-                valc += this.traitementModes(championnat, j, rEquipe);
-            }
-        }
-
-        if(valc > this.max) {
-            if (estDure()) return Integer.MAX_VALUE;
-            return this.penalite * (valc-this.max);
-        }
-        return 0;*/
-
         for (Integer j : this.journees) {
             for (Rencontre r : championnat.getJourneeByID(j).getRencontres().values()) {
-                if(this.equipes.contains(r.getDomicile().getId())){
+                if(this.equipes.contains(r.getDomicile().getId())&&this.equipes.contains(r.getDomicile().getId())){
                     valc+=traitementModes(championnat,r,TypeMode.DOMICILE);
+                    //System.out.println(valc+":"+j+":"+r.getLabel()+"D");
                 }
-                if(this.equipes.contains(r.getExterieur().getId())){
+                if(this.equipes.contains(r.getExterieur().getId())&&this.equipes.contains(r.getExterieur().getId())){
                     valc+=traitementModes(championnat,r,TypeMode.EXTERIEUR);
+                    //System.out.println(valc+":"+j+":"+r.getLabel()+"E");
                 }
             }
         }
+        //System.out.println(valc);
         if(valc > this.max) {
             if (estDure()) return Integer.MAX_VALUE;
             return this.penalite * (valc-this.max);
@@ -107,15 +91,15 @@ public class ContraintePauseGlobale extends Contrainte{
         int valcDelta=0;
         Journee jprec=championnat.getJourneeByID(o.getJournee().getId()-1);
         Journee jnext=championnat.getJourneeByID(o.getJournee().getId()+1);
-
+        if(!this.equipes.contains(o.getRencontre().getDomicile().getId())&&!this.equipes.contains(o.getRencontre().getExterieur().getId()))return 0;
         if(jprec!=null&&this.journees.contains(o.getJournee().getId())){
             //System.out.println(jprec.toString());
             for(Rencontre r:jprec.getRencontres().values()){
-                if(r.isConcerne(o.getRencontre().getDomicile(),TypeMode.DOMICILE)){
+                if(r.isConcerne(o.getRencontre().getDomicile(),TypeMode.DOMICILE)&&this.equipes.contains(o.getRencontre().getDomicile().getId())){
                     //System.out.printf("'''''''''''''''''''''''''''''''''''"+r.toString()+"\n");
                     valcDelta++;
                 };
-                if(r.isConcerne(o.getRencontre().getExterieur(),TypeMode.EXTERIEUR)){
+                if(r.isConcerne(o.getRencontre().getExterieur(),TypeMode.EXTERIEUR)&&this.equipes.contains(o.getRencontre().getExterieur().getId())){
                     //System.out.printf(r.toString()+"\n");
                     valcDelta++;
                 }
@@ -125,11 +109,11 @@ public class ContraintePauseGlobale extends Contrainte{
         if(jnext!=null&&this.journees.contains(jnext.getId())){
             //System.out.println(jnext.toString());
             for(Rencontre r : jnext.getRencontres().values()){
-                if(r.isConcerne(o.getRencontre().getDomicile(), TypeMode.DOMICILE)){
+                if(r.isConcerne(o.getRencontre().getDomicile(), TypeMode.DOMICILE)&&this.equipes.contains(r.getDomicile().getId())){
                     //System.out.printf(r.toString()+"\n");
                     valcDelta++;
                 }
-                if(r.isConcerne(o.getRencontre().getExterieur(), TypeMode.EXTERIEUR))
+                if(r.isConcerne(o.getRencontre().getExterieur(), TypeMode.EXTERIEUR)&&this.equipes.contains(r.getExterieur().getId()))
                 {
                     //System.out.printf(r.toString()+"\n");
                     valcDelta++;
@@ -152,11 +136,11 @@ public class ContraintePauseGlobale extends Contrainte{
         for(Rencontre rjprec : jprec.getRencontres().values()){
             switch (mode){
                 case DOMICILE:
-                    if(rjprec.getDomicile().equals(rEquipe.getDomicile())){
+                    if(rjprec.getDomicile().equals(rEquipe.getDomicile())&&this.equipes.contains(rEquipe.getDomicile().getId())){
                         return 1;
                     }
                 case EXTERIEUR:
-                    if(rjprec.getExterieur().equals(rEquipe.getExterieur())){
+                    if(rjprec.getExterieur().equals(rEquipe.getExterieur())&&this.equipes.contains(rEquipe.getExterieur().getId())){
                         return 1;
                     }
             }
@@ -185,8 +169,22 @@ public class ContraintePauseGlobale extends Contrainte{
     }
 
     @Override
-    public void initCplexEquation(SolveurCplex sCplex, Instance instance) {
-
+    public void initCplexEquationDure(SolveurCplex sCplex, Instance instance) {
+        IloLinearNumExpr expr = null;
+        try {
+            expr = sCplex.getCplex().linearNumExpr();
+            for(int e:this.equipes){
+                for(int j:this.journees){
+                    if(j!=0){
+                        expr.addTerm(sCplex.getZ()[j-1][e], 1);
+                        expr.addTerm(sCplex.getY()[j-1][e], 1);
+                    }
+                }
+            }
+            sCplex.getCplex().addLe(expr, this.max);
+        } catch (IloException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

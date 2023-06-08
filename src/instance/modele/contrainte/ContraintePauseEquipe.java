@@ -1,5 +1,7 @@
 package instance.modele.contrainte;
 
+import ilog.concert.IloException;
+import ilog.concert.IloLinearNumExpr;
 import instance.Instance;
 import operateur.Operateur;
 import operateur.OperateurInsertion;
@@ -60,10 +62,8 @@ public class ContraintePauseEquipe extends Contrainte{
         for (Integer j : this.journees) {
             for (Rencontre r : championnat.getJourneeByID(j).getRencontres().values()) {
                 if(r.isConcerne(this.equipe,this.mode)){
-                    valc+=traitementModes(championnat,r,TypeMode.DOMICILE);
-                }
-                if(r.isConcerne(this.equipe, this.mode)){
-                    valc+=traitementModes(championnat,r,TypeMode.EXTERIEUR);
+                    valc+=traitementModes(championnat,r, this.mode);
+                    //valc+=traitementModes(championnat,r,TypeMode.EXTERIEUR);
                 }
             }
         }
@@ -152,8 +152,35 @@ public class ContraintePauseEquipe extends Contrainte{
      * @param sCplex
      */
     @Override
-    public void initCplexEquation(SolveurCplex sCplex, Instance instance) {
+    public void initCplexEquationDure(SolveurCplex sCplex, Instance instance) {
+        if(this.mode==TypeMode.DOMICILE) {
 
+            IloLinearNumExpr expr = null;
+            try {
+                expr = sCplex.getCplex().linearNumExpr();
+                for(int j:this.journees){
+                    if(j!=0){
+                        expr.addTerm(sCplex.getY()[j-1][this.equipe], 1);
+                    }
+                }
+                sCplex.getCplex().addLe(expr, this.max);
+            } catch (IloException e) {
+                throw new RuntimeException(e);
+            }
+        }else if(this.mode==TypeMode.EXTERIEUR){
+            IloLinearNumExpr expr = null;
+            try {
+                expr = sCplex.getCplex().linearNumExpr();
+                for(int j:this.journees){
+                    if(j!=0){
+                        expr.addTerm(sCplex.getZ()[j-1][this.equipe], 1);
+                    }
+                }
+                sCplex.getCplex().addLe(expr, this.max);
+            } catch (IloException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
     @Override
