@@ -1,6 +1,12 @@
-<# java -jar Tournois_sportif_G1.jar $args[0] #>
+<#$DocumentsPath = Join-Path $env:USERPROFILE 'Documents'
+Write-Output $DocumentsPath#>
+$filePath = Join-Path $PSScriptRoot "Location.txt"
+$documentsPath = Get-Content -Path $filePath
+$resultat = $DocumentsPath + '\' + $args[0]
+Write-Output $resultat
+java -jar Tournois_sportif_G1.jar $resultat 
 Write-Host "Execution Done! Check our webapp!!!!!!"
-<# Read-Host -Prompt "Press Enter to exit" #>
+Read-Host -Prompt "Press Enter to exit"
 <#
 	public static String inFile;
 	

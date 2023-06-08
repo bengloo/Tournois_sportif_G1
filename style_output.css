@@ -135,7 +135,7 @@ all and (min-device-pixel-ratio:1.5) {
 }
 
 .timeline-breaker:after {
-  border-top-color: #1b1b1b;
+  border-top-color: #E7E8ED;
   border-width: 10px;
   left: 50%;
   margin-left: -10px
@@ -732,7 +732,7 @@ all and (min-device-pixel-ratio:1.5) {
 .carousel-timeline-nav .owl-stage-outer:after {
   height: 2px;
   width: 500%;
-  background: #292b2c;
+  background: white;
   left: -200%;
   right: 0;
   top: auto;

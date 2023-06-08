@@ -15,12 +15,14 @@
     </div>
 <div> 
     
-<!-- <input type="file" id="fileInput">
-  <button onclick="getFileName()">Obtenir le nom du fichier</button> -->
+
+
+<input type="file" id="fileInput">
+<!-- <button onclick="getFileName()">Obtenir le nom du fichier</button> -->
 
 
 <script>
-    const fileName = '';
+    fileName = '';
     let file = document.getElementById("readfile");
     
     file.addEventListener("change", function () {
@@ -38,7 +40,6 @@
                         '<div class="col font-weight-bold text-md-right">'+values[0]+'</div>'+
                         '<div class="col-1">vs</div>'+
                         '<div class="col font-weight-bold text-md-left">'+values[1]+'</div>'+
-                        '<div class="col-12 text-xs text-muted"></div>'+
                     '</div>');
                     journee.push(values.map(Number)); // Ajoute la ligne sous forme de tableau de nombres dans la journée
                 } else if (!line.startsWith("//")) {
@@ -65,29 +66,48 @@
     });
 
 
-
-
-  /*function getFileName() {
+  function getFileName() {
     const fileInput = document.getElementById('fileInput');
     fileName = fileInput.files[0].name;
-    alert("Nom du fichier sélectionné : " + fileName);
-  }*/
+  }
+
+
+  function submitForm() {
+    getFileName();
+    
+    // Remplir un champ de formulaire invisible avec la valeur de la variable JavaScript
+    document.getElementById('jsVariableInput').value = fileName;
+
+    // Soumettre le formulaire
+    document.getElementById('myForm').submit();
+  }
+
 
 
 </script>
 
 
+<form id="myForm" method="post" action="">
+  <input type="hidden" name="fileName" id="jsVariableInput">
+  <input type="button" value="Soumettre" onclick="submitForm()">
+</form>
+
 
 
 <?php
-if (isset($_GET['run']) && $_GET['run'] == true) {
-    # This code will run if ?run=true is set.
-    echo "<pre>";
-    echo Shell_Exec('powershell -InputFormat none -ExecutionPolicy ByPass -NoProfile -Command "& { . \".\Run_program.ps1\ "; }"');
-    echo "</pre>";
-}   
-?>
 
-<!-- This link will add ?run=true to your URL, myfilename.php?run=true -->
-<a href="?run=true">Click Me!</a>
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['fileName'])) {
+    // Récupérer la valeur de la variable JavaScript envoyée via le formulaire
+    $fileName = $_POST['fileName'];
+
+    echo "La valeur de la variable JavaScript est : " . $fileName;
+    
+    $commande = 'powershell -InputFormat none -ExecutionPolicy ByPass -NoProfile -Command "& { .\Run_program.ps1 ' . $fileName;
+    $commande = $commande . '; }"';
+   // echo $commande;
+    echo "<pre>";
+    echo Shell_Exec($commande);
+    echo "</pre>";
+  }
+?>
   
