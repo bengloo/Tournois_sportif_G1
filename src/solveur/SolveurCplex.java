@@ -38,9 +38,9 @@ public class SolveurCplex implements Solveur{
         init(instance);
         // imposer un temps limite de resolutuon, ici 60 secondes
         try {
-            this.cplex.setParam(IloCplex.DoubleParam.TiLim, 600);
+            this.cplex.setParam(IloCplex.DoubleParam.TiLim, 1000);
         } catch (IloException e) {
-            throw new RuntimeException(e);
+            //throw new RuntimeException(e);
         }
         try {
             if(cplex.solve()) {
@@ -52,7 +52,7 @@ public class SolveurCplex implements Solveur{
                 // Cplex n’a pas trouve de solution realisable ...
             }
         } catch (IloException e) {
-            throw new RuntimeException(e);
+            //throw new RuntimeException(e);
         }
 
 
@@ -245,7 +245,7 @@ public class SolveurCplex implements Solveur{
                         try {
                             if(cplex.getValue(x[d][e][j])==1){
                                 OperateurInsertion o=new OperateurInsertion(s,s.getJourneeByID(j),s.getRencontreByEquipes(d,e));
-                                if(!o.doMouvementIfRealisable()){
+                                if(!o.doMouvementTrusted()){
                                     System.err.println(o.toString());
                                 };
                             };

@@ -95,6 +95,10 @@ public abstract class Operateur {
         return false;
     }
 
+    public boolean doMouvementTrusted(){
+        return doMouvement();
+    }
+
     /**
      * Indique si le mouvement lié à l'opérateur courant est améliorant
      * @return true si le mouvement améliore la situation actuelle (coût plus faible), false sinon
