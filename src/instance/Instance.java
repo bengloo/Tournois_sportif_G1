@@ -54,6 +54,10 @@ public class Instance {
         return nbEquipes;
     }
 
+    public int getNbContraintePause(){
+        return contraintesPauseEquipe.size()+contraintesPauseGlobale.size();
+    }
+
     public int getNbJournees(){
         return getNbEquipes()*2-2;
     }

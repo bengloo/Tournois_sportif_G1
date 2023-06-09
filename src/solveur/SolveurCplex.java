@@ -24,6 +24,7 @@ public class SolveurCplex implements Solveur{
 
     @Override
     public Solution solve(Instance instance) {
+        System.out.println(this.getNom()+"|"+instance.getNom());
         buildModel(instance);
         return fomatSaveSolution(instance);
     }
@@ -37,14 +38,14 @@ public class SolveurCplex implements Solveur{
         init(instance);
         // imposer un temps limite de resolutuon, ici 60 secondes
         try {
-            this.cplex.setParam(IloCplex.DoubleParam.TiLim, 60);
+            this.cplex.setParam(IloCplex.DoubleParam.TiLim, 600);
         } catch (IloException e) {
             throw new RuntimeException(e);
         }
         try {
             if(cplex.solve()) {
                 // Cplex a trouve une solution realisable !
-                System.out.println(cplex.toString());
+                //System.out.println(cplex.toString());
 
             } else {
                 System.out.println("Cplex n’a pas trouve de solution realisable");
@@ -67,7 +68,7 @@ public class SolveurCplex implements Solveur{
         initContrainteInerante(instance);
         initContrainteDecision(instance);
         initContrainte(instance);
-        System.out.println("all Contrainte et variable init done");
+        //System.out.println("all Contrainte et variable init done");
         // ne pas imprimer les informations sur la console
         // ne pas mettre cette option pendant les tests !
         this.cplex.setOut(null);
@@ -147,34 +148,36 @@ public class SolveurCplex implements Solveur{
     public void initContrainteDecision(Instance instance){
         int nbE=instance.getNbEquipes();
         int nbJ=instance.getNbJournees();
-        for(int e=0;e<nbE;e++){
-            for(int j=1;j<nbJ;j++) {
-                IloLinearNumExpr expry1 = null;
-                IloLinearNumExpr expry2 = null;
-                IloLinearNumExpr exprz1 = null;
-                IloLinearNumExpr exprz2 = null;
-                try {
-                    expry1 = cplex.linearNumExpr();//pause au au jour j-1 d'une equipe en domicile
-                    expry2 = cplex.linearNumExpr();//pause au au jour j d'une equipe en domicile
-                    exprz1 = cplex.linearNumExpr();//pause au au jour j-1 d'une equipe en exterieur
-                    exprz2 = cplex.linearNumExpr();//pause au au jour j d'une equipe en exterieur
-                    for(int i=0;i<nbE;i++){
-                        if(i!=e) {
-                            expry1.addTerm(x[e][i][j - 1], 1);
-                            expry2.addTerm(x[e][i][j], 1);
-                            exprz1.addTerm(x[i][e][j - 1], 1);
-                            exprz2.addTerm(x[i][e][j], 1);
+        if(instance.getNbContraintePause()>0) {
+            for (int e = 0; e < nbE; e++) {
+                for (int j = 1; j < nbJ; j++) {
+                    IloLinearNumExpr expry1 = null;
+                    IloLinearNumExpr expry2 = null;
+                    IloLinearNumExpr exprz1 = null;
+                    IloLinearNumExpr exprz2 = null;
+                    try {
+                        expry1 = cplex.linearNumExpr();//pause au au jour j-1 d'une equipe en domicile
+                        expry2 = cplex.linearNumExpr();//pause au au jour j d'une equipe en domicile
+                        exprz1 = cplex.linearNumExpr();//pause au au jour j-1 d'une equipe en exterieur
+                        exprz2 = cplex.linearNumExpr();//pause au au jour j d'une equipe en exterieur
+                        for (int i = 0; i < nbE; i++) {
+                            if (i != e) {
+                                expry1.addTerm(x[e][i][j - 1], 1);
+                                expry2.addTerm(x[e][i][j], 1);
+                                exprz1.addTerm(x[i][e][j - 1], 1);
+                                exprz2.addTerm(x[i][e][j], 1);
+                            }
                         }
-                    }
-                    cplex.addLe(cplex.sum(cplex.sum(expry1,expry2),-1),y[j-1][e],"CNPD1j"+j+"e"+e);
-                    cplex.addLe(cplex.sum(cplex.sum(exprz1,exprz2),-1),z[j-1][e],"CNPE1j"+j+"e"+e);
-                    cplex.addLe(y[j-1][e],expry1,"CNPD2j"+j+"e"+e);
-                    cplex.addLe(y[j-1][e],expry2,"CNPD3j"+j+"e"+e);
-                    cplex.addLe(z[j-1][e],exprz1,"CNPE2j"+j+"e"+e);
-                    cplex.addLe(z[j-1][e],exprz2,"CNPE3j"+j+"e"+e);
+                        cplex.addLe(cplex.sum(cplex.sum(expry1, expry2), -1), y[j - 1][e], "CNPD1j" + j + "e" + e);
+                        cplex.addLe(cplex.sum(cplex.sum(exprz1, exprz2), -1), z[j - 1][e], "CNPE1j" + j + "e" + e);
+                        cplex.addLe(y[j - 1][e], expry1, "CNPD2j" + j + "e" + e);
+                        cplex.addLe(y[j - 1][e], expry2, "CNPD3j" + j + "e" + e);
+                        cplex.addLe(z[j - 1][e], exprz1, "CNPE2j" + j + "e" + e);
+                        cplex.addLe(z[j - 1][e], exprz2, "CNPE3j" + j + "e" + e);
 
-                } catch (IloException ex) {
-                    throw new RuntimeException(ex);
+                    } catch (IloException ex) {
+                        throw new RuntimeException(ex);
+                    }
                 }
             }
         }
@@ -198,7 +201,7 @@ public class SolveurCplex implements Solveur{
     private void initContrainte(Instance instance){
         for(Contrainte c:instance.getContraintes()){
             c.initCplexEquation(this,instance);
-            System.out.println("Contrainte set: "+c.toString());
+            //System.out.println("Contrainte set: "+c.toString());
         }
     }
 
