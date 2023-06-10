@@ -16,6 +16,8 @@ import solveur.*;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -177,8 +179,18 @@ public class TestAllSolveur {
             // TO CHECK : resolution de l'instance avec le solveur
             Solution sol = solveur.solve(inst);
             long time = System.currentTimeMillis() - start;
-            System.out.println("|timer: "+time);
+            try {
+                ((SolveurCplex)solveur).addLog("|"+InetAddress.getLocalHost().getHostName()+"|"+System.getProperty("user.name"));
+            } catch (UnknownHostException e) {
+                throw new RuntimeException(e);
+            }
+
             sol.writeSolution(solveur.getNom());
+            sol.writeSolutionChekerProf(solveur.getNom());
+            //TODO integré le cheker du prof
+            ((SolveurCplex)solveur).addLog("|"+time+"|null");
+            System.out.println(((SolveurCplex)solveur).getLog());
+            ((SolveurCplex)solveur).restLog();
             // TO CHECK : recperer le cout total de la solution, et savoir si
             // la solution est valide
             Resultat result = new Resultat(sol.getCoutTotal(), time, sol.check());
@@ -351,7 +363,7 @@ public class TestAllSolveur {
      * @param args
      */
     public static void main(String[] args) {
-        TestAllSolveur test = new TestAllSolveur("instances");
+        TestAllSolveur test = new TestAllSolveur("instancesViable");
         test.printAllResultats("results");
     }
 }

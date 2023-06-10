@@ -4,10 +4,7 @@ import instance.Instance;
 import instance.modele.contrainte.*;
 import operateur.OperateurInsertion;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 
 /** classe définissant Solution
@@ -514,6 +511,85 @@ public class Solution {
         }
         try {
             File file = new File("resultats/" + repSolveur + "/" + instance.getNom()+"_sol.txt");
+            FileWriter fw = new FileWriter(file, false);
+            BufferedWriter bw = new BufferedWriter(fw);
+
+
+            bw.write("// Solution");
+            bw.newLine();
+            bw.write("// Instance "+instance.getNom());
+            bw.newLine();
+            for (Journee j : this.journees.values()) {
+                bw.newLine();
+                bw.write("// Journee "+j.getId().toString());
+                bw.newLine();
+                for (Rencontre r : j.getRencontres().values()) {
+                    bw.write(r.getDomicile().getId().toString()+"   "+r.getExterieur().getId().toString());
+                    bw.newLine();
+                }
+            }
+            bw.close();
+            fw.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void writeSolutionChekerProf(String repSolveur){
+
+        //on vide le dossier
+        File dossier = new File("checkerProf");
+
+        // Vérifier si le chemin spécifié correspond à un dossier existant
+        if (dossier.isDirectory()) {
+            File[] fichiers = dossier.listFiles();
+
+            // Parcourir tous les fichiers du dossier
+            for (File fichier : fichiers) {
+                // Vérifier si le fichier est un fichier ".txt"
+                if (fichier.isFile() && fichier.getName().endsWith(".txt")) {
+                    // Supprimer le fichier
+                    fichier.delete();
+                }
+            }
+        } else {
+            System.out.println("Le chemin spécifié ne correspond pas à un dossier existant.");
+        }
+        //on copie l'intsance
+        try {
+            File fichierSource = new File(instance.getChemin());
+            File dossierDestination = new File("checkerProf/");
+
+            // Vérifier si le fichier source existe
+            if (fichierSource.exists()) {
+                // Vérifier si le dossier de destination existe
+                if (!dossierDestination.exists()) {
+                    // Créer le dossier de destination s'il n'existe pas
+                    dossierDestination.mkdirs();
+                }
+
+                // Lire le contenu du fichier source
+                FileInputStream fileInputStream = new FileInputStream(fichierSource);
+                byte[] buffer = new byte[(int) fichierSource.length()];
+                fileInputStream.read(buffer);
+                fileInputStream.close();
+
+                // Créer le fichier de destination
+                File fichierDestination = new File(dossierDestination, "fichierInstance.txt");
+                FileOutputStream fileOutputStream = new FileOutputStream(fichierDestination);
+                fileOutputStream.write(buffer);
+                fileOutputStream.close();
+
+                //System.out.println("Le fichier a été copié avec succès vers : " + fichierDestination.getAbsolutePath());
+            } else {
+                System.out.println("Le fichier source n'existe pas.");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //on write la solution
+        try {
+            File file = new File("checkerProf/fichierInstance_sol.txt");
             FileWriter fw = new FileWriter(file, false);
             BufferedWriter bw = new BufferedWriter(fw);
 

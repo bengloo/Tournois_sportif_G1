@@ -18,6 +18,8 @@ import java.util.Map;
  */
 public class Instance {
     private String nom;
+
+    private String chemin;
     private int nbEquipes;
     /*private Map<Integer, Equipe> equipes;
 
@@ -33,7 +35,7 @@ public class Instance {
     private LinkedList<ContrainteHBClassement>contraintesHBClassement;
     private LinkedList<ContrainteSeparation>contraintesSeparation;
 
-    public Instance(String nom,int nbEquipes) {
+    public Instance(String nom,int nbEquipes,String chemin) {
         this.nom = nom;
         this.nbEquipes=nbEquipes;
         contraintesEquite =new LinkedList<>();
@@ -43,8 +45,12 @@ public class Instance {
         contraintesPauseGlobale =new LinkedList<>();
         contraintesPauseEquipe =new LinkedList<>();
         contraintesSeparation =new LinkedList<>();
+        this.chemin=chemin;
     }
 
+    public String getChemin() {
+        return chemin;
+    }
 
     /**
      * Récupère le nombre d'équipes contenues dans l'instance

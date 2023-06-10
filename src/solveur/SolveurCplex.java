@@ -7,6 +7,8 @@ import solution.Solution;
 import ilog.concert.*;
 import ilog.cplex.IloCplex;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Random;
 
 
@@ -17,6 +19,10 @@ public class SolveurCplex implements Solveur{
     private IloNumVar[][] y;
     private IloNumVar[][] z;
 
+    private int watchDog = 600;
+
+    private String log = "";
+
     @Override
     public String getNom() {
         return "SolveurCplex";
@@ -24,7 +30,7 @@ public class SolveurCplex implements Solveur{
 
     @Override
     public Solution solve(Instance instance) {
-        System.out.println(this.getNom()+"|"+instance.getNom());
+        this.addLog(this.getNom()+"|"+instance.getNom());
         buildModel(instance);
         return fomatSaveSolution(instance);
     }
@@ -38,13 +44,14 @@ public class SolveurCplex implements Solveur{
         init(instance);
         // imposer un temps limite de resolutuon, ici 60 secondes
         try {
-            this.cplex.setParam(IloCplex.DoubleParam.TiLim, 1000);
+            this.cplex.setParam(IloCplex.DoubleParam.TiLim, watchDog);
         } catch (IloException e) {
-            //throw new RuntimeException(e);
+            throw new RuntimeException(e);
         }
         try {
             if(cplex.solve()) {
                 // Cplex a trouve une solution realisable !
+
                 //System.out.println(cplex.toString());
 
             } else {
@@ -52,7 +59,7 @@ public class SolveurCplex implements Solveur{
                 // Cplex n’a pas trouve de solution realisable ...
             }
         } catch (IloException e) {
-            //throw new RuntimeException(e);
+            throw new RuntimeException(e);
         }
 
 
@@ -182,6 +189,19 @@ public class SolveurCplex implements Solveur{
             }
         }
     }
+
+    public String getLog() {
+        return log;
+    }
+
+    public void addLog(String log) {
+        this.log = this.log+log;
+    }
+
+    public void restLog() {
+        this.log = "";
+    }
+
     public IloCplex getCplex() {
         return cplex;
     }
@@ -256,6 +276,7 @@ public class SolveurCplex implements Solveur{
                 }
             }
         }
+        this.addLog("|"+s.check()+"|"+this.watchDog+"|"+ LocalDateTime.now()+"|"+s.getCoutTotal());
         return s;
     }
 

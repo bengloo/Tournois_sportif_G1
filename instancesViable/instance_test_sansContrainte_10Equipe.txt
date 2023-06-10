@@ -1,0 +1,70 @@
+// Nom
+sans contrainte 10 equipe
+
+// Nombre d'equipes
+10
+
+// Contraintes dures
+
+// Contraintes de placement
+// Nombre
+0
+// Contraintes
+
+// Contraintes d'equipes en haut et bas de classement
+// Nombre
+0
+// Contraintes
+
+// Contraintes de rencontres
+// Nombre
+0
+// Contraintes
+
+// Contraintes de pause par equipe
+// Nombre
+0
+// Contraintes
+
+// Contraintes de pause globale
+// Nombre
+0
+// Contraintes
+
+
+// Contraintes souples
+
+// Contraintes de placement
+// Nombre
+0
+// Contraintes
+
+// Contraintes d'equipes en haut et bas de classement
+// Nombre
+0
+// Contraintes
+
+// Contraintes de rencontres
+// Nombre
+0
+// Contraintes
+
+// Contraintes de pause par equipe
+// Nombre
+0
+// Contraintes
+
+// Contraintes de pause globale
+// Nombre
+0
+// Contraintes
+
+// Contraintes d'equite
+// Nombre
+0
+// Contraintes
+
+// Contraintes de separation
+// Nombre
+0
+// Contraintes

@@ -58,8 +58,8 @@ public class InstanceReader {
             BufferedReader br = new BufferedReader(f);
             String nom = lireNom(br);
             int nbEquipes = lireNbEquipes(br);
-
-            Instance i = new Instance(nom,nbEquipes);
+            //System.out.println(this.instanceFile.getPath());
+            Instance i = new Instance(nom,nbEquipes,this.instanceFile.getAbsolutePath());
             //System.out.println(i);
 
             // TO CHECK : constructeur de la classe Instance
