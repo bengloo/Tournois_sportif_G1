@@ -26,13 +26,13 @@ body {
 	left: 50%;
 	transform: translate(-50%, -50%);
 	width: 300px;
-	height: 260px;
+	height: 300px;
 	border-radius: 3px;
 	box-shadow: 8px 10px 15px 0 rgba(0, 0, 0, 0.2);
 	background: #fff;
 	display: flex;
 	align-items: center;
-	justify-content: space-evenly;
+	justify-content: space-around;
 	flex-direction: column;
 }
 
@@ -61,9 +61,13 @@ h1 {
 	margin: 25px 2px 2px 2px;
 }
 
+.filename {
+	font-size: smaller;
+}
+
 .upload-input {
 	position: relative;
-	top: -62px;
+	top: -61px;
 	left: 0;
 	width: 100%;
 	height: 100%;
@@ -89,3 +93,34 @@ h1 {
 	box-shadow: 0 3px 0 0 #fd9718;
 }
 
+#attenteImport {
+	font-size: smaller;
+	text-align: center;
+}
+
+#loadingOverlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 9999; /* Assurez-vous que l'élément de chargement est en premier plan */
+}
+
+.loadingSpinner {
+	border: 4px solid #f3f3f3; /* Couleur de la bordure du spinner */
+	border-top: 4px solid #3498db; /* Couleur de la première ligne du spinner */
+	border-radius: 50%;
+	width: 40px;
+	height: 40px;
+	animation: spin 1s linear infinite; /* Animation de rotation */
+}
+
+@keyframes spin {
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+}
