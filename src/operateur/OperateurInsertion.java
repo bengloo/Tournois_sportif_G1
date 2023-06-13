@@ -33,7 +33,6 @@ public class OperateurInsertion extends Operateur{
         if(!isRealisableInital()){
             //System.out.println(this.toString());
             return Integer.MAX_VALUE;
-
         }
         for(TypeContrainte type:TypeContrainte.values()){
             for(Contrainte c: getChampionnat().getContraintes(type)){
@@ -110,6 +109,11 @@ public class OperateurInsertion extends Operateur{
         //TODO y'a peut étre moyen de mieux parcour un hashmap à moindre temps
         //pour chaque contrainte impacté par l'operation
         for(Contrainte c:deltaCoefs.keySet()){
+            //System.out.println(this.toString());
+            //System.out.println(getChampionnat().getCoefContraintes().toString());
+            //System.out.println(c.evalDeltaCout(getChampionnat(),this,deltaCoefs.get(c)));
+            //System.out.println("------------------------------------------\n");
+
             //on update le cout et les coef des contraintes
             getChampionnat().addCoefCoutContrainte(c,deltaCoefs.get(c),c.evalDeltaCout(getChampionnat(),this,deltaCoefs.get(c)));
         }

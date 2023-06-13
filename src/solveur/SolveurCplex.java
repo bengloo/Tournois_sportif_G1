@@ -19,7 +19,7 @@ public class SolveurCplex implements Solveur{
     private IloNumVar[][] y;
     private IloNumVar[][] z;
 
-    private int watchDog = 600;
+    private int watchDog = 10;
 
     private String log = "";
 
@@ -32,6 +32,7 @@ public class SolveurCplex implements Solveur{
     public Solution solve(Instance instance) {
         this.addLog(this.getNom()+"|"+instance.getNom());
         buildModel(instance);
+
         return fomatSaveSolution(instance);
     }
 
@@ -56,6 +57,8 @@ public class SolveurCplex implements Solveur{
 
             } else {
                 System.out.println("Cplex n’a pas trouve de solution realisable");
+                System.out.println(this.log);
+                //System.out.println(cplex.getInfeasibilities(cplex.ge));
                 // Cplex n’a pas trouve de solution realisable ...
             }
         } catch (IloException e) {

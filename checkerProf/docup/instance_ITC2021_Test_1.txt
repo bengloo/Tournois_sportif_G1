@@ -8,11 +8,18 @@ Test Instance 1
 
 // Contraintes de placement
 // Nombre
-2
+10
 // Contraintes
 equipe=0	jours=6;7;9	mode=D	max=1
+equipe=4	jours=6	mode=D	max=0
+equipe=4	jours=7	mode=E	max=0
+equipe=5	jours=3	mode=E	max=0
 equipe=1	jours=1;2;9	mode=D	max=1
-
+equipe=1	jours=2;4;5	mode=D	max=1
+equipe=1	jours=2;6;8	mode=E	max=1
+equipe=2	jours=0;1;6;8	mode=E	max=2
+equipe=5	jours=4	mode=D	max=0
+equipe=1	jours=4;5	mode=E	max=1
 
 // Contraintes d'equipes en haut et bas de classement
 // Nombre
@@ -21,11 +28,13 @@ equipe=1	jours=1;2;9	mode=D	max=1
 
 // Contraintes de rencontres
 // Nombre
-3
+5
 // Contraintes
 jours=1;7;8	rencontres=2,1;3,2;4,5	min=0	max=1
 jours=0;2;3;7	rencontres=0,5;1,3;4,0;5,0	min=0	max=2
 jours=0;1;7;9	rencontres=0,1;0,4;1,5;3,4	min=0	max=2
+jours=5;8;9	rencontres=1,5;3,1;5,4	min=0	max=1
+jours=1;3;6	rencontres=1,5;3,0;5,1	min=0	max=1
 
 // Contraintes de pause par equipe
 // Nombre

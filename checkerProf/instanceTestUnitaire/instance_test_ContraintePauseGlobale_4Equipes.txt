@@ -2,7 +2,7 @@
 contrainte pause globale 4 equipes
 
 // Nombre d'equipes
-4
+6
 
 // Contraintes dures
 
@@ -30,7 +30,7 @@ contrainte pause globale 4 equipes
 // Nombre
 1
 // Contraintes
-equipes=0;1	jours=0;1;2;3;4;5	max=0	penalite=1
+equipes=0;1;2;3;4;5	jours=0;1;2;3;4;5	max=9
 
 // Contraintes souples
 

@@ -180,6 +180,20 @@ public class ContraintePauseEquipe extends Contrainte{
             } catch (IloException e) {
                 throw new RuntimeException(e);
             }
+        }else{
+            IloLinearNumExpr expr = null;
+            try {
+                expr = sCplex.getCplex().linearNumExpr();
+                for(int j:this.journees){
+                    if(j!=0){
+                        expr.addTerm(sCplex.getZ()[j-1][this.equipe], 1);
+                        expr.addTerm(sCplex.getY()[j-1][this.equipe], 1);
+                    }
+                }
+                sCplex.getCplex().addLe(expr, this.max);
+            } catch (IloException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 

@@ -102,12 +102,6 @@ public class Solution {
         }
     }
 
-    public Solution(Solution sol){
-        //TODO constructeur par copie
-            //l'instance et l'equipe sont referé par adresse
-            //le reste doit étre copié entierrement
-                //TODO faire des constructeur par copie de journne et rencontre
-    }
 
     public boolean isMeilleure(Solution sol){
         if(sol==null)return true;
@@ -190,7 +184,11 @@ public class Solution {
      * @return l'entier symbolisant le coût
      */
     public Integer getCoutTotal() {
-        return this.coutTotal;
+        int ctt=0;
+        for(Contrainte c:coefContraintes.keySet()){
+            ctt+=c.getCoutTotal(this);
+        }
+        return ctt;
     }
 
     /**
@@ -413,14 +411,21 @@ public class Solution {
      * @return true si les contraintes sont réalisables, false sinon
      */
     public boolean checkAllContrainte(){
+        boolean res=true;
         for(Contrainte c:getContraintes()){
             if(!c.checkContrainte(this)){
                 System.err.println("Contrainte non respectée: "+c.toString());
-                return false;
+                if(c instanceof ContraintePauseEquipe || c instanceof ContraintePauseGlobale){
+                    System.err.println("Coef"+((Integer)coefContraintes.get(c)));
+                }else{
+                    //System.err.println("Coef"+coefContraintes.get(c).toString());
+                }
+
+                res= false;
             }
         }
 
-        return true;
+        return res;
     }
 
     /**
@@ -510,7 +515,7 @@ public class Solution {
             folder.mkdirs();
         }
         try {
-            File file = new File("resultats/" + repSolveur + "/" + instance.getNom()+"_sol.txt");
+            File file = new File("resultats/" + repSolveur + "/" + (instance.getChemin().split("/")[instance.getChemin().split("/").length-1]).replace(".txt","_sol.txt"));
             FileWriter fw = new FileWriter(file, false);
             BufferedWriter bw = new BufferedWriter(fw);
 

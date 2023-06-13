@@ -1,8 +1,8 @@
 // Nom
-sans contrainte 14 equipe
+contrainte pause equipe 4 equipe
 
 // Nombre d'equipes
-14
+4
 
 // Contraintes dures
 
@@ -23,8 +23,9 @@ sans contrainte 14 equipe
 
 // Contraintes de pause par equipe
 // Nombre
-0
+1
 // Contraintes
+equipe=2	jours=0;1;2;3;4;5	mode=E	max=0
 
 // Contraintes de pause globale
 // Nombre

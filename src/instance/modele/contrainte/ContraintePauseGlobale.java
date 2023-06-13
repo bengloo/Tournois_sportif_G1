@@ -137,12 +137,16 @@ public class ContraintePauseGlobale extends Contrainte{
             switch (mode){
                 case DOMICILE:
                     if(rjprec.getDomicile().equals(rEquipe.getDomicile())&&this.equipes.contains(rEquipe.getDomicile().getId())){
+                        //System.out.println(rEquipe.getJournee().getId()+":"+rEquipe.getLabel()+":"+rjprec.getLabel()+"D");
                         return 1;
                     }
+                    break;
                 case EXTERIEUR:
                     if(rjprec.getExterieur().equals(rEquipe.getExterieur())&&this.equipes.contains(rEquipe.getExterieur().getId())){
+                        //System.out.println(rEquipe.getJournee().getId()+":"+rEquipe.getLabel()+":"+rjprec.getLabel()+"E");
                         return 1;
                     }
+                    break;
             }
         }
         return 0;
