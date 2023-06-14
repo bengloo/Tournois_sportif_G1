@@ -363,7 +363,7 @@ public class TestAllSolveur {
      * @param args
      */
     public static void main(String[] args) {
-        TestAllSolveur test = new TestAllSolveur("instances");
+        TestAllSolveur test = new TestAllSolveur("instanceViableCplex");
         test.printAllResultats("results");
     }
 }

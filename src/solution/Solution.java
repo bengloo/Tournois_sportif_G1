@@ -515,7 +515,23 @@ public class Solution {
             folder.mkdirs();
         }
         try {
-            File file = new File("resultats/" + repSolveur + "/" + (instance.getChemin().split("/")[instance.getChemin().split("/").length-1]).replace(".txt","_sol.txt"));
+            String os = System.getProperty("os.name").toLowerCase();
+            String aux;
+            if (os.contains("win")) {
+                //System.out.println("Système d'exploitation : Windows");
+                aux=("resultats\\\\" + repSolveur + "\\\\" + (instance.getChemin().split("\\\\")[instance.getChemin().split("\\\\").length-1]).replace(".txt","_sol.txt"));
+            } else if (os.contains("mac")) {
+                //System.out.println("Système d'exploitation : macOS");
+                aux= ("resultats/" + repSolveur + "/" + (instance.getChemin().split("/")[instance.getChemin().split("/").length-1]).replace(".txt","_sol.txt"));
+
+            } else if (os.contains("nix") || os.contains("nux") || os.contains("aix")) {
+                //System.out.println("Système d'exploitation : Unix/Linux");
+                aux=("resultats/" + repSolveur + "/" + (instance.getChemin().split("/")[instance.getChemin().split("/").length-1]).replace(".txt","_sol.txt"));
+            } else {
+                System.out.println("Système d'exploitation inconnu : " + os);
+                aux=("resultats/" + repSolveur + "/" + (instance.getChemin().split("/")[instance.getChemin().split("/").length-1]).replace(".txt","_sol.txt"));
+            }
+            File file = new File(aux);
             FileWriter fw = new FileWriter(file, false);
             BufferedWriter bw = new BufferedWriter(fw);
 

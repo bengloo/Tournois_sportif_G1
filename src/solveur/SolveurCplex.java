@@ -7,8 +7,8 @@ import solution.Solution;
 import ilog.concert.*;
 import ilog.cplex.IloCplex;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.Random;
 
 
@@ -16,10 +16,13 @@ public class SolveurCplex implements Solveur{
 
     private IloCplex cplex;
     private IloIntVar[][][] x;
-    private IloNumVar[][] y;
-    private IloNumVar[][] z;
+    private IloIntVar[][] y;
+    private IloIntVar[][] z;
 
-    private int watchDog = 10;
+    private HashMap<Contrainte,IloIntVar> cDurMax;
+    private HashMap<Contrainte,IloIntVar> cDurMin;
+
+    private int watchDog = 600;
 
     private String log = "";
 
@@ -33,7 +36,7 @@ public class SolveurCplex implements Solveur{
         this.addLog(this.getNom()+"|"+instance.getNom());
         buildModel(instance);
 
-        return fomatSaveSolution(instance);
+        return formatSaveSolution(instance);
     }
 
     private void buildModel(Instance instance) {
@@ -58,6 +61,7 @@ public class SolveurCplex implements Solveur{
             } else {
                 System.out.println("Cplex n’a pas trouve de solution realisable");
                 System.out.println(this.log);
+                
                 //System.out.println(cplex.getInfeasibilities(cplex.ge));
                 // Cplex n’a pas trouve de solution realisable ...
             }
@@ -213,12 +217,20 @@ public class SolveurCplex implements Solveur{
         return x;
     }
 
-    public IloNumVar[][] getY() {
+    public IloIntVar[][] getY() {
         return y;
     }
 
-    public IloNumVar[][] getZ() {
+    public IloIntVar[][] getZ() {
         return z;
+    }
+
+    public IloIntVar getCDureMax(Contrainte c){
+        return cDurMax.get(c);
+    }
+
+    public IloIntVar getCDureMin(Contrainte c){
+        return cDurMin.get(c);
     }
 
     private void initContrainte(Instance instance){
@@ -256,10 +268,24 @@ public class SolveurCplex implements Solveur{
 
             }
         }
+        cDurMax = new HashMap<Contrainte,IloIntVar>();
+        cDurMin = new HashMap<Contrainte,IloIntVar>();
+        int i=0;
+        for(Contrainte c:instance.getContraintes()){
+            if(c.estDure()){
+                i++;
+                try {
+                    cDurMax.put(c,this.cplex.intVar(0,Integer.MAX_VALUE,"cdmax"+i));
+                    cDurMin.put(c,this.cplex.intVar(0,Integer.MAX_VALUE,"cdmax"+i));
+                } catch (IloException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
 
     }
 
-    private Solution fomatSaveSolution(Instance instance){
+    private Solution formatSaveSolution(Instance instance){
         Solution s=new Solution(instance);
         for(int d=0;d<instance.getNbEquipes();d++) {
             for (int e = 0; e < instance.getNbEquipes(); e++) {
