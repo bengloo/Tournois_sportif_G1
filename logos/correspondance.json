@@ -1,0 +1,83 @@
+{
+    "1": {
+      "nom": "Paris Saint-Germain",
+      "logo": "/logos/psg.png"
+    },
+    "2": {
+      "nom": "Olympique de Marseille",
+      "logo": "/logos/om.png"
+    },
+    "3": {
+      "nom": "Olympique Lyonnais",
+      "logo": "/logos/olympique_lyonnais.png"
+    },
+    "4": {
+      "nom": "AS Monaco",
+      "logo": "/logos/as_monaco.png"
+    },
+    "5": {
+      "nom": "Lille OSC",
+      "logo": "/logos/losc.png"
+    },
+    "6": {
+      "nom": "Stade Rennais FC",
+      "logo": "/logos/stade_rennais_football_club.png"
+    },
+    "7": {
+      "nom": "FC Nantes",
+      "logo": "/logos/fc_nantes.png"
+    },
+    "8": {
+      "nom": "Montpellier HSC",
+      "logo": "/logos/montpellier_hérault_sport_club.png"
+    },
+    "9": {
+      "nom": "RC Strasbourg Alsace",
+      "logo": "/logos/racing_club_de_strasbourg.png"
+    },
+    "10": {
+      "nom": "OGC Nice",
+      "logo": "/logos/ogc_nice.png"
+    },
+    "11": {
+      "nom": "FC Metz",
+      "logo": "/logos/fc_metz.png"
+    },
+    "12": {
+      "nom": "Stade de Reims",
+      "logo": "/logos/stade_de_reims.png"
+    },
+    "13": {
+      "nom": "RC Lens",
+      "logo": "/logos/rc_lens.png"
+    },
+    "14": {
+      "nom": "AJ Auxerre",
+      "logo": "/logos/aj_auxerre.png"
+    },
+    "15": {
+      "nom": "AC Ajaccio",
+      "logo": "/logos/ac_ajaccio.png"
+    },
+    "16": {
+      "nom": "FC Lorient",
+      "logo": "/logos/fc_lorient.png"
+    },
+    "17": {
+      "nom": "Toulouse FC",
+      "logo": "/logos/toulouse_fc.png"
+    },
+    "18": {
+      "nom": "Stade Brestois 29",
+      "logo": "/logos/stade_brestois.png"
+    },
+    "19": {
+      "nom": "Clermont Foot 63",
+      "logo": "/logos/clermont_fc.png"
+    },
+    "20": {
+      "nom": "Troyes AC",
+      "logo": "/logos/estac_troyes.png"
+    }
+  }
+  

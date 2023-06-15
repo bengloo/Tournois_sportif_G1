@@ -111,7 +111,7 @@ function checkFilePresence() {
             }
         }
     };
-    xhr.open('HEAD', './solutions/execution_done', true);
+    xhr.open('HEAD', 'ExecutionDone.txt', true);
     xhr.send();
 }
 </script>

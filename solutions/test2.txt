@@ -1,0 +1,26 @@
+// Solution
+// Instance Contrainte equite 4 equipe
+
+// Journee 0
+1   3
+0   2
+
+// Journee 1
+0   3
+1   2
+
+// Journee 2
+0   3
+1   2
+
+// Journee 3
+1   0
+3   2
+
+// Journee 4
+2   0
+3   1
+
+// Journee 5
+2   1
+3   0
