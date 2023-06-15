@@ -139,20 +139,25 @@ public class ContrainteRencontres extends Contrainte{
      * @param sCplex
      */
     @Override
-    public void initCplexEquationDure(SolveurCplex sCplex, Instance instance) {
+    public void initCplexEquationDure(SolveurCplex sCplex, Instance instance,boolean minimise) {
         IloLinearNumExpr expr = null;
+        IloLinearNumExpr expr2 = null;
         try {
             expr = sCplex.getCplex().linearNumExpr();
+            expr2 = sCplex.getCplex().linearNumExpr();
             for(String rlabel:this.rencontres){
                 String[] parties = rlabel.split("-");
                 int d = Integer.parseInt(parties[0]);
                 int e = Integer.parseInt(parties[1]);
                 for(int j:this.journees){
                     expr.addTerm(sCplex.getX()[d][e][j], 1);
+                    expr2.addTerm(sCplex.getX()[d][e][j], 1);
                 }
             }
+            if(minimise)expr.addTerm(sCplex.getCDureMax(this),-1);
             sCplex.getCplex().addLe(expr, this.max,"CR1");
-            sCplex.getCplex().addGe(expr, this.min,"CR2");
+            if(minimise)expr2.addTerm(sCplex.getCDureMin(this),-1);
+            sCplex.getCplex().addGe(expr2, this.min,"CR2");
 
         } catch (IloException e) {
             throw new RuntimeException(e);

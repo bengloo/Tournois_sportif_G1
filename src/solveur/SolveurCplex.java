@@ -23,6 +23,8 @@ public class SolveurCplex implements Solveur{
     private HashMap<Contrainte,IloIntVar> cDurMin;
 
     private int watchDog = 600;
+    private boolean minimise =true;
+
 
     private String log = "";
 
@@ -195,6 +197,21 @@ public class SolveurCplex implements Solveur{
                 }
             }
         }
+        //on cherche à minimiser le nombre de contrainte dure non respecté
+        if(minimise) {
+            try {
+                IloLinearNumExpr expr = cplex.linearNumExpr();
+                for (IloIntVar c : cDurMax.values()) {
+                    expr.addTerm(c, 1);
+                }
+                for (IloIntVar c : cDurMin.values()) {
+                    expr.addTerm(c, 1);
+                }
+                this.cplex.addMinimize(expr);
+            } catch (IloException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
     public String getLog() {
@@ -235,7 +252,7 @@ public class SolveurCplex implements Solveur{
 
     private void initContrainte(Instance instance){
         for(Contrainte c:instance.getContraintes()){
-            c.initCplexEquation(this,instance);
+            c.initCplexEquation(this,instance,minimise);
             //System.out.println("Contrainte set: "+c.toString());
         }
     }
@@ -268,17 +285,19 @@ public class SolveurCplex implements Solveur{
 
             }
         }
-        cDurMax = new HashMap<Contrainte,IloIntVar>();
-        cDurMin = new HashMap<Contrainte,IloIntVar>();
-        int i=0;
-        for(Contrainte c:instance.getContraintes()){
-            if(c.estDure()){
-                i++;
-                try {
-                    cDurMax.put(c,this.cplex.intVar(0,Integer.MAX_VALUE,"cdmax"+i));
-                    cDurMin.put(c,this.cplex.intVar(0,Integer.MAX_VALUE,"cdmax"+i));
-                } catch (IloException e) {
-                    throw new RuntimeException(e);
+        if(minimise) {
+            cDurMax = new HashMap<Contrainte, IloIntVar>();
+            cDurMin = new HashMap<Contrainte, IloIntVar>();
+            int i = 0;
+            for (Contrainte c : instance.getContraintes()) {
+                if (c.estDure()) {
+                    i++;
+                    try {
+                        cDurMax.put(c, this.cplex.intVar(0, Integer.MAX_VALUE, "cdmax" + i));
+                        cDurMin.put(c, this.cplex.intVar(0, Integer.MAX_VALUE, "cdmax" + i));
+                    } catch (IloException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             }
         }

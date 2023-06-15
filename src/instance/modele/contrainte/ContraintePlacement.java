@@ -135,7 +135,7 @@ public class ContraintePlacement extends Contrainte{
      * @param sCplex
      */
     @Override
-    public void initCplexEquationDure(SolveurCplex sCplex, Instance instance) {
+    public void initCplexEquationDure(SolveurCplex sCplex, Instance instance,boolean minimise) {
 
 
 
@@ -148,6 +148,7 @@ public class ContraintePlacement extends Contrainte{
                         if(i!=this.equipe)expr.addTerm(sCplex.getX()[this.equipe][i][j], 1);
                     }
                 }
+                if(minimise)expr.addTerm(sCplex.getCDureMax(this),-1);
                 sCplex.getCplex().addLe(expr, this.max);
             } catch (IloException e) {
                 throw new RuntimeException(e);
@@ -160,6 +161,7 @@ public class ContraintePlacement extends Contrainte{
                         if(i!=this.equipe)expr.addTerm(sCplex.getX()[i][this.equipe][j], 1);
                     }
                 }
+                if(minimise)expr.addTerm(sCplex.getCDureMax(this),-1);
                 sCplex.getCplex().addLe(expr, this.max);
             } catch (IloException e) {
                 throw new RuntimeException(e);

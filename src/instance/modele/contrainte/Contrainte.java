@@ -80,10 +80,10 @@ public abstract class Contrainte {
         return getCoutTotal(championnat)!=Integer.MAX_VALUE;
     }
 
-    public abstract void initCplexEquationDure(SolveurCplex sCplex, Instance instance);
-    public void initCplexEquation(SolveurCplex sCplex, Instance instance){
+    public abstract void initCplexEquationDure(SolveurCplex sCplex, Instance instance,boolean minimise);
+    public void initCplexEquation(SolveurCplex sCplex, Instance instance,boolean minimise){
         if(this.estDure()){
-            initCplexEquationDure(sCplex,instance);
+            initCplexEquationDure(sCplex,instance,minimise);
         }else{
 
         }

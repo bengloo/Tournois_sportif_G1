@@ -173,7 +173,7 @@ public class ContraintePauseGlobale extends Contrainte{
     }
 
     @Override
-    public void initCplexEquationDure(SolveurCplex sCplex, Instance instance) {
+    public void initCplexEquationDure(SolveurCplex sCplex, Instance instance,boolean minimise) {
         IloLinearNumExpr expr = null;
         try {
             expr = sCplex.getCplex().linearNumExpr();
@@ -185,6 +185,7 @@ public class ContraintePauseGlobale extends Contrainte{
                     }
                 }
             }
+            if(minimise)expr.addTerm(sCplex.getCDureMax(this),-1);
             sCplex.getCplex().addLe(expr, this.max);
         } catch (IloException e) {
             throw new RuntimeException(e);

@@ -96,7 +96,7 @@ public class ContrainteSeparation extends Contrainte{
      * @param sCplex
      */
     @Override
-    public void initCplexEquationDure(SolveurCplex sCplex, Instance instance) {
+    public void initCplexEquationDure(SolveurCplex sCplex, Instance instance,boolean minimise) {
 
     }
 

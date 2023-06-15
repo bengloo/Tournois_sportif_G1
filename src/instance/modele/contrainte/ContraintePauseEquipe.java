@@ -152,7 +152,7 @@ public class ContraintePauseEquipe extends Contrainte{
      * @param sCplex
      */
     @Override
-    public void initCplexEquationDure(SolveurCplex sCplex, Instance instance) {
+    public void initCplexEquationDure(SolveurCplex sCplex, Instance instance,boolean minimise) {
         if(this.mode==TypeMode.DOMICILE) {
 
             IloLinearNumExpr expr = null;
@@ -163,6 +163,7 @@ public class ContraintePauseEquipe extends Contrainte{
                         expr.addTerm(sCplex.getY()[j-1][this.equipe], 1);
                     }
                 }
+                if(minimise)expr.addTerm(sCplex.getCDureMax(this),-1);
                 sCplex.getCplex().addLe(expr, this.max);
             } catch (IloException e) {
                 throw new RuntimeException(e);
@@ -176,6 +177,7 @@ public class ContraintePauseEquipe extends Contrainte{
                         expr.addTerm(sCplex.getZ()[j-1][this.equipe], 1);
                     }
                 }
+                if(minimise)expr.addTerm(sCplex.getCDureMax(this),-1);
                 sCplex.getCplex().addLe(expr, this.max);
             } catch (IloException e) {
                 throw new RuntimeException(e);
@@ -190,6 +192,7 @@ public class ContraintePauseEquipe extends Contrainte{
                         expr.addTerm(sCplex.getY()[j-1][this.equipe], 1);
                     }
                 }
+                if(minimise)expr.addTerm(sCplex.getCDureMax(this),-1);
                 sCplex.getCplex().addLe(expr, this.max);
             } catch (IloException e) {
                 throw new RuntimeException(e);

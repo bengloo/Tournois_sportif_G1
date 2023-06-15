@@ -19,7 +19,7 @@ import java.net.UnknownHostException;
  */
 public class TestCplex {
     public static void main(String[] args) {
-        String path="instances/instance_ITC2021_Early_2.txt";
+        String path="instanceViableCplex/instance_ITC2021_Test_1.txt";
         try {
             InstanceReader reader = new InstanceReader(path);
             Instance i= reader.readInstance();
