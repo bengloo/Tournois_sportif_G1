@@ -30,18 +30,18 @@ public class TestCplex {
             Solution s = solveur.solve(i);
             long time = System.currentTimeMillis() - start;
             try {
-                ((SolveurCplex)solveur).addLog("|"+ InetAddress.getLocalHost().getHostName()+"|"+System.getProperty("user.name"));
+                s.addLog("|"+ InetAddress.getLocalHost().getHostName()+"|"+System.getProperty("user.name"));
             } catch (UnknownHostException e) {
                 throw new RuntimeException(e);
             }
             s.writeSolution(solveur.getNom());
             s.writeSolutionChekerProf(solveur.getNom());
             //TODO integré le cheker du prof
-            ((SolveurCplex)solveur).addLog("|"+time+"|null");
+            s.addLog("|"+time+"|null");
             System.out.println(s.toStringSimple());
             System.out.println(s.check());
-            System.out.println(((SolveurCplex)solveur).getLog());
-            ((SolveurCplex)solveur).restLog();
+            System.out.println(s.getLog());
+            s.restLog();
             //System.out.println(s.toString());
         } catch (ReaderException ex) {
             System.out.println(ex.getMessage());

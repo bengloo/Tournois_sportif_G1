@@ -32,6 +32,8 @@ public class Solution {
     //marge par equipe pour les equipe viable
     private List<Integer>[] margeEquipe;
 
+    //log du solveur ayant amené à cette solution
+    private String log = "";
 
     public Solution(Instance instance) {
         this.instance = instance;
@@ -781,6 +783,18 @@ public class Solution {
             }
         }
         return res;
+    }
+
+    public String getLog() {
+        return log;
+    }
+
+    public void addLog(String log) {
+        this.log = this.log+log;
+    }
+
+    public void restLog() {
+        this.log = "";
     }
 
     public String nbMargineString(){

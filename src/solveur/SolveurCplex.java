@@ -23,10 +23,7 @@ public class SolveurCplex implements Solveur{
     private HashMap<Contrainte,IloIntVar> cDurMin;
 
     private int watchDog = 600;
-    private boolean minimise =true;
-
-
-    private String log = "";
+    private boolean minimise =false;
 
     @Override
     public String getNom() {
@@ -35,10 +32,10 @@ public class SolveurCplex implements Solveur{
 
     @Override
     public Solution solve(Instance instance) {
-        this.addLog(this.getNom()+"|"+instance.getNom());
-        buildModel(instance);
 
-        return formatSaveSolution(instance);
+        buildModel(instance);
+        Solution s =formatSaveSolution(instance);
+        return s;
     }
 
     private void buildModel(Instance instance) {
@@ -62,7 +59,6 @@ public class SolveurCplex implements Solveur{
 
             } else {
                 System.out.println("Cplex n’a pas trouve de solution realisable");
-                System.out.println(this.log);
                 
                 //System.out.println(cplex.getInfeasibilities(cplex.ge));
                 // Cplex n’a pas trouve de solution realisable ...
@@ -76,7 +72,7 @@ public class SolveurCplex implements Solveur{
 
     private void init(Instance instance) {
         try {
-            cplex.setParam(IloCplex.Param.RandomSeed, new Random().nextInt(Integer.MAX_VALUE));
+            cplex.setParam(IloCplex.Param.RandomSeed,new Random().nextInt(Integer.MAX_VALUE*3/4));
         } catch (IloException e) {
             throw new RuntimeException(e);
         }
@@ -214,18 +210,6 @@ public class SolveurCplex implements Solveur{
         }
     }
 
-    public String getLog() {
-        return log;
-    }
-
-    public void addLog(String log) {
-        this.log = this.log+log;
-    }
-
-    public void restLog() {
-        this.log = "";
-    }
-
     public IloCplex getCplex() {
         return cplex;
     }
@@ -324,7 +308,8 @@ public class SolveurCplex implements Solveur{
                 }
             }
         }
-        this.addLog("|"+s.check()+"|"+this.watchDog+"|"+ LocalDateTime.now()+"|"+s.getCoutTotal());
+        s.addLog(this.getNom()+"|"+instance.getNom());
+        s.addLog("|"+s.check()+"|"+this.watchDog+"|"+ LocalDateTime.now()+"|"+s.getCoutTotal());
         return s;
     }
 

@@ -10,7 +10,7 @@ contrainte placement 4 equipe
 // Nombre
 1
 // Contraintes
-equipe=0	jours=0	mode=D	max=0
+equipe=0	jours=0;1;2	mode=D	max=0
 
 // Contraintes d'equipes en haut et bas de classement
 // Nombre

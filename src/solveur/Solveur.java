@@ -11,6 +11,7 @@ import solution.Solution;
  * @version 1.0
  */
 public interface Solveur {
+
     /**
      * Méthode permettant de récupérer le nom de la méthode d'insertion de rencontres
      * @return la chaîne de caractères du nom

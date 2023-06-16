@@ -86,7 +86,7 @@ public class TestAllSolveur {
      */
     private void addSolveurs() {
         // TO CHECK : constructeur par defaut de la classe InsertionSimple
-        System.err.close();
+        //System.err.close();
         //solveurs.add(new InsertionSimple());
         //solveurs.add(new SolveurIterThread(new MeilleureInsertionV2()));
         solveurs.add(new SolveurCplex());
@@ -179,18 +179,20 @@ public class TestAllSolveur {
             // TO CHECK : resolution de l'instance avec le solveur
             Solution sol = solveur.solve(inst);
             long time = System.currentTimeMillis() - start;
+
             try {
-                ((SolveurCplex)solveur).addLog("|"+InetAddress.getLocalHost().getHostName()+"|"+System.getProperty("user.name"));
-            } catch (UnknownHostException e) {
+                Thread.sleep(10);
+                sol.addLog("|"+InetAddress.getLocalHost().getHostName()+"|"+System.getProperty("user.name"));
+            } catch (UnknownHostException | InterruptedException e) {
                 throw new RuntimeException(e);
             }
 
             sol.writeSolution(solveur.getNom());
             sol.writeSolutionChekerProf(solveur.getNom());
             //TODO integré le cheker du prof
-            ((SolveurCplex)solveur).addLog("|"+time+"|null");
-            System.out.println(((SolveurCplex)solveur).getLog());
-            ((SolveurCplex)solveur).restLog();
+            sol.addLog("|"+time+"|null");
+            System.out.println(sol.getLog());
+            sol.restLog();
             // TO CHECK : recperer le cout total de la solution, et savoir si
             // la solution est valide
             Resultat result = new Resultat(sol.getCoutTotal(), time, sol.check());
@@ -363,7 +365,7 @@ public class TestAllSolveur {
      * @param args
      */
     public static void main(String[] args) {
-        TestAllSolveur test = new TestAllSolveur("instanceViableCplex");
+        TestAllSolveur test = new TestAllSolveur("instanceTestUnitaire");
         test.printAllResultats("results");
     }
 }
