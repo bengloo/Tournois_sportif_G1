@@ -198,7 +198,7 @@ public class ContrainteHBClassement extends Contrainte{
      * @param sCplex
      */
     @Override
-    public void initCplexEquationDure(SolveurCplex sCplex, Instance instance,boolean minimise) {
+    public void initCplexEquation(SolveurCplex sCplex, Instance instance,boolean minimise,boolean minimiseSouple,boolean dure) {
         if(this.mode==TypeMode.DOMICILE) {
             try {
                 IloLinearNumExpr expr = sCplex.getCplex().linearNumExpr();
@@ -207,8 +207,12 @@ public class ContrainteHBClassement extends Contrainte{
                         if(i!=this.equipe)expr.addTerm(sCplex.getX()[this.equipe][i][j], 1);
                     }
                 }
-                if(minimise)expr.addTerm(sCplex.getCDureMax(this),-1);
-                sCplex.getCplex().addLe(expr, this.max);
+                if(dure) {
+                    if (minimise) expr.addTerm(sCplex.getCDureMax(this), -1);
+                    sCplex.getCplex().addLe(expr, this.max,"CDHB1_"+sCplex.getCplex().getNrows());
+                }else if(minimiseSouple){
+                    addEqSoupleMax(sCplex,max,expr);
+                }
             } catch (IloException e) {
                 throw new RuntimeException(e);
             }
@@ -220,8 +224,12 @@ public class ContrainteHBClassement extends Contrainte{
                         if(i!=this.equipe)expr.addTerm(sCplex.getX()[i][this.equipe][j], 1);
                     }
                 }
-                if(minimise)expr.addTerm(sCplex.getCDureMax(this),-1);
-                sCplex.getCplex().addLe(expr, this.max);
+                if(dure) {
+                    if (minimise) expr.addTerm(sCplex.getCDureMax(this), -1);
+                    sCplex.getCplex().addLe(expr, this.max,"CDHB2_"+sCplex.getCplex().getNrows());
+                }else if(minimiseSouple){
+                    addEqSoupleMax(sCplex,max,expr);
+                }
             } catch (IloException e) {
                 throw new RuntimeException(e);
             }
@@ -236,12 +244,21 @@ public class ContrainteHBClassement extends Contrainte{
                         }
                     }
                 }
-                if(minimise)expr.addTerm(sCplex.getCDureMax(this),-1);
-                sCplex.getCplex().addLe(expr, this.max);
+                if(dure) {
+                    if (minimise) expr.addTerm(sCplex.getCDureMax(this), -1);
+                    sCplex.getCplex().addLe(expr, this.max,"CDHB3_"+sCplex.getCplex().getNrows());
+                }else if(minimiseSouple){
+                    addEqSoupleMax(sCplex,max,expr);
+                }
             } catch (IloException e) {
                 throw new RuntimeException(e);
             }
         }
+    }
+
+    @Override
+    public boolean useValC() {
+        return false;
     }
 
     @Override

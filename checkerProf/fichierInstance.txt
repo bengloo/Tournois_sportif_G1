@@ -1,15 +1,16 @@
 // Nom
-sans contrainte 20 equipe
+contrainte placement 4 equipe
 
 // Nombre d'equipes
-20
+4
 
 // Contraintes dures
 
 // Contraintes de placement
 // Nombre
-0
+1
 // Contraintes
+equipe=0	jours=0;1;2	mode=D	max=0
 
 // Contraintes d'equipes en haut et bas de classement
 // Nombre
@@ -36,8 +37,10 @@ sans contrainte 20 equipe
 
 // Contraintes de placement
 // Nombre
-0
+2
 // Contraintes
+equipe=0	jours=0;1;2;3	mode=D	max=1	penalite=1
+equipe=1	jours=0;1;2;3	mode=D	max=1	penalite=1
 
 // Contraintes d'equipes en haut et bas de classement
 // Nombre

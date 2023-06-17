@@ -21,19 +21,14 @@ public class SolveurIter implements Solveur{
     @Override
     public Solution solve(Instance instance) {
         int niter=0;
+        Solution sbest= new Solution(instance);
         while (niter<nbIterMax){
-            Solution sol=this.solveurInitial.solve(instance);
-            if(sol.check()){
-                System.out.println(this.getNom()+" | "+instance.getNom()+" | niter:"+niter);
-                return sol;
-            }else{
-                System.out.println(sol.toString());
-                System.out.println(sol.getRencontreSansJournee());
-                System.out.println(sol.nbMargineString());
+            Solution sol= this.solveurInitial.solve(instance);
+            if((!sbest.check(false))||(sol.check(false)&&sol.isMeilleure(sbest))){
+                  sbest=sol;
             }
             niter++;
         }
-        System.out.print(this.getNom()+" | "+instance.getNom()+" | niter:"+niter);
-        return this.solveurInitial.solve(instance);
+        return sbest;
     }
 }

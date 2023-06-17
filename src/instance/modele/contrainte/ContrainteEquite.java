@@ -139,8 +139,16 @@ public class ContrainteEquite extends Contrainte {
     }
 
     @Override
-    public void initCplexEquationDure(SolveurCplex sCplex, Instance instance,boolean minimise) {
+    public void initCplexEquation(SolveurCplex sCplex, Instance instance,boolean minimiseDure,boolean minimiseSouple,boolean dure) {
+        if(!dure){
+            //TODO cout
+        }
 
+    }
+
+    @Override
+    public boolean useValC() {
+        return false;
     }
 
     private int getDelatCoef(Object valcDelta,Integer equipe){

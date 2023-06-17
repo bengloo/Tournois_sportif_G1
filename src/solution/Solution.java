@@ -364,21 +364,25 @@ public class Solution {
      * @return true si la solution est réalisable, false sinon
      */
     public boolean check(){
-        if(!checkIntegriteeChampionat())return false;
-        return checkAllContrainte();
+        return check(true);
+    }
+
+    public boolean check(boolean verbose){
+        if(!checkIntegriteeChampionat(verbose))return false;
+        return checkAllContrainte(verbose);
     }
 
     /**
      * Méthode permettant de vérifier la faisabilité de la solution vis-à-vis du planning du nombre de rencontres sur chaque journée et des phases
      * @return true si ces paramètres sont réalisables, false sinon
      */
-    public boolean checkIntegriteeChampionat(){
+    public boolean checkIntegriteeChampionat(boolean verbose){
         int compt;
 
         for(Journee j : this.journees.values()){
             // Vérification du nombre de rencontres sur une journée
             if(j.getRencontres().size()>getNBRencontreJournee()){
-                System.err.println("La journée "+j.getId()+" a un nombre de rencontres égal à: "+j.getRencontres().toString());
+                if(verbose)System.err.println("La journée "+j.getId()+" a un nombre de rencontres égal à: "+j.getRencontres().toString());
                 return false;
             }
             // Vérification que le nombre de rencontres d'une équipe sur une journée soit égal à 1
@@ -390,7 +394,7 @@ public class Solution {
                     }
                 }
                 if (compt != 1) {
-                    System.err.println("L'équipe "+e+" a un nombre de rencontres égal à: "+compt+" sur la journée "+j);
+                    if(verbose)System.err.println("L'équipe "+e+" a un nombre de rencontres égal à: "+compt+" sur la journée "+j);
                     return false;
                 }
             }
@@ -401,7 +405,7 @@ public class Solution {
                 //int a=getPhase(r.getJournee());
                 //int b= getPhase(this.rencontres.get(r.getLabelRetour()).getJournee());
                 //Rencontre ra=this.rencontres.get(r.getLabelRetour());
-                System.err.println("La rencontre "+r.toString()+" a son match retour dans la même phase");
+                if(verbose)System.err.println("La rencontre "+r.toString()+" a son match retour dans la même phase");
                 return false;
             }
         }
@@ -412,13 +416,13 @@ public class Solution {
      * Méthode permettant de vérifier la faisabilité de la solution vis-à-vis des contraintes
      * @return true si les contraintes sont réalisables, false sinon
      */
-    public boolean checkAllContrainte(){
+    public boolean checkAllContrainte(boolean verbose){
         boolean res=true;
         for(Contrainte c:getContraintes()){
             if(!c.checkContrainte(this)){
-                System.err.println("Contrainte non respectée: "+c.toString());
+                if(verbose)System.err.println("Contrainte non respectée: "+c.toString());
                 if(c instanceof ContraintePauseEquipe || c instanceof ContraintePauseGlobale){
-                    System.err.println("Coef"+((Integer)coefContraintes.get(c)));
+                    if(verbose)System.err.println("Coef"+((Integer)coefContraintes.get(c)));
                 }else{
                     //System.err.println("Coef"+coefContraintes.get(c).toString());
                 }

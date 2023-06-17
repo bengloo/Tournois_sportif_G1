@@ -4,11 +4,8 @@ import instance.Instance;
 import operateur.Operateur;
 import operateur.OperateurInsertion;
 import solution.Journee;
-import solution.Rencontre;
 import solution.Solution;
 import solveur.SolveurCplex;
-
-import java.util.LinkedList;
 import java.util.TreeSet;
 
 /** classe définissant ContrainteSeparation (hérite de Contrainte)
@@ -92,12 +89,17 @@ public class ContrainteSeparation extends Contrainte{
         return 0;
     }
 
-    /**
-     * @param sCplex
-     */
-    @Override
-    public void initCplexEquationDure(SolveurCplex sCplex, Instance instance,boolean minimise) {
 
+    @Override
+    public void initCplexEquation(SolveurCplex sCplex, Instance instance,boolean minimise,boolean minimiseSouple,boolean dure) {
+        if(!dure){
+            //TODO cout
+        }
+    }
+
+    @Override
+    public boolean useValC() {
+        return false;
     }
 
     @Override

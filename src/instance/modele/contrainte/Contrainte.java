@@ -1,5 +1,7 @@
 package instance.modele.contrainte;
 
+import ilog.concert.IloException;
+import ilog.concert.IloLinearNumExpr;
 import instance.Instance;
 import operateur.Operateur;
 import solution.Solution;
@@ -80,12 +82,60 @@ public abstract class Contrainte {
         return getCoutTotal(championnat)!=Integer.MAX_VALUE;
     }
 
-    public abstract void initCplexEquationDure(SolveurCplex sCplex, Instance instance,boolean minimise);
-    public void initCplexEquation(SolveurCplex sCplex, Instance instance,boolean minimise){
-        if(this.estDure()){
-            initCplexEquationDure(sCplex,instance,minimise);
-        }else{
+    public abstract void initCplexEquation(SolveurCplex sCplex, Instance instance, boolean minimiseDure, boolean minimiseSouple, boolean dure);
 
+    public abstract boolean useValC();
+
+
+    public void addEqSoupleMax(SolveurCplex sCplex, int max, IloLinearNumExpr expr){
+        //cout=max(valc-k;0)*w
+        try {
+            sCplex.getCplex().addEq(
+                    sCplex.getCoutC(this),
+                    sCplex.getCplex().prod(
+                            sCplex.getCplex().max(
+                                    sCplex.getCplex().sum(expr,-max),
+                                    0
+                            )
+                            ,this.penalite
+                    ),
+                    "CSM_"+sCplex.getCplex().getNrows()
+
+            );
+        } catch (IloException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void addEqSoupleMaxMin(SolveurCplex sCplex, int max,int min, IloLinearNumExpr expr){
+        //expr est est l'iloNumexpr representative de valc
+        //cout=(max(expr-k;0)+max(L-expr;0))*w
+        try {
+            sCplex.getCplex().addEq(
+                    sCplex.getCoutC(this),
+                    sCplex.getCplex().prod(
+                            sCplex.getCplex().sum(
+                                sCplex.getCplex().max(
+                                        sCplex.getCplex().sum(
+                                                expr,
+                                                -max
+                                        ),
+                                        0
+                                ),
+                                sCplex.getCplex().max(
+                                        sCplex.getCplex().sum(
+                                                sCplex.getCplex().prod(expr,-1),
+                                                min
+                                        ),
+                                        0
+                                )
+                            )
+                            ,this.penalite
+                    ),
+                    "CSMM_"+sCplex.getCplex().getNrows()
+
+            );
+        } catch (IloException e) {
+            throw new RuntimeException(e);
         }
     }
 

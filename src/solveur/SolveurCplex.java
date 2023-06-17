@@ -21,9 +21,13 @@ public class SolveurCplex implements Solveur{
 
     private HashMap<Contrainte,IloIntVar> cDurMax;
     private HashMap<Contrainte,IloIntVar> cDurMin;
+    private HashMap<Contrainte,IloIntVar> coutC;
+
+
 
     private int watchDog = 600;
-    private boolean minimise =false;
+    private boolean minimiseDure =false;
+    private boolean minimiseSouple =true;
 
     @Override
     public String getNom() {
@@ -194,13 +198,24 @@ public class SolveurCplex implements Solveur{
             }
         }
         //on cherche à minimiser le nombre de contrainte dure non respecté
-        if(minimise) {
+        if(minimiseDure) {
             try {
                 IloLinearNumExpr expr = cplex.linearNumExpr();
                 for (IloIntVar c : cDurMax.values()) {
                     expr.addTerm(c, 1);
                 }
                 for (IloIntVar c : cDurMin.values()) {
+                    expr.addTerm(c, 1);
+                }
+                this.cplex.addMinimize(expr);
+            } catch (IloException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        if(minimiseSouple){
+            try{
+                IloLinearNumExpr expr = cplex.linearNumExpr();
+                for (IloIntVar c : coutC.values()) {
                     expr.addTerm(c, 1);
                 }
                 this.cplex.addMinimize(expr);
@@ -234,9 +249,16 @@ public class SolveurCplex implements Solveur{
         return cDurMin.get(c);
     }
 
+    public IloIntVar getCoutC(Contrainte c){
+        return coutC.get(c);
+    }
+
+
     private void initContrainte(Instance instance){
         for(Contrainte c:instance.getContraintes()){
-            c.initCplexEquation(this,instance,minimise);
+            if(c.estDure()||((!c.estDure()) && minimiseSouple)) {
+                c.initCplexEquation(this, instance, minimiseDure, minimiseSouple, c.estDure());
+            }
             //System.out.println("Contrainte set: "+c.toString());
         }
     }
@@ -269,7 +291,7 @@ public class SolveurCplex implements Solveur{
 
             }
         }
-        if(minimise) {
+        if(minimiseDure) {
             cDurMax = new HashMap<Contrainte, IloIntVar>();
             cDurMin = new HashMap<Contrainte, IloIntVar>();
             int i = 0;
@@ -284,6 +306,21 @@ public class SolveurCplex implements Solveur{
                     }
                 }
             }
+        }
+        if(minimiseSouple){
+            coutC= new HashMap<Contrainte, IloIntVar>();
+            int i = 0;
+            for (Contrainte c : instance.getContraintes()) {
+                if (!c.estDure()) {
+                    i++;
+                    try {
+                        coutC.put(c, this.cplex.intVar(0, Integer.MAX_VALUE, "coutC" + i));
+                    } catch (IloException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+
         }
 
     }
@@ -309,7 +346,7 @@ public class SolveurCplex implements Solveur{
             }
         }
         s.addLog(this.getNom()+"|"+instance.getNom());
-        s.addLog("|"+s.check()+"|"+this.watchDog+"|"+ LocalDateTime.now()+"|"+s.getCoutTotal());
+        s.addLog("|"+s.check(false)+"|"+this.watchDog+"|"+ LocalDateTime.now()+"|"+s.getCoutTotal());
         return s;
     }
 
