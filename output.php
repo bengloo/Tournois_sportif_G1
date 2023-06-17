@@ -14,11 +14,12 @@
   
 
 	<div class="container animated animated-done bootdey" data-animate="fadeIn" data-animate-delay="0.05" style="animation-delay: 0.05s;">
-		<select id="fileDropdown"></select>
+		<div id="labelDropdown">Veuillez sélectionner une solution à afficher</div></br>
+		<select id="fileDropdown">
+			<option selected style="color:grey;">-- Pas de sélection --</option>
+		</select>
 		<hr class="hr-lg mt-0 mb-2 w-10 mx-auto hr-primary">
-		<div class="timeline timeline-left mx-lg-10">
-		
-		</div>
+		<div class="timeline timeline-left mx-lg-10"></div>
 	<div>
 </html>
     
@@ -47,7 +48,6 @@
 		$('#fileDropdown').on('change', function() {
 			var selectedFile = $(this).val();
 			
-			// TODO : requête Ajax
 			$.ajax({			
 				url: './fonctions/getFile.php',
 				method: 'GET',
@@ -57,8 +57,16 @@
 					var journees = []; // Tableau pour stocker les journées
 					var journee = []; // Tableau pour stocker les lignes d'une journée
 					var i = 0;
+					var dateAleatoire = genererDateAleatoire();
+					var date = new Date(dateAleatoire);
 
 					$('.timeline').empty();
+
+					// TODO: mofifier (c'était pour tester la récupération du JSON)
+					$.getJSON('./logos/correspondance.json', function(data) {
+						// Utilisez les données JSON ici
+						console.log(data);
+					})
 					
 					lines.forEach(function(line) {
 						if (line.trim() !== '' && !line.startsWith("//")) { // Vérifie si la ligne n'est pas vide
@@ -70,12 +78,15 @@
 							'</div>');
 							journee.push(values.map(Number)); // Ajoute la ligne sous forme de tableau de nombres dans la journée
 						} else if (!line.startsWith("//")) {
+							dateAleatoire = date.toLocaleDateString("fr-FR");
+
 							$('.timeline').append('<div class="box" id="box-'+i+'">'+
-													'<div class="timeline-breaker">Journée '+i+'</div>'+
+													'<div class="timeline-breaker">'+dateAleatoire+'</div>'+
 													'</div>');
 							journees.push(journee); // Ajoute la journée au tableau des journées
 							journee = []; // Réinitialise le tableau pour la prochaine journée
 							i++;
+							date.setDate(date.getDate() + 1); // Ajouter un jour à la date
 						}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
 					});
 					
@@ -97,6 +108,16 @@
 		});
 	});
 
+	function genererDateAleatoire() {
+		date = new Date(Math.random() * (new Date().getTime() - new Date(1970, 0, 1).getTime()) + new Date(1970, 0, 1).getTime());
+
+		var jour = date.getDate();
+		var mois = date.getMonth();
+		var annee = date.getFullYear();
+		var dateFormatee = (mois + 1) + "/" + jour + "/" + annee;
+
+		return dateFormatee;
+	}
 
 </script>
 

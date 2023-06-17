@@ -3,12 +3,30 @@
 
 body{
   margin-top:20px;
-  background-image: url(./background2.jpg);
+  background-image: url(./background.jpg);
   font-family: "Lexend Deca", Helvetica, sans-serif; 
 }
 
 .container {
   max-width: 1600px !important;
+	text-align: center;
+}
+
+#labelDropdown {
+	font-size: x-large;
+	text-align: center;
+}
+
+#fileDropdown {
+	font-size: x-large;
+	display: inline-block;
+  padding: 10px 20px;
+	margin-bottom: 10px;
+  border: none;
+  background-color: #1b1b1b;
+	color: white;
+  text-align-last: center;
+	border-radius: 10px;
 }
 
 .timeline {
