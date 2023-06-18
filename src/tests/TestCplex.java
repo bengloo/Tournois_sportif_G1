@@ -21,13 +21,15 @@ import java.net.UnknownHostException;
  */
 public class TestCplex {
     public static void main(String[] args) {
-        String path="instanceTestUnitaire/instance_test_ContraintePlacement_4Equipe.txt";
+        //String path="instanceViableCplex/instance_ITC2021_Test_1.txt";
+        //String path="instanceTestUnitaire/instance_test_ContraintePlacement_4Equipe.txt";
+        String path="instanceViableCplex/instance_ITC2021_Middle_5.txt";
         try {
             InstanceReader reader = new InstanceReader(path);
             Instance i= reader.readInstance();
             //System.out.println(i);
-            Solveur solveur = new SolveurCplex();
-            //Solveur solveur = new SolveurIter( new SolveurCplex(),100);
+            //Solveur solveur = new SolveurCplex();
+            Solveur solveur = new SolveurIter( new SolveurCplex(),1);
             long start = System.currentTimeMillis();
             Solution s = solveur.solve(i);
             long time = System.currentTimeMillis() - start;

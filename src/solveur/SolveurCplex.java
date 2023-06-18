@@ -25,7 +25,7 @@ public class SolveurCplex implements Solveur{
 
 
 
-    private int watchDog = 600;
+    private int watchDog = 2000;
     private boolean minimiseDure =false;
     private boolean minimiseSouple =true;
 
@@ -198,7 +198,7 @@ public class SolveurCplex implements Solveur{
             }
         }
         //on cherche à minimiser le nombre de contrainte dure non respecté
-        if(minimiseDure) {
+        if(minimiseDure&&!minimiseSouple) {
             try {
                 IloLinearNumExpr expr = cplex.linearNumExpr();
                 for (IloIntVar c : cDurMax.values()) {
@@ -207,18 +207,34 @@ public class SolveurCplex implements Solveur{
                 for (IloIntVar c : cDurMin.values()) {
                     expr.addTerm(c, 1);
                 }
-                this.cplex.addMinimize(expr);
+                this.cplex.addMinimize(expr,"minimiseDure");
             } catch (IloException e) {
                 throw new RuntimeException(e);
             }
-        }
-        if(minimiseSouple){
+        }else if(minimiseSouple && !minimiseDure){
             try{
                 IloLinearNumExpr expr = cplex.linearNumExpr();
                 for (IloIntVar c : coutC.values()) {
                     expr.addTerm(c, 1);
                 }
-                this.cplex.addMinimize(expr);
+                this.cplex.addMinimize(expr,"minimiseCout");
+            } catch (IloException e) {
+                throw new RuntimeException(e);
+            }
+        } else if (minimiseDure&& minimiseSouple) {
+            try {
+                IloLinearNumExpr expr = cplex.linearNumExpr();
+                for (IloIntVar c : cDurMax.values()) {
+                    expr.addTerm(c, 1);
+                }
+                for (IloIntVar c : cDurMin.values()) {
+                    expr.addTerm(c, 1);
+                }
+                IloLinearNumExpr expr2 = cplex.linearNumExpr();
+                for (IloIntVar c : coutC.values()) {
+                    expr2.addTerm(c, 1);
+                }
+                this.cplex.addMinimize(this.cplex.sum(this.cplex.prod(expr,10000),expr2),"miniseDureCout");
             } catch (IloException e) {
                 throw new RuntimeException(e);
             }
