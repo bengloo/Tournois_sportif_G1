@@ -1,14 +1,14 @@
-package solveur;
+package solveur.Abandoned;
 
 import instance.Instance;
 import operateur.OperateurInsertion;
 import solution.Rencontre;
 import solution.Solution;
+import solveur.Solveur;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 /** classe définissant InsertionSimple (implémentant l'interface Solveur)
  * @author Engloo Benjamin
@@ -17,7 +17,7 @@ import java.util.Map;
  * @author Lux Hugo
  * @version 1.0
  */
-public class InsertionSimple implements Solveur{
+public class InsertionSimple implements Solveur {
 
     @Override
     public String getNom() {

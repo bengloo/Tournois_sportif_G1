@@ -4,10 +4,8 @@ import instance.Instance;
 import io.InstanceReader;
 import io.exception.ReaderException;
 import solution.Solution;
-import solveur.InsertionSimple;
 import solveur.Solveur;
 import solveur.SolveurCplex;
-import solveur.SolveurIter;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -19,7 +17,7 @@ import java.net.UnknownHostException;
  * @author Lux Hugo
  * @version 1.0
  */
-public class TestCplex {
+public class TestSolveur {
     public static void main(String[] args) {
         //String path="instanceViableCplex/instance_ITC2021_Test_1.txt";
         //String path="instanceTestUnitaire/instance_test_ContraintePlacement_4Equipe.txt";
@@ -28,8 +26,8 @@ public class TestCplex {
             InstanceReader reader = new InstanceReader(path);
             Instance i= reader.readInstance();
             //System.out.println(i);
-            //Solveur solveur = new SolveurCplex();
-            Solveur solveur = new SolveurIter( new SolveurCplex(),1);
+            Solveur solveur = new SolveurCplex();
+            //Solveur solveur = new SolveurIter( new SolveurCplex(),1);
             long start = System.currentTimeMillis();
             Solution s = solveur.solve(i);
             long time = System.currentTimeMillis() - start;

@@ -1,13 +1,14 @@
-package solveur;
+package solveur.Abandoned;
 
 import instance.Instance;
 import solution.Solution;
+import solveur.Solveur;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
-public class SolveurIterThread implements Solveur{
+public class SolveurIterThread implements Solveur {
 
     private final Solveur solveurInitial;
 

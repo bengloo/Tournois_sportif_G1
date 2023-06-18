@@ -1,9 +1,10 @@
-package solveur;
+package solveur.Abandoned;
 
 import instance.Instance;
 import solution.Solution;
+import solveur.Solveur;
 
-public class SolveurIterPivot implements Solveur{
+public class SolveurIterPivot implements Solveur {
 
     private final Solveur solveurInitial;
     private  final int nbIterMax;

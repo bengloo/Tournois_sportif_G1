@@ -1,7 +1,8 @@
-package solveur;
+package solveur.Abandoned;
 
 import instance.Instance;
 import solution.Solution;
+import solveur.Solveur;
 
 /** classe définissant SolveurRecursif (implémentant l'interface Solveur)
  * @author Engloo Benjamin
@@ -10,7 +11,7 @@ import solution.Solution;
  * @author Lux Hugo
  * @version 1.0
  */
-public class SolveurRecursif implements Solveur{
+public class SolveurRecursif implements Solveur {
 
     @Override
     public String getNom() {
