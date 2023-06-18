@@ -2,34 +2,35 @@
 \Problem name: ilog.cplex
 
 Minimize
- obj1: coutC169 + coutC78 + coutC170 + coutC33 + coutC21 + coutC122 + coutC80
-       + coutC119 + coutC179 + coutC86 + coutC36 + coutC182 + coutC15 + coutC29
-       + coutC114 + coutC38 + coutC184 + coutC183 + coutC97 + coutC5 + coutC74
-       + coutC118 + coutC133 + coutC25 + coutC85 + coutC14 + coutC161
-       + coutC147 + coutC64 + coutC23 + coutC171 + coutC93 + coutC28 + coutC105
-       + coutC164 + coutC77 + coutC112 + coutC11 + coutC56 + coutC88 + coutC58
-       + coutC72 + coutC136 + coutC167 + coutC75 + coutC150 + coutC113
-       + coutC180 + coutC30 + coutC45 + coutC109 + coutC68 + coutC116
-       + coutC117 + coutC178 + coutC92 + coutC26 + coutC163 + coutC132
-       + coutC123 + coutC52 + coutC82 + coutC107 + coutC141 + coutC151
-       + coutC177 + coutC8 + coutC50 + coutC49 + coutC156 + coutC32 + coutC34
-       + coutC53 + coutC104 + coutC17 + coutC41 + coutC135 + coutC27 + coutC13
-       + coutC143 + coutC39 + coutC47 + coutC81 + coutC83 + coutC125 + coutC73
-       + coutC152 + coutC76 + coutC91 + coutC98 + coutC6 + coutC60 + coutC101
-       + coutC100 + coutC69 + coutC87 + coutC138 + coutC159 + coutC62 + coutC31
-       + coutC90 + coutC9 + coutC166 + coutC16 + coutC55 + coutC173 + coutC37
-       + coutC102 + coutC110 + coutC172 + coutC65 + coutC103 + coutC153
-       + coutC121 + coutC84 + coutC71 + coutC22 + coutC140 + coutC165 + coutC95
-       + coutC160 + coutC70 + coutC181 + coutC129 + coutC57 + coutC43 + coutC44
-       + coutC134 + coutC142 + coutC51 + coutC139 + coutC46 + coutC131
-       + coutC79 + coutC89 + coutC96 + coutC94 + coutC108 + coutC18 + coutC48
-       + coutC24 + coutC61 + coutC120 + coutC149 + coutC137 + coutC99 + coutC59
-       + coutC35 + coutC42 + coutC146 + coutC111 + coutC20 + coutC3 + coutC54
-       + coutC185 + coutC66 + coutC67 + coutC12 + coutC144 + coutC128
-       + coutC157 + coutC124 + coutC162 + coutC175 + coutC148 + coutC2
-       + coutC63 + coutC1 + coutC126 + coutC40 + coutC10 + coutC155 + coutC106
-       + coutC130 + coutC176 + coutC158 + coutC4 + coutC7 + coutC127 + coutC145
-       + coutC115 + coutC174 + coutC154 + coutC19 + coutC168
+ obj1: coutC125 + coutC139 + coutC69 + coutC126 + coutC103 + coutC152
+       + coutC106 + coutC54 + coutC163 + coutC4 + coutC117 + coutC56 + coutC16
+       + coutC95 + coutC169 + coutC102 + coutC120 + coutC166 + coutC70
+       + coutC142 + coutC24 + coutC77 + coutC131 + coutC60 + coutC86 + coutC114
+       + coutC99 + coutC29 + coutC88 + coutC96 + coutC6 + coutC13 + coutC66
+       + coutC5 + coutC129 + coutC79 + coutC178 + coutC182 + coutC98 + coutC158
+       + coutC59 + coutC75 + coutC12 + coutC80 + coutC58 + coutC121 + coutC161
+       + coutC82 + coutC83 + coutC65 + coutC146 + coutC7 + coutC20 + coutC116
+       + coutC160 + coutC107 + coutC135 + coutC45 + coutC123 + coutC38
+       + coutC170 + coutC108 + coutC149 + coutC100 + coutC176 + coutC183
+       + coutC144 + coutC71 + coutC171 + coutC14 + coutC1 + coutC61 + coutC37
+       + coutC32 + coutC132 + coutC50 + coutC122 + coutC73 + coutC97 + coutC64
+       + coutC180 + coutC174 + coutC145 + coutC19 + coutC43 + coutC53
+       + coutC175 + coutC35 + coutC113 + coutC181 + coutC138 + coutC91
+       + coutC177 + coutC36 + coutC112 + coutC85 + coutC26 + coutC68 + coutC34
+       + coutC111 + coutC137 + coutC48 + coutC110 + coutC44 + coutC9 + coutC25
+       + coutC94 + coutC119 + coutC74 + coutC150 + coutC87 + coutC109 + coutC3
+       + coutC124 + coutC162 + coutC63 + coutC67 + coutC90 + coutC164
+       + coutC140 + coutC128 + coutC136 + coutC168 + coutC173 + coutC49
+       + coutC179 + coutC30 + coutC89 + coutC151 + coutC18 + coutC104
+       + coutC153 + coutC115 + coutC156 + coutC51 + coutC40 + coutC143
+       + coutC165 + coutC93 + coutC184 + coutC42 + coutC46 + coutC10 + coutC21
+       + coutC22 + coutC130 + coutC57 + coutC101 + coutC148 + coutC15 + coutC78
+       + coutC47 + coutC8 + coutC33 + coutC147 + coutC27 + coutC2 + coutC155
+       + coutC72 + coutC28 + coutC52 + coutC81 + coutC159 + coutC76 + coutC118
+       + coutC167 + coutC127 + coutC185 + coutC39 + coutC17 + coutC172
+       + coutC84 + coutC31 + coutC105 + coutC11 + coutC55 + coutC141 + coutC23
+       + coutC62 + coutC92 + coutC134 + coutC157 + coutC154 + coutC133
+       + coutC41
 Subject To
  CI1e0j0:     x0_1_0 + x1_0_0 + x0_2_0 + x2_0_0 + x0_3_0 + x3_0_0 + x0_4_0
               + x4_0_0 + x0_5_0 + x5_0_0 + x0_6_0 + x6_0_0 + x0_7_0 + x7_0_0
@@ -38294,191 +38295,191 @@ Bounds
  0 <= z32_17 <= 1
  0 <= y33_17 <= 1
  0 <= z33_17 <= 1
-      coutC169 >= 0
-      coutC78 >= 0
-      coutC170 >= 0
-      coutC33 >= 0
-      coutC21 >= 0
-      coutC122 >= 0
-      coutC80 >= 0
-      coutC119 >= 0
-      coutC179 >= 0
-      coutC86 >= 0
-      coutC36 >= 0
-      coutC182 >= 0
-      coutC15 >= 0
-      coutC29 >= 0
-      coutC114 >= 0
-      coutC38 >= 0
-      coutC184 >= 0
-      coutC183 >= 0
-      coutC97 >= 0
-      coutC5 >= 0
-      coutC74 >= 0
-      coutC118 >= 0
-      coutC133 >= 0
-      coutC25 >= 0
-      coutC85 >= 0
-      coutC14 >= 0
-      coutC161 >= 0
-      coutC147 >= 0
-      coutC64 >= 0
-      coutC23 >= 0
-      coutC171 >= 0
-      coutC93 >= 0
-      coutC28 >= 0
-      coutC105 >= 0
-      coutC164 >= 0
-      coutC77 >= 0
-      coutC112 >= 0
-      coutC11 >= 0
-      coutC56 >= 0
-      coutC88 >= 0
-      coutC58 >= 0
-      coutC72 >= 0
-      coutC136 >= 0
-      coutC167 >= 0
-      coutC75 >= 0
-      coutC150 >= 0
-      coutC113 >= 0
-      coutC180 >= 0
-      coutC30 >= 0
-      coutC45 >= 0
-      coutC109 >= 0
-      coutC68 >= 0
-      coutC116 >= 0
-      coutC117 >= 0
-      coutC178 >= 0
-      coutC92 >= 0
-      coutC26 >= 0
-      coutC163 >= 0
-      coutC132 >= 0
-      coutC123 >= 0
-      coutC52 >= 0
-      coutC82 >= 0
-      coutC107 >= 0
-      coutC141 >= 0
-      coutC151 >= 0
-      coutC177 >= 0
-      coutC8 >= 0
-      coutC50 >= 0
-      coutC49 >= 0
-      coutC156 >= 0
-      coutC32 >= 0
-      coutC34 >= 0
-      coutC53 >= 0
-      coutC104 >= 0
-      coutC17 >= 0
-      coutC41 >= 0
-      coutC135 >= 0
-      coutC27 >= 0
-      coutC13 >= 0
-      coutC143 >= 0
-      coutC39 >= 0
-      coutC47 >= 0
-      coutC81 >= 0
-      coutC83 >= 0
       coutC125 >= 0
-      coutC73 >= 0
-      coutC152 >= 0
-      coutC76 >= 0
-      coutC91 >= 0
-      coutC98 >= 0
-      coutC6 >= 0
-      coutC60 >= 0
-      coutC101 >= 0
-      coutC100 >= 0
-      coutC69 >= 0
-      coutC87 >= 0
-      coutC138 >= 0
-      coutC159 >= 0
-      coutC62 >= 0
-      coutC31 >= 0
-      coutC90 >= 0
-      coutC9 >= 0
-      coutC166 >= 0
-      coutC16 >= 0
-      coutC55 >= 0
-      coutC173 >= 0
-      coutC37 >= 0
-      coutC102 >= 0
-      coutC110 >= 0
-      coutC172 >= 0
-      coutC65 >= 0
-      coutC103 >= 0
-      coutC153 >= 0
-      coutC121 >= 0
-      coutC84 >= 0
-      coutC71 >= 0
-      coutC22 >= 0
-      coutC140 >= 0
-      coutC165 >= 0
-      coutC95 >= 0
-      coutC160 >= 0
-      coutC70 >= 0
-      coutC181 >= 0
-      coutC129 >= 0
-      coutC57 >= 0
-      coutC43 >= 0
-      coutC44 >= 0
-      coutC134 >= 0
-      coutC142 >= 0
-      coutC51 >= 0
       coutC139 >= 0
-      coutC46 >= 0
-      coutC131 >= 0
-      coutC79 >= 0
-      coutC89 >= 0
-      coutC96 >= 0
-      coutC94 >= 0
-      coutC108 >= 0
-      coutC18 >= 0
-      coutC48 >= 0
-      coutC24 >= 0
-      coutC61 >= 0
-      coutC120 >= 0
-      coutC149 >= 0
-      coutC137 >= 0
-      coutC99 >= 0
-      coutC59 >= 0
-      coutC35 >= 0
-      coutC42 >= 0
-      coutC146 >= 0
-      coutC111 >= 0
-      coutC20 >= 0
-      coutC3 >= 0
+      coutC69 >= 0
+      coutC126 >= 0
+      coutC103 >= 0
+      coutC152 >= 0
+      coutC106 >= 0
       coutC54 >= 0
-      coutC185 >= 0
+      coutC163 >= 0
+      coutC4 >= 0
+      coutC117 >= 0
+      coutC56 >= 0
+      coutC16 >= 0
+      coutC95 >= 0
+      coutC169 >= 0
+      coutC102 >= 0
+      coutC120 >= 0
+      coutC166 >= 0
+      coutC70 >= 0
+      coutC142 >= 0
+      coutC24 >= 0
+      coutC77 >= 0
+      coutC131 >= 0
+      coutC60 >= 0
+      coutC86 >= 0
+      coutC114 >= 0
+      coutC99 >= 0
+      coutC29 >= 0
+      coutC88 >= 0
+      coutC96 >= 0
+      coutC6 >= 0
+      coutC13 >= 0
       coutC66 >= 0
-      coutC67 >= 0
+      coutC5 >= 0
+      coutC129 >= 0
+      coutC79 >= 0
+      coutC178 >= 0
+      coutC182 >= 0
+      coutC98 >= 0
+      coutC158 >= 0
+      coutC59 >= 0
+      coutC75 >= 0
       coutC12 >= 0
+      coutC80 >= 0
+      coutC58 >= 0
+      coutC121 >= 0
+      coutC161 >= 0
+      coutC82 >= 0
+      coutC83 >= 0
+      coutC65 >= 0
+      coutC146 >= 0
+      coutC7 >= 0
+      coutC20 >= 0
+      coutC116 >= 0
+      coutC160 >= 0
+      coutC107 >= 0
+      coutC135 >= 0
+      coutC45 >= 0
+      coutC123 >= 0
+      coutC38 >= 0
+      coutC170 >= 0
+      coutC108 >= 0
+      coutC149 >= 0
+      coutC100 >= 0
+      coutC176 >= 0
+      coutC183 >= 0
       coutC144 >= 0
-      coutC128 >= 0
-      coutC157 >= 0
+      coutC71 >= 0
+      coutC171 >= 0
+      coutC14 >= 0
+      coutC1 >= 0
+      coutC61 >= 0
+      coutC37 >= 0
+      coutC32 >= 0
+      coutC132 >= 0
+      coutC50 >= 0
+      coutC122 >= 0
+      coutC73 >= 0
+      coutC97 >= 0
+      coutC64 >= 0
+      coutC180 >= 0
+      coutC174 >= 0
+      coutC145 >= 0
+      coutC19 >= 0
+      coutC43 >= 0
+      coutC53 >= 0
+      coutC175 >= 0
+      coutC35 >= 0
+      coutC113 >= 0
+      coutC181 >= 0
+      coutC138 >= 0
+      coutC91 >= 0
+      coutC177 >= 0
+      coutC36 >= 0
+      coutC112 >= 0
+      coutC85 >= 0
+      coutC26 >= 0
+      coutC68 >= 0
+      coutC34 >= 0
+      coutC111 >= 0
+      coutC137 >= 0
+      coutC48 >= 0
+      coutC110 >= 0
+      coutC44 >= 0
+      coutC9 >= 0
+      coutC25 >= 0
+      coutC94 >= 0
+      coutC119 >= 0
+      coutC74 >= 0
+      coutC150 >= 0
+      coutC87 >= 0
+      coutC109 >= 0
+      coutC3 >= 0
       coutC124 >= 0
       coutC162 >= 0
-      coutC175 >= 0
-      coutC148 >= 0
-      coutC2 >= 0
       coutC63 >= 0
-      coutC1 >= 0
-      coutC126 >= 0
-      coutC40 >= 0
-      coutC10 >= 0
-      coutC155 >= 0
-      coutC106 >= 0
-      coutC130 >= 0
-      coutC176 >= 0
-      coutC158 >= 0
-      coutC4 >= 0
-      coutC7 >= 0
-      coutC127 >= 0
-      coutC145 >= 0
-      coutC115 >= 0
-      coutC174 >= 0
-      coutC154 >= 0
-      coutC19 >= 0
+      coutC67 >= 0
+      coutC90 >= 0
+      coutC164 >= 0
+      coutC140 >= 0
+      coutC128 >= 0
+      coutC136 >= 0
       coutC168 >= 0
+      coutC173 >= 0
+      coutC49 >= 0
+      coutC179 >= 0
+      coutC30 >= 0
+      coutC89 >= 0
+      coutC151 >= 0
+      coutC18 >= 0
+      coutC104 >= 0
+      coutC153 >= 0
+      coutC115 >= 0
+      coutC156 >= 0
+      coutC51 >= 0
+      coutC40 >= 0
+      coutC143 >= 0
+      coutC165 >= 0
+      coutC93 >= 0
+      coutC184 >= 0
+      coutC42 >= 0
+      coutC46 >= 0
+      coutC10 >= 0
+      coutC21 >= 0
+      coutC22 >= 0
+      coutC130 >= 0
+      coutC57 >= 0
+      coutC101 >= 0
+      coutC148 >= 0
+      coutC15 >= 0
+      coutC78 >= 0
+      coutC47 >= 0
+      coutC8 >= 0
+      coutC33 >= 0
+      coutC147 >= 0
+      coutC27 >= 0
+      coutC2 >= 0
+      coutC155 >= 0
+      coutC72 >= 0
+      coutC28 >= 0
+      coutC52 >= 0
+      coutC81 >= 0
+      coutC159 >= 0
+      coutC76 >= 0
+      coutC118 >= 0
+      coutC167 >= 0
+      coutC127 >= 0
+      coutC185 >= 0
+      coutC39 >= 0
+      coutC17 >= 0
+      coutC172 >= 0
+      coutC84 >= 0
+      coutC31 >= 0
+      coutC105 >= 0
+      coutC11 >= 0
+      coutC55 >= 0
+      coutC141 >= 0
+      coutC23 >= 0
+      coutC62 >= 0
+      coutC92 >= 0
+      coutC134 >= 0
+      coutC157 >= 0
+      coutC154 >= 0
+      coutC133 >= 0
+      coutC41 >= 0
       x12390 Free
       x12391 Free
       x12392 Free
@@ -40272,28 +40273,28 @@ Generals
  y19_17  z19_17  y20_17  z20_17  y21_17  z21_17  y22_17  z22_17  y23_17 
  z23_17  y24_17  z24_17  y25_17  z25_17  y26_17  z26_17  y27_17  z27_17 
  y28_17  z28_17  y29_17  z29_17  y30_17  z30_17  y31_17  z31_17  y32_17 
- z32_17  y33_17  z33_17  coutC169  coutC78  coutC170  coutC33  coutC21 
- coutC122  coutC80  coutC119  coutC179  coutC86  coutC36  coutC182  coutC15 
- coutC29  coutC114  coutC38  coutC184  coutC183  coutC97  coutC5  coutC74 
- coutC118  coutC133  coutC25  coutC85  coutC14  coutC161  coutC147  coutC64 
- coutC23  coutC171  coutC93  coutC28  coutC105  coutC164  coutC77  coutC112 
- coutC11  coutC56  coutC88  coutC58  coutC72  coutC136  coutC167  coutC75 
- coutC150  coutC113  coutC180  coutC30  coutC45  coutC109  coutC68  coutC116 
- coutC117  coutC178  coutC92  coutC26  coutC163  coutC132  coutC123  coutC52 
- coutC82  coutC107  coutC141  coutC151  coutC177  coutC8  coutC50  coutC49 
- coutC156  coutC32  coutC34  coutC53  coutC104  coutC17  coutC41  coutC135 
- coutC27  coutC13  coutC143  coutC39  coutC47  coutC81  coutC83  coutC125 
- coutC73  coutC152  coutC76  coutC91  coutC98  coutC6  coutC60  coutC101 
- coutC100  coutC69  coutC87  coutC138  coutC159  coutC62  coutC31  coutC90 
- coutC9  coutC166  coutC16  coutC55  coutC173  coutC37  coutC102  coutC110 
- coutC172  coutC65  coutC103  coutC153  coutC121  coutC84  coutC71  coutC22 
- coutC140  coutC165  coutC95  coutC160  coutC70  coutC181  coutC129  coutC57 
- coutC43  coutC44  coutC134  coutC142  coutC51  coutC139  coutC46  coutC131 
- coutC79  coutC89  coutC96  coutC94  coutC108  coutC18  coutC48  coutC24 
- coutC61  coutC120  coutC149  coutC137  coutC99  coutC59  coutC35  coutC42 
- coutC146  coutC111  coutC20  coutC3  coutC54  coutC185  coutC66  coutC67 
- coutC12  coutC144  coutC128  coutC157  coutC124  coutC162  coutC175  coutC148 
- coutC2  coutC63  coutC1  coutC126  coutC40  coutC10  coutC155  coutC106 
- coutC130  coutC176  coutC158  coutC4  coutC7  coutC127  coutC145  coutC115 
- coutC174  coutC154  coutC19  coutC168 
+ z32_17  y33_17  z33_17  coutC125  coutC139  coutC69  coutC126  coutC103 
+ coutC152  coutC106  coutC54  coutC163  coutC4  coutC117  coutC56  coutC16 
+ coutC95  coutC169  coutC102  coutC120  coutC166  coutC70  coutC142  coutC24 
+ coutC77  coutC131  coutC60  coutC86  coutC114  coutC99  coutC29  coutC88 
+ coutC96  coutC6  coutC13  coutC66  coutC5  coutC129  coutC79  coutC178 
+ coutC182  coutC98  coutC158  coutC59  coutC75  coutC12  coutC80  coutC58 
+ coutC121  coutC161  coutC82  coutC83  coutC65  coutC146  coutC7  coutC20 
+ coutC116  coutC160  coutC107  coutC135  coutC45  coutC123  coutC38  coutC170 
+ coutC108  coutC149  coutC100  coutC176  coutC183  coutC144  coutC71  coutC171 
+ coutC14  coutC1  coutC61  coutC37  coutC32  coutC132  coutC50  coutC122 
+ coutC73  coutC97  coutC64  coutC180  coutC174  coutC145  coutC19  coutC43 
+ coutC53  coutC175  coutC35  coutC113  coutC181  coutC138  coutC91  coutC177 
+ coutC36  coutC112  coutC85  coutC26  coutC68  coutC34  coutC111  coutC137 
+ coutC48  coutC110  coutC44  coutC9  coutC25  coutC94  coutC119  coutC74 
+ coutC150  coutC87  coutC109  coutC3  coutC124  coutC162  coutC63  coutC67 
+ coutC90  coutC164  coutC140  coutC128  coutC136  coutC168  coutC173  coutC49 
+ coutC179  coutC30  coutC89  coutC151  coutC18  coutC104  coutC153  coutC115 
+ coutC156  coutC51  coutC40  coutC143  coutC165  coutC93  coutC184  coutC42 
+ coutC46  coutC10  coutC21  coutC22  coutC130  coutC57  coutC101  coutC148 
+ coutC15  coutC78  coutC47  coutC8  coutC33  coutC147  coutC27  coutC2 
+ coutC155  coutC72  coutC28  coutC52  coutC81  coutC159  coutC76  coutC118 
+ coutC167  coutC127  coutC185  coutC39  coutC17  coutC172  coutC84  coutC31 
+ coutC105  coutC11  coutC55  coutC141  coutC23  coutC62  coutC92  coutC134 
+ coutC157  coutC154  coutC133  coutC41 
 End
