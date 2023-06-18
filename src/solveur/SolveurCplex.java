@@ -91,7 +91,7 @@ public class SolveurCplex implements Solveur{
         // exporter le modele dans un fichier texte au format .lp
         // ce format est comprehensible par cplex
         try {
-            this.cplex.exportModel("model_" + instance.getNom() + ".lp");
+            this.cplex.exportModel("modelsCplex/model_" + instance.getNom() + ".lp");
         } catch (IloException e) {
             throw new RuntimeException(e);
         }
