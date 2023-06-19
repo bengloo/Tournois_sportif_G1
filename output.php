@@ -12,6 +12,9 @@
 		<link rel='stylesheet' type='text/css' href='./style_output.css'>
 	</head>
   
+	<a href="./index.php" id="redirectLink">
+		<img src="./ressources/return_button.png" id="redirectIcon">
+	</a>
 
 	<div class="container animated animated-done bootdey" data-animate="fadeIn" data-animate-delay="0.05" style="animation-delay: 0.05s;">
 		<div id="labelDropdown">Veuillez sélectionner une solution à afficher</div></br>
@@ -62,44 +65,40 @@
 
 					$('.timeline').empty();
 
-					// TODO: mofifier (c'était pour tester la récupération du JSON)
 					$.getJSON('./logos/correspondance.json', function(data) {
-						// Utilisez les données JSON ici
-						console.log(data);
-					})
-					
-					lines.forEach(function(line) {
-						if (line.trim() !== '' && !line.startsWith("//")) { // Vérifie si la ligne n'est pas vide
-							var values = line.split('   '); // Divise la ligne en valeurs (suppose que les valeurs sont séparées par une tabulation)
-							$('#box-'+(i-1)).append('<div class="timeline-item mt-3 row text-center p-2">'+
-								'<div class="col font-weight-bold text-md-right">'+values[0]+'</div>'+
-								'<div class="col-1">vs</div>'+
-								'<div class="col font-weight-bold text-md-left">'+values[1]+'</div>'+
-							'</div>');
-							journee.push(values.map(Number)); // Ajoute la ligne sous forme de tableau de nombres dans la journée
-						} else if (!line.startsWith("//")) {
-							dateAleatoire = date.toLocaleDateString("fr-FR");
+						lines.forEach(function(line) {
+							if (line.trim() !== '' && !line.startsWith("//")) { // Vérifie si la ligne n'est pas vide
+								var values = line.split('   '); // Divise la ligne en valeurs (suppose que les valeurs sont séparées par une tabulation)
 
-							$('.timeline').append('<div class="box" id="box-'+i+'">'+
-													'<div class="timeline-breaker">'+dateAleatoire+'</div>'+
-													'</div>');
-							journees.push(journee); // Ajoute la journée au tableau des journées
-							journee = []; // Réinitialise le tableau pour la prochaine journée
-							i++;
-							date.setDate(date.getDate() + 1); // Ajouter un jour à la date
-						}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
-					});
-					
-					// Vérifie s'il reste des lignes non ajoutées comme une journée finale
-					if (journee.length > 0) {
-						journees.push(journee);
-					}
+								$('#box-'+(i-1)).append('<div class="timeline-item mt-3 row text-center p-2">'+
+									'<div class="col font-weight-bold text-md-right"><img class="logo" style="float:left;" src='+data[parseInt(values[0])].logo+'>'+data[parseInt(values[0])].nom+'</div>'+
+									'<div class="col-1">vs</div>'+
+									'<div class="col font-weight-bold text-md-left">'+data[parseInt(values[1])].nom+'<img class="logo" style="float:right;" src='+data[parseInt(values[1])].logo+'></div>'+
+								'</div>');
+								journee.push(values.map(Number)); // Ajoute la ligne sous forme de tableau de nombres dans la journée
+							} else if (!line.startsWith("//")) {
+								dateAleatoire = date.toLocaleDateString("fr-FR");
+
+								$('.timeline').append('<div class="box" id="box-'+i+'">'+
+														'<div class="timeline-breaker">'+dateAleatoire+'</div>'+
+														'</div>');
+								journees.push(journee); // Ajoute la journée au tableau des journées
+								journee = []; // Réinitialise le tableau pour la prochaine journée
+								i++;
+								date.setDate(date.getDate() + 1); // Ajouter un jour à la date
+							}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+						});
+						// Supprime le dernier bloc de journée vide
+						// (à cause d'un saut de ligne en trop à la fin du fichier solution)
+						if ($('.box').length > 0) {
+							if ($('.box').last().children().length === 1) {
+								$('.box').last().remove();
+							}
+						}
+					})
 
 					// Supprime le 1er élément du tableau car il n'y a pas encore eu de journée parcourue à ce stage
-					journees.shift();
-
-					// Affiche le tableau des journées dans la console
-					console.log(journees);
+					journees.shift();	
 				},
 				error: function(xhr){
 					console.log(xhr.responseText);
@@ -109,7 +108,7 @@
 	});
 
 	function genererDateAleatoire() {
-		date = new Date(Math.random() * (new Date().getTime() - new Date(1970, 0, 1).getTime()) + new Date(1970, 0, 1).getTime());
+		date = new Date(Math.random() * (new Date().getTime() - new Date(2022, 0, 1).getTime()) + new Date(2022, 0, 1).getTime());
 
 		var jour = date.getDate();
 		var mois = date.getMonth();

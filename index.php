@@ -6,7 +6,7 @@
 <title>Tournoi sportif G1  - Import instance</title>
 <html>
     <head>
-        <link rel="stylesheet" href="./style.css">
+        <link rel="stylesheet" href="./style_index.css">
         <script src="jquery-3.7.0.js"></script>
     </head>
     <body>
