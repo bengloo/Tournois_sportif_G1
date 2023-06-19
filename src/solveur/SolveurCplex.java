@@ -2,6 +2,7 @@ package solveur;
 
 import instance.Instance;
 import instance.modele.contrainte.Contrainte;
+import instance.modele.contrainte.ContraintePauseGlobale;
 import instance.modele.contrainte.TypeMode;
 import operateur.OperateurInsertion;
 import solution.Solution;
@@ -26,9 +27,10 @@ public class SolveurCplex implements Solveur{
 
 
 
-    private int watchDog = 3000;
+    private int watchDog = 1000;
     private boolean minimiseDure =true;
     private boolean minimiseSouple =false;
+    private boolean avoidContraintePauseGlobale=true;
 
     @Override
     public String getNom() {
@@ -185,12 +187,12 @@ public class SolveurCplex implements Solveur{
                                 exprz2.addTerm(x[i][e][j], 1);
                             }
                         }
-                        if(instance.isPauseConcerne(e,j, TypeMode.DOMICILE)) {
+                        if(instance.isPauseConcerne(e,j, TypeMode.DOMICILE,avoidContraintePauseGlobale)) {
                             cplex.addLe(cplex.sum(cplex.sum(expry1, expry2), -1), y[j - 1][e], "CNPD1j" + j + "e" + e);
                             cplex.addLe(y[j - 1][e], expry1, "CNPD2j" + j + "e" + e);
                             cplex.addLe(y[j - 1][e], expry2, "CNPD3j" + j + "e" + e);
                         }
-                        if(instance.isPauseConcerne(e,j, TypeMode.EXTERIEUR)) {
+                        if(instance.isPauseConcerne(e,j, TypeMode.EXTERIEUR,avoidContraintePauseGlobale)) {
                             cplex.addLe(cplex.sum(cplex.sum(exprz1, exprz2), -1), z[j - 1][e], "CNPE1j" + j + "e" + e);
                             cplex.addLe(z[j - 1][e], exprz2, "CNPE3j" + j + "e" + e);
                             cplex.addLe(z[j - 1][e], exprz1, "CNPE2j" + j + "e" + e);
@@ -278,7 +280,11 @@ public class SolveurCplex implements Solveur{
     private void initContrainte(Instance instance){
         for(Contrainte c:instance.getContraintes()){
             if(c.estDure()||((!c.estDure()) && minimiseSouple)) {
-                c.initCplexEquation(this, instance, minimiseDure, minimiseSouple, c.estDure());
+                if((c instanceof ContraintePauseGlobale)) {
+                    if(!avoidContraintePauseGlobale) c.initCplexEquation(this, instance, minimiseDure, minimiseSouple, c.estDure());
+                }else{
+                    c.initCplexEquation(this, instance, minimiseDure, minimiseSouple, c.estDure());
+                }
             }
             //System.out.println("Contrainte set: "+c.toString());
         }
@@ -304,10 +310,10 @@ public class SolveurCplex implements Solveur{
         for(int j=1;j<nbJ;j++){
             for(int e=0;e<nbE;e++){
                 try {
-                    if(instance.isPauseConcerne(e,j, TypeMode.DOMICILE)) {
+                    if(instance.isPauseConcerne(e,j, TypeMode.DOMICILE,avoidContraintePauseGlobale)) {
                         y[j - 1][e] = this.cplex.intVar(0, 1, "y" + j + "_" + e);
                     }
-                    if(instance.isPauseConcerne(e,j, TypeMode.EXTERIEUR)) {
+                    if(instance.isPauseConcerne(e,j, TypeMode.EXTERIEUR,avoidContraintePauseGlobale)) {
                         z[j - 1][e] = this.cplex.intVar(0, 1, "z" + j + "_" + e);
                     }
                 } catch (IloException ex) {

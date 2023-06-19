@@ -131,12 +131,12 @@ public class Instance {
         }
         return contraintesAll;
     }
-    public boolean isPauseConcerne(int e,int j,TypeMode m){
+    public boolean isPauseConcerne(int e,int j,TypeMode m,boolean avoidPauseGlobal){
         for(ContraintePauseEquipe c:contraintesPauseEquipe){
             if(c.isConserne(e,j,m))return true;
         }
         for(ContraintePauseGlobale c:contraintesPauseGlobale){
-            if(c.isConserne(e,j))return true;
+            if((!avoidPauseGlobal)&&c.isConserne(e,j))return true;
         }
         return false;
     }
