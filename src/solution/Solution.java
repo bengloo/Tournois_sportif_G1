@@ -6,6 +6,8 @@ import operateur.OperateurInsertion;
 
 import java.io.*;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /** classe définissant Solution
  * @author Engloo Benjamin
@@ -819,6 +821,60 @@ public class Solution {
         }
         sb.append("\n");
         return sb.toString();
+    }
+
+    public void logCheckProf(){
+        String cheminJar = "CheckerChampionnat.jar";
+        String motifContraintes = "\t\t (\\d+) contraintes non satisfaites";
+        String motifDeviation = "\t\t (\\d+) de deviation";
+        String motifCout = "\t\t cout de la solution : (\\d+)";
+        String motifCoutBis =".*cout de la solution: (\\d+). *";
+        Pattern patternContraintes = Pattern.compile(motifContraintes);
+        Pattern patternDeviation = Pattern.compile(motifDeviation);
+        Pattern patternCout = Pattern.compile(motifCout);
+        Pattern patternCoutbis = Pattern.compile(motifCoutBis);
+        int contraintes = 0;
+        int deviation = 0;
+        int cout = 0;
+        try {
+            ProcessBuilder processBuilder = new ProcessBuilder("../../openjdk-20.0.1/bin/java", "-jar", cheminJar);
+            processBuilder.directory(new File("checkerProf/"));
+            processBuilder.redirectErrorStream(true);
+            Process process = processBuilder.start();
+
+            // Capturer la sortie du processus exécutant le fichier JAR
+            InputStream inputStream = process.getInputStream();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                Matcher matcherContraintes = patternContraintes.matcher(line);
+                Matcher matcherDeviation = patternDeviation.matcher(line);
+                Matcher matcherCout = patternCout.matcher(line);
+                Matcher matcherCoutbis = patternCoutbis.matcher(line);
+
+                if (matcherContraintes.find()) {
+                    contraintes = Integer.parseInt(matcherContraintes.group(1));
+                } else if (matcherDeviation.find()) {
+                    deviation = Integer.parseInt(matcherDeviation.group(1));
+                } else if (matcherCout.find()) {
+                    cout = Integer.parseInt(matcherCout.group(1));
+                }else if (matcherCoutbis.find()) {
+                    cout = Integer.parseInt(matcherCoutbis.group(1));
+                }
+                //System.out.println(line);
+            }
+            addLog("|"+cout+"|"+deviation+"|"+contraintes);
+            // Attendre la fin de l'exécution du processus
+            int exitCode = 0;
+            try {
+                exitCode = process.waitFor();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
     @Override
     public String toString() {

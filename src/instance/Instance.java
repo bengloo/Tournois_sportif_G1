@@ -60,8 +60,20 @@ public class Instance {
         return nbEquipes;
     }
 
-    public int getNbContraintePause(){
-        return contraintesPauseEquipe.size()+contraintesPauseGlobale.size();
+    public int getNbContraintePause(boolean withSouple){
+        int res=0;
+        if(withSouple){
+            for(Contrainte c:contraintesPauseEquipe){
+                if(c.estDure())res+=1;
+            }
+            for(Contrainte c:contraintesPauseGlobale){
+                if(c.estDure())res+=1;
+            }
+        }else {
+            res += contraintesPauseEquipe.size();
+            res += contraintesPauseGlobale.size();
+        }
+        return res;
     }
 
     public int getNbJournees(){

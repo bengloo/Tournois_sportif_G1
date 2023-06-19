@@ -190,7 +190,8 @@ public class TestAllSolveur {
             sol.writeSolution(solveur.getNom());
             sol.writeSolutionChekerProf(solveur.getNom());
             //TODO integré le cheker du prof
-            sol.addLog("|"+time+"|null");
+            sol.addLog("|"+time);
+            sol.logCheckProf();
             System.out.println(sol.getLog());
             sol.restLog();
             // TO CHECK : recperer le cout total de la solution, et savoir si

@@ -21,7 +21,7 @@ public class TestSolveur {
     public static void main(String[] args) {
         //String path="instanceViableCplex/instance_ITC2021_Test_1.txt";
         //String path="instanceTestUnitaire/instance_test_ContraintePlacement_4Equipe.txt";
-        String path="instances/instance_ITC2021_Test_7.txt";
+        String path="instanceViableCplex/instance_ITC2021_Test_1.txt";
         try {
             InstanceReader reader = new InstanceReader(path);
             Instance i= reader.readInstance();
@@ -39,7 +39,8 @@ public class TestSolveur {
             s.writeSolution(solveur.getNom());
             s.writeSolutionChekerProf(solveur.getNom());
             //TODO integré le cheker du prof si il peux paratager ces resultat en resource
-            s.addLog("|"+time+"|null");
+            s.addLog("|"+time);
+            s.logCheckProf();
             System.out.println(s.toStringSimple());
             System.out.println(s.check());
             System.out.println(s.getLog());

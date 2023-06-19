@@ -167,7 +167,7 @@ public class SolveurCplex implements Solveur{
     public void initContrainteDecision(Instance instance){
         int nbE=instance.getNbEquipes();
         int nbJ=instance.getNbJournees();
-        if(instance.getNbContraintePause()>0) {
+        if(instance.getNbContraintePause(minimiseSouple)>0) {
             for (int e = 0; e < nbE; e++) {
                 for (int j = 1; j < nbJ; j++) {
                     IloLinearNumExpr expry1 = null;
