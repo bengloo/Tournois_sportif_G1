@@ -63,8 +63,8 @@ public class ContraintePlacement extends Contrainte{
     public int getCoutTotal(Solution championnat) {
         //pseudo code
             //coef=0
-            //pour r dans toutes les rencontre de la solution
-                //pour j dans toute les journee de la contrainte
+            //pour r dans toutes les rencontres de la solution
+                //pour j dans toutes les journées de la contrainte
                     //Pour le mode de la contrainte
                         //si r verifie le mode concerné avec l'équipe de la contrainte
                             //coef++
@@ -74,9 +74,9 @@ public class ContraintePlacement extends Contrainte{
         //le nombre de rencontres jouées par l’équipe de la contrainte selon un mode sur l’ensemble des journées
         int valc=0;
 
-        //pour toute les rencontres
+        //pour toutes les rencontres
         for(Rencontre r:championnat.getRencontres().values()){
-            //pour toutes les journees concerné par la contraintes
+            //pour toutes les journees concerné par les contraintes
             valc += parcoursJournees(championnat, r);
             //System.out.println("coef contrainte placement get cout tt:"+valc);
         }

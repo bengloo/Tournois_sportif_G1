@@ -127,7 +127,7 @@ public class ContraintePauseGlobale extends Contrainte{
     /**
      * retoune 1 si la rencontre requipe passé en paramètre implique une pause dans le mode sinon 0
      * @param championnat le championnat dans lequelle rechercher
-     * @param rEquipe la rencontre a utiliser
+     * @param rEquipe la rencontre à utiliser
      * @return int
      */
     private int traitementModes(Solution championnat,Rencontre rEquipe,TypeMode mode) {
@@ -161,7 +161,6 @@ public class ContraintePauseGlobale extends Contrainte{
     @Override
     public int evalDeltaCout(Solution championnat, Operateur o, Object valcDelta) {
         if(o instanceof OperateurInsertion){
-
             if((Integer)championnat.getCoefContraintes().get(this)+(Integer) valcDelta>max){
                 if (estDure()) return Integer.MAX_VALUE;
                 //au dela du max le cout suit une relation lineaire le deltat cout est donc proportionel

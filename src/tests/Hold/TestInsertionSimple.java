@@ -4,7 +4,7 @@ import solution.Solution;
 import instance.Instance;
 import io.InstanceReader;
 import io.exception.ReaderException;
-import solveur.Abandoned.InsertionSimple;
+import solveur.Abandoné.InsertionSimple;
 
 /** classe définissant TestInsertionSimple (pour tester la classe InsertionSimple)
  * @author Engloo Benjamin

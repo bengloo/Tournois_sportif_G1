@@ -74,7 +74,7 @@ public class ContrainteHBClassement extends Contrainte{
     public int getCoutTotal(Solution championnat) {
         //le nombre de rencontres jouées par l’équipe de la contrainte selon un mode sur l’ensemble des journées
         int valc=0;
-        //pour toute les rencontres
+        //pour toutes les rencontres
         for(Rencontre r:championnat.getRencontres().values()){
             // à chaque équipe adverse de la liste rencontrée
             if (this.equipesAdverses.contains(r.getDomicile().getId()) || this.equipesAdverses.contains(r.getExterieur().getId())) {
@@ -112,13 +112,13 @@ public class ContrainteHBClassement extends Contrainte{
             }
             return valcDelta;
         }else if(o instanceof OperateurEchange){
-            //la premierre rencontre fait partie des journee de la contrainte?
+            //la premiere rencontre fait partie des journées de la contrainte
             boolean r1inJC=this.journees.contains(o.getJournee().getId());
-            //la seconde rencontre fait partie des journee de la contrainte?
+            //la seconde rencontre fait partie des journées de la contrainte
             boolean r2inJc=this.journees.contains(((OperateurEchange) o).getJournee2().getId());
-            //les equipes de la premierre rencontre verififi la contraine en terme d'équipe
+            //les équipes de la premiere rencontre vérifient la contrainte en terme d'équipe
             boolean r1inEC=false;
-            //les equipes de la seconde rencontre verififi la contraine en terme d'équipe
+            //les équipes de la seconde rencontre vérifient la contrainte en terme d'équipe
             boolean r2inEC=false;
 
             if(this.mode==DOMICILE||this.mode==INDEFINI){
@@ -131,10 +131,10 @@ public class ContrainteHBClassement extends Contrainte{
             }
 
             if((!r1inJC && r2inJc && r1inEC && !r2inEC)||(r1inJC && !r2inJc && !r1inEC && r2inEC)){
-                //si l'echange de rencontre ajoute une rencontre a la contrainte :cf table de verité drive
+                //si l'échange de rencontre ajoute une rencontre à la contrainte : cf table de verité drive
                 return 1;
             } else if((r1inJC && !r2inJc && r1inEC && !r2inEC)||(!r1inJC && r2inJc && !r1inEC && r2inEC)) {
-                //si l'echange de rencontre sort une rencontre de la contrainte:cf table de verité drive
+                //si l'échange de rencontre sort une rencontre de la contrainte: cf table de verité drive
                 return -1;
             }
             return 0;
@@ -152,7 +152,7 @@ public class ContrainteHBClassement extends Contrainte{
     private int parcoursJournees(Solution championnat, Rencontre r) { //Factorisation du code
         int valcDelta=0;
         for (Integer jID : this.journees) {
-            /*if(r.isConcerne(championnat.getEquipes().get(this.equipe), this.mode) && championnat.isRJPresent(jID,r));
+            /*if(r.isConcerne(championnat.getEquipes().get(this.équipe), this.mode) && championnat.isRJPresent(jID,r));
             valcDelta++;*/
             switch(this.mode) {
                 case DOMICILE:
@@ -186,7 +186,7 @@ public class ContrainteHBClassement extends Contrainte{
         if(o instanceof OperateurInsertion){
             if((Integer)championnat.getCoefContraintes().get(this)+ (Integer) valcDelta>max){
                 if (estDure()) return Integer.MAX_VALUE;
-                //au dela du max le cout suit une relation lineaire le deltat cout est donc proportionel
+                //au dela du max le cout suit une relation linéaire le delta cout est donc proportionel
                 return this.penalite *((Integer)valcDelta);
             }else return 0;
         }

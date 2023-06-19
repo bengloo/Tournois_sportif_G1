@@ -55,7 +55,6 @@ public class ContraintePauseEquipe extends Contrainte{
         return TypeContrainte.PAUSEEQUIPE;
     }
 
-    //TODO implementer les fonction de calcule de cout en sinspirent de la contrainte de placement, réflechire si on ne peux pas factoriser du code sout des fonction comune aux contraintes
     @Override
     public int getCoutTotal(Solution championnat) {
         int valc=0;
@@ -140,7 +139,7 @@ public class ContraintePauseEquipe extends Contrainte{
         if(o instanceof OperateurInsertion){
             if((Integer)championnat.getCoefContraintes().get(this)+(Integer) valcDelta>max){
                 if (estDure()) return Integer.MAX_VALUE;
-                //au dela du max le cout suit une relation lineaire le deltat cout est donc proportionel
+                //au dela du max le cout suit une relation linéaire le delta cout est donc proportionel
                 return this.penalite *((Integer)valcDelta);
             }else return 0;
         }

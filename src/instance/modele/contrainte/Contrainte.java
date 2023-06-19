@@ -68,13 +68,13 @@ public abstract class Contrainte {
      * Indique le delta de penalité pour une opération faite sur le championnat
      * @param championnat la solution
      * @param o l'opérateur
-     * @param deltaCoef le coefficient deltay
+     * @param deltaCoef le coefficient delta
      * @return le delta (ou Max.INTEGER si la contrainte est dure)
      **/
     public abstract int evalDeltaCout(Solution championnat, Operateur o, Object deltaCoef);
 
     /**
-     * Indique si la contrainte conserve la viabilité de la solution (coût non égale à l'infini)
+     * Indique si la contrainte conserve la viabilité de la solution (coût non égal à l'infini)
      * @param championnat
      * @return true si la solution est faisable, false sinon
      */
@@ -107,7 +107,7 @@ public abstract class Contrainte {
         }
     }
     public void addEqSoupleMaxMin(SolveurCplex sCplex, int max,int min, IloLinearNumExpr expr){
-        //expr est est l'iloNumexpr representative de valc
+        //expr est l'iloNumexpr representative de valc
         //cout=(max(expr-k;0)+max(L-expr;0))*w
         try {
             sCplex.getCplex().addEq(

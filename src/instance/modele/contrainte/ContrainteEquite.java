@@ -56,7 +56,7 @@ public class ContrainteEquite extends Contrainte {
 
     @Override
     public int getCoutTotal(Solution championnat) {
-        //on calcule le nombre de rencontre a domicile pour les equipes de la contrainte sur les jour de la contrainte
+        //on calcule le nombre de rencontres à domicile pour les equipes de la contrainte sur les jours de la contrainte
         HashMap<Integer,Integer> coefs=new HashMap<>();
         for(int eid:this.equipes) {
             coefs.put(eid, 0);
@@ -68,7 +68,7 @@ public class ContrainteEquite extends Contrainte {
                 }
             }
         }
-        //on calcule les deltat de chaque paire d'equipe
+        //on calcule les deltas de chaque paire d'équipe
         int pena=0;
         for(int e1:this.equipes){
             for(int e2:this.equipes){

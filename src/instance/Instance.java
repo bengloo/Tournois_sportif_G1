@@ -53,7 +53,7 @@ public class Instance {
     }
 
     /**
-     * Récupère le nombre d'équipes contenues dans l'instance
+     * Récupère le nombre d'équipes contenu dans l'instance
      * @return le nombre d'équipes
      */
     public int getNbEquipes() {
@@ -132,7 +132,7 @@ public class Instance {
     }
 
     /**
-     * Retourne la liste des contraintes de l'instance sans disctinction de type
+     * Retourne la liste des contraintes de l'instance sans distinction de type
      * @return la liste chaînée de contraintes
      */
     public LinkedList<Contrainte> getContraintes(){

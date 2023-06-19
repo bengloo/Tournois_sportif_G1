@@ -1,4 +1,4 @@
-package solveur.Abandoned;
+package solveur.Abandoné;
 
 import instance.Instance;
 import solution.Solution;

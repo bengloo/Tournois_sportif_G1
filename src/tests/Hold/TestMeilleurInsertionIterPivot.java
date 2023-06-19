@@ -5,7 +5,7 @@ import io.InstanceReader;
 import io.exception.ReaderException;
 import solution.Solution;
 import solveur.MeilleureInsertionV2;
-import solveur.Abandoned.SolveurIterPivot;
+import solveur.Abandoné.SolveurIterPivot;
 
 /** classe définissant TestInsertionSimple (pour tester la classe InsertionSimple)
  * @author Engloo Benjamin

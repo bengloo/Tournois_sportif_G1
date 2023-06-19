@@ -837,7 +837,8 @@ public class Solution {
         int deviation = 0;
         int cout = 0;
         try {
-            ProcessBuilder processBuilder = new ProcessBuilder("../../openjdk-20.0.1/bin/java", "-jar", cheminJar);
+            //ProcessBuilder processBuilder = new ProcessBuilder("../../openjdk-20.0.1/bin/java", "-jar", cheminJar);
+            ProcessBuilder processBuilder = new ProcessBuilder("java", "-jar", cheminJar);
             processBuilder.directory(new File("checkerProf/"));
             processBuilder.redirectErrorStream(true);
             Process process = processBuilder.start();

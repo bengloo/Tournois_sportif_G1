@@ -127,7 +127,7 @@ public class ContrainteRencontres extends Contrainte{
 
             if((Integer)championnat.getCoefContraintes().get(this)+(Integer) valcDelta>max || (Integer)championnat.getCoefContraintes().get(this)+ (Integer) valcDelta < min){
                 if (estDure()) return Integer.MAX_VALUE;
-                //au dela du max ou en-dessous du min le cout suit une relation lineaire le deltat cout est donc proportionel
+                //au dela du max ou en-dessous du min le cout suit une relation linéaire le delta cout est donc proportionel
                 return this.penalite *((Integer)valcDelta);
             }else return 0;
         }

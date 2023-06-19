@@ -42,7 +42,7 @@ public class ContrainteSeparation extends Contrainte{
     @Override
     public int getCoutTotal(Solution championnat) {
         int valc =0;
-        //pour tout les couple déquipes sans doublont
+        //pour tout les couple d'équipes sans doublont
         for (Integer equipe1 : equipes) {
             for (Integer equipe2 : equipes) {
                 if (equipe1 < equipe2) {
