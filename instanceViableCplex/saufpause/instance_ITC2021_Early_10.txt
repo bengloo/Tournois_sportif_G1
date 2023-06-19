@@ -1,0 +1,882 @@
+// Nom
+Early 10
+
+// Nombre d'equipes
+20
+
+// Contraintes dures
+
+// Contraintes de placement
+// Nombre
+42
+// Contraintes
+equipe=13	jours=7;21;29	mode=D	max=1
+equipe=11	jours=2;31;32;36	mode=E	max=1
+equipe=12	jours=13	mode=D	max=0
+equipe=14	jours=31	mode=E	max=0
+equipe=19	jours=10;34	mode=D	max=1
+equipe=19	jours=6;10;19	mode=D	max=1
+equipe=13	jours=18	mode=D	max=0
+equipe=19	jours=13;19;24;26	mode=E	max=1
+equipe=16	jours=8	mode=D	max=0
+equipe=6	jours=31	mode=D	max=0
+equipe=13	jours=6	mode=E	max=0
+equipe=10	jours=7;10;18;32	mode=E	max=2
+equipe=6	jours=25	mode=D	max=0
+equipe=16	jours=10	mode=D	max=0
+equipe=16	jours=35	mode=D	max=0
+equipe=11	jours=30;37	mode=E	max=1
+equipe=14	jours=15;29	mode=E	max=1
+equipe=18	jours=6	mode=E	max=0
+equipe=9	jours=13;19;33;36	mode=E	max=2
+equipe=17	jours=20;35;37	mode=D	max=1
+equipe=15	jours=11;14;16;37	mode=E	max=1
+equipe=11	jours=6;10	mode=E	max=1
+equipe=11	jours=14	mode=E	max=0
+equipe=8	jours=4;19;24	mode=E	max=1
+equipe=5	jours=4	mode=E	max=0
+equipe=3	jours=10;22;37	mode=D	max=1
+equipe=10	jours=13	mode=D	max=0
+equipe=17	jours=5;14;30	mode=E	max=1
+equipe=3	jours=7	mode=E	max=0
+equipe=13	jours=7;11;14;29	mode=D	max=1
+equipe=3	jours=13;15;33	mode=E	max=1
+equipe=13	jours=21	mode=E	max=0
+equipe=16	jours=20	mode=E	max=0
+equipe=1	jours=11	mode=E	max=0
+equipe=10	jours=6;11;17;25	mode=D	max=1
+equipe=3	jours=10;20;33;36	mode=E	max=2
+equipe=4	jours=32	mode=D	max=0
+equipe=7	jours=24;26;30;37	mode=E	max=2
+equipe=18	jours=3;13;16	mode=D	max=1
+equipe=5	jours=36	mode=D	max=0
+equipe=9	jours=37	mode=E	max=0
+equipe=18	jours=18	mode=E	max=0
+
+// Contraintes d'equipes en haut et bas de classement
+// Nombre
+72
+// Contraintes
+equipe=17	jours=34	equipesAdverses=1	mode=E	max=0
+equipe=7	jours=0	equipesAdverses=4	mode=D	max=0
+equipe=16	jours=31	equipesAdverses=14	mode=D	max=0
+equipe=6	jours=27	equipesAdverses=7	mode=E	max=0
+equipe=6	jours=14	equipesAdverses=17	mode=D	max=0
+equipe=7	jours=11;20;27;31	equipesAdverses=2;6;10;18	mode=DE	max=1
+equipe=10	jours=14;17;18;22;32	equipesAdverses=1;2;12;17;19	mode=DE	max=2
+equipe=14	jours=6;12;15;22;23	equipesAdverses=4;8;10;12;13	mode=DE	max=1
+equipe=2	jours=12	equipesAdverses=5	mode=E	max=0
+equipe=1	jours=7;13;22;26	equipesAdverses=0;11;12;14	mode=DE	max=1
+equipe=13	jours=19	equipesAdverses=19	mode=E	max=0
+equipe=10	jours=0	equipesAdverses=8	mode=D	max=0
+equipe=14	jours=6;7;10;32	equipesAdverses=4;8;9;15	mode=DE	max=1
+equipe=18	jours=30	equipesAdverses=6	mode=E	max=0
+equipe=1	jours=1;28;29;31;33;35	equipesAdverses=8;10;12;13;14;18	mode=DE	max=2
+equipe=10	jours=32	equipesAdverses=8	mode=D	max=0
+equipe=19	jours=3	equipesAdverses=14	mode=E	max=0
+equipe=16	jours=7;11;15;18;20;29	equipesAdverses=3;6;8;13;14;19	mode=DE	max=2
+equipe=5	jours=29	equipesAdverses=10	mode=E	max=0
+equipe=15	jours=29	equipesAdverses=6	mode=D	max=0
+equipe=6	jours=16	equipesAdverses=16	mode=E	max=0
+equipe=1	jours=35	equipesAdverses=12	mode=D	max=0
+equipe=11	jours=14	equipesAdverses=10	mode=D	max=0
+equipe=4	jours=30	equipesAdverses=6	mode=D	max=0
+equipe=12	jours=2;11;12;26;36	equipesAdverses=0;1;5;13;19	mode=DE	max=1
+equipe=15	jours=0;1;8;19;21;36	equipesAdverses=1;2;3;10;12;19	mode=DE	max=2
+equipe=3	jours=8;9;19;26;33;34	equipesAdverses=1;2;8;9;11;13	mode=DE	max=2
+equipe=13	jours=12	equipesAdverses=3	mode=D	max=0
+equipe=7	jours=27	equipesAdverses=16	mode=E	max=0
+equipe=9	jours=34	equipesAdverses=10	mode=E	max=0
+equipe=1	jours=8	equipesAdverses=9	mode=D	max=0
+equipe=13	jours=12	equipesAdverses=2	mode=E	max=0
+equipe=8	jours=9;14;16;27;34	equipesAdverses=1;2;3;7;11	mode=DE	max=1
+equipe=12	jours=12;14;18;26	equipesAdverses=2;3;10;19	mode=DE	max=1
+equipe=12	jours=13	equipesAdverses=10	mode=E	max=0
+equipe=0	jours=6;29;32;34	equipesAdverses=1;6;8;11	mode=DE	max=1
+equipe=0	jours=23	equipesAdverses=4	mode=E	max=0
+equipe=13	jours=9	equipesAdverses=18	mode=E	max=0
+equipe=5	jours=6;13;20;34	equipesAdverses=3;6;10;14	mode=DE	max=1
+equipe=11	jours=7;12;25;34;37	equipesAdverses=0;8;9;10;17	mode=DE	max=1
+equipe=0	jours=7	equipesAdverses=1	mode=E	max=0
+equipe=16	jours=18	equipesAdverses=11	mode=E	max=0
+equipe=10	jours=0;2;11;30;31	equipesAdverses=3;4;8;15;18	mode=DE	max=1
+equipe=11	jours=16	equipesAdverses=17	mode=D	max=0
+equipe=0	jours=34	equipesAdverses=12	mode=E	max=0
+equipe=6	jours=7	equipesAdverses=4	mode=E	max=0
+equipe=9	jours=2;29;35;36;37	equipesAdverses=2;3;7;12;17	mode=DE	max=1
+equipe=1	jours=12	equipesAdverses=8	mode=E	max=0
+equipe=12	jours=1;2;14;31;33;34	equipesAdverses=2;10;11;14;16;17	mode=DE	max=2
+equipe=18	jours=1	equipesAdverses=15	mode=D	max=0
+equipe=7	jours=7	equipesAdverses=19	mode=E	max=0
+equipe=16	jours=26	equipesAdverses=11	mode=E	max=0
+equipe=19	jours=8	equipesAdverses=18	mode=D	max=0
+equipe=11	jours=15;16;19;22;33	equipesAdverses=5;7;10;18;19	mode=DE	max=1
+equipe=12	jours=3;8;26;35	equipesAdverses=4;9;15;16	mode=DE	max=1
+equipe=8	jours=10	equipesAdverses=1	mode=D	max=0
+equipe=10	jours=0	equipesAdverses=18	mode=D	max=0
+equipe=18	jours=25	equipesAdverses=9	mode=D	max=0
+equipe=15	jours=36	equipesAdverses=11	mode=E	max=0
+equipe=8	jours=10	equipesAdverses=18	mode=E	max=0
+equipe=6	jours=13	equipesAdverses=4	mode=E	max=0
+equipe=7	jours=3;5;15;30;32	equipesAdverses=1;6;13;14;15	mode=DE	max=1
+equipe=17	jours=11;14;24;33	equipesAdverses=4;10;11;13	mode=DE	max=1
+equipe=16	jours=15	equipesAdverses=3	mode=E	max=0
+equipe=17	jours=24	equipesAdverses=5	mode=E	max=0
+equipe=2	jours=3	equipesAdverses=8	mode=D	max=0
+equipe=6	jours=7;15;18;24;28;33	equipesAdverses=0;7;9;14;17;18	mode=DE	max=2
+equipe=2	jours=6;9;11;13;15;26	equipesAdverses=5;8;11;16;17;19	mode=DE	max=2
+equipe=8	jours=3	equipesAdverses=2	mode=E	max=0
+equipe=8	jours=28	equipesAdverses=4	mode=E	max=0
+equipe=8	jours=20	equipesAdverses=17	mode=E	max=0
+equipe=17	jours=26	equipesAdverses=18	mode=E	max=0
+
+// Contraintes de rencontres
+// Nombre
+0
+// Contraintes
+
+// Contraintes de pause par equipe
+// Nombre
+44
+// Contraintes
+equipe=2	jours=15	mode=DE	max=0
+equipe=13	jours=36	mode=DE	max=0
+equipe=11	jours=6	mode=DE	max=0
+equipe=8	jours=1;2;14;20;24;29	mode=DE	max=2
+equipe=19	jours=1;2;5;16;18;25	mode=DE	max=2
+equipe=0	jours=16;20;30	mode=DE	max=1
+equipe=2	jours=19	mode=DE	max=0
+equipe=14	jours=23	mode=DE	max=0
+equipe=15	jours=9;11;22;23;26;33	mode=DE	max=2
+equipe=17	jours=13;30;36	mode=DE	max=1
+equipe=18	jours=8;9;10;32;34;37	mode=DE	max=2
+equipe=17	jours=11;12;22;28;30;33	mode=DE	max=2
+equipe=5	jours=28;32;35	mode=DE	max=1
+equipe=4	jours=3;6;8;14;28;36	mode=DE	max=2
+equipe=15	jours=0;7;11;17;25;34	mode=DE	max=2
+equipe=8	jours=21;34;36	mode=DE	max=1
+equipe=14	jours=6;15;20;21;35;37	mode=DE	max=2
+equipe=14	jours=6;12;14;20;21;31	mode=DE	max=2
+equipe=5	jours=13;20;22;28;31;35	mode=DE	max=2
+equipe=16	jours=14	mode=DE	max=0
+equipe=5	jours=0;2;4;15;29;36	mode=DE	max=2
+equipe=7	jours=1;2;11;12;16;17	mode=DE	max=2
+equipe=17	jours=16;32;33	mode=DE	max=1
+equipe=19	jours=14;18;34	mode=DE	max=1
+equipe=18	jours=11	mode=DE	max=0
+equipe=12	jours=3;5;6;7;11;14	mode=DE	max=2
+equipe=17	jours=6	mode=DE	max=0
+equipe=12	jours=0;11;13;17;18;19	mode=DE	max=2
+equipe=1	jours=11;14;36	mode=DE	max=1
+equipe=15	jours=23;26;31	mode=DE	max=1
+equipe=1	jours=1;11;24	mode=DE	max=1
+equipe=18	jours=5;7;10;12;26;27	mode=DE	max=2
+equipe=11	jours=17;24;32	mode=DE	max=1
+equipe=6	jours=3;6;8;15;17;19	mode=DE	max=2
+equipe=18	jours=1;11;27	mode=DE	max=1
+equipe=11	jours=15	mode=DE	max=0
+equipe=2	jours=1	mode=DE	max=0
+equipe=15	jours=16;18;26;33;35;36	mode=DE	max=2
+equipe=8	jours=16;26;34	mode=DE	max=1
+equipe=13	jours=1;5;6;17;21;22	mode=DE	max=2
+equipe=9	jours=3;6;23	mode=DE	max=1
+equipe=2	jours=1;6;17;27;33;36	mode=DE	max=2
+equipe=9	jours=5;11;29	mode=DE	max=1
+equipe=13	jours=16;20;21;23;28;30	mode=DE	max=2
+
+// Contraintes de pause globale
+// Nombre
+1
+// Contraintes
+equipes=0;1;2;3;4;5;6;7;8;9;10;11;12;13;14;15;16;17;18;19	jours=0;1;2;3;4;5;6;7;8;9;10;11;12;13;14;15;16;17;18;19;20;21;22;23;24;25;26;27;28;29;30;31;32;33;34;35;36;37	max=96
+
+
+// Contraintes souples
+
+// Contraintes de placement
+// Nombre
+32
+// Contraintes
+equipe=11	jours=2;3;10;12;15;20	mode=D	max=2	penalite=1
+equipe=19	jours=5;17;24;35	mode=E	max=1	penalite=1
+equipe=19	jours=5;13;15;20;25;34	mode=D	max=2	penalite=1
+equipe=13	jours=23;28	mode=E	max=1	penalite=1
+equipe=5	jours=20	mode=E	max=0	penalite=1
+equipe=10	jours=1;2;5;23;29;32	mode=D	max=2	penalite=1
+equipe=3	jours=15;26;36	mode=E	max=1	penalite=1
+equipe=2	jours=16;17	mode=E	max=1	penalite=1
+equipe=11	jours=9;15;22;31	mode=E	max=1	penalite=1
+equipe=1	jours=29	mode=E	max=0	penalite=1
+equipe=3	jours=6;8;13;20;26	mode=D	max=1	penalite=1
+equipe=1	jours=3;8;18;21	mode=D	max=1	penalite=1
+equipe=15	jours=4;8;13;23;25	mode=E	max=1	penalite=1
+equipe=9	jours=5;17;19;26;32;36	mode=E	max=2	penalite=1
+equipe=14	jours=20	mode=D	max=0	penalite=1
+equipe=7	jours=13;16;27;32	mode=D	max=1	penalite=1
+equipe=2	jours=19;21;32	mode=E	max=1	penalite=1
+equipe=16	jours=24	mode=D	max=0	penalite=1
+equipe=5	jours=6;17;21;31	mode=D	max=1	penalite=1
+equipe=8	jours=1;14;16;28;37	mode=D	max=1	penalite=1
+equipe=6	jours=5;36	mode=D	max=1	penalite=1
+equipe=13	jours=6;34	mode=D	max=1	penalite=1
+equipe=0	jours=31	mode=E	max=0	penalite=1
+equipe=15	jours=3;9;26;27;34;36	mode=E	max=2	penalite=1
+equipe=9	jours=9	mode=E	max=0	penalite=1
+equipe=2	jours=13;32;33;35	mode=D	max=1	penalite=1
+equipe=12	jours=0;5;10;18;19;24	mode=D	max=2	penalite=1
+equipe=13	jours=8;15;26	mode=E	max=1	penalite=1
+equipe=12	jours=5	mode=D	max=0	penalite=1
+equipe=8	jours=5;27;28;32;33;36	mode=E	max=2	penalite=1
+equipe=10	jours=8;26;29;33	mode=E	max=1	penalite=1
+equipe=4	jours=21	mode=E	max=0	penalite=1
+
+// Contraintes d'equipes en haut et bas de classement
+// Nombre
+620
+// Contraintes
+equipe=4	jours=2;14;18;24;25;30;33	equipesAdverses=1;3;5;10;11;17;19	mode=E	max=2	penalite=5
+equipe=19	jours=2;15;18;20;32;37	equipesAdverses=1;2;6;13;15;16	mode=DE	max=1	penalite=5
+equipe=2	jours=9;13;18;31;34;36	equipesAdverses=1;5;7;12;14;15	mode=DE	max=1	penalite=5
+equipe=17	jours=1;2;6;13;17;19;31;37	equipesAdverses=0;3;6;10;11;12;14;16	mode=D	max=3	penalite=5
+equipe=11	jours=1;12;13;15;19;33	equipesAdverses=1;4;9;14;17;19	mode=DE	max=1	penalite=5
+equipe=3	jours=1;5;6;9;15;24	equipesAdverses=0;1;2;6;8;18	mode=DE	max=1	penalite=5
+equipe=19	jours=5;7;13;26;28;32;36	equipesAdverses=1;4;5;6;7;14;18	mode=E	max=2	penalite=5
+equipe=13	jours=1;3;8;9;12;14;20;26	equipesAdverses=0;3;6;7;9;10;11;12	mode=DE	max=2	penalite=5
+equipe=13	jours=8;9;12;16;17;33;35;36	equipesAdverses=3;5;10;11;12;14;16;19	mode=D	max=3	penalite=5
+equipe=9	jours=3;8;15;17;19;32;36	equipesAdverses=4;6;10;13;14;15;19	mode=E	max=2	penalite=5
+equipe=7	jours=13;16;17;18;23;27;29;32	equipesAdverses=1;3;5;8;9;17;18;19	mode=D	max=3	penalite=5
+equipe=7	jours=11;13;24;25;31;34;35	equipesAdverses=0;1;3;9;10;13;14	mode=D	max=2	penalite=5
+equipe=17	jours=3;13;14;25;28;37	equipesAdverses=1;2;5;7;8;19	mode=DE	max=1	penalite=5
+equipe=1	jours=3;7;8;9;11;13;33	equipesAdverses=4;6;8;9;12;16;18	mode=E	max=2	penalite=5
+equipe=2	jours=10;12;13;19;26;28;29;30	equipesAdverses=1;3;4;8;9;10;12;16	mode=D	max=3	penalite=5
+equipe=13	jours=5;17;20;30;31;33	equipesAdverses=2;4;5;11;12;14	mode=D	max=2	penalite=5
+equipe=18	jours=0;1;16;21;24;25;33	equipesAdverses=2;3;6;7;9;10;19	mode=E	max=2	penalite=5
+equipe=5	jours=3;12;15;20;24;33	equipesAdverses=0;1;4;9;10;15	mode=E	max=2	penalite=5
+equipe=4	jours=19;20;21;23;24;31;35	equipesAdverses=2;5;7;8;11;12;13	mode=E	max=2	penalite=5
+equipe=4	jours=6;7;10;11;36;37	equipesAdverses=2;5;7;15;16;19	mode=E	max=2	penalite=5
+equipe=15	jours=7;10;18;25;26;29;31	equipesAdverses=0;1;6;11;13;17;18	mode=D	max=2	penalite=5
+equipe=2	jours=2;6;17;20;23;30;32;36	equipesAdverses=4;5;6;10;11;12;14;15	mode=D	max=3	penalite=5
+equipe=15	jours=0;7;11;12;21;30;36;37	equipesAdverses=1;3;7;9;11;12;13;18	mode=DE	max=2	penalite=5
+equipe=11	jours=9;10;15;17;19;26;27;33	equipesAdverses=2;4;6;9;10;13;14;16	mode=E	max=3	penalite=5
+equipe=15	jours=1;3;11;14;31;34	equipesAdverses=0;4;6;9;12;13	mode=DE	max=1	penalite=5
+equipe=18	jours=7;15;20;27;29;34;36	equipesAdverses=0;1;2;7;10;13;17	mode=E	max=2	penalite=5
+equipe=2	jours=7;8;14;17;18;37	equipesAdverses=0;4;8;10;12;19	mode=E	max=2	penalite=5
+equipe=12	jours=4;7;10;11;27;28;33;34	equipesAdverses=3;5;8;9;10;14;16;18	mode=E	max=3	penalite=5
+equipe=19	jours=7;9;11;18;20;21;35;36	equipesAdverses=0;1;3;5;7;8;9;10	mode=E	max=3	penalite=5
+equipe=15	jours=1;2;9;11;15;18;32;35	equipesAdverses=2;6;8;9;13;14;18;19	mode=E	max=3	penalite=5
+equipe=11	jours=4;8;16;18;20;33;34;37	equipesAdverses=3;5;10;12;13;14;15;18	mode=DE	max=2	penalite=5
+equipe=6	jours=10;12;14;20;26;28;34;35	equipesAdverses=1;4;5;7;8;9;11;18	mode=E	max=3	penalite=5
+equipe=8	jours=11;15;21;24;25;26;34;36	equipesAdverses=0;2;4;12;14;16;17;19	mode=DE	max=2	penalite=5
+equipe=17	jours=8;11;12;16;30;33;35	equipesAdverses=0;5;8;12;13;15;18	mode=E	max=2	penalite=5
+equipe=1	jours=9;11;15;17;25;26;34	equipesAdverses=2;5;7;9;10;13;18	mode=E	max=2	penalite=5
+equipe=7	jours=3;10;11;16;20;21;30;32	equipesAdverses=1;4;6;8;10;13;16;17	mode=E	max=3	penalite=5
+equipe=11	jours=7;12;20;22;25;28;33;34	equipesAdverses=0;4;7;9;14;17;18;19	mode=DE	max=2	penalite=5
+equipe=10	jours=4;12;22;25;26;29;36	equipesAdverses=1;3;5;6;8;14;16	mode=D	max=2	penalite=5
+equipe=16	jours=2;8;10;12;14;21;25;28	equipesAdverses=2;3;4;5;8;10;12;17	mode=DE	max=2	penalite=5
+equipe=5	jours=1;20;21;23;27;29;30	equipesAdverses=3;8;9;11;13;17;18	mode=D	max=2	penalite=5
+equipe=13	jours=13;17;18;23;29;35;37	equipesAdverses=1;5;7;9;12;16;17	mode=E	max=2	penalite=5
+equipe=15	jours=7;13;18;22;24;30;33	equipesAdverses=3;5;7;14;16;18;19	mode=D	max=2	penalite=5
+equipe=13	jours=1;18;25;29;30;31;34;35	equipesAdverses=0;2;6;9;11;12;14;19	mode=DE	max=2	penalite=5
+equipe=7	jours=2;4;12;15;16;29;31;36	equipesAdverses=0;1;2;3;6;11;14;19	mode=DE	max=2	penalite=5
+equipe=7	jours=10;11;16;20;26;31	equipesAdverses=2;8;12;14;15;19	mode=D	max=2	penalite=5
+equipe=18	jours=2;6;7;11;15;21;33;35	equipesAdverses=1;2;3;4;7;8;11;19	mode=E	max=3	penalite=5
+equipe=19	jours=1;6;7;9;10;22;24;30	equipesAdverses=3;4;8;9;12;14;16;17	mode=E	max=3	penalite=5
+equipe=13	jours=1;14;17;18;21;32	equipesAdverses=2;4;5;8;16;19	mode=E	max=2	penalite=5
+equipe=3	jours=4;7;10;19;24;33;35	equipesAdverses=1;4;5;7;9;10;12	mode=D	max=2	penalite=5
+equipe=14	jours=4;8;12;18;30;32	equipesAdverses=2;6;8;9;13;18	mode=DE	max=1	penalite=5
+equipe=1	jours=4;8;25;28;29;30	equipesAdverses=2;4;9;10;14;19	mode=DE	max=1	penalite=5
+equipe=12	jours=0;12;23;25;27;30;33	equipesAdverses=2;4;5;9;10;16;18	mode=D	max=2	penalite=5
+equipe=19	jours=5;10;13;15;23;25;28;35	equipesAdverses=0;2;5;8;14;15;17;18	mode=E	max=3	penalite=5
+equipe=11	jours=0;5;17;20;25;29	equipesAdverses=3;4;6;13;15;19	mode=D	max=2	penalite=5
+equipe=1	jours=1;5;6;13;19;25;29;33	equipesAdverses=2;3;7;8;11;16;17;19	mode=DE	max=2	penalite=5
+equipe=1	jours=3;20;24;26;27;28;35;36	equipesAdverses=3;7;10;11;12;13;16;18	mode=D	max=3	penalite=5
+equipe=17	jours=2;9;13;24;31;36;37	equipesAdverses=2;3;4;5;10;11;15	mode=DE	max=1	penalite=5
+equipe=4	jours=5;9;16;29;34;35	equipesAdverses=2;6;11;12;13;18	mode=D	max=2	penalite=5
+equipe=9	jours=7;10;14;15;17;18;19;36	equipesAdverses=2;3;10;12;15;16;18;19	mode=D	max=3	penalite=5
+equipe=9	jours=3;4;7;13;21;25;34;35	equipesAdverses=2;3;5;8;12;13;14;15	mode=D	max=3	penalite=5
+equipe=18	jours=2;3;5;23;25;32;37	equipesAdverses=2;4;6;10;12;14;15	mode=DE	max=1	penalite=5
+equipe=5	jours=3;7;12;19;23;27;30;33	equipesAdverses=2;7;10;11;12;13;18;19	mode=DE	max=2	penalite=5
+equipe=15	jours=0;1;18;21;22;27;30;37	equipesAdverses=4;5;6;7;8;9;16;17	mode=DE	max=2	penalite=5
+equipe=16	jours=0;4;12;25;29;34	equipesAdverses=0;9;10;13;15;18	mode=E	max=2	penalite=5
+equipe=8	jours=3;15;16;23;30;34	equipesAdverses=2;6;10;15;16;18	mode=D	max=2	penalite=5
+equipe=5	jours=8;9;13;14;26;31;37	equipesAdverses=6;7;9;10;11;13;19	mode=D	max=2	penalite=5
+equipe=0	jours=5;11;17;20;23;25;36	equipesAdverses=1;5;6;8;9;10;19	mode=D	max=2	penalite=5
+equipe=18	jours=1;2;3;4;12;18;23;27	equipesAdverses=0;2;3;5;8;9;15;17	mode=DE	max=2	penalite=5
+equipe=18	jours=0;8;15;21;22;23;32	equipesAdverses=0;1;4;5;7;10;11	mode=DE	max=1	penalite=5
+equipe=12	jours=4;15;17;26;32;34	equipesAdverses=1;2;8;9;14;19	mode=DE	max=1	penalite=5
+equipe=15	jours=3;19;24;26;28;29;30	equipesAdverses=0;2;3;5;6;10;16	mode=E	max=2	penalite=5
+equipe=15	jours=2;5;10;12;16;22;27;28	equipesAdverses=0;3;8;9;13;14;16;19	mode=D	max=3	penalite=5
+equipe=18	jours=10;23;27;29;33;35;36	equipesAdverses=0;3;5;7;10;12;15	mode=D	max=2	penalite=5
+equipe=6	jours=3;6;7;8;14;24;31	equipesAdverses=4;5;7;12;13;15;16	mode=E	max=2	penalite=5
+equipe=12	jours=3;5;6;15;17;27;30;32	equipesAdverses=0;2;5;7;10;11;15;19	mode=E	max=3	penalite=5
+equipe=3	jours=6;9;11;12;18;28	equipesAdverses=0;2;6;8;10;12	mode=E	max=2	penalite=5
+equipe=16	jours=4;5;15;17;23;25;34;36	equipesAdverses=1;3;9;12;13;17;18;19	mode=E	max=3	penalite=5
+equipe=1	jours=4;8;15;16;17;23;25;30	equipesAdverses=0;4;7;10;13;16;17;18	mode=D	max=3	penalite=5
+equipe=6	jours=0;1;6;18;26;28;30;34	equipesAdverses=0;2;3;4;5;8;18;19	mode=E	max=3	penalite=5
+equipe=5	jours=4;5;22;23;29;35;37	equipesAdverses=0;1;10;11;12;14;16	mode=E	max=2	penalite=5
+equipe=10	jours=1;3;15;16;17;18;24;27	equipesAdverses=1;5;7;12;13;17;18;19	mode=DE	max=2	penalite=5
+equipe=15	jours=1;9;11;16;19;37	equipesAdverses=3;8;11;13;14;17	mode=D	max=2	penalite=5
+equipe=16	jours=10;15;17;20;25;29;30;36	equipesAdverses=0;1;2;12;13;14;17;19	mode=E	max=3	penalite=5
+equipe=8	jours=15;20;21;31;32;33;35;37	equipesAdverses=1;2;10;11;15;16;18;19	mode=DE	max=2	penalite=5
+equipe=2	jours=9;15;23;25;26;30;34	equipesAdverses=6;7;8;9;13;14;15	mode=D	max=2	penalite=5
+equipe=9	jours=5;19;26;27;31;33	equipesAdverses=0;5;6;8;13;19	mode=D	max=2	penalite=5
+equipe=13	jours=0;11;14;18;19;31	equipesAdverses=0;4;10;16;17;19	mode=D	max=2	penalite=5
+equipe=1	jours=0;2;16;21;23;29;37	equipesAdverses=5;11;13;14;15;16;18	mode=DE	max=1	penalite=5
+equipe=19	jours=0;10;13;18;19;27;33	equipesAdverses=0;1;5;7;11;12;13	mode=D	max=2	penalite=5
+equipe=8	jours=6;7;8;12;24;35	equipesAdverses=0;2;3;5;7;9	mode=D	max=2	penalite=5
+equipe=14	jours=2;13;17;20;23;24;31;35	equipesAdverses=0;3;7;9;10;12;15;16	mode=D	max=3	penalite=5
+equipe=8	jours=0;1;5;19;23;28;37	equipesAdverses=4;6;7;9;10;16;19	mode=DE	max=1	penalite=5
+equipe=17	jours=0;12;13;22;23;25;32	equipesAdverses=2;4;6;8;9;10;18	mode=E	max=2	penalite=5
+equipe=11	jours=0;11;12;16;21;22;26	equipesAdverses=1;8;10;13;14;17;19	mode=DE	max=1	penalite=5
+equipe=8	jours=5;16;21;23;27;28;32	equipesAdverses=1;3;10;11;14;17;18	mode=E	max=2	penalite=5
+equipe=18	jours=2;3;11;14;19;33	equipesAdverses=2;3;5;6;8;11	mode=D	max=2	penalite=5
+equipe=5	jours=0;10;12;18;21;34	equipesAdverses=2;6;12;15;16;19	mode=D	max=2	penalite=5
+equipe=1	jours=6;11;13;17;23;30;34;35	equipesAdverses=2;10;11;12;13;14;16;18	mode=D	max=3	penalite=5
+equipe=2	jours=4;8;18;21;23;24;33	equipesAdverses=0;6;7;11;16;17;18	mode=E	max=2	penalite=5
+equipe=18	jours=0;1;6;12;19;22;34;36	equipesAdverses=3;4;5;7;9;14;15;16	mode=DE	max=2	penalite=5
+equipe=6	jours=0;10;18;20;22;23;25	equipesAdverses=0;1;3;5;7;13;14	mode=E	max=2	penalite=5
+equipe=19	jours=0;3;8;10;15;36	equipesAdverses=7;8;12;14;15;17	mode=DE	max=1	penalite=5
+equipe=8	jours=11;14;21;23;28;31	equipesAdverses=0;4;6;9;13;17	mode=DE	max=1	penalite=5
+equipe=6	jours=7;12;21;23;29;34;37	equipesAdverses=0;1;3;14;16;17;19	mode=DE	max=1	penalite=5
+equipe=13	jours=8;10;11;18;19;22;24	equipesAdverses=0;2;5;6;10;12;15	mode=D	max=2	penalite=5
+equipe=18	jours=9;24;28;30;36;37	equipesAdverses=0;1;8;10;11;14	mode=D	max=2	penalite=5
+equipe=17	jours=10;12;16;17;24;30;35;36	equipesAdverses=2;4;8;9;10;12;13;14	mode=DE	max=2	penalite=5
+equipe=0	jours=7;12;19;21;25;26	equipesAdverses=2;9;11;13;14;16	mode=E	max=2	penalite=5
+equipe=1	jours=5;9;13;14;18;25;30;37	equipesAdverses=0;2;3;5;7;11;12;17	mode=DE	max=2	penalite=5
+equipe=0	jours=1;5;13;17;22;24;26;30	equipesAdverses=6;8;9;10;12;13;14;18	mode=DE	max=2	penalite=5
+equipe=2	jours=2;3;5;9;15;16	equipesAdverses=4;5;6;9;11;15	mode=DE	max=1	penalite=5
+equipe=6	jours=6;11;18;20;27;31	equipesAdverses=1;5;9;16;18;19	mode=DE	max=1	penalite=5
+equipe=14	jours=4;8;9;15;17;23	equipesAdverses=1;4;5;15;18;19	mode=D	max=2	penalite=5
+equipe=13	jours=0;6;8;10;12;17;21;36	equipesAdverses=0;2;5;6;11;14;16;18	mode=E	max=3	penalite=5
+equipe=5	jours=0;3;4;15;22;23;28;35	equipesAdverses=1;8;9;13;14;17;18;19	mode=D	max=3	penalite=5
+equipe=2	jours=9;18;25;26;27;28	equipesAdverses=3;4;5;11;16;17	mode=D	max=2	penalite=5
+equipe=15	jours=2;9;12;23;26;27;30;34	equipesAdverses=2;4;6;12;13;16;17;19	mode=DE	max=2	penalite=5
+equipe=1	jours=2;9;17;20;24;28;29;36	equipesAdverses=4;7;10;11;13;15;16;18	mode=D	max=3	penalite=5
+equipe=0	jours=9;16;28;30;31;32	equipesAdverses=1;8;11;13;16;17	mode=DE	max=1	penalite=5
+equipe=16	jours=10;17;19;25;31;36	equipesAdverses=2;9;10;11;15;19	mode=DE	max=1	penalite=5
+equipe=10	jours=1;8;11;14;15;29;37	equipesAdverses=2;5;7;8;9;13;17	mode=E	max=2	penalite=5
+equipe=5	jours=0;4;6;17;20;34;37	equipesAdverses=0;1;10;11;12;13;19	mode=E	max=2	penalite=5
+equipe=17	jours=2;14;18;19;20;29;30	equipesAdverses=1;2;7;10;11;15;19	mode=DE	max=1	penalite=5
+equipe=18	jours=6;7;8;15;18;34	equipesAdverses=1;11;12;14;15;17	mode=DE	max=1	penalite=5
+equipe=14	jours=4;9;10;14;20;26;29;35	equipesAdverses=3;4;5;7;8;12;15;16	mode=D	max=3	penalite=5
+equipe=14	jours=8;14;18;30;32;33;34;35	equipesAdverses=0;1;3;7;11;16;18;19	mode=E	max=3	penalite=5
+equipe=9	jours=6;11;13;22;25;26;27;31	equipesAdverses=0;1;4;6;8;10;14;15	mode=DE	max=2	penalite=5
+equipe=17	jours=7;9;12;19;20;27;28	equipesAdverses=5;6;8;12;15;18;19	mode=D	max=2	penalite=5
+equipe=7	jours=7;8;11;23;26;31;35	equipesAdverses=1;8;11;13;14;15;16	mode=E	max=2	penalite=5
+equipe=2	jours=4;10;16;20;28;37	equipesAdverses=0;4;5;8;14;18	mode=D	max=2	penalite=5
+equipe=16	jours=2;5;9;24;33;35	equipesAdverses=5;7;10;12;14;18	mode=E	max=2	penalite=5
+equipe=1	jours=12;17;21;24;31;36	equipesAdverses=2;3;7;12;13;18	mode=E	max=2	penalite=5
+equipe=12	jours=3;7;9;10;12;21;26	equipesAdverses=2;3;5;7;10;11;13	mode=DE	max=1	penalite=5
+equipe=12	jours=3;11;13;21;26;28;33	equipesAdverses=3;5;7;10;11;13;17	mode=DE	max=1	penalite=5
+equipe=18	jours=10;11;14;22;23;33	equipesAdverses=1;2;3;7;8;12	mode=D	max=2	penalite=5
+equipe=3	jours=0;2;11;13;19;25;26;33	equipesAdverses=1;5;6;9;14;15;17;18	mode=D	max=3	penalite=5
+equipe=17	jours=2;9;11;15;23;33	equipesAdverses=3;4;7;8;9;18	mode=D	max=2	penalite=5
+equipe=12	jours=0;5;9;11;14;24;27	equipesAdverses=7;8;9;10;13;17;18	mode=DE	max=1	penalite=5
+equipe=12	jours=0;5;12;21;27;29;36	equipesAdverses=0;4;5;7;11;15;19	mode=E	max=2	penalite=5
+equipe=14	jours=0;1;2;21;28;30	equipesAdverses=1;6;8;11;13;17	mode=E	max=2	penalite=5
+equipe=15	jours=0;8;9;28;32;33;34	equipesAdverses=4;6;7;9;10;17;19	mode=D	max=2	penalite=5
+equipe=2	jours=4;6;12;23;26;35	equipesAdverses=4;5;6;11;14;17	mode=D	max=2	penalite=5
+equipe=0	jours=20;23;26;30;35;36	equipesAdverses=4;5;10;11;13;17	mode=E	max=2	penalite=5
+equipe=18	jours=5;10;15;19;22;24	equipesAdverses=0;2;4;7;9;13	mode=D	max=2	penalite=5
+equipe=6	jours=7;10;21;22;25;27	equipesAdverses=0;2;3;4;14;17	mode=DE	max=1	penalite=5
+equipe=9	jours=1;7;20;26;29;32;33;37	equipesAdverses=0;2;3;4;10;12;15;16	mode=DE	max=2	penalite=5
+equipe=3	jours=0;9;12;18;25;29;31	equipesAdverses=6;9;11;12;16;17;19	mode=D	max=2	penalite=5
+equipe=5	jours=4;6;21;22;23;25;30	equipesAdverses=0;2;4;6;10;11;15	mode=D	max=2	penalite=5
+equipe=18	jours=0;6;10;15;17;21;34	equipesAdverses=2;8;11;14;15;17;19	mode=D	max=2	penalite=5
+equipe=18	jours=6;8;12;17;22;24;31;34	equipesAdverses=1;4;6;7;9;10;16;17	mode=D	max=3	penalite=5
+equipe=0	jours=2;3;10;11;19;29;37	equipesAdverses=2;4;8;10;12;13;16	mode=E	max=2	penalite=5
+equipe=7	jours=3;5;7;12;15;20;31;34	equipesAdverses=0;3;4;6;9;10;11;13	mode=E	max=3	penalite=5
+equipe=2	jours=9;16;19;26;29;30;36	equipesAdverses=1;3;4;5;11;12;14	mode=E	max=2	penalite=5
+equipe=6	jours=2;26;28;31;32;34	equipesAdverses=12;13;14;15;16;17	mode=E	max=2	penalite=5
+equipe=0	jours=7;18;20;23;27;29;30	equipesAdverses=2;3;6;8;15;16;17	mode=E	max=2	penalite=5
+equipe=14	jours=13;14;15;17;24;33;35;37	equipesAdverses=1;3;5;6;8;9;18;19	mode=D	max=3	penalite=5
+equipe=18	jours=2;3;8;14;18;33	equipesAdverses=0;4;7;13;14;17	mode=E	max=2	penalite=5
+equipe=1	jours=2;4;15;26;27;30;37	equipesAdverses=0;4;6;7;12;14;18	mode=DE	max=1	penalite=5
+equipe=2	jours=4;5;18;19;21;30;32;33	equipesAdverses=5;7;9;12;14;16;18;19	mode=E	max=3	penalite=5
+equipe=8	jours=6;16;21;28;31;33	equipesAdverses=1;2;3;12;18;19	mode=E	max=2	penalite=5
+equipe=2	jours=14;16;18;22;25;28;29;32	equipesAdverses=0;3;4;5;7;8;12;19	mode=E	max=3	penalite=5
+equipe=0	jours=14;16;21;22;25;33	equipesAdverses=8;9;10;15;18;19	mode=D	max=2	penalite=5
+equipe=8	jours=14;16;21;23;27;36	equipesAdverses=0;2;3;12;14;18	mode=E	max=2	penalite=5
+equipe=9	jours=2;4;14;24;30;31;35	equipesAdverses=1;4;6;8;10;14;17	mode=D	max=2	penalite=5
+equipe=14	jours=1;6;9;17;23;30;35	equipesAdverses=0;3;10;11;13;15;17	mode=D	max=2	penalite=5
+equipe=17	jours=8;9;11;15;18;32;37	equipesAdverses=3;4;10;12;15;16;18	mode=E	max=2	penalite=5
+equipe=6	jours=3;11;19;22;23;26;27;31	equipesAdverses=0;2;3;7;8;10;11;15	mode=E	max=3	penalite=5
+equipe=17	jours=2;11;17;18;27;35;37	equipesAdverses=2;4;6;14;15;16;18	mode=D	max=2	penalite=5
+equipe=0	jours=1;2;4;7;8;30;35	equipesAdverses=6;7;10;14;15;16;19	mode=E	max=2	penalite=5
+equipe=11	jours=7;9;10;18;21;23;25;30	equipesAdverses=0;1;6;7;8;10;16;17	mode=E	max=3	penalite=5
+equipe=9	jours=2;13;16;21;30;33;37	equipesAdverses=2;4;7;10;15;17;18	mode=E	max=2	penalite=5
+equipe=6	jours=2;6;12;18;25;30;32	equipesAdverses=0;3;8;9;10;14;19	mode=D	max=2	penalite=5
+equipe=10	jours=0;8;12;15;27;34;37	equipesAdverses=0;7;8;9;12;14;19	mode=D	max=2	penalite=5
+equipe=15	jours=0;16;18;30;36;37	equipesAdverses=2;5;7;8;12;18	mode=E	max=2	penalite=5
+equipe=5	jours=2;4;12;15;22;32;33;34	equipesAdverses=0;1;3;4;6;12;18;19	mode=D	max=3	penalite=5
+equipe=0	jours=1;9;14;18;21;36	equipesAdverses=2;7;10;13;14;18	mode=D	max=2	penalite=5
+equipe=10	jours=0;1;10;12;13;16;28;34	equipesAdverses=1;2;4;5;6;11;13;14	mode=DE	max=2	penalite=5
+equipe=8	jours=1;13;16;21;23;37	equipesAdverses=0;1;3;4;13;15	mode=E	max=2	penalite=5
+equipe=11	jours=6;13;16;18;28;31;34	equipesAdverses=1;3;7;13;15;18;19	mode=D	max=2	penalite=5
+equipe=9	jours=6;15;18;29;31;37	equipesAdverses=2;5;11;13;17;19	mode=E	max=2	penalite=5
+equipe=19	jours=4;6;7;8;14;34	equipesAdverses=5;12;13;14;15;18	mode=D	max=2	penalite=5
+equipe=0	jours=9;13;14;28;33;37	equipesAdverses=1;3;8;9;11;14	mode=D	max=2	penalite=5
+equipe=19	jours=0;1;6;8;13;27;30	equipesAdverses=2;4;5;10;12;15;17	mode=D	max=2	penalite=5
+equipe=3	jours=0;7;11;20;21;27;35	equipesAdverses=0;4;6;10;13;15;16	mode=D	max=2	penalite=5
+equipe=5	jours=5;12;14;25;26;27;28	equipesAdverses=0;4;8;11;12;13;18	mode=E	max=2	penalite=5
+equipe=17	jours=1;4;7;15;26;34;36	equipesAdverses=1;3;4;5;9;18;19	mode=DE	max=1	penalite=5
+equipe=16	jours=2;3;12;22;32;33	equipesAdverses=0;1;10;13;17;18	mode=D	max=2	penalite=5
+equipe=2	jours=5;10;20;26;28;31;32;33	equipesAdverses=3;4;5;7;9;12;14;15	mode=DE	max=2	penalite=5
+equipe=16	jours=5;27;28;29;31;34;36;37	equipesAdverses=2;3;6;7;9;10;15;19	mode=DE	max=2	penalite=5
+equipe=17	jours=0;1;6;8;21;22;25	equipesAdverses=1;3;5;7;10;12;15	mode=DE	max=1	penalite=5
+equipe=19	jours=13;16;19;29;30;33	equipesAdverses=2;3;8;11;13;18	mode=DE	max=1	penalite=5
+equipe=2	jours=0;4;13;15;20;21;24;34	equipesAdverses=0;3;4;6;8;9;12;16	mode=DE	max=2	penalite=5
+equipe=18	jours=5;7;8;12;14;17;27;32	equipesAdverses=0;1;2;4;10;12;13;16	mode=E	max=3	penalite=5
+equipe=16	jours=6;21;25;29;33;34	equipesAdverses=0;2;3;13;14;17	mode=DE	max=1	penalite=5
+equipe=5	jours=1;4;15;21;25;27;29	equipesAdverses=0;1;6;7;8;10;17	mode=DE	max=1	penalite=5
+equipe=8	jours=16;19;23;32;33;35	equipesAdverses=0;3;6;7;9;18	mode=E	max=2	penalite=5
+equipe=1	jours=2;11;12;13;19;20;25;31	equipesAdverses=4;7;8;10;11;12;17;18	mode=E	max=3	penalite=5
+equipe=16	jours=0;8;10;11;17;18;24	equipesAdverses=0;2;3;11;14;15;18	mode=DE	max=1	penalite=5
+equipe=8	jours=3;6;10;13;30;31;36;37	equipesAdverses=2;3;6;11;12;14;16;18	mode=D	max=3	penalite=5
+equipe=9	jours=0;10;13;21;22;23;25;29	equipesAdverses=1;3;5;7;8;10;13;16	mode=E	max=3	penalite=5
+equipe=2	jours=0;9;15;19;26;27;30;34	equipesAdverses=3;4;5;6;7;14;17;19	mode=D	max=3	penalite=5
+equipe=15	jours=2;21;22;23;25;29	equipesAdverses=6;8;12;13;16;17	mode=E	max=2	penalite=5
+equipe=16	jours=3;4;6;23;28;29;32;33	equipesAdverses=2;3;4;6;7;8;14;17	mode=DE	max=2	penalite=5
+equipe=8	jours=8;14;17;18;20;32	equipesAdverses=2;7;9;16;17;19	mode=D	max=2	penalite=5
+equipe=2	jours=2;12;15;19;23;26	equipesAdverses=0;1;9;12;13;16	mode=D	max=2	penalite=5
+equipe=0	jours=0;3;9;11;26;36	equipesAdverses=6;8;9;10;11;19	mode=DE	max=1	penalite=5
+equipe=5	jours=10;14;15;19;21;24;27	equipesAdverses=1;2;4;7;8;10;19	mode=D	max=2	penalite=5
+equipe=4	jours=0;8;21;22;26;31;32	equipesAdverses=6;7;9;10;14;18;19	mode=DE	max=1	penalite=5
+equipe=10	jours=2;3;13;15;21;25;34;36	equipesAdverses=0;3;4;8;14;17;18;19	mode=E	max=3	penalite=5
+equipe=11	jours=5;15;19;20;22;25;26;30	equipesAdverses=4;6;7;8;12;13;15;16	mode=E	max=3	penalite=5
+equipe=1	jours=3;8;15;24;29;35	equipesAdverses=7;10;14;15;17;19	mode=DE	max=1	penalite=5
+equipe=5	jours=2;4;11;13;27;30;33;34	equipesAdverses=0;6;11;13;14;15;16;19	mode=D	max=3	penalite=5
+equipe=13	jours=4;6;12;13;21;31	equipesAdverses=3;4;9;12;16;18	mode=E	max=2	penalite=5
+equipe=14	jours=3;7;11;12;17;19;30	equipesAdverses=2;4;7;9;11;16;19	mode=DE	max=1	penalite=5
+equipe=13	jours=3;7;14;21;22;26;31	equipesAdverses=1;4;6;9;12;15;17	mode=DE	max=1	penalite=5
+equipe=9	jours=4;6;21;26;28;29;31;32	equipesAdverses=3;6;11;12;13;15;17;18	mode=E	max=3	penalite=5
+equipe=5	jours=2;8;22;31;34;37	equipesAdverses=0;1;2;3;10;16	mode=E	max=2	penalite=5
+equipe=8	jours=5;6;10;12;29;31	equipesAdverses=1;4;5;10;11;16	mode=D	max=2	penalite=5
+equipe=3	jours=1;5;9;13;20;21;33;37	equipesAdverses=1;6;8;9;10;11;12;16	mode=DE	max=2	penalite=5
+equipe=2	jours=1;5;25;28;31;33;36	equipesAdverses=4;6;9;13;16;18;19	mode=DE	max=1	penalite=5
+equipe=5	jours=1;9;19;21;25;28;31;36	equipesAdverses=1;2;3;7;12;15;16;18	mode=E	max=3	penalite=5
+equipe=18	jours=5;16;28;29;32;35	equipesAdverses=4;8;10;14;15;19	mode=DE	max=1	penalite=5
+equipe=16	jours=7;8;10;19;23;25;27;32	equipesAdverses=0;2;4;6;8;11;13;14	mode=DE	max=2	penalite=5
+equipe=12	jours=1;3;5;6;8;9;19;34	equipesAdverses=6;9;11;14;15;17;18;19	mode=D	max=3	penalite=5
+equipe=8	jours=8;9;18;19;23;24;25	equipesAdverses=3;7;10;13;16;18;19	mode=E	max=2	penalite=5
+equipe=15	jours=7;14;22;27;29;30	equipesAdverses=1;4;10;13;18;19	mode=D	max=2	penalite=5
+equipe=3	jours=4;5;8;13;14;15;31	equipesAdverses=0;1;2;6;11;18;19	mode=E	max=2	penalite=5
+equipe=13	jours=12;14;16;17;25;34	equipesAdverses=8;9;10;11;15;19	mode=DE	max=1	penalite=5
+equipe=9	jours=1;7;10;14;19;29;33	equipesAdverses=0;3;6;7;11;15;18	mode=DE	max=1	penalite=5
+equipe=19	jours=10;22;23;26;27;29;35;37	equipesAdverses=1;5;7;8;9;12;13;18	mode=D	max=3	penalite=5
+equipe=4	jours=3;13;14;17;24;28;30	equipesAdverses=7;8;10;12;13;14;19	mode=E	max=2	penalite=5
+equipe=17	jours=3;6;13;20;22;29;35;37	equipesAdverses=2;3;5;7;10;13;14;15	mode=E	max=3	penalite=5
+equipe=11	jours=6;14;15;16;26;27;28	equipesAdverses=0;4;9;12;13;14;15	mode=DE	max=1	penalite=5
+equipe=14	jours=15;16;19;23;30;33	equipesAdverses=1;8;11;12;13;18	mode=E	max=2	penalite=5
+equipe=8	jours=0;6;12;13;21;24;31;33	equipesAdverses=1;2;4;7;14;16;17;19	mode=DE	max=2	penalite=5
+equipe=18	jours=1;7;8;16;29;31	equipesAdverses=3;5;11;13;15;19	mode=DE	max=1	penalite=5
+equipe=17	jours=1;3;5;15;22;25;29;36	equipesAdverses=0;1;10;11;12;13;14;19	mode=E	max=3	penalite=5
+equipe=6	jours=6;8;24;29;33;34;35	equipesAdverses=7;8;10;11;14;17;18	mode=D	max=2	penalite=5
+equipe=3	jours=0;1;4;5;21;28;29;34	equipesAdverses=0;5;10;12;13;14;15;16	mode=D	max=3	penalite=5
+equipe=18	jours=1;3;9;17;21;34	equipesAdverses=5;12;13;14;15;19	mode=D	max=2	penalite=5
+equipe=9	jours=0;9;16;18;19;20;26;33	equipesAdverses=4;5;6;10;12;15;17;19	mode=E	max=3	penalite=5
+equipe=14	jours=2;7;8;16;20;28	equipesAdverses=3;5;6;9;15;16	mode=E	max=2	penalite=5
+equipe=8	jours=5;17;21;23;24;29;34	equipesAdverses=0;5;12;14;15;16;18	mode=DE	max=1	penalite=5
+equipe=14	jours=3;6;7;19;23;28	equipesAdverses=1;3;6;13;15;17	mode=D	max=2	penalite=5
+equipe=3	jours=15;16;20;23;25;27;31	equipesAdverses=2;7;8;12;13;15;18	mode=DE	max=1	penalite=5
+equipe=2	jours=0;3;5;16;28;30;31;33	equipesAdverses=3;6;9;10;11;14;15;17	mode=DE	max=2	penalite=5
+equipe=17	jours=2;6;13;30;32;36	equipesAdverses=1;2;4;9;12;14	mode=D	max=2	penalite=5
+equipe=7	jours=14;18;24;28;31;35	equipesAdverses=0;1;3;5;11;17	mode=D	max=2	penalite=5
+equipe=17	jours=13;19;27;28;33;34	equipesAdverses=1;2;10;11;14;15	mode=E	max=2	penalite=5
+equipe=9	jours=0;2;4;19;21;26;36	equipesAdverses=2;4;8;10;11;14;17	mode=DE	max=1	penalite=5
+equipe=8	jours=1;2;3;9;16;19;36	equipesAdverses=0;3;5;12;13;14;18	mode=E	max=2	penalite=5
+equipe=5	jours=6;7;9;12;28;29;32	equipesAdverses=0;2;3;11;14;16;19	mode=DE	max=1	penalite=5
+equipe=1	jours=6;12;13;18;20;24;27;35	equipesAdverses=0;7;8;9;11;14;15;19	mode=DE	max=2	penalite=5
+equipe=17	jours=2;4;9;11;14;29;33	equipesAdverses=2;3;6;12;14;15;16	mode=DE	max=1	penalite=5
+equipe=19	jours=3;12;30;32;34;36	equipesAdverses=1;2;4;7;14;16	mode=D	max=2	penalite=5
+equipe=3	jours=17;18;20;21;23;32	equipesAdverses=0;4;6;7;8;13	mode=D	max=2	penalite=5
+equipe=9	jours=0;2;5;8;15;21;31;33	equipesAdverses=0;1;2;7;10;11;14;17	mode=D	max=3	penalite=5
+equipe=0	jours=0;7;19;24;27;28;35;36	equipesAdverses=1;2;4;6;10;12;14;18	mode=E	max=3	penalite=5
+equipe=12	jours=0;6;7;10;12;24;29;37	equipesAdverses=1;2;7;9;11;13;17;19	mode=D	max=3	penalite=5
+equipe=4	jours=10;12;13;20;22;29	equipesAdverses=7;9;10;14;17;19	mode=DE	max=1	penalite=5
+equipe=8	jours=0;7;10;25;34;35;37	equipesAdverses=5;7;14;15;16;18;19	mode=E	max=2	penalite=5
+equipe=19	jours=0;1;20;23;32;35	equipesAdverses=0;6;7;14;15;17	mode=E	max=2	penalite=5
+equipe=9	jours=2;6;21;27;28;35;36;37	equipesAdverses=2;5;6;7;11;15;18;19	mode=DE	max=2	penalite=5
+equipe=7	jours=3;4;10;15;23;28;35	equipesAdverses=0;4;5;11;12;17;19	mode=D	max=2	penalite=5
+equipe=3	jours=8;10;12;17;25;33;34	equipesAdverses=1;4;7;10;11;14;19	mode=D	max=2	penalite=5
+equipe=5	jours=0;9;10;19;20;24;32	equipesAdverses=0;2;3;7;8;13;18	mode=D	max=2	penalite=5
+equipe=14	jours=0;5;14;18;19;20	equipesAdverses=1;4;9;11;16;17	mode=E	max=2	penalite=5
+equipe=11	jours=2;3;6;9;30;34	equipesAdverses=6;8;9;10;15;18	mode=E	max=2	penalite=5
+equipe=14	jours=4;15;26;27;31;35	equipesAdverses=0;1;7;10;13;18	mode=E	max=2	penalite=5
+equipe=2	jours=11;13;14;21;32;33	equipesAdverses=1;5;8;9;15;18	mode=E	max=2	penalite=5
+equipe=12	jours=20;22;24;29;32;33;35	equipesAdverses=0;2;7;8;11;13;19	mode=D	max=2	penalite=5
+equipe=6	jours=3;5;12;13;18;35	equipesAdverses=0;2;5;12;15;16	mode=D	max=2	penalite=5
+equipe=14	jours=10;18;19;22;28;29;30;34	equipesAdverses=0;2;3;8;11;12;13;19	mode=E	max=3	penalite=5
+equipe=11	jours=4;6;13;14;16;18;23;33	equipesAdverses=0;1;3;4;6;9;13;16	mode=D	max=3	penalite=5
+equipe=14	jours=2;13;21;22;36;37	equipesAdverses=5;6;8;11;16;18	mode=D	max=2	penalite=5
+equipe=13	jours=5;11;12;13;20;25;26	equipesAdverses=1;2;3;11;17;18;19	mode=D	max=2	penalite=5
+equipe=16	jours=8;11;29;31;36;37	equipesAdverses=3;8;9;10;15;19	mode=E	max=2	penalite=5
+equipe=12	jours=1;10;13;22;26;27;30	equipesAdverses=1;3;4;7;8;10;17	mode=DE	max=1	penalite=5
+equipe=5	jours=2;8;14;17;20;29;36	equipesAdverses=1;3;4;6;11;12;19	mode=D	max=2	penalite=5
+equipe=1	jours=4;11;23;24;25;26;33;35	equipesAdverses=2;5;6;8;10;12;14;19	mode=D	max=3	penalite=5
+equipe=11	jours=10;18;27;30;32;37	equipesAdverses=1;2;4;7;12;19	mode=D	max=2	penalite=5
+equipe=18	jours=2;6;12;17;21;28	equipesAdverses=0;3;5;6;8;17	mode=DE	max=1	penalite=5
+equipe=7	jours=8;11;14;24;29;33;34;37	equipesAdverses=2;3;4;5;8;12;13;18	mode=E	max=3	penalite=5
+equipe=17	jours=5;20;22;24;25;27;33	equipesAdverses=1;2;7;8;12;13;15	mode=D	max=2	penalite=5
+equipe=10	jours=12;18;19;24;30;34	equipesAdverses=7;9;11;16;18;19	mode=D	max=2	penalite=5
+equipe=3	jours=4;5;9;18;21;28;30;36	equipesAdverses=0;5;8;10;12;13;16;19	mode=D	max=3	penalite=5
+equipe=3	jours=6;9;13;16;29;35	equipesAdverses=2;4;5;9;15;18	mode=E	max=2	penalite=5
+equipe=4	jours=0;8;9;16;21;25;29;35	equipesAdverses=0;1;2;6;7;10;12;14	mode=DE	max=2	penalite=5
+equipe=12	jours=7;18;19;22;28;29;30;32	equipesAdverses=2;5;7;11;13;16;17;18	mode=D	max=3	penalite=5
+equipe=6	jours=0;4;6;16;21;26;35	equipesAdverses=0;2;3;5;11;15;19	mode=DE	max=1	penalite=5
+equipe=1	jours=10;12;19;23;25;27;30	equipesAdverses=0;5;9;10;14;16;19	mode=E	max=2	penalite=5
+equipe=4	jours=5;12;14;16;21;27	equipesAdverses=0;1;8;11;13;15	mode=E	max=2	penalite=5
+equipe=14	jours=0;2;5;9;15;30;36;37	equipesAdverses=0;2;7;10;11;12;17;18	mode=D	max=3	penalite=5
+equipe=16	jours=0;3;14;16;27;29;33	equipesAdverses=3;9;11;14;15;18;19	mode=E	max=2	penalite=5
+equipe=3	jours=3;13;16;30;32;33;35	equipesAdverses=4;6;8;11;12;17;18	mode=DE	max=1	penalite=5
+equipe=11	jours=4;10;14;26;27;31;34;36	equipesAdverses=0;3;9;10;13;14;16;17	mode=D	max=3	penalite=5
+equipe=15	jours=3;15;21;23;26;28;29;33	equipesAdverses=0;5;9;11;12;13;14;18	mode=D	max=3	penalite=5
+equipe=5	jours=0;2;5;11;17;18;19;31	equipesAdverses=0;4;10;11;13;14;15;17	mode=E	max=3	penalite=5
+equipe=5	jours=7;15;18;19;23;31	equipesAdverses=0;1;2;11;14;17	mode=D	max=2	penalite=5
+equipe=6	jours=0;4;8;10;11;24;31	equipesAdverses=0;2;5;8;10;15;17	mode=D	max=2	penalite=5
+equipe=16	jours=6;8;11;17;22;37	equipesAdverses=0;6;7;11;17;18	mode=DE	max=1	penalite=5
+equipe=11	jours=0;3;4;6;15;22;26	equipesAdverses=2;12;13;14;15;18;19	mode=E	max=2	penalite=5
+equipe=5	jours=4;5;6;16;20;22;24;33	equipesAdverses=1;4;6;7;12;15;16;19	mode=D	max=3	penalite=5
+equipe=17	jours=4;7;14;26;29;35	equipesAdverses=4;5;7;8;13;16	mode=E	max=2	penalite=5
+equipe=16	jours=2;3;14;24;31;34	equipesAdverses=2;4;5;17;18;19	mode=DE	max=1	penalite=5
+equipe=8	jours=0;6;8;21;26;30;32	equipesAdverses=2;3;5;6;7;9;12	mode=E	max=2	penalite=5
+equipe=2	jours=5;12;14;28;33;34	equipesAdverses=1;4;5;8;12;18	mode=D	max=2	penalite=5
+equipe=17	jours=2;10;12;13;22;29;31;36	equipesAdverses=4;5;6;9;12;13;14;19	mode=D	max=3	penalite=5
+equipe=5	jours=10;13;15;17;29;31;32	equipesAdverses=3;4;8;12;15;17;18	mode=D	max=2	penalite=5
+equipe=6	jours=1;6;8;10;11;13;22;26	equipesAdverses=1;5;7;8;10;11;14;18	mode=D	max=3	penalite=5
+equipe=19	jours=0;1;3;6;7;10;17;28	equipesAdverses=2;3;4;7;10;11;13;18	mode=DE	max=2	penalite=5
+equipe=16	jours=0;6;11;12;14;17;18;37	equipesAdverses=0;1;2;3;5;8;11;13	mode=D	max=3	penalite=5
+equipe=16	jours=7;8;17;19;29;36;37	equipesAdverses=0;2;7;9;11;13;14	mode=E	max=2	penalite=5
+equipe=9	jours=3;5;8;17;31;34	equipesAdverses=0;5;11;13;16;17	mode=D	max=2	penalite=5
+equipe=17	jours=1;5;15;16;17;25;26;29	equipesAdverses=0;7;9;11;12;14;16;19	mode=E	max=3	penalite=5
+equipe=17	jours=0;5;11;13;14;32	equipesAdverses=2;4;5;12;13;16	mode=D	max=2	penalite=5
+equipe=13	jours=0;5;8;18;31;36	equipesAdverses=3;7;8;14;16;18	mode=E	max=2	penalite=5
+equipe=7	jours=2;8;10;11;12;25	equipesAdverses=3;5;8;9;11;16	mode=D	max=2	penalite=5
+equipe=9	jours=3;8;25;27;30;35	equipesAdverses=1;3;11;14;17;19	mode=E	max=2	penalite=5
+equipe=11	jours=10;15;17;20;21;35;37	equipesAdverses=0;1;7;10;12;15;18	mode=E	max=2	penalite=5
+equipe=3	jours=11;15;21;22;25;36	equipesAdverses=0;2;4;13;14;18	mode=E	max=2	penalite=5
+equipe=19	jours=1;7;9;13;15;26;31;33	equipesAdverses=7;8;10;11;14;15;16;17	mode=D	max=3	penalite=5
+equipe=18	jours=3;12;14;16;25;29;30	equipesAdverses=2;5;7;8;9;14;17	mode=DE	max=1	penalite=5
+equipe=5	jours=2;3;5;6;10;37	equipesAdverses=2;7;11;14;16;18	mode=D	max=2	penalite=5
+equipe=6	jours=9;10;13;21;30;32;37	equipesAdverses=4;7;11;13;14;16;19	mode=E	max=2	penalite=5
+equipe=5	jours=6;8;17;21;32;36	equipesAdverses=6;7;9;10;11;15	mode=D	max=2	penalite=5
+equipe=8	jours=11;15;24;27;30;36	equipesAdverses=0;3;4;9;15;16	mode=E	max=2	penalite=5
+equipe=19	jours=9;19;20;28;29;32	equipesAdverses=0;9;10;11;12;18	mode=D	max=2	penalite=5
+equipe=18	jours=3;7;18;28;32;35	equipesAdverses=1;10;11;15;16;19	mode=DE	max=1	penalite=5
+equipe=4	jours=14;17;18;21;27;34	equipesAdverses=5;10;12;15;16;19	mode=E	max=2	penalite=5
+equipe=11	jours=12;13;16;20;23;27;28	equipesAdverses=1;2;10;15;16;17;19	mode=E	max=2	penalite=5
+equipe=17	jours=9;11;12;15;17;24;35;36	equipesAdverses=1;5;7;11;14;16;18;19	mode=D	max=3	penalite=5
+equipe=0	jours=15;16;17;27;32;33	equipesAdverses=6;8;12;13;15;16	mode=DE	max=1	penalite=5
+equipe=14	jours=5;9;11;25;26;27;30;33	equipesAdverses=1;3;5;6;7;9;13;18	mode=E	max=3	penalite=5
+equipe=18	jours=3;6;13;23;26;27	equipesAdverses=3;5;6;10;12;13	mode=D	max=2	penalite=5
+equipe=3	jours=1;4;20;25;27;33;35	equipesAdverses=4;5;8;14;15;16;17	mode=DE	max=1	penalite=5
+equipe=6	jours=8;12;13;21;22;23;28;34	equipesAdverses=0;1;3;7;10;11;13;14	mode=D	max=3	penalite=5
+equipe=6	jours=2;7;8;24;25;30;35;37	equipesAdverses=0;1;7;9;10;13;15;17	mode=DE	max=2	penalite=5
+equipe=8	jours=5;14;23;24;29;30;33	equipesAdverses=1;4;6;11;15;16;19	mode=DE	max=1	penalite=5
+equipe=17	jours=3;7;9;21;23;26;31;35	equipesAdverses=0;2;6;8;10;11;18;19	mode=E	max=3	penalite=5
+equipe=15	jours=1;2;6;7;8;15;19	equipesAdverses=1;4;6;8;9;11;19	mode=E	max=2	penalite=5
+equipe=11	jours=11;14;24;29;34;35;37	equipesAdverses=5;9;13;15;16;17;19	mode=E	max=2	penalite=5
+equipe=9	jours=13;17;19;22;27;28;32	equipesAdverses=3;4;5;8;10;11;18	mode=DE	max=1	penalite=5
+equipe=15	jours=8;13;14;22;24;27;33;36	equipesAdverses=2;5;6;10;12;13;16;19	mode=E	max=3	penalite=5
+equipe=18	jours=5;6;13;14;16;17;27	equipesAdverses=3;7;8;9;10;15;17	mode=E	max=2	penalite=5
+equipe=4	jours=0;1;7;9;26;27;31;34	equipesAdverses=0;1;2;5;6;12;13;15	mode=E	max=3	penalite=5
+equipe=1	jours=4;6;10;16;25;26	equipesAdverses=0;2;5;6;7;17	mode=DE	max=1	penalite=5
+equipe=17	jours=5;9;10;12;23;26;33	equipesAdverses=4;5;6;7;8;12;14	mode=DE	max=1	penalite=5
+equipe=11	jours=2;8;9;17;18;25;32	equipesAdverses=1;4;7;10;14;17;18	mode=DE	max=1	penalite=5
+equipe=0	jours=0;14;18;26;33;34;36	equipesAdverses=3;6;9;11;12;14;15	mode=DE	max=1	penalite=5
+equipe=17	jours=1;7;8;18;19;27;29	equipesAdverses=5;6;9;13;14;16;19	mode=E	max=2	penalite=5
+equipe=12	jours=1;5;6;8;9;19;25;33	equipesAdverses=1;2;5;8;10;13;15;19	mode=DE	max=2	penalite=5
+equipe=19	jours=6;12;29;30;34;35	equipesAdverses=1;3;5;6;12;14	mode=D	max=2	penalite=5
+equipe=9	jours=7;11;12;25;30;34;35	equipesAdverses=2;4;7;10;13;16;17	mode=DE	max=1	penalite=5
+equipe=7	jours=2;8;11;13;23;31;32;36	equipesAdverses=0;2;4;9;11;12;13;17	mode=DE	max=2	penalite=5
+equipe=3	jours=0;5;7;8;9;11;13;31	equipesAdverses=1;6;7;8;9;14;16;19	mode=DE	max=2	penalite=5
+equipe=10	jours=1;2;7;13;19;34;36	equipesAdverses=1;2;6;11;12;13;14	mode=E	max=2	penalite=5
+equipe=10	jours=1;2;6;10;20;23;34;36	equipesAdverses=0;2;6;9;14;15;16;18	mode=E	max=3	penalite=5
+equipe=9	jours=0;8;19;23;29;31;32;37	equipesAdverses=0;4;6;10;13;14;17;18	mode=E	max=3	penalite=5
+equipe=11	jours=0;10;16;21;22;26	equipesAdverses=1;2;4;6;13;17	mode=DE	max=1	penalite=5
+equipe=14	jours=20;23;24;26;28;35	equipesAdverses=0;2;7;9;15;17	mode=DE	max=1	penalite=5
+equipe=15	jours=2;7;8;12;13;21;22;31	equipesAdverses=5;12;13;14;16;17;18;19	mode=DE	max=2	penalite=5
+equipe=3	jours=0;6;11;18;24;28;35	equipesAdverses=0;1;5;7;11;15;18	mode=D	max=2	penalite=5
+equipe=8	jours=6;11;20;26;27;35	equipesAdverses=3;6;11;13;15;19	mode=DE	max=1	penalite=5
+equipe=11	jours=6;7;13;29;30;32	equipesAdverses=6;7;8;13;14;18	mode=D	max=2	penalite=5
+equipe=19	jours=0;5;6;9;14;33	equipesAdverses=1;2;3;8;17;18	mode=E	max=2	penalite=5
+equipe=8	jours=11;25;27;28;29;32;33;34	equipesAdverses=2;5;6;7;10;12;14;15	mode=D	max=3	penalite=5
+equipe=3	jours=2;4;9;17;19;31;36	equipesAdverses=0;2;4;12;14;16;17	mode=DE	max=1	penalite=5
+equipe=19	jours=0;6;8;21;24;27;31;37	equipesAdverses=0;4;7;9;10;11;12;14	mode=E	max=3	penalite=5
+equipe=13	jours=5;7;21;26;27;28;29;30	equipesAdverses=0;5;6;7;12;15;17;19	mode=E	max=3	penalite=5
+equipe=19	jours=5;18;20;21;23;29	equipesAdverses=8;9;15;16;17;18	mode=E	max=2	penalite=5
+equipe=9	jours=7;9;13;15;16;17;30;37	equipesAdverses=0;3;4;5;13;14;16;18	mode=DE	max=2	penalite=5
+equipe=0	jours=1;2;3;9;19;20;34	equipesAdverses=1;2;7;10;11;18;19	mode=E	max=2	penalite=5
+equipe=5	jours=1;7;13;28;30;35	equipesAdverses=3;4;8;11;13;14	mode=DE	max=1	penalite=5
+equipe=1	jours=5;7;10;14;25;27;32;35	equipesAdverses=5;6;10;12;13;15;16;19	mode=D	max=3	penalite=5
+equipe=14	jours=7;15;20;22;30;32;36	equipesAdverses=0;1;3;10;16;17;18	mode=E	max=2	penalite=5
+equipe=6	jours=1;5;8;10;20;28;29;33	equipesAdverses=0;2;7;8;10;11;13;16	mode=D	max=3	penalite=5
+equipe=14	jours=14;15;17;19;20;29;30;33	equipesAdverses=3;5;6;7;8;9;12;16	mode=D	max=3	penalite=5
+equipe=13	jours=0;4;7;16;20;21	equipesAdverses=0;3;4;7;18;19	mode=E	max=2	penalite=5
+equipe=11	jours=2;11;17;22;24;33	equipesAdverses=6;10;12;16;17;18	mode=E	max=2	penalite=5
+equipe=16	jours=1;6;11;24;27;28;33	equipesAdverses=1;2;3;9;12;14;17	mode=DE	max=1	penalite=5
+equipe=12	jours=1;4;7;16;34;37	equipesAdverses=1;5;6;16;17;18	mode=DE	max=1	penalite=5
+equipe=13	jours=2;4;7;8;23;25;29;36	equipesAdverses=3;4;6;10;14;16;17;19	mode=E	max=3	penalite=5
+equipe=14	jours=0;2;8;26;30;33;37	equipesAdverses=1;3;5;9;12;15;18	mode=E	max=2	penalite=5
+equipe=5	jours=2;10;13;15;19;28;35;36	equipesAdverses=3;6;9;11;14;16;17;19	mode=DE	max=2	penalite=5
+equipe=9	jours=5;10;20;23;24;36	equipesAdverses=2;13;16;17;18;19	mode=D	max=2	penalite=5
+equipe=10	jours=3;8;11;15;23;26;31	equipesAdverses=1;4;7;8;14;16;17	mode=E	max=2	penalite=5
+equipe=8	jours=0;9;19;22;25;26;27;28	equipesAdverses=1;2;5;10;11;13;16;18	mode=DE	max=2	penalite=5
+equipe=9	jours=0;11;17;28;32;33	equipesAdverses=0;2;4;8;10;16	mode=DE	max=1	penalite=5
+equipe=5	jours=0;7;9;12;22;30;31;36	equipesAdverses=1;3;7;9;11;12;17;18	mode=E	max=3	penalite=5
+equipe=8	jours=10;11;12;13;19;21;22	equipesAdverses=6;9;10;13;14;16;18	mode=DE	max=1	penalite=5
+equipe=18	jours=0;8;13;18;31;36	equipesAdverses=1;4;7;8;11;14	mode=DE	max=1	penalite=5
+equipe=11	jours=12;15;25;26;28;33;36;37	equipesAdverses=0;2;5;8;14;16;17;18	mode=DE	max=2	penalite=5
+equipe=6	jours=5;10;11;24;26;29;30;34	equipesAdverses=1;2;7;8;13;15;18;19	mode=DE	max=2	penalite=5
+equipe=2	jours=0;4;9;12;33;35;37	equipesAdverses=0;3;4;7;8;10;15	mode=E	max=2	penalite=5
+equipe=2	jours=3;10;17;18;27;29;34	equipesAdverses=0;4;6;9;12;14;16	mode=DE	max=1	penalite=5
+equipe=13	jours=4;5;8;12;18;21	equipesAdverses=3;5;9;10;12;16	mode=E	max=2	penalite=5
+equipe=19	jours=1;12;15;20;31;33;34	equipesAdverses=2;3;5;7;9;10;11	mode=D	max=2	penalite=5
+equipe=1	jours=1;4;5;6;7;18;24;27	equipesAdverses=3;7;9;10;14;15;16;19	mode=DE	max=2	penalite=5
+equipe=8	jours=6;9;17;18;32;34	equipesAdverses=0;1;4;6;13;14	mode=D	max=2	penalite=5
+equipe=12	jours=8;19;27;31;36;37	equipesAdverses=0;3;8;10;13;19	mode=E	max=2	penalite=5
+equipe=9	jours=0;2;7;9;12;23;27;28	equipesAdverses=1;2;3;7;11;14;15;19	mode=DE	max=2	penalite=5
+equipe=8	jours=3;6;7;16;20;25;35;36	equipesAdverses=1;2;3;10;11;14;16;17	mode=E	max=3	penalite=5
+equipe=11	jours=1;2;5;8;15;17;23;31	equipesAdverses=0;1;3;7;13;14;15;17	mode=E	max=3	penalite=5
+equipe=18	jours=10;11;19;23;25;31;33	equipesAdverses=3;8;10;13;14;16;19	mode=D	max=2	penalite=5
+equipe=13	jours=2;4;13;14;20;31	equipesAdverses=4;7;8;10;11;16	mode=DE	max=1	penalite=5
+equipe=8	jours=3;5;6;7;13;22	equipesAdverses=2;5;7;10;13;16	mode=DE	max=1	penalite=5
+equipe=3	jours=3;7;11;15;22;23	equipesAdverses=2;9;11;12;14;18	mode=E	max=2	penalite=5
+equipe=8	jours=0;4;12;17;26;32;35	equipesAdverses=0;3;7;10;14;16;19	mode=DE	max=1	penalite=5
+equipe=2	jours=6;13;20;25;26;33;36	equipesAdverses=0;4;5;9;10;11;13	mode=D	max=2	penalite=5
+equipe=18	jours=7;17;22;24;29;33	equipesAdverses=2;3;6;10;12;17	mode=DE	max=1	penalite=5
+equipe=5	jours=9;14;15;17;24;28;29	equipesAdverses=1;2;8;12;14;16;19	mode=DE	max=1	penalite=5
+equipe=9	jours=2;5;10;11;15;23;33;37	equipesAdverses=0;1;3;7;8;11;12;17	mode=DE	max=2	penalite=5
+equipe=17	jours=1;4;6;15;17;22;23	equipesAdverses=2;3;6;7;13;16;18	mode=E	max=2	penalite=5
+equipe=1	jours=8;11;15;18;20;33	equipesAdverses=2;4;9;12;14;17	mode=DE	max=1	penalite=5
+equipe=14	jours=0;2;5;23;24;33;35;37	equipesAdverses=0;2;4;9;11;12;16;19	mode=DE	max=2	penalite=5
+equipe=4	jours=1;2;11;13;14;20;34	equipesAdverses=1;13;14;15;16;17;18	mode=E	max=2	penalite=5
+equipe=12	jours=0;9;13;18;25;30;32	equipesAdverses=0;2;7;14;16;17;18	mode=E	max=2	penalite=5
+equipe=0	jours=1;3;7;13;21;22;24;27	equipesAdverses=2;3;7;11;15;16;17;18	mode=E	max=3	penalite=5
+equipe=11	jours=2;5;6;8;12;18;31;35	equipesAdverses=3;6;7;9;10;15;17;19	mode=E	max=3	penalite=5
+equipe=0	jours=3;5;7;16;25;29;35;36	equipesAdverses=3;7;9;11;13;16;18;19	mode=E	max=3	penalite=5
+equipe=16	jours=2;5;6;14;23;31;33;37	equipesAdverses=0;1;3;7;8;10;15;17	mode=E	max=3	penalite=5
+equipe=7	jours=4;6;13;15;17;25;27;30	equipesAdverses=0;1;5;6;8;9;14;16	mode=E	max=3	penalite=5
+equipe=8	jours=2;18;19;26;32;35;36	equipesAdverses=0;6;9;13;14;16;18	mode=D	max=2	penalite=5
+equipe=11	jours=4;9;11;24;25;36	equipesAdverses=0;2;5;6;10;18	mode=D	max=2	penalite=5
+equipe=19	jours=2;10;11;15;16;21;27	equipesAdverses=6;11;12;13;14;17;18	mode=DE	max=1	penalite=5
+equipe=8	jours=13;16;17;18;23;26;30	equipesAdverses=0;2;4;9;12;16;19	mode=D	max=2	penalite=5
+equipe=15	jours=0;1;3;20;27;35	equipesAdverses=5;9;12;14;16;18	mode=E	max=2	penalite=5
+equipe=4	jours=0;15;17;20;25;34	equipesAdverses=2;5;7;12;13;17	mode=E	max=2	penalite=5
+equipe=12	jours=2;4;13;27;28;34	equipesAdverses=4;5;9;10;14;18	mode=E	max=2	penalite=5
+equipe=8	jours=1;2;4;9;12;19;26;29	equipesAdverses=0;2;4;9;14;15;16;18	mode=DE	max=2	penalite=5
+equipe=4	jours=2;5;14;17;19;23;24;28	equipesAdverses=0;2;7;9;11;16;17;19	mode=D	max=3	penalite=5
+equipe=0	jours=3;5;7;11;21;23;34;35	equipesAdverses=1;7;10;11;13;14;16;19	mode=DE	max=2	penalite=5
+equipe=9	jours=5;6;9;13;17;32;36	equipesAdverses=1;3;8;14;15;18;19	mode=D	max=2	penalite=5
+equipe=5	jours=6;17;18;24;32;37	equipesAdverses=0;2;3;8;10;17	mode=E	max=2	penalite=5
+equipe=17	jours=0;1;2;10;30;31;37	equipesAdverses=3;4;5;6;10;16;18	mode=D	max=2	penalite=5
+equipe=13	jours=5;7;8;13;18;22;29;32	equipesAdverses=0;3;6;9;11;14;15;16	mode=E	max=3	penalite=5
+equipe=1	jours=3;4;22;26;29;31	equipesAdverses=3;4;13;16;17;18	mode=D	max=2	penalite=5
+equipe=18	jours=6;8;9;14;23;27;30;33	equipesAdverses=2;3;6;7;8;9;14;19	mode=DE	max=2	penalite=5
+equipe=9	jours=0;6;7;14;20;26;27;35	equipesAdverses=2;4;7;12;13;16;17;18	mode=DE	max=2	penalite=5
+equipe=0	jours=9;10;22;26;28;31	equipesAdverses=6;10;15;16;18;19	mode=DE	max=1	penalite=5
+equipe=4	jours=5;6;7;8;9;16;24;31	equipesAdverses=0;1;8;9;11;12;14;18	mode=DE	max=2	penalite=5
+equipe=17	jours=4;6;11;21;33;37	equipesAdverses=1;5;7;14;15;19	mode=DE	max=1	penalite=5
+equipe=1	jours=4;6;8;10;12;35	equipesAdverses=3;7;10;16;17;18	mode=DE	max=1	penalite=5
+equipe=11	jours=6;7;10;14;20;21;26;29	equipesAdverses=0;1;5;6;8;14;17;19	mode=D	max=3	penalite=5
+equipe=10	jours=4;7;13;17;20;25;29	equipesAdverses=0;3;7;11;12;13;14	mode=E	max=2	penalite=5
+equipe=2	jours=9;15;16;21;29;37	equipesAdverses=1;3;4;7;12;16	mode=E	max=2	penalite=5
+equipe=4	jours=3;6;17;29;33;34;36;37	equipesAdverses=2;5;8;12;14;16;18;19	mode=D	max=3	penalite=5
+equipe=2	jours=5;6;16;19;22;32	equipesAdverses=0;5;8;13;18;19	mode=DE	max=1	penalite=5
+equipe=7	jours=2;6;8;9;17;23;34;37	equipesAdverses=2;3;4;5;6;10;13;18	mode=D	max=3	penalite=5
+equipe=14	jours=5;8;13;20;27;28;29	equipesAdverses=2;3;4;8;12;17;19	mode=D	max=2	penalite=5
+equipe=16	jours=5;6;19;20;24;30;31;35	equipesAdverses=6;8;9;10;12;14;17;18	mode=D	max=3	penalite=5
+equipe=0	jours=3;4;10;15;19;21;32;35	equipesAdverses=1;4;7;9;10;13;15;16	mode=DE	max=2	penalite=5
+equipe=10	jours=2;4;11;12;13;17;24	equipesAdverses=0;1;3;6;8;13;18	mode=D	max=2	penalite=5
+equipe=0	jours=0;5;18;19;33;36;37	equipesAdverses=1;2;6;10;12;14;15	mode=DE	max=1	penalite=5
+equipe=9	jours=2;3;7;14;20;31	equipesAdverses=0;5;8;14;17;19	mode=E	max=2	penalite=5
+equipe=6	jours=4;9;16;24;35;36	equipesAdverses=4;7;10;13;14;15	mode=E	max=2	penalite=5
+equipe=5	jours=1;12;14;15;18;22;29;32	equipesAdverses=0;4;8;9;12;13;15;17	mode=DE	max=2	penalite=5
+equipe=9	jours=2;6;7;21;23;31;34;36	equipesAdverses=1;2;4;10;13;15;16;19	mode=D	max=3	penalite=5
+equipe=15	jours=3;4;6;20;26;32;37	equipesAdverses=2;4;8;9;11;12;19	mode=E	max=2	penalite=5
+equipe=4	jours=3;9;20;21;23;33	equipesAdverses=3;7;9;10;14;18	mode=DE	max=1	penalite=5
+equipe=12	jours=0;4;13;22;29;36	equipesAdverses=2;4;9;13;14;15	mode=DE	max=1	penalite=5
+equipe=13	jours=2;7;11;12;18;22	equipesAdverses=0;4;5;9;17;18	mode=E	max=2	penalite=5
+equipe=19	jours=2;5;9;14;20;35;37	equipesAdverses=2;6;9;11;12;13;18	mode=E	max=2	penalite=5
+equipe=10	jours=1;12;18;19;25;27;30;32	equipesAdverses=0;1;2;5;6;8;11;12	mode=DE	max=2	penalite=5
+equipe=14	jours=7;22;24;25;29;32	equipesAdverses=0;11;12;13;15;18	mode=DE	max=1	penalite=5
+equipe=17	jours=2;9;15;19;30;33;36	equipesAdverses=4;12;13;14;15;16;18	mode=DE	max=1	penalite=5
+equipe=10	jours=12;14;15;19;20;29;34;37	equipesAdverses=0;1;2;7;8;11;12;13	mode=DE	max=2	penalite=5
+equipe=17	jours=2;4;13;16;22;23;33	equipesAdverses=2;3;5;8;13;14;19	mode=DE	max=1	penalite=5
+equipe=17	jours=6;11;18;23;29;31;33;34	equipesAdverses=0;1;4;5;12;14;18;19	mode=E	max=3	penalite=5
+equipe=0	jours=3;6;10;14;18;22;37	equipesAdverses=3;4;6;7;15;16;18	mode=E	max=2	penalite=5
+equipe=4	jours=9;16;17;19;30;32;34	equipesAdverses=0;5;8;9;13;14;17	mode=E	max=2	penalite=5
+equipe=1	jours=8;26;30;35;36;37	equipesAdverses=4;7;9;11;15;16	mode=E	max=2	penalite=5
+equipe=19	jours=5;11;27;30;36;37	equipesAdverses=0;3;4;8;14;15	mode=DE	max=1	penalite=5
+equipe=18	jours=6;9;10;12;17;33;34;35	equipesAdverses=0;8;11;13;14;15;16;19	mode=DE	max=2	penalite=5
+equipe=19	jours=0;8;19;25;30;36	equipesAdverses=0;1;6;7;8;17	mode=E	max=2	penalite=5
+equipe=9	jours=0;1;2;5;8;23;28	equipesAdverses=1;4;10;15;16;18;19	mode=E	max=2	penalite=5
+equipe=0	jours=3;8;13;14;15;34	equipesAdverses=3;9;10;14;18;19	mode=D	max=2	penalite=5
+equipe=7	jours=11;14;16;25;31;32	equipesAdverses=2;5;13;14;16;17	mode=D	max=2	penalite=5
+equipe=1	jours=1;3;6;13;14;15;16;32	equipesAdverses=3;6;10;11;14;15;17;19	mode=DE	max=2	penalite=5
+equipe=8	jours=0;3;4;9;10;17;20	equipesAdverses=3;6;7;11;13;14;17	mode=D	max=2	penalite=5
+equipe=7	jours=3;4;5;9;15;22;32;36	equipesAdverses=1;3;4;5;8;9;16;18	mode=E	max=3	penalite=5
+equipe=0	jours=6;11;14;18;19;22;25;31	equipesAdverses=7;8;10;12;13;14;16;18	mode=DE	max=2	penalite=5
+equipe=19	jours=0;2;4;9;12;15;25	equipesAdverses=7;8;13;14;15;17;18	mode=DE	max=1	penalite=5
+equipe=13	jours=3;14;15;26;28;29;30;34	equipesAdverses=1;2;3;5;10;12;14;18	mode=E	max=3	penalite=5
+equipe=12	jours=0;3;6;15;17;23;27;33	equipesAdverses=0;2;5;10;11;16;18;19	mode=D	max=3	penalite=5
+equipe=18	jours=0;6;21;26;32;34	equipesAdverses=1;4;7;13;14;16	mode=E	max=2	penalite=5
+equipe=13	jours=8;9;10;18;25;27;32	equipesAdverses=0;4;8;9;10;11;15	mode=D	max=2	penalite=5
+equipe=5	jours=2;11;19;20;21;25;26;29	equipesAdverses=0;2;3;4;6;8;16;18	mode=D	max=3	penalite=5
+equipe=9	jours=0;7;21;22;23;32;37	equipesAdverses=0;3;11;14;15;18;19	mode=E	max=2	penalite=5
+equipe=9	jours=8;17;23;32;33;35	equipesAdverses=0;8;11;12;16;18	mode=DE	max=1	penalite=5
+equipe=8	jours=3;10;13;25;30;34;37	equipesAdverses=2;4;11;13;14;18;19	mode=DE	max=1	penalite=5
+equipe=18	jours=0;1;7;15;16;27;29	equipesAdverses=1;2;4;8;9;10;15	mode=E	max=2	penalite=5
+equipe=6	jours=4;9;10;11;15;28;29;34	equipesAdverses=5;8;9;12;14;15;16;18	mode=D	max=3	penalite=5
+equipe=1	jours=7;8;12;15;16;22;28;30	equipesAdverses=2;5;8;9;14;15;17;18	mode=E	max=3	penalite=5
+equipe=13	jours=5;15;22;28;31;32;37	equipesAdverses=0;2;4;5;6;8;15	mode=DE	max=1	penalite=5
+equipe=3	jours=0;8;10;18;22;23;30;33	equipesAdverses=1;2;4;6;12;13;14;18	mode=DE	max=2	penalite=5
+equipe=14	jours=1;3;12;24;28;29;35	equipesAdverses=2;3;4;7;11;13;15	mode=DE	max=1	penalite=5
+equipe=0	jours=2;8;10;13;23;25;26;32	equipesAdverses=2;4;5;7;10;13;14;16	mode=E	max=3	penalite=5
+equipe=11	jours=4;6;7;17;18;25;27	equipesAdverses=2;3;6;9;13;15;19	mode=D	max=2	penalite=5
+equipe=5	jours=0;5;13;16;32;37	equipesAdverses=2;3;4;12;13;19	mode=DE	max=1	penalite=5
+equipe=5	jours=3;10;16;17;26;30;35;36	equipesAdverses=6;8;10;11;12;14;16;19	mode=DE	max=2	penalite=5
+equipe=19	jours=8;11;20;23;34;35	equipesAdverses=4;8;9;11;13;14	mode=D	max=2	penalite=5
+equipe=7	jours=4;20;21;26;28;29;31	equipesAdverses=1;2;5;8;14;17;19	mode=E	max=2	penalite=5
+equipe=12	jours=0;8;22;26;28;31	equipesAdverses=2;4;5;8;10;17	mode=E	max=2	penalite=5
+equipe=1	jours=4;5;16;19;25;29;33	equipesAdverses=2;5;10;12;14;17;18	mode=D	max=2	penalite=5
+equipe=14	jours=5;6;15;16;19;20;22	equipesAdverses=1;2;5;10;11;16;17	mode=D	max=2	penalite=5
+equipe=12	jours=2;14;21;34;35;37	equipesAdverses=0;5;10;14;16;19	mode=E	max=2	penalite=5
+equipe=9	jours=6;11;23;25;33;34	equipesAdverses=2;3;5;10;11;13	mode=E	max=2	penalite=5
+equipe=17	jours=2;11;12;13;14;18	equipesAdverses=7;10;11;13;18;19	mode=D	max=2	penalite=5
+equipe=1	jours=1;11;14;21;27;37	equipesAdverses=4;5;9;11;12;14	mode=DE	max=1	penalite=5
+equipe=4	jours=25;26;31;34;36;37	equipesAdverses=0;8;10;11;12;16	mode=D	max=2	penalite=5
+equipe=1	jours=1;12;14;30;31;36	equipesAdverses=8;11;15;16;17;18	mode=DE	max=1	penalite=5
+equipe=10	jours=0;16;24;26;30;32;36	equipesAdverses=0;2;3;5;7;9;18	mode=E	max=2	penalite=5
+equipe=0	jours=7;11;20;21;25;26;35	equipesAdverses=1;5;6;13;14;16;18	mode=DE	max=1	penalite=5
+equipe=7	jours=0;3;19;20;26;32;33	equipesAdverses=6;9;10;11;13;14;16	mode=DE	max=1	penalite=5
+equipe=11	jours=1;4;17;18;21;24;31;35	equipesAdverses=0;4;6;8;10;13;16;18	mode=DE	max=2	penalite=5
+equipe=14	jours=1;7;11;18;20;29;34	equipesAdverses=1;2;10;11;13;15;16	mode=D	max=2	penalite=5
+equipe=17	jours=0;9;16;27;28;33;35;36	equipesAdverses=1;8;12;13;14;16;18;19	mode=E	max=3	penalite=5
+equipe=18	jours=0;2;16;21;23;26;33	equipesAdverses=6;9;11;12;13;17;19	mode=D	max=2	penalite=5
+equipe=16	jours=2;3;6;14;18;21;33	equipesAdverses=1;2;7;8;9;13;14	mode=D	max=2	penalite=5
+equipe=9	jours=2;6;9;12;17;19;24;29	equipesAdverses=4;6;7;8;10;15;17;18	mode=DE	max=2	penalite=5
+equipe=19	jours=3;7;17;20;23;28;31;37	equipesAdverses=0;1;2;5;7;9;15;17	mode=DE	max=2	penalite=5
+equipe=14	jours=1;13;15;18;19;34;36	equipesAdverses=4;5;7;10;12;16;19	mode=D	max=2	penalite=5
+equipe=7	jours=2;5;6;11;20;28;30;33	equipesAdverses=2;8;9;10;11;14;16;19	mode=D	max=3	penalite=5
+equipe=15	jours=2;3;4;11;16;20;27;31	equipesAdverses=2;5;7;9;13;17;18;19	mode=E	max=3	penalite=5
+equipe=0	jours=1;8;10;17;18;20;22;30	equipesAdverses=1;2;3;8;9;14;16;18	mode=D	max=3	penalite=5
+equipe=14	jours=0;2;9;10;15;16;27;31	equipesAdverses=1;2;5;13;15;16;17;19	mode=D	max=3	penalite=5
+equipe=13	jours=2;5;20;27;30;32;33;34	equipesAdverses=0;1;6;8;9;10;12;17	mode=D	max=3	penalite=5
+equipe=5	jours=1;9;16;20;23;26;31	equipesAdverses=0;3;4;6;9;14;15	mode=DE	max=1	penalite=5
+equipe=14	jours=3;5;14;26;32;35	equipesAdverses=3;4;8;9;11;12	mode=E	max=2	penalite=5
+equipe=16	jours=9;11;14;17;18;23;37	equipesAdverses=0;2;8;12;13;15;18	mode=D	max=2	penalite=5
+equipe=8	jours=8;12;27;29;33;36;37	equipesAdverses=0;4;9;11;13;14;18	mode=D	max=2	penalite=5
+equipe=11	jours=2;12;14;15;21;24	equipesAdverses=0;1;6;10;14;18	mode=D	max=2	penalite=5
+equipe=12	jours=6;9;14;17;19;22;26;35	equipesAdverses=1;3;5;6;7;8;17;19	mode=E	max=3	penalite=5
+equipe=16	jours=8;10;13;15;17;21;32;36	equipesAdverses=1;2;7;8;9;14;15;17	mode=D	max=3	penalite=5
+equipe=6	jours=0;10;16;20;30;32;37	equipesAdverses=2;5;8;10;11;13;14	mode=E	max=2	penalite=5
+equipe=5	jours=0;1;3;11;17;27;31;36	equipesAdverses=3;6;7;12;13;15;17;18	mode=D	max=3	penalite=5
+equipe=1	jours=5;20;22;25;26;28;29	equipesAdverses=4;8;11;13;15;16;19	mode=D	max=2	penalite=5
+equipe=9	jours=9;18;24;25;26;31;35	equipesAdverses=0;5;8;10;11;13;14	mode=D	max=2	penalite=5
+equipe=12	jours=7;17;19;21;22;23;26;28	equipesAdverses=1;3;8;11;13;14;17;19	mode=D	max=3	penalite=5
+equipe=9	jours=9;10;12;16;18;24;29;36	equipesAdverses=2;3;8;10;11;12;13;19	mode=D	max=3	penalite=5
+equipe=1	jours=0;1;15;19;22;31;35	equipesAdverses=2;7;9;10;11;12;19	mode=DE	max=1	penalite=5
+equipe=0	jours=5;6;11;14;29;36	equipesAdverses=1;5;7;9;11;14	mode=DE	max=1	penalite=5
+equipe=1	jours=0;13;15;23;25;30;32;37	equipesAdverses=2;3;4;5;7;16;18;19	mode=DE	max=2	penalite=5
+equipe=15	jours=4;8;15;30;31;35	equipesAdverses=0;2;5;9;14;18	mode=DE	max=1	penalite=5
+equipe=1	jours=6;9;17;20;21;28;29;31	equipesAdverses=2;3;5;8;10;12;14;19	mode=D	max=3	penalite=5
+equipe=11	jours=0;9;13;16;21;30;35;37	equipesAdverses=0;1;2;9;14;15;18;19	mode=D	max=3	penalite=5
+equipe=4	jours=9;14;17;18;20;24;27;31	equipesAdverses=0;2;6;8;10;14;18;19	mode=E	max=3	penalite=5
+equipe=10	jours=0;8;9;11;13;14;20;37	equipesAdverses=0;1;2;9;11;12;13;18	mode=DE	max=2	penalite=5
+equipe=10	jours=4;10;12;20;22;30;36	equipesAdverses=1;3;6;7;12;15;19	mode=DE	max=1	penalite=5
+equipe=11	jours=11;16;17;20;22;26;33;34	equipesAdverses=1;2;4;5;6;10;16;18	mode=DE	max=2	penalite=5
+equipe=3	jours=9;18;21;24;28;32;33	equipesAdverses=1;2;4;9;10;14;15	mode=E	max=2	penalite=5
+equipe=3	jours=3;11;17;19;30;32;33;37	equipesAdverses=4;7;8;11;15;16;17;19	mode=D	max=3	penalite=5
+equipe=5	jours=4;5;6;17;19;26;31;32	equipesAdverses=0;8;12;13;15;16;17;19	mode=D	max=3	penalite=5
+equipe=2	jours=7;9;16;29;33;34;36;37	equipesAdverses=1;4;8;9;11;14;17;19	mode=DE	max=2	penalite=5
+equipe=0	jours=2;6;8;17;27;32	equipesAdverses=1;2;4;11;13;19	mode=E	max=2	penalite=5
+equipe=8	jours=0;10;16;20;31;34	equipesAdverses=2;6;7;11;13;16	mode=DE	max=1	penalite=5
+equipe=0	jours=3;13;16;18;28;29;31	equipesAdverses=5;6;10;11;13;14;18	mode=D	max=2	penalite=5
+equipe=8	jours=1;6;15;20;29;30;33	equipesAdverses=0;1;5;7;9;15;19	mode=DE	max=1	penalite=5
+equipe=0	jours=3;4;8;18;23;26;34;35	equipesAdverses=2;3;7;9;11;13;17;18	mode=DE	max=2	penalite=5
+equipe=17	jours=5;18;22;23;27;31;36	equipesAdverses=7;9;10;11;14;16;18	mode=E	max=2	penalite=5
+equipe=7	jours=7;9;13;17;23;24;25	equipesAdverses=0;9;12;13;15;18;19	mode=E	max=2	penalite=5
+equipe=12	jours=4;5;6;8;9;17;24;35	equipesAdverses=1;2;5;6;10;13;14;16	mode=D	max=3	penalite=5
+equipe=17	jours=1;5;6;8;21;25;31;36	equipesAdverses=0;2;3;4;5;8;11;13	mode=D	max=3	penalite=5
+equipe=18	jours=11;15;16;20;23;28;31	equipesAdverses=6;7;9;11;15;17;19	mode=D	max=2	penalite=5
+equipe=14	jours=0;2;3;7;11;26;36	equipesAdverses=2;4;5;12;16;17;18	mode=E	max=2	penalite=5
+equipe=4	jours=2;4;5;7;10;17;30;32	equipesAdverses=0;2;6;7;9;15;18;19	mode=E	max=3	penalite=5
+equipe=0	jours=0;1;5;6;16;17;27;33	equipesAdverses=2;4;9;10;11;13;15;18	mode=D	max=3	penalite=5
+equipe=6	jours=2;3;5;9;10;19;27;36	equipesAdverses=0;2;7;14;15;16;17;18	mode=E	max=3	penalite=5
+equipe=3	jours=5;6;7;11;20;22;27	equipesAdverses=1;2;5;9;10;15;19	mode=DE	max=1	penalite=5
+equipe=8	jours=0;9;14;15;19;24;36;37	equipesAdverses=0;2;4;6;7;12;17;18	mode=DE	max=2	penalite=5
+equipe=11	jours=2;11;12;16;24;33;34	equipesAdverses=6;7;10;12;15;18;19	mode=D	max=2	penalite=5
+equipe=18	jours=3;9;13;15;27;28	equipesAdverses=4;5;11;14;16;17	mode=D	max=2	penalite=5
+equipe=0	jours=8;17;19;24;25;30;33	equipesAdverses=4;7;10;12;17;18;19	mode=D	max=2	penalite=5
+equipe=12	jours=0;6;21;22;27;29	equipesAdverses=0;2;4;7;8;13	mode=E	max=2	penalite=5
+equipe=13	jours=7;11;16;28;30;35;37	equipesAdverses=5;6;9;10;15;16;17	mode=E	max=2	penalite=5
+equipe=9	jours=1;4;19;20;32;35;37	equipesAdverses=1;6;7;10;11;12;13	mode=DE	max=1	penalite=5
+equipe=0	jours=7;13;19;21;22;28;36;37	equipesAdverses=2;7;9;11;14;15;17;18	mode=D	max=3	penalite=5
+equipe=8	jours=2;7;9;10;11;22;28;30	equipesAdverses=2;3;9;12;13;15;16;18	mode=E	max=3	penalite=5
+equipe=11	jours=2;4;7;15;28;33	equipesAdverses=5;7;13;16;18;19	mode=D	max=2	penalite=5
+equipe=7	jours=2;9;12;24;31;34	equipesAdverses=0;1;8;11;14;16	mode=DE	max=1	penalite=5
+equipe=2	jours=3;5;14;17;25;29;32	equipesAdverses=0;3;7;8;9;12;19	mode=D	max=2	penalite=5
+equipe=3	jours=9;17;21;27;29;31	equipesAdverses=0;2;7;9;14;18	mode=E	max=2	penalite=5
+equipe=3	jours=3;4;8;12;15;18;24	equipesAdverses=1;6;9;10;12;15;18	mode=E	max=2	penalite=5
+equipe=19	jours=2;3;7;15;17;23;32;34	equipesAdverses=2;4;5;8;9;12;16;18	mode=D	max=3	penalite=5
+equipe=11	jours=1;11;16;20;21;30;33;36	equipesAdverses=5;6;7;9;12;14;15;19	mode=E	max=3	penalite=5
+equipe=13	jours=1;4;5;11;17;18;24;36	equipesAdverses=0;2;7;9;10;11;15;16	mode=E	max=3	penalite=5
+equipe=14	jours=12;18;19;25;26;29;30	equipesAdverses=0;4;7;9;11;12;16	mode=E	max=2	penalite=5
+equipe=6	jours=0;12;20;26;27;29;33;34	equipesAdverses=0;1;3;5;7;9;12;17	mode=D	max=3	penalite=5
+equipe=9	jours=8;13;14;16;21;34;35	equipesAdverses=2;3;6;7;10;17;18	mode=DE	max=1	penalite=5
+equipe=4	jours=5;18;19;23;25;32	equipesAdverses=1;5;6;11;14;18	mode=E	max=2	penalite=5
+equipe=13	jours=3;7;17;22;23;27;28;37	equipesAdverses=3;5;6;7;9;10;11;15	mode=DE	max=2	penalite=5
+equipe=5	jours=2;3;10;14;19;36	equipesAdverses=0;3;9;10;14;19	mode=E	max=2	penalite=5
+equipe=1	jours=0;12;18;24;26;28;30;34	equipesAdverses=0;4;5;12;14;15;17;18	mode=E	max=3	penalite=5
+equipe=17	jours=12;15;23;28;30;33;34;37	equipesAdverses=0;5;6;9;10;14;15;16	mode=DE	max=2	penalite=5
+equipe=2	jours=0;8;18;27;30;31;35	equipesAdverses=3;4;8;10;13;14;15	mode=D	max=2	penalite=5
+equipe=6	jours=1;12;21;28;30;32;35	equipesAdverses=1;3;4;12;17;18;19	mode=D	max=2	penalite=5
+equipe=11	jours=4;12;16;25;27;28;30;36	equipesAdverses=1;4;6;7;8;10;14;17	mode=DE	max=2	penalite=5
+equipe=15	jours=0;6;8;23;25;27	equipesAdverses=2;3;5;6;8;19	mode=DE	max=1	penalite=5
+equipe=14	jours=14;18;22;25;27;29;36	equipesAdverses=1;3;6;10;11;12;16	mode=DE	max=1	penalite=5
+equipe=10	jours=14;16;18;29;33;34	equipesAdverses=2;4;5;15;16;19	mode=D	max=2	penalite=5
+equipe=4	jours=12;25;33;35;36;37	equipesAdverses=0;2;7;9;17;18	mode=D	max=2	penalite=5
+equipe=5	jours=8;10;15;25;32;33;36	equipesAdverses=2;4;8;10;12;15;17	mode=E	max=2	penalite=5
+equipe=15	jours=4;12;18;20;21;25;26;37	equipesAdverses=0;3;5;6;8;12;13;17	mode=E	max=3	penalite=5
+equipe=3	jours=6;15;18;19;31;35	equipesAdverses=5;10;11;12;13;18	mode=DE	max=1	penalite=5
+equipe=9	jours=0;2;4;18;21;22;29;34	equipesAdverses=0;2;3;8;12;14;15;16	mode=E	max=3	penalite=5
+equipe=16	jours=0;1;5;13;14;22;36;37	equipesAdverses=3;4;5;8;9;12;13;14	mode=E	max=3	penalite=5
+equipe=7	jours=2;3;7;20;22;24;26	equipesAdverses=5;6;8;12;13;14;16	mode=D	max=2	penalite=5
+equipe=11	jours=12;30;31;32;33;35;37	equipesAdverses=1;3;12;13;14;15;16	mode=E	max=2	penalite=5
+equipe=5	jours=1;5;22;24;25;27;31;32	equipesAdverses=0;2;6;11;12;13;14;17	mode=DE	max=2	penalite=5
+equipe=16	jours=0;5;12;14;16;24;32;33	equipesAdverses=2;3;4;5;7;13;15;19	mode=E	max=3	penalite=5
+equipe=4	jours=1;11;18;20;28;30;32;33	equipesAdverses=0;6;7;8;9;11;17;18	mode=DE	max=2	penalite=5
+equipe=12	jours=3;7;8;11;20;23;26;29	equipesAdverses=2;3;4;5;11;13;17;19	mode=DE	max=2	penalite=5
+equipe=18	jours=8;12;19;24;35;37	equipesAdverses=1;4;7;9;15;16	mode=DE	max=1	penalite=5
+equipe=19	jours=16;20;22;24;28;30;36	equipesAdverses=0;6;8;10;12;16;18	mode=D	max=2	penalite=5
+equipe=15	jours=0;4;5;17;20;28;29	equipesAdverses=0;5;8;11;14;16;17	mode=E	max=2	penalite=5
+equipe=11	jours=13;15;18;22;33;36;37	equipesAdverses=2;3;9;13;17;18;19	mode=DE	max=1	penalite=5
+equipe=10	jours=3;5;6;14;24;28;32;34	equipesAdverses=1;4;5;6;7;11;15;17	mode=DE	max=2	penalite=5
+equipe=2	jours=3;11;14;17;22;29;31;36	equipesAdverses=0;1;4;7;12;15;17;18	mode=DE	max=2	penalite=5
+
+// Contraintes de rencontres
+// Nombre
+0
+// Contraintes
+
+// Contraintes de pause par equipe
+// Nombre
+0
+// Contraintes
+
+// Contraintes de pause globale
+// Nombre
+0
+// Contraintes
+
+// Contraintes d'equite
+// Nombre
+0
+// Contraintes
+
+// Contraintes de separation
+// Nombre
+1
+// Contraintes
+equipes=0;1;2;3;4;5;6;7;8;9;10;11;12;13;14;15;16;17;18;19	min=10	penalite=10

@@ -21,7 +21,7 @@ public class TestSolveur {
     public static void main(String[] args) {
         //String path="instanceViableCplex/instance_ITC2021_Test_1.txt";
         //String path="instanceTestUnitaire/instance_test_ContraintePlacement_4Equipe.txt";
-        String path="instanceViableCplex/instance_ITC2021_Test_1.txt";
+        String path="instances/instance_ITC2021_Test_7.txt";
         try {
             InstanceReader reader = new InstanceReader(path);
             Instance i= reader.readInstance();
