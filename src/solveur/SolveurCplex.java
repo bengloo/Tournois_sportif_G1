@@ -45,6 +45,10 @@ public class SolveurCplex implements Solveur{
         return s;
     }
 
+    /**
+     * Construit le model d'equoition et le resout au sens de cplex
+     * @param instance instance traité
+     */
     private void buildModel(Instance instance) {
         try {
             this.cplex = new IloCplex();
@@ -77,6 +81,10 @@ public class SolveurCplex implements Solveur{
 
     }
 
+    /**
+     * pose les equoitions du model cplex et les enregistre dans modelsCplex/model_{nom instance}.lp
+     * @param instance instance traité par le solveur
+     */
     private void init(Instance instance) {
         try {
             cplex.setParam(IloCplex.Param.RandomSeed,new Random().nextInt(Integer.MAX_VALUE*3/4));
@@ -100,6 +108,10 @@ public class SolveurCplex implements Solveur{
         }
     }
 
+    /**
+     * definit les equoitions relative à la viabilité de la solution.
+     * @param instance instance traité par le solveur
+     */
     private void initContrainteInerante(Instance instance){
         int nbEquipe=instance.getNbEquipes();
 
@@ -164,6 +176,10 @@ public class SolveurCplex implements Solveur{
         }
     }
 
+    /**
+     * definit les equations delimitant les variables de decisions ne definissant pas directement de la solution (Pause,Minimiser)
+     * @param instance instance traité par le solveur
+     */
     public void initContrainteDecision(Instance instance){
         int nbE=instance.getNbEquipes();
         int nbJ=instance.getNbJournees();
@@ -248,35 +264,69 @@ public class SolveurCplex implements Solveur{
         }
     }
 
+    /**
+     * permet d'obtenir l'objet lié au model.
+     * @return le model de type IloCplex
+     */
     public IloCplex getCplex() {
         return cplex;
     }
 
+    /**
+     * permet d'acceder à la variable de decision definisant les afectation de couple d'equipe à une journee (rencontres)
+     * @return x un IloIntVar[][][] de taille nbEquipe ^2 et nb Journee
+     */
     public IloIntVar[][][] getX() {
         return x;
     }
 
+    /**
+     * permet d'acceder à la variable de decision definisant les pauses par equipe par jour en domicile
+     * @return y un IloIntVar[][] de taille nbEquipe et nb Journee
+     */
     public IloIntVar[][] getY() {
         return y;
     }
 
+    /**
+     * permet d'acceder à la variable de decision definisant les pauses par equipe par jour en exterieur
+     * @return z un IloIntVar[][] de taille nbEquipe et nb Journee
+     */
     public IloIntVar[][] getZ() {
         return z;
     }
 
+    /**
+     * permet d'acceder à la variable de decision definisant les ecart de coef sur les borne max de la contrainte spécifié
+     * @param c contrainte ciblé
+     * @return cDurMax un IloIntVar
+     */
     public IloIntVar getCDureMax(Contrainte c){
         return cDurMax.get(c);
     }
 
+    /**
+     * permet d'acceder à la variable de decision definisant les ecart de coef sur les borne min de la contrainte spécifié
+     * @param c contrainte ciblé
+     * @return cDurMin un IloIntVar
+     */
     public IloIntVar getCDureMin(Contrainte c){
         return cDurMin.get(c);
     }
 
+    /**
+     * permet d'acceder à la variable de decision definisant le cout de la contrainte spécifié
+     * @param c contrainte ciblé
+     * @return coutC un IloIntVar
+     */
     public IloIntVar getCoutC(Contrainte c){
         return coutC.get(c);
     }
 
-
+    /**
+     * definit les equation lié au contrainte dure et souple
+     * @param instance instance traité par le solveur
+     */
     private void initContrainte(Instance instance){
         for(Contrainte c:instance.getContraintes()){
             if(c.estDure()||((!c.estDure()) && minimiseSouple)) {
@@ -290,6 +340,10 @@ public class SolveurCplex implements Solveur{
         }
     }
 
+    /**
+     * initialise les variabe de decision en les afectant au modele et les nomant
+     * @param instance instance traité par le solveur
+     */
     private void initVariableDecision(Instance instance){
         int nbE=instance.getNbEquipes();
         int nbJ=instance.getNbJournees();
@@ -356,6 +410,12 @@ public class SolveurCplex implements Solveur{
 
     }
 
+    /**
+     * converti la variable de decision x du model cplex relative aux afectation equipes journe en Solution
+     * update les log de la solution
+     * @param instance instance traité par le solveur
+     * @return
+     */
     private Solution formatSaveSolution(Instance instance){
         Solution s=new Solution(instance);
         for(int d=0;d<instance.getNbEquipes();d++) {
