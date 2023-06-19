@@ -217,6 +217,20 @@ public class ContraintePauseEquipe extends Contrainte{
         return false;
     }
 
+    public boolean isConserne(int e,int j,TypeMode m){
+        if(this.equipe!=e)return false;
+        if(!this.journees.contains(j))return false;
+        switch (m){
+            case DOMICILE:
+                if(this.mode==TypeMode.EXTERIEUR)return false;
+                break;
+            case EXTERIEUR:
+                if(this.mode==TypeMode.DOMICILE)return false;
+                break;
+        }
+        return true;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

@@ -2,6 +2,7 @@ package solveur;
 
 import instance.Instance;
 import instance.modele.contrainte.Contrainte;
+import instance.modele.contrainte.TypeMode;
 import operateur.OperateurInsertion;
 import solution.Solution;
 import ilog.concert.*;
@@ -25,9 +26,9 @@ public class SolveurCplex implements Solveur{
 
 
 
-    private int watchDog = 2000;
-    private boolean minimiseDure =false;
-    private boolean minimiseSouple =true;
+    private int watchDog = 3000;
+    private boolean minimiseDure =true;
+    private boolean minimiseSouple =false;
 
     @Override
     public String getNom() {
@@ -184,12 +185,16 @@ public class SolveurCplex implements Solveur{
                                 exprz2.addTerm(x[i][e][j], 1);
                             }
                         }
-                        cplex.addLe(cplex.sum(cplex.sum(expry1, expry2), -1), y[j - 1][e], "CNPD1j" + j + "e" + e);
-                        cplex.addLe(cplex.sum(cplex.sum(exprz1, exprz2), -1), z[j - 1][e], "CNPE1j" + j + "e" + e);
-                        cplex.addLe(y[j - 1][e], expry1, "CNPD2j" + j + "e" + e);
-                        cplex.addLe(y[j - 1][e], expry2, "CNPD3j" + j + "e" + e);
-                        cplex.addLe(z[j - 1][e], exprz1, "CNPE2j" + j + "e" + e);
-                        cplex.addLe(z[j - 1][e], exprz2, "CNPE3j" + j + "e" + e);
+                        if(instance.isPauseConcerne(e,j, TypeMode.DOMICILE)) {
+                            cplex.addLe(cplex.sum(cplex.sum(expry1, expry2), -1), y[j - 1][e], "CNPD1j" + j + "e" + e);
+                            cplex.addLe(y[j - 1][e], expry1, "CNPD2j" + j + "e" + e);
+                            cplex.addLe(y[j - 1][e], expry2, "CNPD3j" + j + "e" + e);
+                        }
+                        if(instance.isPauseConcerne(e,j, TypeMode.EXTERIEUR)) {
+                            cplex.addLe(cplex.sum(cplex.sum(exprz1, exprz2), -1), z[j - 1][e], "CNPE1j" + j + "e" + e);
+                            cplex.addLe(z[j - 1][e], exprz2, "CNPE3j" + j + "e" + e);
+                            cplex.addLe(z[j - 1][e], exprz1, "CNPE2j" + j + "e" + e);
+                        }
 
                     } catch (IloException ex) {
                         throw new RuntimeException(ex);
@@ -299,8 +304,12 @@ public class SolveurCplex implements Solveur{
         for(int j=1;j<nbJ;j++){
             for(int e=0;e<nbE;e++){
                 try {
-                    y[j-1][e]=this.cplex.intVar(0,1,"y"+j+"_"+e);
-                    z[j-1][e]=this.cplex.intVar(0,1,"z"+j+"_"+e);
+                    if(instance.isPauseConcerne(e,j, TypeMode.DOMICILE)) {
+                        y[j - 1][e] = this.cplex.intVar(0, 1, "y" + j + "_" + e);
+                    }
+                    if(instance.isPauseConcerne(e,j, TypeMode.EXTERIEUR)) {
+                        z[j - 1][e] = this.cplex.intVar(0, 1, "z" + j + "_" + e);
+                    }
                 } catch (IloException ex) {
                     throw new RuntimeException(ex);
                 }

@@ -196,6 +196,12 @@ public class ContraintePauseGlobale extends Contrainte{
         }
     }
 
+    public boolean isConserne(int e,int j){
+        if(!this.equipes.contains(e))return false;
+        if(!this.journees.contains(j))return false;
+        return true;
+    }
+
     @Override
     public boolean useValC() {
         return false;
