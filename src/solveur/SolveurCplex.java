@@ -9,6 +9,8 @@ import solution.Solution;
 import ilog.concert.*;
 import ilog.cplex.IloCplex;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Random;
@@ -32,6 +34,16 @@ public class SolveurCplex implements Solveur{
     private boolean minimiseSouple =false;
     private boolean avoidContraintePauseGlobale=true;
 
+    public SolveurCplex() {
+    }
+
+    public SolveurCplex(int watchDog, boolean minimiseDure, boolean minimiseSouple, boolean avoidContraintePauseGlobale) {
+        this.watchDog = watchDog;
+        this.minimiseDure = minimiseDure;
+        this.minimiseSouple = minimiseSouple;
+        this.avoidContraintePauseGlobale = avoidContraintePauseGlobale;
+    }
+
     @Override
     public String getNom() {
         return "SolveurCplex";
@@ -39,9 +51,18 @@ public class SolveurCplex implements Solveur{
 
     @Override
     public Solution solve(Instance instance) {
-
+        long start = System.currentTimeMillis();
         buildModel(instance);
         Solution s =formatSaveSolution(instance);
+        long time = System.currentTimeMillis() - start;
+        try {
+            s.addLog("|"+ InetAddress.getLocalHost().getHostName()+"|"+System.getProperty("user.name"));
+        } catch (UnknownHostException e) {
+            throw new RuntimeException(e);
+        }
+        s.addLog("|"+time);
+        s.writeSolutionChekerProf(this.getNom());
+        s.logCheckProf();
         return s;
     }
 
@@ -101,11 +122,11 @@ public class SolveurCplex implements Solveur{
         this.cplex.setOut(null);
         // exporter le modele dans un fichier texte au format .lp
         // ce format est comprehensible par cplex
-        try {
+        /*try {
             this.cplex.exportModel("modelsCplex/model_" + instance.getNom() + ".lp");
         } catch (IloException e) {
             throw new RuntimeException(e);
-        }
+        }*/
     }
 
     /**

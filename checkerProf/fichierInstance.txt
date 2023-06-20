@@ -1,181 +1,98 @@
 // Nom
-Middle5
+Test Instance 5
 
 // Nombre d'equipes
-18
+16
 
 // Contraintes dures
 
 // Contraintes de placement
 // Nombre
-41
+8
 // Contraintes
-equipe=12	jours=9	mode=D	max=0
-equipe=3	jours=5;17;30;31	mode=E	max=1
-equipe=3	jours=30	mode=E	max=0
-equipe=11	jours=2;23	mode=E	max=1
-equipe=5	jours=17;20	mode=D	max=1
-equipe=6	jours=20	mode=E	max=0
-equipe=16	jours=17;22	mode=E	max=1
-equipe=10	jours=4;9;23;30	mode=D	max=1
-equipe=0	jours=7;14;16;28	mode=E	max=2
-equipe=8	jours=11;13;20	mode=E	max=1
-equipe=6	jours=3	mode=E	max=0
-equipe=11	jours=8;9;22	mode=E	max=1
-equipe=1	jours=10;13;16;21	mode=E	max=2
-equipe=6	jours=6;29;30	mode=E	max=1
-equipe=4	jours=2;10;26	mode=E	max=1
-equipe=9	jours=7;26	mode=D	max=1
-equipe=12	jours=6;17	mode=D	max=1
-equipe=14	jours=17;19;33	mode=E	max=1
-equipe=15	jours=17	mode=D	max=0
-equipe=8	jours=4;6;12;18	mode=E	max=2
-equipe=15	jours=8	mode=E	max=0
-equipe=10	jours=25	mode=E	max=0
-equipe=5	jours=4;5;19	mode=E	max=1
-equipe=7	jours=20	mode=E	max=0
-equipe=4	jours=16;20	mode=D	max=1
-equipe=12	jours=16;18	mode=D	max=1
-equipe=17	jours=25;29	mode=E	max=1
-equipe=9	jours=8;27	mode=E	max=1
-equipe=12	jours=0;3;4;23	mode=E	max=1
-equipe=6	jours=29	mode=E	max=0
-equipe=2	jours=17	mode=D	max=0
-equipe=14	jours=4;8;31	mode=D	max=1
-equipe=5	jours=6	mode=D	max=0
-equipe=7	jours=12	mode=D	max=0
-equipe=1	jours=33	mode=D	max=0
-equipe=6	jours=4;5	mode=D	max=1
-equipe=5	jours=12;21;26	mode=D	max=1
-equipe=12	jours=11	mode=D	max=0
-equipe=1	jours=7;11;24	mode=E	max=1
-equipe=1	jours=29	mode=D	max=0
-equipe=12	jours=15;24;26	mode=D	max=1
+equipe=8	jours=7;17;23;26	mode=D	max=1
+equipe=11	jours=22	mode=D	max=0
+equipe=5	jours=2;27	mode=E	max=1
+equipe=9	jours=6;7;10;28	mode=D	max=1
+equipe=3	jours=14	mode=E	max=0
+equipe=6	jours=0;6;19;24	mode=E	max=2
+equipe=10	jours=3;18	mode=E	max=1
+equipe=9	jours=0;1;17	mode=E	max=1
 
 // Contraintes d'equipes en haut et bas de classement
 // Nombre
-40
+16
 // Contraintes
-equipe=1	jours=0;3;21;32	equipesAdverses=2;8;11;14	mode=DE	max=2
-equipe=3	jours=27	equipesAdverses=10	mode=D	max=0
-equipe=11	jours=3	equipesAdverses=3	mode=E	max=0
-equipe=2	jours=6	equipesAdverses=12	mode=D	max=0
-equipe=4	jours=4;7;21;32	equipesAdverses=2;5;14;15	mode=DE	max=1
-equipe=7	jours=13;17;23;26;29;31	equipesAdverses=2;3;9;10;12;16	mode=DE	max=2
-equipe=17	jours=0	equipesAdverses=11	mode=E	max=0
-equipe=6	jours=2	equipesAdverses=17	mode=D	max=0
-equipe=3	jours=2;11;26;31	equipesAdverses=7;8;12;14	mode=DE	max=1
-equipe=7	jours=10;15;26;29;33	equipesAdverses=3;5;10;11;16	mode=DE	max=1
-equipe=4	jours=13	equipesAdverses=3	mode=E	max=0
-equipe=15	jours=6;16;20;22;28;29	equipesAdverses=1;6;7;10;16;17	mode=DE	max=2
-equipe=3	jours=6	equipesAdverses=6	mode=D	max=0
-equipe=16	jours=29	equipesAdverses=9	mode=D	max=0
-equipe=7	jours=32	equipesAdverses=15	mode=D	max=0
-equipe=1	jours=1	equipesAdverses=17	mode=E	max=0
-equipe=1	jours=5;7;11;14;31	equipesAdverses=5;9;13;14;15	mode=DE	max=1
-equipe=6	jours=11	equipesAdverses=17	mode=E	max=0
-equipe=8	jours=5;14;24;29	equipesAdverses=2;3;4;14	mode=DE	max=1
-equipe=0	jours=32	equipesAdverses=11	mode=D	max=0
-equipe=10	jours=29	equipesAdverses=4	mode=D	max=0
-equipe=10	jours=1;5;6;23	equipesAdverses=5;6;7;17	mode=DE	max=2
-equipe=6	jours=29	equipesAdverses=8	mode=E	max=0
-equipe=15	jours=1;6;8;16;33	equipesAdverses=5;8;11;13;14	mode=DE	max=1
-equipe=11	jours=8	equipesAdverses=0	mode=D	max=0
-equipe=17	jours=15	equipesAdverses=10	mode=D	max=0
-equipe=13	jours=15	equipesAdverses=16	mode=E	max=0
-equipe=13	jours=27	equipesAdverses=7	mode=E	max=0
-equipe=11	jours=3	equipesAdverses=10	mode=E	max=0
-equipe=6	jours=4;15;25;33	equipesAdverses=0;3;5;17	mode=DE	max=1
-equipe=0	jours=19	equipesAdverses=12	mode=E	max=0
-equipe=1	jours=5;6;8;27	equipesAdverses=5;7;12;16	mode=DE	max=1
-equipe=9	jours=6	equipesAdverses=10	mode=E	max=0
-equipe=5	jours=4	equipesAdverses=7	mode=D	max=0
-equipe=2	jours=32	equipesAdverses=6	mode=D	max=0
-equipe=5	jours=10	equipesAdverses=1	mode=D	max=0
-equipe=13	jours=6	equipesAdverses=16	mode=E	max=0
-equipe=7	jours=4	equipesAdverses=11	mode=E	max=0
-equipe=10	jours=9	equipesAdverses=17	mode=D	max=0
-equipe=12	jours=33	equipesAdverses=9	mode=D	max=0
+equipe=12	jours=5;7;18;25;26	equipesAdverses=0;6;13;14;15	mode=DE	max=1
+equipe=12	jours=0	equipesAdverses=6	mode=D	max=0
+equipe=2	jours=2;7;13;20;22	equipesAdverses=1;4;8;11;13	mode=DE	max=1
+equipe=1	jours=10	equipesAdverses=0	mode=D	max=0
+equipe=3	jours=7	equipesAdverses=5	mode=E	max=0
+equipe=11	jours=3;10;25;26	equipesAdverses=1;12;14;15	mode=DE	max=1
+equipe=2	jours=14	equipesAdverses=0	mode=D	max=0
+equipe=8	jours=9	equipesAdverses=11	mode=E	max=0
+equipe=9	jours=27	equipesAdverses=14	mode=E	max=0
+equipe=5	jours=15	equipesAdverses=4	mode=D	max=0
+equipe=7	jours=9	equipesAdverses=0	mode=D	max=0
+equipe=2	jours=8;11;14;21;22;29	equipesAdverses=3;7;8;10;13;15	mode=DE	max=4
+equipe=12	jours=0;1;18;19;21;25	equipesAdverses=0;3;5;13;14;15	mode=DE	max=2
+equipe=12	jours=12	equipesAdverses=3	mode=D	max=0
+equipe=5	jours=25	equipesAdverses=2	mode=D	max=0
+equipe=15	jours=6;12;14;17	equipesAdverses=4;11;12;13	mode=DE	max=1
 
 // Contraintes de rencontres
 // Nombre
-26
+31
 // Contraintes
-jours=21	rencontres=6,5	min=0	max=0
-jours=19	rencontres=16,1	min=0	max=0
-jours=4	rencontres=10,16	min=0	max=0
-jours=22	rencontres=11,10	min=0	max=0
-jours=1;3;6;24	rencontres=0,17;4,10;13,4;16,3	min=2	max=4
-jours=27	rencontres=8,11	min=1	max=1
-jours=1;18;19	rencontres=0,12;6,3;15,4	min=0	max=1
-jours=6;21	rencontres=12,16;13,9	min=0	max=1
-jours=4;6;31;32	rencontres=2,14;5,16;15,2;16,3	min=2	max=4
-jours=4;7;16;26	rencontres=3,10;9,0;10,1;17,3	min=0	max=2
-jours=15;22	rencontres=13,1;14,6	min=0	max=1
-jours=10	rencontres=3,9	min=0	max=0
-jours=30	rencontres=13,17	min=1	max=1
-jours=29	rencontres=10,11	min=1	max=1
-jours=0;2;18	rencontres=4,5;8,11;9,0	min=0	max=1
-jours=4;14;27	rencontres=5,15;9,12;12,11	min=0	max=1
-jours=1;15;30	rencontres=0,14;3,5;8,10	min=0	max=1
-jours=7	rencontres=7,15	min=1	max=1
-jours=0	rencontres=1,14	min=1	max=1
-jours=1;12;19	rencontres=12,6;14,7;14,11	min=2	max=3
-jours=21;22	rencontres=3,2;9,11	min=0	max=1
-jours=3;10;17;23	rencontres=0,5;4,5;10,7;11,8	min=0	max=2
-jours=26	rencontres=1,12	min=0	max=0
-jours=3;22;25;27	rencontres=2,4;5,13;12,4;17,15	min=0	max=2
-jours=9	rencontres=13,5	min=0	max=0
-jours=2	rencontres=3,11	min=0	max=0
+jours=9	rencontres=14,13	min=0	max=0
+jours=20	rencontres=6,3	min=1	max=1
+jours=10	rencontres=6,14	min=1	max=1
+jours=19	rencontres=14,13	min=0	max=0
+jours=3	rencontres=7,12	min=0	max=0
+jours=27	rencontres=5,8	min=1	max=1
+jours=21;23	rencontres=3,13;5,6;11,4	min=2	max=3
+jours=12	rencontres=6,9	min=0	max=0
+jours=5;11;28	rencontres=0,5;8,5;12,11	min=2	max=3
+jours=4;13;14;20	rencontres=2,15;6,5;9,4;13,0	min=2	max=4
+jours=28	rencontres=9,15	min=0	max=0
+jours=4;23;29	rencontres=0,3;14,15;15,8	min=0	max=1
+jours=11	rencontres=6,12	min=0	max=0
+jours=1;22;25	rencontres=0,4;0,11;3,12	min=2	max=3
+jours=6;11	rencontres=0,1;13,8	min=0	max=1
+jours=2;28	rencontres=2,4;11,12	min=0	max=1
+jours=1;10	rencontres=6,7;8,9	min=0	max=1
+jours=11;23	rencontres=14,4;15,3	min=1	max=2
+jours=20;26;28;29	rencontres=12,11;13,7;15,2;15,7	min=2	max=4
+jours=2	rencontres=5,7	min=1	max=1
+jours=3	rencontres=8,10	min=0	max=0
+jours=4;9;18;23	rencontres=5,1;8,2;9,0;10,2	min=2	max=4
+jours=9	rencontres=7,3	min=0	max=0
+jours=8	rencontres=0,9	min=1	max=1
+jours=8	rencontres=11,5	min=1	max=1
+jours=10;20	rencontres=7,15;9,4	min=1	max=2
+jours=17;23;24;26	rencontres=3,14;4,13;11,8;15,4	min=2	max=4
+jours=4	rencontres=3,9	min=1	max=1
+jours=9	rencontres=9,7	min=1	max=1
+jours=2;9;14;29	rencontres=0,3;1,15;11,1;13,4	min=0	max=2
+jours=2;6;7;28	rencontres=5,12;6,4;12,13;15,8	min=2	max=4
 
 // Contraintes de pause par equipe
 // Nombre
-44
+13
 // Contraintes
-equipe=15	jours=4;6;30	mode=DE	max=1
-equipe=10	jours=9;11;27	mode=DE	max=1
-equipe=7	jours=5;25;28	mode=DE	max=1
-equipe=11	jours=5;8;21;22;23;33	mode=DE	max=2
-equipe=3	jours=0;1;3;13;20;32	mode=DE	max=2
-equipe=4	jours=20	mode=DE	max=0
-equipe=4	jours=11;12;24	mode=DE	max=1
-equipe=7	jours=5;18;22	mode=DE	max=1
-equipe=4	jours=5;7;18;23;30;33	mode=DE	max=2
-equipe=7	jours=1	mode=DE	max=0
-equipe=13	jours=7;10;18;22;23;30	mode=DE	max=2
-equipe=11	jours=17;20;23;27;28;30	mode=DE	max=2
-equipe=14	jours=4	mode=DE	max=0
-equipe=16	jours=30	mode=DE	max=0
-equipe=8	jours=33	mode=DE	max=0
-equipe=13	jours=8;9;10;12;26;31	mode=DE	max=2
-equipe=7	jours=6;13;18;29;32;33	mode=DE	max=2
-equipe=2	jours=14	mode=DE	max=0
-equipe=10	jours=3	mode=DE	max=0
-equipe=4	jours=13	mode=DE	max=0
-equipe=11	jours=10;12;15;17;19;28	mode=DE	max=2
-equipe=8	jours=7;15;22	mode=DE	max=1
-equipe=14	jours=4	mode=DE	max=0
-equipe=1	jours=23	mode=DE	max=0
-equipe=15	jours=2;3;15;18;21;23	mode=DE	max=2
-equipe=14	jours=1;7;8;14;18;33	mode=DE	max=2
-equipe=16	jours=11;18;31	mode=DE	max=1
-equipe=6	jours=1;2;5;10;14;25	mode=DE	max=2
-equipe=9	jours=12;15;32	mode=DE	max=1
-equipe=10	jours=2;6;8;13;14;20	mode=DE	max=2
-equipe=15	jours=0;19;25	mode=DE	max=1
-equipe=15	jours=2;12;13;19;22;31	mode=DE	max=2
-equipe=15	jours=10;12;19	mode=DE	max=1
-equipe=8	jours=6;27;29	mode=DE	max=1
-equipe=10	jours=10	mode=DE	max=0
-equipe=8	jours=6	mode=DE	max=0
-equipe=1	jours=17	mode=DE	max=0
-equipe=17	jours=2	mode=DE	max=0
-equipe=13	jours=10;13;21;24;25;33	mode=DE	max=2
-equipe=7	jours=3;4;12;14;21;26	mode=DE	max=2
-equipe=15	jours=2;8;9	mode=DE	max=1
-equipe=12	jours=5;18;20;23;28;33	mode=DE	max=2
-equipe=12	jours=8;26;32	mode=DE	max=1
-equipe=1	jours=1;24;30	mode=DE	max=1
+equipe=0	jours=23	mode=DE	max=0
+equipe=6	jours=12	mode=DE	max=0
+equipe=10	jours=11	mode=DE	max=0
+equipe=5	jours=4;7;28	mode=DE	max=1
+equipe=4	jours=4;6;14;15;17;27	mode=DE	max=2
+equipe=14	jours=4;8;13;19;22;28	mode=DE	max=2
+equipe=0	jours=27	mode=DE	max=0
+equipe=11	jours=13;17;20	mode=DE	max=1
+equipe=2	jours=2	mode=DE	max=0
+equipe=7	jours=4;5;11;19;22;24	mode=DE	max=2
+equipe=7	jours=8;14;17;19;21;27	mode=DE	max=2
+equipe=10	jours=3;14;17;18;22;29	mode=DE	max=2
+equipe=11	jours=8;11;19	mode=DE	max=1
 
 // Contraintes de pause globale
 // Nombre
@@ -187,218 +104,87 @@ equipe=1	jours=1;24;30	mode=DE	max=1
 
 // Contraintes de placement
 // Nombre
-24
+29
 // Contraintes
-equipe=9	jours=23	mode=E	max=0	penalite=1
-equipe=7	jours=1;3;4;12;27	mode=E	max=1	penalite=1
-equipe=2	jours=7	mode=D	max=0	penalite=1
-equipe=12	jours=10;11;17;31;32	mode=E	max=1	penalite=1
-equipe=2	jours=30	mode=E	max=0	penalite=1
-equipe=6	jours=4;8;11;29;31	mode=E	max=1	penalite=1
-equipe=10	jours=15;17;30	mode=D	max=1	penalite=1
-equipe=5	jours=10	mode=D	max=0	penalite=1
-equipe=11	jours=33	mode=E	max=0	penalite=1
-equipe=0	jours=7;26;30	mode=E	max=1	penalite=1
-equipe=11	jours=10;12;22	mode=D	max=1	penalite=1
-equipe=6	jours=1;3;10;19;26	mode=E	max=1	penalite=1
-equipe=10	jours=12	mode=D	max=0	penalite=1
-equipe=8	jours=17;19;20	mode=D	max=1	penalite=1
-equipe=17	jours=4	mode=D	max=0	penalite=1
-equipe=4	jours=1;9;16;23;24;31	mode=D	max=2	penalite=1
-equipe=3	jours=6;7;13;14;17;21	mode=E	max=2	penalite=1
-equipe=16	jours=2;3;14;16	mode=E	max=1	penalite=1
-equipe=10	jours=14;17;21;23;32	mode=D	max=1	penalite=1
-equipe=2	jours=2;10;14;24;33	mode=D	max=1	penalite=1
-equipe=8	jours=10;15;33	mode=D	max=1	penalite=1
-equipe=5	jours=0;4;13;25	mode=E	max=1	penalite=1
-equipe=6	jours=6;7;8;11;26	mode=E	max=1	penalite=1
-equipe=1	jours=5;7;21;28	mode=D	max=1	penalite=1
+equipe=3	jours=4;12;20;29	mode=D	max=1	penalite=1
+equipe=8	jours=8;22	mode=E	max=1	penalite=1
+equipe=15	jours=2;17;26	mode=D	max=1	penalite=1
+equipe=14	jours=8;12;15;21;23	mode=D	max=1	penalite=1
+equipe=14	jours=21	mode=D	max=0	penalite=1
+equipe=10	jours=0;7;10;12;17;20	mode=D	max=2	penalite=1
+equipe=5	jours=7;8;20;22;27	mode=D	max=1	penalite=1
+equipe=13	jours=7	mode=D	max=0	penalite=1
+equipe=13	jours=5;27	mode=E	max=1	penalite=1
+equipe=2	jours=18	mode=E	max=0	penalite=1
+equipe=12	jours=23	mode=E	max=0	penalite=1
+equipe=2	jours=5;19;22;23;24;29	mode=D	max=2	penalite=1
+equipe=10	jours=2	mode=E	max=0	penalite=1
+equipe=13	jours=0;4;5;13;23;25	mode=E	max=2	penalite=1
+equipe=3	jours=21	mode=E	max=0	penalite=1
+equipe=5	jours=14;22	mode=D	max=1	penalite=1
+equipe=6	jours=20	mode=D	max=0	penalite=1
+equipe=2	jours=8;9;14;24;25	mode=E	max=1	penalite=1
+equipe=13	jours=7	mode=E	max=0	penalite=1
+equipe=6	jours=1;8;12;18;20	mode=E	max=1	penalite=1
+equipe=14	jours=1	mode=D	max=0	penalite=1
+equipe=11	jours=5;10;14;15;28	mode=E	max=1	penalite=1
+equipe=15	jours=1;2	mode=D	max=1	penalite=1
+equipe=4	jours=7;10;15;18;23	mode=E	max=1	penalite=1
+equipe=13	jours=6	mode=E	max=0	penalite=1
+equipe=1	jours=5;9;11;12;22;27	mode=D	max=2	penalite=1
+equipe=9	jours=7;18;22;29	mode=D	max=1	penalite=1
+equipe=1	jours=1	mode=D	max=0	penalite=1
+equipe=7	jours=9;15;18	mode=E	max=1	penalite=1
 
 // Contraintes d'equipes en haut et bas de classement
-// Nombre
-33
-// Contraintes
-equipe=10	jours=4;7;8;22;25;29;32	equipesAdverses=0;2;3;6;8;12;15	mode=D	max=2	penalite=5
-equipe=7	jours=0;6;14;20;26;28;31;32	equipesAdverses=0;5;8;9;11;12;14;17	mode=E	max=3	penalite=5
-equipe=4	jours=0;2;3;9;14;24;26	equipesAdverses=2;5;9;10;12;15;17	mode=D	max=2	penalite=5
-equipe=15	jours=0;1;2;17;23;31	equipesAdverses=0;4;8;9;12;13	mode=E	max=2	penalite=5
-equipe=13	jours=3;9;10;18;24;25;30	equipesAdverses=0;3;4;8;12;16;17	mode=E	max=2	penalite=5
-equipe=6	jours=2;7;15;16;23;24;33	equipesAdverses=1;2;3;7;9;13;15	mode=E	max=2	penalite=5
-equipe=16	jours=0;5;8;12;16;18;26	equipesAdverses=1;5;8;10;12;13;17	mode=E	max=2	penalite=5
-equipe=0	jours=1;6;9;19;20;26;31	equipesAdverses=1;2;6;8;9;11;16	mode=E	max=2	penalite=5
-equipe=17	jours=12;18;20;26;28;33	equipesAdverses=5;6;7;8;10;16	mode=E	max=2	penalite=5
-equipe=11	jours=7;11;16;19;23;24;27;28	equipesAdverses=0;4;5;6;9;14;15;17	mode=DE	max=2	penalite=5
-equipe=1	jours=0;1;2;7;13;21;30;31	equipesAdverses=5;7;8;10;11;12;13;17	mode=D	max=3	penalite=5
-equipe=7	jours=4;8;11;14;16;19;26	equipesAdverses=0;1;2;3;4;10;15	mode=D	max=2	penalite=5
-equipe=0	jours=5;6;11;15;17;22;32	equipesAdverses=1;3;5;7;12;13;16	mode=D	max=2	penalite=5
-equipe=15	jours=2;20;23;25;28;31	equipesAdverses=1;2;4;8;11;16	mode=D	max=2	penalite=5
-equipe=12	jours=5;12;16;23;25;29;30;32	equipesAdverses=0;3;5;7;9;14;15;16	mode=DE	max=2	penalite=5
-equipe=5	jours=0;1;6;8;11;12;16	equipesAdverses=0;1;6;7;10;13;16	mode=D	max=2	penalite=5
-equipe=7	jours=1;4;5;6;12;14;22;33	equipesAdverses=0;2;3;4;5;10;12;14	mode=DE	max=2	penalite=5
-equipe=15	jours=1;6;10;11;16;22;28	equipesAdverses=1;2;3;6;8;10;17	mode=D	max=2	penalite=5
-equipe=2	jours=0;4;7;8;19;20;25	equipesAdverses=1;3;4;8;9;14;16	mode=E	max=2	penalite=5
-equipe=8	jours=0;4;18;20;24;25;30	equipesAdverses=2;3;4;9;12;14;16	mode=DE	max=1	penalite=5
-equipe=11	jours=2;3;5;12;13;20	equipesAdverses=2;3;4;7;10;15	mode=D	max=2	penalite=5
-equipe=9	jours=0;2;3;5;12;18	equipesAdverses=1;3;5;12;13;17	mode=DE	max=1	penalite=5
-equipe=8	jours=3;11;13;16;26;32	equipesAdverses=2;9;10;11;12;15	mode=D	max=2	penalite=5
-equipe=7	jours=4;9;16;21;24;27	equipesAdverses=0;3;8;10;11;17	mode=D	max=2	penalite=5
-equipe=15	jours=13;14;21;29;31;32	equipesAdverses=0;6;8;12;14;17	mode=E	max=2	penalite=5
-equipe=15	jours=0;6;10;12;22;25;28	equipesAdverses=1;4;7;8;9;13;17	mode=D	max=2	penalite=5
-equipe=0	jours=5;6;8;19;21;24;28;32	equipesAdverses=2;4;6;7;8;10;14;15	mode=D	max=3	penalite=5
-equipe=11	jours=1;7;15;17;26;28;30	equipesAdverses=2;4;10;12;14;15;17	mode=D	max=2	penalite=5
-equipe=1	jours=2;3;10;13;16;18;24;29	equipesAdverses=3;4;6;10;11;15;16;17	mode=E	max=3	penalite=5
-equipe=12	jours=10;12;21;25;29;32;33	equipesAdverses=2;7;9;10;13;15;16	mode=E	max=2	penalite=5
-equipe=16	jours=7;16;19;22;23;29;30	equipesAdverses=1;2;6;8;10;11;17	mode=D	max=2	penalite=5
-equipe=11	jours=2;4;11;12;15;30;32	equipesAdverses=1;4;5;7;9;14;17	mode=DE	max=1	penalite=5
-equipe=3	jours=2;3;13;19;23;25	equipesAdverses=1;2;6;9;12;14	mode=DE	max=1	penalite=5
-
-// Contraintes de rencontres
-// Nombre
-126
-// Contraintes
-jours=29	rencontres=16,13	min=0	max=0	penalite=1
-jours=4;8;12;33	rencontres=10,11	min=1	max=1	penalite=1
-jours=21;25;29	rencontres=0,8	min=0	max=0	penalite=1
-jours=18	rencontres=0,4	min=1	max=1	penalite=1
-jours=3	rencontres=7,5	min=0	max=0	penalite=1
-jours=10	rencontres=0,15	min=1	max=1	penalite=1
-jours=0	rencontres=5,11;12,1;16,13	min=0	max=1	penalite=1
-jours=31	rencontres=5,2	min=0	max=0	penalite=1
-jours=10;11;15;30	rencontres=3,0;3,9;13,11;17,11	min=0	max=2	penalite=1
-jours=10	rencontres=6,12	min=0	max=0	penalite=1
-jours=28	rencontres=5,8	min=0	max=0	penalite=1
-jours=6;16;28	rencontres=1,7	min=1	max=1	penalite=1
-jours=15	rencontres=2,6	min=0	max=0	penalite=1
-jours=1	rencontres=1,5;13,2	min=1	max=2	penalite=1
-jours=27	rencontres=2,3	min=1	max=1	penalite=1
-jours=17	rencontres=9,4	min=0	max=0	penalite=1
-jours=1;5;19;29	rencontres=0,11;2,5;5,12;7,2	min=0	max=2	penalite=1
-jours=18;22;24;29	rencontres=15,11	min=1	max=1	penalite=1
-jours=11;13;24;28	rencontres=3,15;4,3;16,11	min=0	max=1	penalite=1
-jours=2	rencontres=16,6	min=1	max=1	penalite=1
-jours=28	rencontres=3,6	min=0	max=0	penalite=1
-jours=25	rencontres=5,17	min=1	max=1	penalite=1
-jours=25	rencontres=13,5	min=0	max=0	penalite=1
-jours=12	rencontres=6,4	min=1	max=1	penalite=1
-jours=32	rencontres=16,9	min=1	max=1	penalite=1
-jours=4	rencontres=11,6;12,6;17,0	min=0	max=1	penalite=1
-jours=11	rencontres=3,6;3,7;3,8;8,15	min=0	max=2	penalite=1
-jours=15;26	rencontres=5,11	min=1	max=1	penalite=1
-jours=0;7;21;31	rencontres=14,17	min=0	max=0	penalite=1
-jours=8	rencontres=1,17;3,4	min=0	max=1	penalite=1
-jours=1;3;8;32	rencontres=11,4	min=1	max=1	penalite=1
-jours=4	rencontres=4,3	min=1	max=1	penalite=1
-jours=29	rencontres=1,4;11,9	min=0	max=1	penalite=1
-jours=0;6;8	rencontres=14,17	min=1	max=1	penalite=1
-jours=5;13;18;25	rencontres=0,9;1,9;2,5	min=0	max=1	penalite=1
-jours=1;10;17;25	rencontres=15,7	min=1	max=1	penalite=1
-jours=11;20;28	rencontres=11,8	min=1	max=1	penalite=1
-jours=3	rencontres=9,2	min=0	max=0	penalite=1
-jours=0	rencontres=15,4	min=1	max=1	penalite=1
-jours=16;23	rencontres=6,7	min=1	max=1	penalite=1
-jours=29;32	rencontres=1,7;3,0;14,11	min=0	max=1	penalite=1
-jours=27	rencontres=5,8;9,14;14,15	min=2	max=3	penalite=1
-jours=8	rencontres=9,5;15,8	min=0	max=1	penalite=1
-jours=13	rencontres=16,5;17,13	min=1	max=2	penalite=1
-jours=16	rencontres=7,2	min=0	max=0	penalite=1
-jours=0;18;20;33	rencontres=1,15;16,4	min=0	max=1	penalite=1
-jours=27	rencontres=1,2;10,13;14,13	min=0	max=1	penalite=1
-jours=24	rencontres=7,12	min=1	max=1	penalite=1
-jours=7;22;27;28	rencontres=3,1	min=0	max=0	penalite=1
-jours=22;29	rencontres=9,16	min=0	max=0	penalite=1
-jours=8	rencontres=3,7	min=0	max=0	penalite=1
-jours=22	rencontres=16,11	min=0	max=0	penalite=1
-jours=3;7	rencontres=1,10	min=1	max=1	penalite=1
-jours=7;12	rencontres=5,13	min=0	max=0	penalite=1
-jours=0;7	rencontres=11,10	min=1	max=1	penalite=1
-jours=13;23;30	rencontres=10,16	min=0	max=0	penalite=1
-jours=16;32	rencontres=17,9	min=0	max=0	penalite=1
-jours=26	rencontres=15,16	min=1	max=1	penalite=1
-jours=0;4;11;25	rencontres=4,12	min=0	max=0	penalite=1
-jours=4;6	rencontres=13,3	min=1	max=1	penalite=1
-jours=0;28	rencontres=10,7	min=0	max=0	penalite=1
-jours=10	rencontres=2,0	min=0	max=0	penalite=1
-jours=12;23	rencontres=9,2;9,7;16,5;17,11	min=2	max=4	penalite=1
-jours=9	rencontres=1,10;4,8;12,4	min=0	max=1	penalite=1
-jours=16	rencontres=1,8;7,0;12,9	min=0	max=1	penalite=1
-jours=19	rencontres=3,10;5,17;9,4;16,13	min=2	max=4	penalite=1
-jours=7;13	rencontres=9,13	min=1	max=1	penalite=1
-jours=3	rencontres=3,17	min=1	max=1	penalite=1
-jours=19	rencontres=0,11;8,17	min=1	max=2	penalite=1
-jours=3;11;12;28	rencontres=4,7	min=0	max=0	penalite=1
-jours=29	rencontres=0,2	min=1	max=1	penalite=1
-jours=15;23	rencontres=11,16	min=0	max=0	penalite=1
-jours=7	rencontres=11,3	min=1	max=1	penalite=1
-jours=1;2;8	rencontres=6,1;10,3;13,17	min=0	max=1	penalite=1
-jours=6;9;29;33	rencontres=4,14;4,17;14,0	min=0	max=1	penalite=1
-jours=6;9;15;22	rencontres=4,12;7,1;10,12;13,4	min=0	max=2	penalite=1
-jours=23	rencontres=13,15	min=1	max=1	penalite=1
-jours=10	rencontres=3,9	min=1	max=1	penalite=1
-jours=13;24;28	rencontres=9,13	min=0	max=0	penalite=1
-jours=21	rencontres=8,1	min=0	max=0	penalite=1
-jours=17	rencontres=9,15	min=0	max=0	penalite=1
-jours=4	rencontres=9,16;10,12;11,2;16,2	min=0	max=2	penalite=1
-jours=29	rencontres=8,11	min=1	max=1	penalite=1
-jours=24;28	rencontres=3,17	min=0	max=0	penalite=1
-jours=1;5	rencontres=15,1	min=1	max=1	penalite=1
-jours=7	rencontres=9,1	min=0	max=0	penalite=1
-jours=13;14	rencontres=5,12;7,4;10,14	min=2	max=3	penalite=1
-jours=11	rencontres=7,1;8,9	min=1	max=2	penalite=1
-jours=23	rencontres=4,6;12,16	min=0	max=1	penalite=1
-jours=10	rencontres=7,2;8,6;9,0;10,9	min=0	max=2	penalite=1
-jours=5;13;20;26	rencontres=3,9	min=0	max=0	penalite=1
-jours=3;16;18;24	rencontres=5,7	min=0	max=0	penalite=1
-jours=9;16;19;26	rencontres=2,17	min=0	max=0	penalite=1
-jours=8;10;25	rencontres=6,5	min=0	max=0	penalite=1
-jours=10	rencontres=9,17;10,6;10,15;12,4	min=2	max=4	penalite=1
-jours=27	rencontres=2,1	min=1	max=1	penalite=1
-jours=13;19;22;25	rencontres=13,0	min=0	max=0	penalite=1
-jours=14	rencontres=2,9;8,17	min=0	max=1	penalite=1
-jours=9	rencontres=0,6	min=1	max=1	penalite=1
-jours=3	rencontres=12,11	min=0	max=0	penalite=1
-jours=9;16;18;21	rencontres=9,3	min=0	max=0	penalite=1
-jours=0;17;22;30	rencontres=12,3	min=1	max=1	penalite=1
-jours=15	rencontres=13,10	min=0	max=0	penalite=1
-jours=2;5;15;22	rencontres=9,0;13,1	min=1	max=2	penalite=1
-jours=20;24;29	rencontres=0,17;9,2;12,2;16,15	min=0	max=2	penalite=1
-jours=5;6	rencontres=5,7;7,4;17,9	min=2	max=3	penalite=1
-jours=18	rencontres=2,11	min=1	max=1	penalite=1
-jours=2;11;13;17	rencontres=5,10	min=0	max=0	penalite=1
-jours=4	rencontres=0,9;10,2;11,13;13,7	min=0	max=2	penalite=1
-jours=10	rencontres=1,5;6,3;9,1;11,3	min=0	max=2	penalite=1
-jours=12	rencontres=1,9;11,17;13,10	min=2	max=3	penalite=1
-jours=15;16;23	rencontres=4,13;11,1;14,6	min=0	max=1	penalite=1
-jours=11;20;26	rencontres=11,2;11,6;11,8	min=2	max=3	penalite=1
-jours=18;25;32	rencontres=6,13	min=0	max=0	penalite=1
-jours=31;32	rencontres=13,15	min=0	max=0	penalite=1
-jours=29	rencontres=1,7	min=0	max=0	penalite=1
-jours=27	rencontres=2,13	min=1	max=1	penalite=1
-jours=2;20;27;28	rencontres=15,2	min=0	max=0	penalite=1
-jours=2;5	rencontres=17,7	min=0	max=0	penalite=1
-jours=1	rencontres=10,13	min=0	max=0	penalite=1
-jours=15	rencontres=7,14	min=1	max=1	penalite=1
-jours=21	rencontres=4,15	min=0	max=0	penalite=1
-jours=10	rencontres=2,1	min=1	max=1	penalite=1
-jours=3	rencontres=15,3	min=0	max=0	penalite=1
-jours=13	rencontres=13,17;16,14	min=1	max=2	penalite=1
-jours=8	rencontres=4,16	min=0	max=0	penalite=1
-
-// Contraintes de pause par equipe
 // Nombre
 0
 // Contraintes
 
+// Contraintes de rencontres
+// Nombre
+5
+// Contraintes
+jours=5;13;14	rencontres=15,9	min=1	max=1	penalite=1
+jours=12	rencontres=1,0;2,3;15,2	min=2	max=3	penalite=1
+jours=27	rencontres=5,12	min=0	max=0	penalite=1
+jours=17	rencontres=4,13	min=0	max=0	penalite=1
+jours=20	rencontres=0,10;9,10	min=0	max=1	penalite=1
+
+// Contraintes de pause par equipe
+// Nombre
+20
+// Contraintes
+equipe=2	jours=0;2;15;18;22;29	mode=DE	max=2	penalite=5
+equipe=0	jours=6;13;18;21;26;28	mode=DE	max=2	penalite=5
+equipe=6	jours=6;17;20;21;25;28	mode=DE	max=2	penalite=5
+equipe=6	jours=2	mode=DE	max=0	penalite=5
+equipe=9	jours=27	mode=DE	max=0	penalite=5
+equipe=5	jours=8;11;22	mode=DE	max=1	penalite=5
+equipe=10	jours=5;7;8;10;11;22	mode=DE	max=2	penalite=5
+equipe=8	jours=25	mode=DE	max=0	penalite=5
+equipe=6	jours=9;14;16;19;26;27	mode=DE	max=2	penalite=5
+equipe=8	jours=19;24;26	mode=DE	max=1	penalite=5
+equipe=12	jours=21	mode=DE	max=0	penalite=5
+equipe=5	jours=11;15;19;20;27;29	mode=DE	max=2	penalite=5
+equipe=9	jours=0	mode=DE	max=0	penalite=5
+equipe=10	jours=24	mode=DE	max=0	penalite=5
+equipe=12	jours=27	mode=DE	max=0	penalite=5
+equipe=3	jours=18	mode=DE	max=0	penalite=5
+equipe=8	jours=9	mode=DE	max=0	penalite=5
+equipe=2	jours=5	mode=DE	max=0	penalite=5
+equipe=7	jours=8	mode=DE	max=0	penalite=5
+equipe=7	jours=6;7;14;15;20;24	mode=DE	max=2	penalite=5
+
 // Contraintes de pause globale
 // Nombre
-1
+0
 // Contraintes
-equipes=0;1;2;3;4;5;6;7;8;9;10;11;12;13;14;15;16;17	jours=0;1;2;3;4;5;6;7;8;9;10;11;12;13;14;15;16;17;18;19;20;21;22;23;24;25;26;27;28;29;30;31;32;33	max=16	penalite=10
 
 // Contraintes d'equite
 // Nombre
-1
+0
 // Contraintes
-equipes=0;1;2;3;4;5;6;7;8;9;10;11;12;13;14;15;16;17	jours=0;1;2;3;4;5;6;7;8;9;10;11;12;13;14;15;16;17;18;19;20;21;22;23;24;25;26;27;28;29;30;31;32;33	max=2	penalite=10
 
 // Contraintes de separation
 // Nombre

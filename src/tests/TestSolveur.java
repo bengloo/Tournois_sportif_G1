@@ -6,6 +6,7 @@ import io.exception.ReaderException;
 import solution.Solution;
 import solveur.Solveur;
 import solveur.SolveurCplex;
+import solveur.SolveurIter;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -19,28 +20,22 @@ import java.net.UnknownHostException;
  */
 public class TestSolveur {
     public static void main(String[] args) {
-        //String path="instanceViableCplex/instance_ITC2021_Test_1.txt";
+        String path="instancesViablesCplex/instance_ITC2021_Test_5.txt";
         //String path="instanceTestUnitaire/instance_test_ContraintePlacement_4Equipe.txt";
-        String path="instancesViablesCplex/instance_ITC2021_Early_3.txt";
+        //String path="instancesViablesCplex/instance_ITC2021_Early_3.txt";
         try {
             InstanceReader reader = new InstanceReader(path);
             Instance i= reader.readInstance();
             //System.out.println(i);
-            Solveur solveur = new SolveurCplex();
-            //Solveur solveur = new SolveurIter( new SolveurCplex(),1);
-            long start = System.currentTimeMillis();
+            //Solveur solveur = new SolveurCplex();
+            Solveur solveur = new SolveurIter( new SolveurCplex(600,false,false,false),100);
+
             Solution s = solveur.solve(i);
-            long time = System.currentTimeMillis() - start;
-            try {
-                s.addLog("|"+ InetAddress.getLocalHost().getHostName()+"|"+System.getProperty("user.name"));
-            } catch (UnknownHostException e) {
-                throw new RuntimeException(e);
-            }
+
+
             s.writeSolution(solveur.getNom());
             s.writeSolutionChekerProf(solveur.getNom());
-            //TODO integré le cheker du prof si il peux paratager ces resultat en resource
-            s.addLog("|"+time);
-            s.logCheckProf();
+
             System.out.println(s.toStringSimple());
             System.out.println(s.check());
             System.out.println(s.getLog());

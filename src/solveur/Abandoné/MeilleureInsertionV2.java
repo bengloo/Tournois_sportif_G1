@@ -1,9 +1,10 @@
-package solveur;
+package solveur.Abandoné;
 
 import instance.Instance;
 import operateur.OperateurInsertion;
 import solution.Rencontre;
 import solution.Solution;
+import solveur.Solveur;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,7 +16,7 @@ import java.util.Collections;
  * @author Lux Hugo
  * @version 1.0
  */
-public class MeilleureInsertionV2 implements Solveur{
+public class MeilleureInsertionV2 implements Solveur {
     @Override
     public String getNom() {
         return "Meilleure Insertion V2";

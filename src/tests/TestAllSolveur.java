@@ -175,28 +175,22 @@ public class TestAllSolveur {
         // TO CHECK : recuperer le nom de l'instance
         ecriture.print(inst.getNom());
         for(Solveur solveur : solveurs) {
-            long start = System.currentTimeMillis();
-            // TO CHECK : resolution de l'instance avec le solveur
-            Solution sol = solveur.solve(inst);
-            long time = System.currentTimeMillis() - start;
 
+            Solution sol = solveur.solve(inst);
             try {
                 Thread.sleep(10);
-                sol.addLog("|"+InetAddress.getLocalHost().getHostName()+"|"+System.getProperty("user.name"));
-            } catch (UnknownHostException | InterruptedException e) {
+            } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
 
             sol.writeSolution(solveur.getNom());
             sol.writeSolutionChekerProf(solveur.getNom());
             //TODO integré le cheker du prof
-            sol.addLog("|"+time);
-            sol.logCheckProf();
             System.out.println(sol.getLog());
             sol.restLog();
             // TO CHECK : recperer le cout total de la solution, et savoir si
             // la solution est valide
-            Resultat result = new Resultat(sol.getCoutTotal(), time, sol.check());
+            Resultat result = new Resultat(sol.getCoutTotal(),Integer.parseInt(sol.getLog(8)), sol.check());
             resultats.put(new InstanceSolveur(inst, solveur), result);
             ecriture.print(";"+result.formatCsv());
             totalStats.get(solveur).add(result);

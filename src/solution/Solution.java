@@ -795,6 +795,12 @@ public class Solution {
         return log;
     }
 
+    public String getLog(int i) {
+        //System.out.println(log);
+        //System.out.println((log.split("\\|"))[i]);
+        return log.split("\\|")[i];
+    }
+
     public void addLog(String log) {
         this.log = this.log+log;
     }
@@ -837,8 +843,12 @@ public class Solution {
         int deviation = 0;
         int cout = 0;
         try {
-            //ProcessBuilder processBuilder = new ProcessBuilder("../../openjdk-20.0.1/bin/java", "-jar", cheminJar);
-            ProcessBuilder processBuilder = new ProcessBuilder("java", "-jar", cheminJar);
+            ProcessBuilder processBuilder;
+            if(getLog(7).equals("bengloo")){
+                processBuilder = new ProcessBuilder("../../openjdk-20.0.1/bin/java", "-jar", cheminJar);
+            }else {
+                processBuilder = new ProcessBuilder("java", "-jar", cheminJar);
+            }
             processBuilder.directory(new File("checkerProf/"));
             processBuilder.redirectErrorStream(true);
             Process process = processBuilder.start();
