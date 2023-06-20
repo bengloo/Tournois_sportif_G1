@@ -69,7 +69,8 @@ public class ContrainteHBClassement extends Contrainte{
         return TypeContrainte.HBCLASSEMENT;
     }
 
-    //TODO implementer les fonction de calcule de cout en sinspirent de la contrainte de placement, réflechire si on ne peux pas factoriser du code sout des fonction comune aux contraintes
+    //TODO implementer les fonction de calcule de cout en sinspirent de la contrainte de placement, réflechire si on ne
+    // peux pas factoriser du code sout des fonction comune aux contraintes
     @Override
     public int getCoutTotal(Solution championnat) {
         //le nombre de rencontres jouées par l’équipe de la contrainte selon un mode sur l’ensemble des journées
@@ -77,7 +78,8 @@ public class ContrainteHBClassement extends Contrainte{
         //pour toutes les rencontres
         for(Rencontre r:championnat.getRencontres().values()){
             // à chaque équipe adverse de la liste rencontrée
-            if (this.equipesAdverses.contains(r.getDomicile().getId()) || this.equipesAdverses.contains(r.getExterieur().getId())) {
+            if (this.equipesAdverses.contains(r.getDomicile().getId()) || this.equipesAdverses.contains(r.getExterieur()
+                    .getId())) {
                 valc += parcoursJournees(championnat, r);
             }
         }
@@ -95,17 +97,23 @@ public class ContrainteHBClassement extends Contrainte{
             int valcDelta=0;
             switch(this.mode) {
                 case DOMICILE:
-                    if(this.journees.contains(o.getJournee().getId()) && this.equipesAdverses.contains(o.getRencontre().getExterieur().getId()) && o.getRencontre().isConcerne(championnat.getEquipeByID(equipe),mode)) {
+                    if(this.journees.contains(o.getJournee().getId()) && this.equipesAdverses.contains(o.getRencontre()
+                            .getExterieur().getId()) && o.getRencontre().isConcerne(championnat
+                            .getEquipeByID(equipe),mode)) {
                         valcDelta = 1;
                     }
                     break;
                 case EXTERIEUR:
-                    if(this.journees.contains(o.getJournee().getId()) && this.equipesAdverses.contains(o.getRencontre().getDomicile().getId()) && o.getRencontre().isConcerne(championnat.getEquipeByID(equipe),mode)) {
+                    if(this.journees.contains(o.getJournee().getId()) && this.equipesAdverses.contains(o.getRencontre()
+                            .getDomicile().getId()) && o.getRencontre().isConcerne(championnat
+                            .getEquipeByID(equipe),mode)) {
                         valcDelta = 1;
                     }
                     break;
                 case INDEFINI:
-                    if(this.journees.contains(o.getJournee().getId()) && (this.equipesAdverses.contains(o.getRencontre().getDomicile().getId()) || this.equipesAdverses.contains(o.getRencontre().getExterieur().getId())) && o.getRencontre().isConcerne(championnat.getEquipeByID(equipe),mode)) {
+                    if(this.journees.contains(o.getJournee().getId()) && (this.equipesAdverses.contains(o.getRencontre()
+                            .getDomicile().getId()) || this.equipesAdverses.contains(o.getRencontre().getExterieur()
+                            .getId())) && o.getRencontre().isConcerne(championnat.getEquipeByID(equipe),mode)) {
                         valcDelta = 1;
                     }
                     break;
@@ -122,12 +130,16 @@ public class ContrainteHBClassement extends Contrainte{
             boolean r2inEC=false;
 
             if(this.mode==DOMICILE||this.mode==INDEFINI){
-                if(o.getRencontre().getDomicile().getId()==this.equipe && this.equipesAdverses.contains(o.getRencontre().getExterieur())){r1inEC=true;}
-                if(((OperateurEchange) o).getRencontre2().getDomicile().getId()==this.equipe && this.equipesAdverses.contains(((OperateurEchange) o).getRencontre2().getExterieur())){r2inEC=true;}
+                if(o.getRencontre().getDomicile().getId()==this.equipe && this.equipesAdverses.contains(o.getRencontre()
+                        .getExterieur())){r1inEC=true;}
+                if(((OperateurEchange) o).getRencontre2().getDomicile().getId()==this.equipe && this.equipesAdverses
+                        .contains(((OperateurEchange) o).getRencontre2().getExterieur())){r2inEC=true;}
             }
             if(this.mode==EXTERIEUR||this.mode==INDEFINI){
-                if(o.getRencontre().getExterieur().getId()==this.equipe && this.equipesAdverses.contains(o.getRencontre().getDomicile())){r1inEC=true;}
-                if(((OperateurEchange) o).getRencontre2().getExterieur().getId()==this.equipe && this.equipesAdverses.contains(((OperateurEchange) o).getRencontre2().getDomicile())){r2inEC=true;}
+                if(o.getRencontre().getExterieur().getId()==this.equipe && this.equipesAdverses.contains(o.getRencontre()
+                        .getDomicile())){r1inEC=true;}
+                if(((OperateurEchange) o).getRencontre2().getExterieur().getId()==this.equipe && this.equipesAdverses
+                        .contains(((OperateurEchange) o).getRencontre2().getDomicile())){r2inEC=true;}
             }
 
             if((!r1inJC && r2inJc && r1inEC && !r2inEC)||(r1inJC && !r2inJc && !r1inEC && r2inEC)){
@@ -144,7 +156,8 @@ public class ContrainteHBClassement extends Contrainte{
     }
 
     /**
-     * Parcourt les journées de la contrainte pour incrémenter un compteur à chaque fois que son équipe fait partie de la rencontre
+     * Parcourt les journées de la contrainte pour incrémenter un compteur à chaque fois que son équipe fait partie de
+     * la rencontre
      * @param championnat la solution
      * @param r la rencontre concernée
      * @return le nombre entier du compteur
@@ -156,17 +169,21 @@ public class ContrainteHBClassement extends Contrainte{
             valcDelta++;*/
             switch(this.mode) {
                 case DOMICILE:
-                    if(r.isConcerne(championnat.getEquipes().get(this.equipe), this.mode) && this.equipesAdverses.contains(r.getExterieur().getId()) && championnat.isRJPresent(jID,r)) {
+                    if(r.isConcerne(championnat.getEquipes().get(this.equipe), this.mode) && this.equipesAdverses
+                            .contains(r.getExterieur().getId()) && championnat.isRJPresent(jID,r)) {
                         valcDelta++;
                     }
                     break;
                 case EXTERIEUR:
-                    if(r.isConcerne(championnat.getEquipes().get(this.equipe), this.mode) && this.equipesAdverses.contains(r.getDomicile().getId()) && championnat.isRJPresent(jID,r)) {
+                    if(r.isConcerne(championnat.getEquipes().get(this.equipe), this.mode) && this.equipesAdverses
+                            .contains(r.getDomicile().getId()) && championnat.isRJPresent(jID,r)) {
                         valcDelta++;
                     }
                     break;
                 case INDEFINI:
-                    if(r.isConcerne(championnat.getEquipes().get(this.equipe), this.mode) && (this.equipesAdverses.contains(r.getDomicile().getId()) || this.equipesAdverses.contains(r.getExterieur().getId())) && championnat.isRJPresent(jID,r)) {
+                    if(r.isConcerne(championnat.getEquipes().get(this.equipe), this.mode) && (this.equipesAdverses
+                            .contains(r.getDomicile().getId()) || this.equipesAdverses.contains(r.getExterieur()
+                            .getId())) && championnat.isRJPresent(jID,r)) {
                         valcDelta++;
                     }
                     break;
@@ -198,7 +215,8 @@ public class ContrainteHBClassement extends Contrainte{
      * @param sCplex
      */
     @Override
-    public void initCplexEquation(SolveurCplex sCplex, Instance instance,boolean minimise,boolean minimiseSouple,boolean dure) {
+    public void initCplexEquation(SolveurCplex sCplex, Instance instance,boolean minimise,boolean minimiseSouple,
+                                  boolean dure) {
         if(this.mode==TypeMode.DOMICILE) {
             try {
                 IloLinearNumExpr expr = sCplex.getCplex().linearNumExpr();

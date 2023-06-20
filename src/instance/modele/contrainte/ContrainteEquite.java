@@ -88,7 +88,8 @@ public class ContrainteEquite extends Contrainte {
         HashMap<Integer,Integer> valcDelta =new HashMap<>();
 
         if(o instanceof OperateurInsertion) {
-            if(this.journees.contains(o.getJournee().getId())&&this.equipes.contains(o.getRencontre().getDomicile().getId())){
+            if(this.journees.contains(o.getJournee().getId())&&this.equipes.contains(o.getRencontre().getDomicile()
+                    .getId())){
                 valcDelta.put(o.getRencontre().getDomicile().getId(),1);
             }
         }else if(o instanceof OperateurEchange) {
@@ -130,8 +131,10 @@ public class ContrainteEquite extends Contrainte {
         for(Integer e1:((HashMap<Integer,Integer>)valcDelta).keySet()){
             for(Integer e2:this.equipes){
                 if(e1!=e2){
-                    deltaCout += deltatDomicile(championnat.getCoefEquite(this, e1)+this.getDelatCoef(valcDelta,e1), championnat.getCoefEquite(this, e2)+this.getDelatCoef(valcDelta,e2));
-                    deltaCout -= deltatDomicile(championnat.getCoefEquite(this, e1), championnat.getCoefEquite(this, e2));
+                    deltaCout += deltatDomicile(championnat.getCoefEquite(this, e1)+this.getDelatCoef(valcDelta,e1),
+                            championnat.getCoefEquite(this, e2)+this.getDelatCoef(valcDelta,e2));
+                    deltaCout -= deltatDomicile(championnat.getCoefEquite(this, e1), championnat.getCoefEquite(
+                            this, e2));
                 }
             }
         }
@@ -139,7 +142,8 @@ public class ContrainteEquite extends Contrainte {
     }
 
     @Override
-    public void initCplexEquation(SolveurCplex sCplex, Instance instance,boolean minimiseDure,boolean minimiseSouple,boolean dure) {
+    public void initCplexEquation(SolveurCplex sCplex, Instance instance,boolean minimiseDure,boolean minimiseSouple,
+                                  boolean dure) {
         if(!dure){
             //TODO cout
         }
@@ -161,6 +165,13 @@ public class ContrainteEquite extends Contrainte {
         return Math.max(0,Math.abs(coefe1-coefe2)-this.max);
     }
 
+
+
+    private int getDelatCoef(Object valcDelta,Integer equipe){
+        Integer val= ((HashMap<Integer,Integer>)valcDelta).get(equipe);
+        if(val==null)return 0;
+        return val;
+    }
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

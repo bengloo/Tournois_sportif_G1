@@ -61,7 +61,7 @@ public class SolveurCplex implements Solveur{
             throw new RuntimeException(e);
         }
         s.addLog("|"+time);
-        s.writeSolutionChekerProf(this.getNom());
+        s.writeSolutionCheckerProf(this.getNom());
         s.logCheckProf();
         return s;
     }

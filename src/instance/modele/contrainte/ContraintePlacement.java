@@ -92,7 +92,8 @@ public class ContraintePlacement extends Contrainte{
     public Object evalDeltaCoef(Solution championnat, Operateur o) {
         Integer valcDelta=0;
         if(o instanceof OperateurInsertion) {
-            if(this.journees.contains(o.getJournee().getId()) && o.getRencontre().isConcerne(championnat.getEquipeByID(equipe),mode)) {
+            if(this.journees.contains(o.getJournee().getId()) && o.getRencontre().isConcerne(championnat
+                    .getEquipeByID(equipe),mode)) {
                 valcDelta = 1;
             }
         }
@@ -100,7 +101,8 @@ public class ContraintePlacement extends Contrainte{
     }
 
     /**
-     * Parcourt les journées de la contrainte pour incrémenter un compteur à chaque fois que son équipe fait partie de la rencontre
+     * Parcourt les journées de la contrainte pour incrémenter un compteur à chaque fois que son équipe fait partie
+     * de la rencontre
      * @param championnat la solution
      * @param r la rencontre concernée
      * @return le nombre entier du compteur
@@ -137,7 +139,8 @@ public class ContraintePlacement extends Contrainte{
      * @param sCplex
      */
     @Override
-    public void initCplexEquation(SolveurCplex sCplex, Instance instance,boolean minimise,boolean minimiseSouple,boolean dure) {
+    public void initCplexEquation(SolveurCplex sCplex, Instance instance,boolean minimise,boolean minimiseSouple,
+                                  boolean dure) {
         if(this.mode==TypeMode.DOMICILE) {
             try {
                 IloLinearNumExpr expr = sCplex.getCplex().linearNumExpr();

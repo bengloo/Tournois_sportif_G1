@@ -41,21 +41,6 @@ public class Rencontre {
         }
     }
 
-    public TypeMode getModeEquipe(Equipe e) {
-        if (this.isConcerne(e, TypeMode.DOMICILE)) {
-            return TypeMode.DOMICILE;
-        } else {
-            return TypeMode.EXTERIEUR;
-        }
-    }
-
-    public TypeMode getModeEquipe(Journee j, Equipe e) {
-        if (j.getRencontres().get(this).isConcerne(e, TypeMode.DOMICILE)) {
-            return TypeMode.DOMICILE;
-        } else {
-            return TypeMode.EXTERIEUR;
-        }
-    }
 
     public boolean isConcerne(int eid, TypeMode mode){
         switch (mode) {
@@ -122,7 +107,7 @@ public class Rencontre {
             this.journee=null;
             return true;
         }
-        if(j.isPresent(this)){//si il est présent
+        if(j.isPresent(this)){//s'il est présent
             Journee lastJournee= this.journee;
             this.journee = j;
             if(lastJournee!=null){
@@ -162,18 +147,6 @@ public class Rencontre {
      * Renvoie une chaîne de caractères longue qui caractérise une rencontre
      * @return la chaîne de caractères avec les équipes jouant à domicile et en extérieur de la rencontre
      */
-    public String toStringLong() {
-        return "Rencontre{" +
-                "domicile=" + domicile +
-                ", exterieur=" + exterieur +
-                '}';
-    }
-
-    @Override
-   /* public String toString() {
-        return exterieur.getId()+"-"+domicile.getId();
-    }*/
-
     public String toString() {
          return "Rencontre{" +
                  "domicile=" + domicile +

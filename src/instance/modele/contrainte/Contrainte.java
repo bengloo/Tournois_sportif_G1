@@ -41,7 +41,8 @@ public abstract class Contrainte {
 
 
     /**
-     * Indique le coût total engendré par la contrainte (à chaque fois que la contrainte est vérifiée, cumule les pénalités)
+     * Indique le coût total engendré par la contrainte (à chaque fois que la contrainte est vérifiée,
+     * cumule les pénalités)
      * @param championnat la solution
      * @return l'entier associé au coût (ou Max.INTEGER si la contrainte vérifiée est dure)
      **/

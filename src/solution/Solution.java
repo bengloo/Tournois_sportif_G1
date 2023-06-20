@@ -25,13 +25,13 @@ public class Solution {
     private Map<Contrainte,Object> coefContraintes;
 
 
-    //marge par rencontre(couple equipe) pour les journee viable
+    //marge par rencontre (couple équipe) pour les journées viables
     private List<Integer>[][] margeJournees;
 
-    //marge par journee pour les rencontre viable
+    //marge par journée pour les rencontres viables
     private List<Integer[]>[] margeRencontres;
 
-    //marge par equipe pour les equipe viable
+    //marge par équipe pour les équipes viables
     private List<Integer>[] margeEquipe;
 
     //log du solveur ayant amené à cette solution
@@ -40,19 +40,19 @@ public class Solution {
     public Solution(Instance instance) {
         this.instance = instance;
 
-        //on pourra faire des operation par equipes
+        //on pourra faire des operations par équipe
         this.equipes =new HashMap<>();
         for(int id=0;id<getNBEquipe();id++){
             addEquipe(id);
         }
 
-        //on pourra faire des operation par journee
+        //on pourra faire des operations par journée
         this.journees =new HashMap<>();
         for(int id=0;id<getNbJournee();id++){
             addJournee(id);
         }
 
-        //on pourra faire des operation par rencontres
+        //on pourra faire des operations par rencontre
         this.rencontres =new HashMap<>();
         for(int id=0;id<getNBEquipe();id++){
             for(int idAdverse=0;idAdverse<getNBEquipe();idAdverse++){
@@ -64,7 +64,7 @@ public class Solution {
 
         this.coutTotal=0;
 
-        //le calcule du cout total par contrainte n'est par continus vis à vias des coef de la contrainte comme valc
+        //le calcul du coût total par contrainte n'est pas continu vis à vis des coeffs de la contrainte comme valc
         this.coefContraintes = new HashMap<>();
         for(TypeContrainte type:TypeContrainte.values()) {
             for (Contrainte contrainte : instance.getContraintes(type)){
@@ -106,12 +106,6 @@ public class Solution {
         }
     }
 
-
-    public boolean isMeilleure(Solution sol){
-        if(sol==null)return true;
-        return sol.getCoutTotal()>this.getCoutTotal();
-    }
-
     /**
      * Méthode permettant de récupérer l'instance de la solution
      * @return l'instance en question
@@ -123,7 +117,7 @@ public class Solution {
     /**
      * Méthode permettant de connaître la phase de la solution à partir d'une journée donnée
      * @param journee du championnat
-     * @return 1 si on se situe dans la 1ère phase du championnat, 2 sinon
+     * @return 1 si on se situe dans la 1ʳᵉ phase du championnat, 2ᵉ sinon
      */
     public Integer getPhase(Journee journee){
         if(journee==null)return null;
@@ -239,29 +233,13 @@ public class Solution {
     public Journee getJourneeByID(int id){
         return this.journees.get(id);
     }
-    public Rencontre getRencontreByID(String id){
-        return this.rencontres.get(id);
-    }
-    public Rencontre getRencontreByEquipes(Equipe eDomicile,Equipe eExterne){
-        return this.rencontres.get(getIDRencontre(eDomicile,eExterne));
-    }
     public Rencontre getRencontreByEquipes(int eDomicile,int eExterne){
         return this.rencontres.get(getIDRencontre(eDomicile,eExterne));
-    }
-    public Journee getJourneeRencontreByEquipes(int eDomicile,int eExterne){
-        return this.rencontres.get(getIDRencontre(eDomicile,eExterne)).getJournee();
     }
     public boolean isRJPresent(int jId, Rencontre r){
         if(!this.journees.containsKey(jId))return false;
         return this.journees.get(jId).isPresent(r);
     }
-
-    /*public boolean isRJPresent(int jId,String rID){
-        return  this.journees.get(jId).isPresent(rID);
-    }*/
-
-
-
 
     /**
      * Indique toutes les rencontres jouées par l'équipe passée en paramètre
@@ -340,25 +318,22 @@ public class Solution {
      * @param deltaCout le coût associé
      */
     public void addCoefCoutContrainte(Contrainte c,Object deltaCoef,Integer deltaCout){
-        //update du coef contrainte
+        //update du coeff contrainte
         //System.out.println("Deltacoef pour cette insert"+deltaCoef);
         if(c instanceof ContrainteEquite){
             for(Integer e:((HashMap<Integer,Integer>)deltaCoef).keySet()){
-                ((HashMap<Integer,Integer>)coefContraintes.get(c)).put(e,((HashMap<Integer,Integer>)coefContraintes.get(c)).get(e)+((HashMap<Integer,Integer>)deltaCoef).get(e));
+                ((HashMap<Integer,Integer>)coefContraintes.get(c)).put(e,((HashMap<Integer,Integer>)coefContraintes
+                        .get(c)).get(e)+((HashMap<Integer,Integer>)deltaCoef).get(e));
             }
         }else {
             coefContraintes.put(c, (Integer)coefContraintes.get(c) + (Integer)deltaCoef);
         }
-        //update du cout totale
+        //update du coût total
         coutTotal+=deltaCout;
     }
 
     public Integer getCoefEquite(Contrainte c,Integer equipe){
         return ( ((HashMap<Integer,Integer>)coefContraintes.get(c)).get(equipe));
-    }
-
-    public void addCoefEquite(Contrainte c,Integer equipe,Integer deltatCoef){
-        ((HashMap<Integer,Integer>)coefContraintes.get(c)).put(equipe,((HashMap<Integer,Integer>)coefContraintes.get(c)).get(equipe)+deltatCoef);
     }
 
     /**
@@ -375,7 +350,8 @@ public class Solution {
     }
 
     /**
-     * Méthode permettant de vérifier la faisabilité de la solution vis-à-vis du planning du nombre de rencontres sur chaque journée et des phases
+     * Méthode permettant de vérifier la faisabilité de la solution vis-à-vis du planning du nombre de rencontres
+     * sur chaque journée et des phases
      * @return true si ces paramètres sont réalisables, false sinon
      */
     public boolean checkIntegriteeChampionat(boolean verbose){
@@ -384,7 +360,8 @@ public class Solution {
         for(Journee j : this.journees.values()){
             // Vérification du nombre de rencontres sur une journée
             if(j.getRencontres().size()>getNBRencontreJournee()){
-                if(verbose)System.err.println("La journée "+j.getId()+" a un nombre de rencontres égal à: "+j.getRencontres().toString());
+                if(verbose)System.err.println("La journée "+j.getId()+" a un nombre de rencontres égal à: "+
+                        j.getRencontres().toString());
                 return false;
             }
             // Vérification que le nombre de rencontres d'une équipe sur une journée soit égal à 1
@@ -396,12 +373,13 @@ public class Solution {
                     }
                 }
                 if (compt != 1) {
-                    if(verbose)System.err.println("L'équipe "+e+" a un nombre de rencontres égal à: "+compt+" sur la journée "+j);
+                    if(verbose)System.err.println("L'équipe "+e+" a un nombre de rencontres égal à: "+compt+
+                            " sur la journée "+j);
                     return false;
                 }
             }
         }
-        // Vérification que les matchs aller et retour ne sont pas dans la même phase
+        // Vérification que les matchs allers et retours ne sont pas dans la même phase
         for(Rencontre r : this.rencontres.values()){
             if(getPhase(r.getJournee())==getPhase(this.rencontres.get(r.getLabelRetour()).getJournee())){
                 //int a=getPhase(r.getJournee());
@@ -453,8 +431,10 @@ public class Solution {
                         bestInsertion = o;
                     }
                 }else{
-                    //this.margeJournees[r.getDomicile().getId()][r.getExterieur().getId()].remove(o.getJournee().getId());
-                    //this.margeRencontres[o.getJournee().getId()].removeIf(n->(n[0]==r.getDomicile().getId()&&n[1]==r.getExterieur().getId()));
+                    //this.margeJournees[r.getDomicile().getId()][r.getExterieur().getId()].remove(o.getJournee()
+                    // .getId());
+                    //this.margeRencontres[o.getJournee().getId()].removeIf(n->(n[0]==r.getDomicile().getId()&&n[1]==r
+                    // .getExterieur().getId()));
                 }
 
             }
@@ -489,8 +469,10 @@ public class Solution {
                         bestInsertion = o;
                     }
                 }else{
-                    this.margeJournees[o.getRencontre().getDomicile().getId()][o.getRencontre().getExterieur().getId()].remove(o.getJournee().getId());
-                    this.margeRencontres[o.getJournee().getId()].removeIf(n->(n[0]==o.getRencontre().getDomicile().getId()&&n[1]==o.getRencontre().getExterieur().getId()));
+                    this.margeJournees[o.getRencontre().getDomicile().getId()][o.getRencontre().getExterieur().getId()]
+                            .remove(o.getJournee().getId());
+                    this.margeRencontres[o.getJournee().getId()].removeIf(n->(n[0]==o.getRencontre().getDomicile()
+                            .getId()&&n[1]==o.getRencontre().getExterieur().getId()));
                 }
 
             }
@@ -518,32 +500,34 @@ public class Solution {
 
     public void writeSolution(String repSolveur){
         File folder = new File("resultats/"+repSolveur);
-        //on crer un dossier propre au solveur si besoin
+        //on crée un dossier propre au solveur si besoin
         if (!folder.exists()) {
             folder.mkdirs();
         }
-        try {
+        try {//on détecte le système d'exploitation
             String os = System.getProperty("os.name").toLowerCase();
             String aux;
             if (os.contains("win")) {
                 //System.out.println("Système d'exploitation : Windows");
-                aux=("resultats\\\\" + repSolveur + "\\\\" + (instance.getChemin().split("\\\\")[instance.getChemin().split("\\\\").length-1]).replace(".txt","_sol.txt"));
+                aux=("resultats\\\\" + repSolveur + "\\\\" + (instance.getChemin().split("\\\\")[instance
+                        .getChemin().split("\\\\").length-1]).replace(".txt","_sol.txt"));
             } else if (os.contains("mac")) {
                 //System.out.println("Système d'exploitation : macOS");
-                aux= ("resultats/" + repSolveur + "/" + (instance.getChemin().split("/")[instance.getChemin().split("/").length-1]).replace(".txt","_sol.txt"));
+                aux= ("resultats/" + repSolveur + "/" + (instance.getChemin().split("/")[instance.getChemin()
+                        .split("/").length-1]).replace(".txt","_sol.txt"));
 
             } else if (os.contains("nix") || os.contains("nux") || os.contains("aix")) {
                 //System.out.println("Système d'exploitation : Unix/Linux");
-                aux=("resultats/" + repSolveur + "/" + (instance.getChemin().split("/")[instance.getChemin().split("/").length-1]).replace(".txt","_sol.txt"));
+                aux=("resultats/" + repSolveur + "/" + (instance.getChemin().split("/")[instance.getChemin()
+                        .split("/").length-1]).replace(".txt","_sol.txt"));
             } else {
                 System.out.println("Système d'exploitation inconnu : " + os);
-                aux=("resultats/" + repSolveur + "/" + (instance.getChemin().split("/")[instance.getChemin().split("/").length-1]).replace(".txt","_sol.txt"));
+                aux=("resultats/" + repSolveur + "/" + (instance.getChemin().split("/")[instance.getChemin()
+                        .split("/").length-1]).replace(".txt","_sol.txt"));
             }
             File file = new File(aux);
             FileWriter fw = new FileWriter(file, false);
             BufferedWriter bw = new BufferedWriter(fw);
-
-
             bw.write("// Solution");
             bw.newLine();
             bw.write("// Instance "+instance.getNom());
@@ -564,65 +548,63 @@ public class Solution {
         }
     }
 
-    public void writeSolutionChekerProf(String repSolveur){
+    public void writeSolutionCheckerProf(String repSolveur){
 
         //on vide le dossier
         File dossier = new File("checkerProf");
 
-        // Vérifier si le chemin spécifié correspond à un dossier existant
+        // Vérifie si le chemin spécifié correspond à un dossier existant
         if (dossier.isDirectory()) {
             File[] fichiers = dossier.listFiles();
 
-            // Parcourir tous les fichiers du dossier
+            // Parcoure tous les fichiers du dossier
             for (File fichier : fichiers) {
-                // Vérifier si le fichier est un fichier ".txt"
+                // Vérifie si le fichier est un fichier ".txt"
                 if (fichier.isFile() && fichier.getName().endsWith(".txt")) {
-                    // Supprimer le fichier
+                    // Supprime le fichier
                     fichier.delete();
                 }
             }
         } else {
             System.out.println("Le chemin spécifié ne correspond pas à un dossier existant.");
         }
-        //on copie l'intsance
+        //copie l'instance
         try {
             File fichierSource = new File(instance.getChemin());
             File dossierDestination = new File("checkerProf/");
 
-            // Vérifier si le fichier source existe
+            // Vérifie si le fichier source existe
             if (fichierSource.exists()) {
-                // Vérifier si le dossier de destination existe
+                // Vérifie si le dossier de destination existe
                 if (!dossierDestination.exists()) {
-                    // Créer le dossier de destination s'il n'existe pas
+                    // Crée le dossier de destination s'il n'existe pas
                     dossierDestination.mkdirs();
                 }
 
-                // Lire le contenu du fichier source
+                // Lit le contenu du fichier source
                 FileInputStream fileInputStream = new FileInputStream(fichierSource);
                 byte[] buffer = new byte[(int) fichierSource.length()];
                 fileInputStream.read(buffer);
                 fileInputStream.close();
 
-                // Créer le fichier de destination
+                // Crée le fichier de destination
                 File fichierDestination = new File(dossierDestination, "fichierInstance.txt");
                 FileOutputStream fileOutputStream = new FileOutputStream(fichierDestination);
                 fileOutputStream.write(buffer);
                 fileOutputStream.close();
-
-                //System.out.println("Le fichier a été copié avec succès vers : " + fichierDestination.getAbsolutePath());
+                //System.out.println("Le fichier a été copié avec succès vers : " +
+                // fichierDestination.getAbsolutePath());
             } else {
                 System.out.println("Le fichier source n'existe pas.");
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        //on write la solution
+        //on écrit la solution
         try {
             File file = new File("checkerProf/fichierInstance_sol.txt");
             FileWriter fw = new FileWriter(file, false);
             BufferedWriter bw = new BufferedWriter(fw);
-
-
             bw.write("// Solution");
             bw.newLine();
             bw.write("// Instance "+instance.getNom());
@@ -647,56 +629,58 @@ public class Solution {
     public List<OperateurInsertion> updateMages(OperateurInsertion o){
 
         if(o!=null) {
-            //Update marge des contraintes inerantes si une operation à été apliqué-----------------------------------------------------------------
-            //equip domicile
+            //Update marge des contraintes inhérentes si une operation a été appliquée
+            //equipe domicile
             int d = o.getRencontre().getDomicile().getId();
-            //equipe exterieur
+            //equipe extérieur
             int e = o.getRencontre().getExterieur().getId();
-            //journee insert
+            //journee insérée
             int j = o.getJournee().getId();
-            //les rencontre impliquant les même equipe ne peuvent plus étre inséré sur la même journee
+            //les rencontres impliquent que les mêmes équipes ne peuvent plus être insérées sur la même journée
             for (int i = 0; i < getNBEquipe(); i++) {
                 margeJournees[d][i].removeIf(n -> (n == j));
                 margeJournees[e][i].removeIf(n -> n == j);
                 margeJournees[i][e].removeIf(n -> n == j);
                 margeJournees[i][d].removeIf(n -> n == j);
             }
-            //le match retour ne peux plus étre afecté sur la même phase
+            //le match retour ne peut plus être affecté sur la même phase
             for (int j2 = 0; j2 < getNbJournee(); j2++) {
                 if (getPhase(j2) == getPhase(j)) {
                     int jaux=j2;
                     margeJournees[e][d].removeIf(n -> n == jaux);
                 }
             }
-            //aprés insert la rencontre inseré n'a par convention plus aucune journee de marge
+            //après l'insertion, la rencontre inserée n'a par convention plus aucune journée de marge
             margeJournees[d][e].clear();
 
-            //la journee ne peux pas recevoir d'autre rencontre impliquant les même equipes
+            //la journée ne peut pas recevoir d'autre rencontre impliquant les mêmes équipes
             margeRencontres[j].removeIf(n -> ((n[0] == d) || (n[0] == e) || (n[1] == d) || (n[1] == e)));
 
             for (int j2 = 0; j2 < getNbJournee(); j2++) {
                 if (getPhase(j2) == getPhase(j)) {
-                    //les journee de la même phase ne peuvent pas recevoir le match retour
+                    //les journées de la même phase ne peuvent pas recevoir le match retour
                     margeRencontres[j2].removeIf(n -> (n[0] == e && n[1] == d));
                 }
-                //les autres jounee ne peuvent plus accepter la rencontre inseré
+                //les autres jounées ne peuvent plus accepter la rencontre insérée
                 margeRencontres[j2].removeIf(n -> (n[0] == d && n[1] == e));
             }
-            //aprés insert la journe d'insertion n'a par convention plus aucune rencontre de marge si elle est pleine
+            //après insertion, la journée d'insertion n'a par convention plus aucune rencontre de marge si elle
+            // est pleine
             if (o.getJournee().getRencontres().size() == getNBRencontreJournee()) {
                 margeRencontres[j].clear();
             }
             margeEquipe[j].removeIf(n -> (n == d || n == e));
         }
 
-        //update marge contrainte --------------------------------------------------------------------------------
+        //Mise à jour : Marge Contrainte
         List<OperateurInsertion> listInserViable =new ArrayList<>();
-        //pour tous les insert possible restant on verifie qu'il ne declanche pas de contrainte dure
+        //pour toutes les insertions possibles restantes, on vérifie qu'elle ne déclenche pas de contrainte dure
         for(int di=0;di<getNBEquipe();di++){
             for(int ei=0;ei<getNBEquipe();ei++){
                 if(di!=ei) {
                     for(int ji:margeJournees[di][ei]){
-                        OperateurInsertion oi = new OperateurInsertion(this, this.getJourneeByID(ji), this.getRencontreByEquipes(di, ei));
+                        OperateurInsertion oi = new OperateurInsertion(this, this.getJourneeByID(ji),
+                                this.getRencontreByEquipes(di, ei));
                         if (!oi.isMouvementRealisable()) {
                             //margeJournees[di][ei].removeIf(n -> (n == ji));
                             System.out.println(nbMargineString());
@@ -730,20 +714,20 @@ public class Solution {
         int nbMRJ=getNbMargeRJ(o.getJournee());
         int nbMJE=getNbMargeJE(o.getJournee());
 
-        //priorité absolus les operation critique
+        //priorité absolue aux operations critiques
         if(nbMRJ==1||nbMJR==1||nbMJE==1)return 1;
         if(nbMRJ==2||nbMJR==2)return 2;
         return nbMJR;
     }
     /**
-     * Methode retournant les rencontre qui n'ont pas encore été inséré et qui on le moins de journee
-     * de marge pour étré inséré
+     * Méthode retournant les rencontres qui n'ont pas encore étaient insérées et qui ont le moins de journées
+     * de marge pour être insérées
      */
     public ArrayList<Rencontre> getRencontresMinMarge(){
         ArrayList<Rencontre> res= new ArrayList<>();
         int sizeMin=Integer.MAX_VALUE;
         for(Rencontre r:rencontres.values()){
-            //si il existe un ensemble d'insert ayant moins de marge
+            //s'il existe un ensemble d'insertion ayant moins de marge
             if(getNbMargeJR(r)!=0&&getNbMargeJR(r)<sizeMin){
                 res.clear();
                 sizeMin=getNbMargeJR(r);

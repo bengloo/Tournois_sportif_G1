@@ -16,8 +16,6 @@ import solveur.*;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -184,7 +182,7 @@ public class TestAllSolveur {
             }
 
             sol.writeSolution(solveur.getNom());
-            sol.writeSolutionChekerProf(solveur.getNom());
+            sol.writeSolutionCheckerProf(solveur.getNom());
             //TODO integré le cheker du prof
             System.out.println(sol.getLog());
             sol.restLog();

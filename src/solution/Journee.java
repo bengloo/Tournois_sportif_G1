@@ -49,13 +49,6 @@ public class Journee {
         return Objects.hash(getId());
     }
 
-    /**
-     * ??? TODO: compléter ?
-     * @return booléen
-     */
-    public boolean checkIntegriteChampionat(){
-        return false;
-    }
 
     /**
      * Méthode permettant d'ajouter une rencontre qui se déroulera sur la journée courante
@@ -64,7 +57,7 @@ public class Journee {
      */
     public boolean addRencontre(Rencontre rencontre){
         if(rencontre==null){
-            System.err.println("rencontre est null");
+            System.err.println("rencontre est nulle");
             return false;
         }
         if(rencontres.containsKey(rencontre.getLabel())){
@@ -96,11 +89,11 @@ public class Journee {
      */
     public boolean removeRencontre(Rencontre rencontre){
         if(rencontre==null){
-            System.err.println("rencontre is null");
+            System.err.println("rencontre est nulle");
             System.exit(-1);
         }
         if(!rencontre.isInJournee(this)){
-            System.err.println("isInJournee");
+            System.err.println("dans une journée");
             System.exit(-1);
         }
         rencontres.remove(rencontre.getLabel());

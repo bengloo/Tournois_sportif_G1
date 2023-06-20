@@ -8,9 +8,6 @@ import solveur.Solveur;
 import solveur.SolveurCplex;
 import solveur.SolveurIter;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-
 /** classe définissant TestInsertionSimple (pour tester la classe InsertionSimple)
  * @author Engloo Benjamin
  * @author Morcq Alexandre
@@ -34,7 +31,7 @@ public class TestSolveur {
 
 
             s.writeSolution(solveur.getNom());
-            s.writeSolutionChekerProf(solveur.getNom());
+            s.writeSolutionCheckerProf(solveur.getNom());
 
             System.out.println(s.toStringSimple());
             System.out.println(s.check());

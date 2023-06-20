@@ -2,7 +2,6 @@ package operateur;
 
 import instance.modele.contrainte.Contrainte;
 import instance.modele.contrainte.TypeContrainte;
-import instance.modele.contrainte.TypeMode;
 import solution.Journee;
 import solution.Rencontre;
 import solution.Solution;
@@ -29,7 +28,7 @@ public class OperateurEchange extends Operateur{
         for(TypeContrainte type:TypeContrainte.values()){
             for(Contrainte c: getChampionnat().getContraintes(type)){
                 Object deltaCoef = c.evalDeltaCoef(getChampionnat(),this);
-                if(isNotDelatcoefNull(type,deltaCoef))deltaCout+=c.evalDeltaCout(getChampionnat(),this,deltaCoef);
+                if(isNotDeltaCoefNull(type,deltaCoef))deltaCout+=c.evalDeltaCout(getChampionnat(),this,deltaCoef);
                 if(deltaCout==Integer.MAX_VALUE)return Integer.MAX_VALUE;
             }
         }
@@ -40,11 +39,10 @@ public class OperateurEchange extends Operateur{
     protected Map<Contrainte, Object> evalDeltaCoefs() {
         if(!isRealisableInital())return null;
         Map<Contrainte, Object> deltaCoefs = new HashMap<>();
-
         for(TypeContrainte type:TypeContrainte.values()){
             for(Contrainte c: getChampionnat().getContraintes(type)){
                 Object deltaCoef = c.evalDeltaCoef(getChampionnat(),this);
-                if(isNotDelatcoefNull(type,deltaCoef)){
+                if(isNotDeltaCoefNull(type,deltaCoef)){
                     deltaCoefs.put(c,deltaCoef);
                 }
 
@@ -53,7 +51,7 @@ public class OperateurEchange extends Operateur{
         return deltaCoefs;
     }
 
-    protected boolean isNotDelatcoefNull(TypeContrainte type,Object deltaCoef){
+    protected boolean isNotDeltaCoefNull(TypeContrainte type, Object deltaCoef){
         if(type != TypeContrainte.EQUITE){
             if((Integer) deltaCoef!=0){
                 return true;
@@ -83,15 +81,15 @@ public class OperateurEchange extends Operateur{
     @Override
     protected boolean doMouvement() {
         Map<Contrainte, Object> deltaCoefs= evalDeltaCoefs();
-        //TODO y'a peut étre moyen de mieux parcour un hashmap à moindre temps
-        //pour chaque contrainte impacté par l'operation
+        //TODO y'a peut-être moyen de mieux parcourir un hashmap à moindre temps
+        //pour chaque contrainte impactée par l'opération
         for(Contrainte c:deltaCoefs.keySet()){
-            //on update le cout et les coef des contraintes
+            //on update le cout et les coeffs des contraintes
             getChampionnat().addCoefCoutContrainte(c,deltaCoefs.get(c),c.evalDeltaCout(getChampionnat(),this,deltaCoefs.get(c)));
         }
         //on update le cout total
         //getChampionnat().addCoutTotal(this.getCout());
-        //on affect la rencontre à la journee
+        //on affecte la rencontre à la journée
         try {
             return echangeRencontre(this);
         } catch (Exception e) {

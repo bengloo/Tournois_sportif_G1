@@ -60,7 +60,8 @@ public class ContrainteSeparation extends Contrainte{
 
     @Override
     public Object evalDeltaCoef(Solution championnat, Operateur o) {
-        if(this.equipes.contains(o.getRencontre().getDomicile().getId())&&this.equipes.contains(o.getRencontre().getExterieur().getId())){
+        if(this.equipes.contains(o.getRencontre().getDomicile().getId())&&this.equipes.contains(o.getRencontre()
+                .getExterieur().getId())){
             Journee j1 = o.getJournee();
             Journee j2 = championnat.getMatchRetour(o.getRencontre()).getJournee();
             //System.out.println(j1);
@@ -91,7 +92,8 @@ public class ContrainteSeparation extends Contrainte{
 
 
     @Override
-    public void initCplexEquation(SolveurCplex sCplex, Instance instance,boolean minimise,boolean minimiseSouple,boolean dure) {
+    public void initCplexEquation(SolveurCplex sCplex, Instance instance,boolean minimise,boolean minimiseSouple,
+                                  boolean dure) {
         if(!dure){
             //TODO cout
         }

@@ -9,7 +9,6 @@ import solution.Solution;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 /** classe définissant OperateurInsertion (hérite de Operateur)
  * @author Engloo Benjamin
@@ -37,7 +36,7 @@ public class OperateurInsertion extends Operateur{
         for(TypeContrainte type:TypeContrainte.values()){
             for(Contrainte c: getChampionnat().getContraintes(type)){
                 Object deltaCoef = c.evalDeltaCoef(getChampionnat(),this);
-                if(isNotDelatcoefNull(type,deltaCoef))deltaCout+=c.evalDeltaCout(getChampionnat(),this,deltaCoef);
+                if(isNotDeltaCoefNull(type,deltaCoef))deltaCout+=c.evalDeltaCout(getChampionnat(),this,deltaCoef);
                 if(deltaCout==Integer.MAX_VALUE)return Integer.MAX_VALUE;
             }
         }
@@ -52,7 +51,7 @@ public class OperateurInsertion extends Operateur{
         for(TypeContrainte type:TypeContrainte.values()){
             for(Contrainte c: getChampionnat().getContraintes(type)){
                 Object deltaCoef = c.evalDeltaCoef(getChampionnat(),this);
-                if(isNotDelatcoefNull(type,deltaCoef)){
+                if(isNotDeltaCoefNull(type,deltaCoef)){
                     deltaCoefs.put(c,deltaCoef);
                 }
 
@@ -61,7 +60,7 @@ public class OperateurInsertion extends Operateur{
         return deltaCoefs;
     }
 
-    protected boolean isNotDelatcoefNull(TypeContrainte type,Object deltaCoef){
+    protected boolean isNotDeltaCoefNull(TypeContrainte type, Object deltaCoef){
         if(type != TypeContrainte.EQUITE){
             if((Integer) deltaCoef!=0){
                 return true;
@@ -76,7 +75,7 @@ public class OperateurInsertion extends Operateur{
 
     @Override
     protected boolean isRealisableInital() {
-        //check nb rencontre journee
+        //check nb rencontre journée
         if(this.getJournee().getRencontres().size()+1>getChampionnat().getNBRencontreJournee()){
             //System.out.println("nb max r pour j");
             return false;
@@ -90,7 +89,7 @@ public class OperateurInsertion extends Operateur{
 
         }
 
-        //match aller ou retour par phase si il existe
+        //match aller ou retour par phase s'il existe
         if(getChampionnat().getPhase(getJournee())==getChampionnat().getPhase(getChampionnat().getRencontres().get(getRencontre().getLabelRetour()).getJournee())){
             /*int a=getChampionnat().getPhase(getJournee());
             Journee j=getJournee();
@@ -106,20 +105,20 @@ public class OperateurInsertion extends Operateur{
     @Override
     protected boolean doMouvement() {
         Map<Contrainte, Object> deltaCoefs= evalDeltaCoefs();
-        //TODO y'a peut étre moyen de mieux parcour un hashmap à moindre temps
-        //pour chaque contrainte impacté par l'operation
+        //TODO y'a peut-être moyen de mieux parcourir un hashmap à moindre temps
+        //pour chaque contrainte impacté par l'opération
         for(Contrainte c:deltaCoefs.keySet()){
             //System.out.println(this.toString());
             //System.out.println(getChampionnat().getCoefContraintes().toString());
             //System.out.println(c.evalDeltaCout(getChampionnat(),this,deltaCoefs.get(c)));
             //System.out.println("------------------------------------------\n");
 
-            //on update le cout et les coef des contraintes
+            //on update le cout et les coeffs des contraintes
             getChampionnat().addCoefCoutContrainte(c,deltaCoefs.get(c),c.evalDeltaCout(getChampionnat(),this,deltaCoefs.get(c)));
         }
         //on update le cout total
         //getChampionnat().addCoutTotal(this.getCout());
-        //on affect la rencontre à la journee
+        //on affecte la rencontre à la journée
         try {
             return getChampionnat().getJournees().get(this.getJournee().getId()).addRencontre(this.getRencontre());
         } catch (Exception e) {

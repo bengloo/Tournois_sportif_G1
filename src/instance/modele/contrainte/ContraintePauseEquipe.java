@@ -151,7 +151,8 @@ public class ContraintePauseEquipe extends Contrainte{
      * @param sCplex
      */
     @Override
-    public void initCplexEquation(SolveurCplex sCplex, Instance instance,boolean minimise,boolean minimiseSouple,boolean dure) {
+    public void initCplexEquation(SolveurCplex sCplex, Instance instance,boolean minimise,boolean minimiseSouple,
+                                  boolean dure) {
         if(this.mode==TypeMode.DOMICILE) {
 
             IloLinearNumExpr expr = null;

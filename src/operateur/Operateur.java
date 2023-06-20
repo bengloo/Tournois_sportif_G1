@@ -22,13 +22,12 @@ public abstract class Operateur {
     public Rencontre rencontre2;
     public Journee journee2;
     private Solution championnat;
-    //delat cout totale de toutes les contraintes pour une operation donné on se baseras sur les coefDesContrainte pour ne par recalculer entierement les fonction objectives de l'entiereter de la solution dejas etablie
+    //delta cout total de toutes les contraintes pour une operation donnée on se basera sur les coeff des contraintes
+    // pour ne pas recalculer entièrement les fonctions objectives de l'entièreté de la solution deja etablie
     private Integer cout;
 
     /*
-    //TODO serait t'il judicieux de ne pas le garder en memoir et de le recalculer uniquement pour l'operation appliqué par do movement?
-    //contient les deltatCoef des contrainte impacté par l'operation
-    private Map<Contrainte,Integer> deltatCoefContraintes;
+    //contient les deltaCoefs des contraintes impactées par l'opération
     */
 
     public Operateur() {

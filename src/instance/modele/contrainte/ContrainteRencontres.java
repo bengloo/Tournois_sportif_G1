@@ -64,7 +64,8 @@ public class ContrainteRencontres extends Contrainte{
         return TypeContrainte.RENCONTRES;
     }
 
-    //TODO implementer les fonction de calcule de cout en sinspirent de la contrainte de placement, réflechire si on ne peux pas factoriser du code sout des fonction comune aux contraintes
+    //TODO implementer les fonctions de calcul de cout en s'inspirant de la contrainte de placement, réflechir si on ne
+    // peut pas factoriser du code avec des fonctions communes aux contraintes
     @Override
     public int getCoutTotal(Solution championnat) {
         //le nombre de rencontres jouées par l’équipe de la contrainte selon un mode sur l’ensemble des journées
@@ -76,7 +77,8 @@ public class ContrainteRencontres extends Contrainte{
 
         if(valc>this.max || valc < this.min) {
             if (estDure()) return Integer.MAX_VALUE;
-            return this.penalite *(Math.max(0, valc-this.max) + Math.max(0, this.min - valc)); //source : https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html
+            return this.penalite *(Math.max(0, valc-this.max) + Math.max(0, this.min - valc)); //source :
+            // https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html
         }
         return 0;
     }
@@ -89,7 +91,7 @@ public class ContrainteRencontres extends Contrainte{
             /*Rencontre r = o.getRencontre();
             valcDelta = parcoursJournees(championnat, r.getLabel());*/
             //System.out.println(this.rencontres.contains(o.getRencontre().getLabel()));
-            if(this.journees.contains(o.getJournee().getId()) && this.rencontres.contains(o.getRencontre().getLabel())) {
+            if(this.journees.contains(o.getJournee().getId()) && this.rencontres.contains(o.getRencontre().getLabel())){
                 valcDelta = 1;
             }
         }
@@ -97,7 +99,8 @@ public class ContrainteRencontres extends Contrainte{
     }
 
     /**
-     * Parcourt les journées de la contrainte pour incrémenter un compteur à chaque fois qu'une certaine rencontre a lieu sur la journée concernée
+     * Parcourt les journées de la contrainte pour incrémenter un compteur à chaque fois qu'une certaine rencontre
+     * a lieu sur la journée concernée
      * @param championnat la solution
      * @param r la rencontre concernée
      * @return le nombre entier du compteur
@@ -107,7 +110,8 @@ public class ContrainteRencontres extends Contrainte{
 
             for (Integer jID : this.journees) {
                 //si la journee courante contient la rencontre
-                if (jID != null && championnat.getJourneeByID(jID).getRencontres().containsKey(r)) { // TODO enlever inutile ?? -------> && championnat.getJournees().equals(jID)
+                if (jID != null && championnat.getJourneeByID(jID).getRencontres().containsKey(r)) {
+                    // TODO enlever inutile ?? -------> && championnat.getJournees().equals(jID)
                     valcDelta++;
                 }
             }
@@ -125,9 +129,11 @@ public class ContrainteRencontres extends Contrainte{
     public int evalDeltaCout(Solution championnat, Operateur o, Object valcDelta) {
         if(o instanceof OperateurInsertion){
 
-            if((Integer)championnat.getCoefContraintes().get(this)+(Integer) valcDelta>max || (Integer)championnat.getCoefContraintes().get(this)+ (Integer) valcDelta < min){
+            if((Integer)championnat.getCoefContraintes().get(this)+(Integer) valcDelta>max || (Integer)championnat
+                    .getCoefContraintes().get(this)+ (Integer) valcDelta < min){
                 if (estDure()) return Integer.MAX_VALUE;
-                //au dela du max ou en-dessous du min le cout suit une relation linéaire le delta cout est donc proportionel
+                //au dela du max ou en-dessous du min le cout suit une relation linéaire le delta cout est donc
+                // proportionel
                 return this.penalite *((Integer)valcDelta);
             }else return 0;
         }
@@ -139,7 +145,8 @@ public class ContrainteRencontres extends Contrainte{
      * @param sCplex
      */
     @Override
-    public void initCplexEquation(SolveurCplex sCplex, Instance instance,boolean minimise,boolean minimiseSouple,boolean dure) {
+    public void initCplexEquation(SolveurCplex sCplex, Instance instance,boolean minimise,boolean minimiseSouple,
+                                  boolean dure) {
         IloLinearNumExpr expr = null;
         IloLinearNumExpr expr2 = null;
         try {
