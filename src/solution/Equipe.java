@@ -12,6 +12,10 @@ import java.util.Objects;
 public class Equipe {
     private Integer id;
 
+    /**
+     * constructeur d'equipe
+     * @param id numero de l'equipe
+     */
     public Equipe(Integer id) {
         this.id = id;
     }

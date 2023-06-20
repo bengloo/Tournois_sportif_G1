@@ -31,6 +31,12 @@ public class Instance {
     private LinkedList<ContrainteHBClassement>contraintesHBClassement;
     private LinkedList<ContrainteSeparation>contraintesSeparation;
 
+    /**
+     * constructeur par defaut de l'instance
+     * @param nom nom de l'instance
+     * @param nbEquipes nb Equipes de l'instance
+     * @param chemin chemin absolut de l'instance
+     */
     public Instance(String nom,int nbEquipes,String chemin) {
         this.nom = nom;
         this.nbEquipes=nbEquipes;

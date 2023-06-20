@@ -37,6 +37,14 @@ public class ContrainteHBClassement extends Contrainte{
         this.mode = mode;
         this.max = max;
     }
+
+    /**
+     * constructeur Contrainte haut bas classement
+     * @param equipe equipe de la contrainte
+     * @param mode  mode de la contrainte
+     * @param max   max de la contrainte
+     * @param penalite  penalite de la contrainte
+     */
     public ContrainteHBClassement(Integer equipe,TypeMode mode,Integer max, Integer penalite) {
         super(penalite);
         this.equipe=equipe;

@@ -18,9 +18,17 @@ public abstract class Contrainte {
 
     protected Integer penalite;
 
+    /**
+     * constructeur par defaut de contrainte souple
+     * @param penalite penalité de la contrainte
+     */
     public Contrainte(Integer penalite) {
         this.penalite=penalite;
     }
+
+    /**
+     * constructeur par defaut de contrainte dure
+     */
     public Contrainte() {
         this.penalite=Integer.MAX_VALUE;
     }
@@ -76,7 +84,7 @@ public abstract class Contrainte {
 
     /**
      * Indique si la contrainte conserve la viabilité de la solution (coût non égal à l'infini)
-     * @param championnat
+     * @param championnat solution courante
      * @return true si la solution est faisable, false sinon
      */
     public boolean checkContrainte(Solution championnat){
@@ -84,7 +92,7 @@ public abstract class Contrainte {
     }
 
     /**
-     *
+     * definit les equations cplex lié à la contrainte
      * @param sCplex    Solveur dans lequel est definit le model cplex et ces variables de decisions
      * @param instance  instance traité par le solveur
      * @param minimiseDure  definit si il faut rendre permisive les equation de contrainte dure en ajoutant delat

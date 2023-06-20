@@ -31,7 +31,6 @@ public class SolveurIter implements Solveur{
                 System.out.println(sol.getLog());
             }
             niter++;
-
         }
         return sbest;
     }

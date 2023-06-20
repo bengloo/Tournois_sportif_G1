@@ -147,9 +147,7 @@ public class ContraintePauseEquipe extends Contrainte{
         return 0;
     }
 
-    /**
-     * @param sCplex
-     */
+
     @Override
     public void initCplexEquation(SolveurCplex sCplex, Instance instance,boolean minimise,boolean minimiseSouple,
                                   boolean dure) {

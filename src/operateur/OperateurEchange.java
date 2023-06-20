@@ -9,6 +9,9 @@ import solution.Solution;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Class de l' Operateur d'échange /!\ developement abandoné
+ */
 public class OperateurEchange extends Operateur{
 
 

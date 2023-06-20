@@ -23,7 +23,7 @@ public class Rencontre {
     }
 
     /**
-     *
+     * indique si l'équipe ciblée fait partie de la rencontre dans le mode précisé
      * @param e équipe ciblée
      * @param mode mode ciblé
      * @return un bolean indiquant si l'équipe ciblée fait partie de la rencontre dans le mode précisé

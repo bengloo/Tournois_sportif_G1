@@ -25,7 +25,7 @@ public class TestSolveur {
             Instance i= reader.readInstance();
             //System.out.println(i);
             //Solveur solveur = new SolveurCplex();
-            Solveur solveur = new SolveurIter( new SolveurCplex(600,false,false,false),100);
+            Solveur solveur = new SolveurIter( new SolveurCplex(600,false,false,false),1);
 
             Solution s = solveur.solve(i);
 

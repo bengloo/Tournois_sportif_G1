@@ -6,7 +6,7 @@
 package io.exception;
 
 /**
- *
+ * class exeption de formatge de fichier
  * @author mogier01
  */
 public class FormatFileException extends ReaderException {

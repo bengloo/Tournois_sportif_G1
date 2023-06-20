@@ -6,7 +6,7 @@
 package io.exception;
 
 /**
- *
+ *  class d'exeption file opener
  * @author mogier01
  */
 public class OpenFileException extends ReaderException {

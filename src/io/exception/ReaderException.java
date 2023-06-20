@@ -6,6 +6,7 @@
 package io.exception;
 
 /**
+ * class d'exeption du reader
  * @author mogier01
  * @author Engloo Benjamin
  * @author Morcq Alexandre
