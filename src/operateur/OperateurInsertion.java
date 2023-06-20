@@ -82,7 +82,8 @@ public class OperateurInsertion extends Operateur{
         }
         //check un match par jr
         for(Rencontre r:getJournee().getRencontres().values()){
-            if(r.isConcerne(getRencontre().getDomicile(), TypeMode.INDEFINI) || r.isConcerne(getRencontre().getExterieur(), TypeMode.INDEFINI)){
+            if(r.isConcerne(getRencontre().getDomicile(), TypeMode.INDEFINI) || r.isConcerne(getRencontre()
+                    .getExterieur(), TypeMode.INDEFINI)){
                 //System.out.println("nb rencontre par equipe joure >1");
                 return false;
             }
@@ -90,10 +91,12 @@ public class OperateurInsertion extends Operateur{
         }
 
         //match aller ou retour par phase s'il existe
-        if(getChampionnat().getPhase(getJournee())==getChampionnat().getPhase(getChampionnat().getRencontres().get(getRencontre().getLabelRetour()).getJournee())){
+        if(getChampionnat().getPhase(getJournee())==getChampionnat().getPhase(getChampionnat().getRencontres()
+                .get(getRencontre().getLabelRetour()).getJournee())){
             /*int a=getChampionnat().getPhase(getJournee());
             Journee j=getJournee();
-            int b=getChampionnat().getPhase(getChampionnat().getRencontres().get(getRencontre().getLabelRetour()).getJournee());
+            int b=getChampionnat().getPhase(getChampionnat().getRencontres().get(getRencontre().getLabelRetour())
+            .getJournee());
             Journee j2=getChampionnat().getRencontres().get(getRencontre().getLabelRetour()).getJournee();
             */
             //System.out.println("matche retour même phase");
@@ -114,7 +117,8 @@ public class OperateurInsertion extends Operateur{
             //System.out.println("------------------------------------------\n");
 
             //on update le cout et les coeffs des contraintes
-            getChampionnat().addCoefCoutContrainte(c,deltaCoefs.get(c),c.evalDeltaCout(getChampionnat(),this,deltaCoefs.get(c)));
+            getChampionnat().addCoefCoutContrainte(c,deltaCoefs.get(c),c.evalDeltaCout(getChampionnat(),
+                    this,deltaCoefs.get(c)));
         }
         //on update le cout total
         //getChampionnat().addCoutTotal(this.getCout());

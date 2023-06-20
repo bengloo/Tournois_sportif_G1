@@ -33,7 +33,8 @@ public class InsertionSimple implements Solveur {
             System.out.println(solution);
             OperateurInsertion o= solution.getPremiereInsertion(r);
             if(o==null){
-                return solution;//l'insertion simple peux ammener à une situation bloquante on transmet alor la solution incomplete
+                return solution;//l'insertion simple peut amener à une situation bloquante on transmet alors la
+                // solution incomplete
             }else{
                 o.doMouvementIfRealisable();
             }

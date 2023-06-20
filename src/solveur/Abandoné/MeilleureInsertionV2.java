@@ -25,7 +25,8 @@ public class MeilleureInsertionV2 implements Solveur {
     @Override
     public Solution solve(Instance instance) {
         Solution solution = new Solution(instance);
-        ArrayList<OperateurInsertion> list = new ArrayList<OperateurInsertion>(solution.getInsertionMinMarge(solution.updateMages(null)));
+        ArrayList<OperateurInsertion> list = new ArrayList<OperateurInsertion>(solution.getInsertionMinMarge(solution.updateMages(
+                null)));
         //Collections.shuffle(list);
 
 
@@ -40,11 +41,12 @@ public class MeilleureInsertionV2 implements Solveur {
             //System.out.println("operationRetenus");
             //System.out.println(o.toString());
             if(o==null){
-                //System.err.println("situation blocante");
-                return solution;//la meilleur insertion simple peux ammener à une situation bloquante on transmet alor la solution incomplete
+                //System.err.println("situation bloquante");
+                return solution;//la meilleure insertion simple peut amener à une situation bloquante on transmet
+                // alors la solution incomplète
             }else{
                 if(!o.doMouvementIfRealisable()){
-                    //System.err.println("situation blocante2");
+                    //System.err.println("situation bloquante2");
                     return solution;
                 }else{
                     solution.updateMages(o);

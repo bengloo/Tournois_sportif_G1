@@ -66,7 +66,7 @@ public abstract class Contrainte {
     public abstract Object evalDeltaCoef(Solution championnat, Operateur o);
 
     /**
-     * Indique le delta de penalité pour une opération faite sur le championnat
+     * Indique le delta de pénalité pour une opération faite sur le championnat
      * @param championnat la solution
      * @param o l'opérateur
      * @return le delta (ou Max.INTEGER si la contrainte est dure)
@@ -74,7 +74,7 @@ public abstract class Contrainte {
     public abstract int evalDeltaCout(Solution championnat, Operateur o);
 
     /**
-     * Indique le delta de penalité pour une opération faite sur le championnat
+     * Indique le delta de pénalité pour une opération faite sur le championnat
      * @param championnat la solution
      * @param o l'opérateur
      * @param deltaCoef le coefficient delta
@@ -84,7 +84,7 @@ public abstract class Contrainte {
 
     /**
      * Indique si la contrainte conserve la viabilité de la solution (coût non égal à l'infini)
-     * @param championnat solution courante
+     * @param championnat
      * @return true si la solution est faisable, false sinon
      */
     public boolean checkContrainte(Solution championnat){
@@ -97,7 +97,7 @@ public abstract class Contrainte {
      * @param instance  instance traité par le solveur
      * @param minimiseDure  definit si il faut rendre permisive les equation de contrainte dure en ajoutant delat
      *                      que l'on cherchera à minimiser
-     * @param minimiseSouple    definit si il faut pauser les equations des contrainte souple afin de minimiser leurs
+     * @param minimiseSouple    défini s'il faut pauser les equations des contraintes souples afin de minimiser leurs
      *                          couts
      * @param dure
      */
@@ -106,9 +106,10 @@ public abstract class Contrainte {
 
 
     /**
-     * definit l'equoition de contrainte souple pour une contrainte soumis à un maximum à partire de l'expr du coef/valc
-     * @param sCplex    le solveur contenant le model cplex et les variable de decision
-     * @param max la valeur max admise par le contrainte
+     * défini les equations de contraintes souples pour une contrainte soumis à un maximum à partir de l'expression
+     * du coef/valc
+     * @param sCplex le solveur contenant le model cplex et les variables de decisions
+     * @param max la valeur max admise par la contrainte
      * @param expr expression cplex du coef de la contrainte 
      */
     public void addEqSoupleMax(SolveurCplex sCplex, int max, IloLinearNumExpr expr){
@@ -130,6 +131,15 @@ public abstract class Contrainte {
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * défini les equations de contraintes souples pour une contrainte soumise à un maximum et un minimum à partir de
+     * l'expression du coef/valc
+     * @param sCplex    le solveur contenant le model cplex et les variables de decisions
+     * @param max la valeur max admise par la contrainte
+     * @param min la valeur min admise par la contrainte
+     * @param expr expression cplex du coeff de la contrainte
+     */
     public void addEqSoupleMaxMin(SolveurCplex sCplex, int max,int min, IloLinearNumExpr expr){
         //expr est l'iloNumexpr representative de valc
         //cout=(max(expr-k;0)+max(L-expr;0))*w

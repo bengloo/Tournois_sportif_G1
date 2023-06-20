@@ -34,7 +34,7 @@ public abstract class Operateur {
         this.cout = Integer.MAX_VALUE;
     }
 
-    public Operateur(Journee journee, Rencontre rencontre, Rencontre rencontre2, Journee journee2, Solution championnat) {
+    public Operateur(Journee journee, Rencontre rencontre, Rencontre rencontre2, Journee journee2,Solution championnat){
         this.journee = journee;
         this.rencontre = rencontre;
         this.rencontre2 = rencontre2;
@@ -62,6 +62,7 @@ public abstract class Operateur {
 
     /**
      * Indique la somme des deltas de pénalité pour l'opération courante, sur toutes les contraintes du championnat
+     * @param
      * @return Max.INTEGER si deltaCoef est nul, la somme des deltas de pénalité sinon
      */
     protected abstract Integer evalDeltaCout();
@@ -79,8 +80,8 @@ public abstract class Operateur {
     protected abstract boolean isRealisableInital();
 
     /**
-     * Applique l'opérateur courant en mettant à jour
-     * le coût des contraintes sur le championnat, et en affectant la rencontre à la journée
+     * Applique l'opérateur courant en mettant à jour le coût des contraintes sur le championnat, et en affectant la
+     * rencontre à la journée
      * @return true l'opérateur a pu être appliqué, false sinon
      */
     protected abstract boolean doMouvement();
@@ -94,10 +95,6 @@ public abstract class Operateur {
         return false;
     }
 
-    /**
-     * réalise un mouvement sans verifier qui respecte les contraintes car il est estimé de confiance
-     * @return un boolean indicatif que le mouvement c'est réalisé
-     */
     public boolean doMouvementTrusted(){
         return doMouvement();
     }
