@@ -167,18 +167,13 @@ public class ContrainteRencontres extends Contrainte{
                 if (minimise) expr2.addTerm(sCplex.getCDureMin(this), -1);
                 sCplex.getCplex().addGe(expr2, this.min,"CDR2_"+sCplex.getCplex().getNrows());
             }else if(minimiseSouple){
-
+                addEqSoupleMaxMin(sCplex,this.max,this.min,expr);
             }
 
         } catch (IloException e) {
             throw new RuntimeException(e);
         }
 
-    }
-
-    @Override
-    public boolean useValC() {
-        return false;
     }
 
     @Override

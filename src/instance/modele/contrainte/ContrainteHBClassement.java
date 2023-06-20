@@ -275,11 +275,6 @@ public class ContrainteHBClassement extends Contrainte{
     }
 
     @Override
-    public boolean useValC() {
-        return false;
-    }
-
-    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("ContrainteHBClassement{");

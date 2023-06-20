@@ -150,16 +150,6 @@ public class ContrainteEquite extends Contrainte {
 
     }
 
-    @Override
-    public boolean useValC() {
-        return false;
-    }
-
-    private int getDelatCoef(Object valcDelta,Integer equipe){
-        Integer val= ((HashMap<Integer,Integer>)valcDelta).get(equipe);
-        if(val==null)return 0;
-        return val;
-    }
 
     private int deltatDomicile(int coefe1,int coefe2){
         return Math.max(0,Math.abs(coefe1-coefe2)-this.max);

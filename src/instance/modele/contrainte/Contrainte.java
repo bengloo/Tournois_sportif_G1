@@ -83,11 +83,26 @@ public abstract class Contrainte {
         return getCoutTotal(championnat)!=Integer.MAX_VALUE;
     }
 
-    public abstract void initCplexEquation(SolveurCplex sCplex, Instance instance, boolean minimiseDure, boolean minimiseSouple, boolean dure);
+    /**
+     *
+     * @param sCplex    Solveur dans lequel est definit le model cplex et ces variables de decisions
+     * @param instance  instance traité par le solveur
+     * @param minimiseDure  definit si il faut rendre permisive les equation de contrainte dure en ajoutant delat
+     *                      que l'on cherchera à minimiser
+     * @param minimiseSouple    definit si il faut pauser les equations des contrainte souple afin de minimiser leurs
+     *                          couts
+     * @param dure
+     */
+    public abstract void initCplexEquation(SolveurCplex sCplex, Instance instance, boolean minimiseDure,
+                                           boolean minimiseSouple, boolean dure);
 
-    public abstract boolean useValC();
 
-
+    /**
+     * definit l'equoition de contrainte souple pour une contrainte soumis à un maximum à partire de l'expr du coef/valc
+     * @param sCplex    le solveur contenant le model cplex et les variable de decision
+     * @param max la valeur max admise par le contrainte
+     * @param expr expression cplex du coef de la contrainte 
+     */
     public void addEqSoupleMax(SolveurCplex sCplex, int max, IloLinearNumExpr expr){
         //cout=max(valc-k;0)*w
         try {

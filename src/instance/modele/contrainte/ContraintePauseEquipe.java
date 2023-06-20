@@ -212,11 +212,6 @@ public class ContraintePauseEquipe extends Contrainte{
         }
     }
 
-    @Override
-    public boolean useValC() {
-        return false;
-    }
-
     public boolean isConserne(int e,int j,TypeMode m){
         if(this.equipe!=e)return false;
         if(!this.journees.contains(j))return false;

@@ -20,12 +20,8 @@ public class Instance {
     private String nom;
 
     private String chemin;
+
     private int nbEquipes;
-    /*private Map<Integer, Equipe> equipes;
-
-    private Map<String, Rencontre> rencontres;
-
-    private Map<Integer, Journee> journees;*/
 
     private LinkedList<ContraintePlacement> contraintesPlacement;
     private LinkedList<ContrainteEquite> contraintesEquite;
@@ -60,6 +56,11 @@ public class Instance {
         return nbEquipes;
     }
 
+    /**
+     * get le nombre de contrainte impliquant des pause
+     * @param withSouple si true inclue les contrainte souple
+     * @return en entier
+     */
     public int getNbContraintePause(boolean withSouple){
         int res=0;
         if(withSouple){
@@ -143,6 +144,16 @@ public class Instance {
         }
         return contraintesAll;
     }
+
+    /**
+     * detecte si une pause est utilisée dans les contraintes de l'instance afin de savoir s'il faut définir ces
+     * équations
+     * @param e une equipe liée à la pause ciblée
+     * @param j une journée lié à la pause ciblée
+     * @param m un mode lié à la pause ciblée
+     * @param avoidPauseGlobal inclus ou non les pause globale dans le test
+     * @return  un boolean indicatif si la pause a été comptabilisé au moins une fois
+     */
     public boolean isPauseConcerne(int e,int j,TypeMode m,boolean avoidPauseGlobal){
         for(ContraintePauseEquipe c:contraintesPauseEquipe){
             if(c.isConserne(e,j,m))return true;
