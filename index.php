@@ -10,23 +10,47 @@
         <script src="jquery-3.7.0.js"></script>
     </head>
     <body>
-        <div class="frame" id="content">
-            <div class="center">
-                <div class="title">
-                   <h1>Déposez un fichier texte d'instance</h1>
-                </div>
+        <form id="myForm" method="post" action="">
+            <div class="frame" id="content">
+                <div class="center" id="import">
+                    <div class="title">
+                    <h1>Déposez un fichier texte d'instance</h1>
+                    </div>
 
-                <div class="dropzone">
-                    <img src="http://100dayscss.com/codepen/upload.svg" class="upload-icon"/>
-                    <span class="filename"></span>
-                    <input type="file" class="upload-input" id="fileInput"/>
-                </div>
-                <form id="myForm" method="post" action="">
+                    <div class="dropzone">
+                        <img src="http://100dayscss.com/codepen/upload.svg" class="upload-icon"/>
+                        <span class="filename"></span>
+                        <input type="file" class="upload-input" id="fileInput"/>
+                    </div>
                     <input type="hidden" name="fileName" id="jsVariableInput">
                     <button type="button" class="btn" onclick="submitForm()">Soumettre</button>
-                </form>
-            </div> 
-        </div>
+                </div> 
+                
+                <div class="center" id="options">
+                    <div class="title">
+                        <h1>Sélectionnez les options voulues</h1>
+                    </div>
+
+                    <label> Choisir la valeur du Watchdog en secondes :</label>
+                    <input type="number" name="watchdog" class="number-input" value="600">
+
+                    <div class="switch-container">
+                        <label for="minimize-hard">Minimiser contraintes dures</label>
+                        <input type="checkbox" name="minimize-hard" id="minimize-hard" class="switch">
+                    </div>
+
+                    <div class="switch-container">
+                        <label for="minimize-soft">Minimiser contraintes souples</label>
+                        <input type="checkbox" name="minimize-soft" id="minimize-soft" class="switch">
+                    </div>
+
+                    <div class="switch-container">
+                        <label for="disable-global-pause">Désactiver la contrainte de pause globale</label>
+                        <input type="checkbox" name="disable-global-pause" id="disable-global-pause" class="switch">
+                    </div>
+                </div>
+            </div>
+        </form>
     </body>
 </html>
 
@@ -66,7 +90,6 @@ function getFileName() {
 function submitForm() {
     let counter = 0;
     fileName = getFileName();
-    console.log(fileName);
 
     if (fileName != null && fileName.split('.').pop() == "txt") {
         // Remplir un champ de formulaire invisible avec la valeur de la variable JavaScript
@@ -87,9 +110,6 @@ function submitForm() {
     }
 }
 
-// TODO: dès que le fichier execution_done a été créé, on va 
-// rediriger vers output.php et y lister tous les fichiers dans un menu
-
 window.addEventListener('DOMContentLoaded', function() {
     // Vérifier périodiquement la présence du fichier
     setInterval(checkFilePresence, 1000);
@@ -106,7 +126,7 @@ function checkFilePresence() {
             } else {
                 // Le fichier n'est pas encore présent
                 if ($('#attenteImport').length == 0) {
-                    $('.center').append("<div id='attenteImport'>Veuillez importer un fichier d'instance au format .txt</div>");
+                    $('#import').append("<div id='attenteImport'>Veuillez importer un fichier d'instance au format .txt</div>");
                 }
             }
         }
@@ -122,7 +142,19 @@ function checkFilePresence() {
         // Récupérer la valeur de la variable JavaScript envoyée via le formulaire
         $fileName = $_POST['fileName'];
         echo '<div id="loadingOverlay"><div class="loadingSpinner"></div></div>';
-        echo "La valeur de la variable JavaScript est : " . $fileName;
+        
+        if (!isset($_POST['minimize-hard'])) {
+            $_POST['minimize-hard'] = 'off';
+        } 
+        if (!isset($_POST['minimize-soft'])) {
+            $_POST['minimize-soft'] = 'off';
+        } 
+        if (!isset($_POST['disable-global-pause'])) {
+            $_POST['disable-global-pause'] = 'off';
+        } 
+        
+        print_r($_POST);
+        // echo "La valeur de la variable JavaScript est : " . $fileName;
         
         $commande = 'powershell -InputFormat none -ExecutionPolicy ByPass -NoProfile -Command "& { .\Run_program.ps1 ' . $fileName;
         $commande = $commande . '; }"';

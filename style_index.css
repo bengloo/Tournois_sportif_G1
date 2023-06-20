@@ -5,35 +5,45 @@ body {
 }
 
 .frame {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	width: 400px;
-	height: 400px;
-	margin-top: -200px;
-	margin-left: -200px;
-	border-radius: 2px;
-	box-shadow: 4px 8px 16px 0 rgba(0, 0, 0, 0.1);
-	overflow: hidden;
-	background: linear-gradient(to top right, #06008b 0%, #69d3ff 100%);
-	color: #333;
-	font-family: "Lexend Deca", Helvetica, sans-serif; 
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 400px;
+    width: 60%;
+    border-radius: 2px;
+    box-shadow: 4px 8px 16px 0 rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    background: linear-gradient(to top right, #06008b 0%, #69d3ff 100%);
+    color: #333;
+    font-family: "Lexend Deca", Helvetica, sans-serif;
+    display: flex; /* Ajout de la propriété display: flex; */
+    justify-content: center; /* Centrage horizontal des éléments enfants */
+    align-items: center; /* Centrage vertical des éléments enfants */
 }
 
 .center {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	width: 300px;
-	height: 300px;
-	border-radius: 3px;
-	box-shadow: 8px 10px 15px 0 rgba(0, 0, 0, 0.2);
-	background: #fff;
-	display: flex;
-	align-items: center;
-	justify-content: space-around;
-	flex-direction: column;
+    width: 345px;
+    height: 300px;
+    border-radius: 3px;
+    box-shadow: 8px 10px 15px 0 rgba(0, 0, 0, 0.2);
+    background: #fff;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+}
+
+#options {
+	float: right;
+	align-items: flex-start;
+	padding-left: 5px;
+
+}
+
+#import {
+	float: left;
 }
 
 .title {
@@ -123,4 +133,67 @@ h1 {
 @keyframes spin {
 	0% { transform: rotate(0deg); }
 	100% { transform: rotate(360deg); }
+}
+
+input[type="number"] {
+    height: 30px;
+	width: 95%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: smaller;
+    color: #333;
+    background-color: #f5f5f5;
+	font-family: "Lexend Deca", Helvetica, sans-serif;
+}
+
+.switch-container {
+	display: flex;
+	align-items: center;
+	margin-bottom: 10px;
+}
+  
+.switch-container label {
+	margin-right: 10px;
+}
+  
+.switch {
+	position: relative;
+	width: 40px;
+	height: 20px;
+	appearance: none;
+	outline: none;
+	background-color: #ccc;
+	border-radius: 10px;
+	cursor: pointer;
+	transition: background-color 0.2s ease-in-out;
+}
+  
+.switch::before {
+	content: '';
+	position: absolute;
+	top: 2px;
+	left: 2px;
+	width: 16px;
+	height: 16px;
+	background-color: #fff;
+	border-radius: 50%;
+	transition: transform 0.2s ease-in-out;
+}
+  
+.switch:checked::before {
+	transform: translateX(20px);
+}
+  
+.switch:checked {
+	background-color: green; /* Nouvelle couleur pour l'état activé */
+}
+  
+.switch:focus-visible::before {
+	box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.3);
+}
+  
+label{
+	font-family: "Lexend Deca", Helvetica, sans-serif;
+	font-size: smaller;
 }
