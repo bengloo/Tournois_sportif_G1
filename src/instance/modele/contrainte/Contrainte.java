@@ -58,7 +58,7 @@ public abstract class Contrainte {
     public abstract Object evalDeltaCoef(Solution championnat, Operateur o);
 
     /**
-     * Indique le delta de penalité pour une opération faite sur le championnat
+     * Indique le delta de pénalité pour une opération faite sur le championnat
      * @param championnat la solution
      * @param o l'opérateur
      * @return le delta (ou Max.INTEGER si la contrainte est dure)
@@ -66,7 +66,7 @@ public abstract class Contrainte {
     public abstract int evalDeltaCout(Solution championnat, Operateur o);
 
     /**
-     * Indique le delta de penalité pour une opération faite sur le championnat
+     * Indique le delta de pénalité pour une opération faite sur le championnat
      * @param championnat la solution
      * @param o l'opérateur
      * @param deltaCoef le coefficient delta
@@ -85,11 +85,11 @@ public abstract class Contrainte {
 
     /**
      *
-     * @param sCplex    Solveur dans lequel est definit le model cplex et ces variables de decisions
-     * @param instance  instance traité par le solveur
-     * @param minimiseDure  definit si il faut rendre permisive les equation de contrainte dure en ajoutant delat
+     * @param sCplex    Solveur dans lequel est défini le model cplex et ces variables de decisions
+     * @param instance  instance traitée par le solveur
+     * @param minimiseDure  défini s'il faut rendre permissive les equations de contraintes dures en ajoutant le delta
      *                      que l'on cherchera à minimiser
-     * @param minimiseSouple    definit si il faut pauser les equations des contrainte souple afin de minimiser leurs
+     * @param minimiseSouple    défini s'il faut pauser les equations des contraintes souples afin de minimiser leurs
      *                          couts
      * @param dure
      */

@@ -85,7 +85,8 @@ public class OperateurEchange extends Operateur{
         //pour chaque contrainte impactée par l'opération
         for(Contrainte c:deltaCoefs.keySet()){
             //on update le cout et les coeffs des contraintes
-            getChampionnat().addCoefCoutContrainte(c,deltaCoefs.get(c),c.evalDeltaCout(getChampionnat(),this,deltaCoefs.get(c)));
+            getChampionnat().addCoefCoutContrainte(c,deltaCoefs.get(c),c.evalDeltaCout(getChampionnat(),
+                    this,deltaCoefs.get(c)));
         }
         //on update le cout total
         //getChampionnat().addCoutTotal(this.getCout());

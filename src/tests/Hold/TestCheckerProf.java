@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-public class testChekerProf {
+public class TestCheckerProf {
     public static void main(String[] args) {
 
             String cheminJar = "checkerProf/CheckerChampionnat.jar";

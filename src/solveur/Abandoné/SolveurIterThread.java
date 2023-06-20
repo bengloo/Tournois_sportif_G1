@@ -7,7 +7,13 @@ import solveur.Solveur;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
-
+/** classe définissant SolveurIterThread (implémentant l'interface Solveur)
+ * @author Engloo Benjamin
+ * @author Morcq Alexandre
+ * @author Sueur Jeanne
+ * @author Lux Hugo
+ * @version 1.0
+ */
 public class SolveurIterThread implements Solveur {
 
     private final Solveur solveurInitial;

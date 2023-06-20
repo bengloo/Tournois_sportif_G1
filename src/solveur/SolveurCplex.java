@@ -37,7 +37,7 @@ public class SolveurCplex implements Solveur{
     public SolveurCplex() {
     }
 
-    public SolveurCplex(int watchDog, boolean minimiseDure, boolean minimiseSouple, boolean avoidContraintePauseGlobale) {
+    public SolveurCplex(int watchDog, boolean minimiseDure, boolean minimiseSouple,boolean avoidContraintePauseGlobale){
         this.watchDog = watchDog;
         this.minimiseDure = minimiseDure;
         this.minimiseSouple = minimiseSouple;
@@ -67,8 +67,8 @@ public class SolveurCplex implements Solveur{
     }
 
     /**
-     * Construit le model d'equoition et le resout au sens de cplex
-     * @param instance instance traité
+     * Construit le model d'équation et le résout au sens de cplex
+     * @param instance instance traitée
      */
     private void buildModel(Instance instance) {
         try {
@@ -77,7 +77,7 @@ public class SolveurCplex implements Solveur{
             throw new RuntimeException(e);
         }
         init(instance);
-        // imposer un temps limite de resolutuon, ici 60 secondes
+        // imposer un temps limite de résolution, ici 60 secondes
         try {
             this.cplex.setParam(IloCplex.DoubleParam.TiLim, watchDog);
         } catch (IloException e) {
@@ -85,7 +85,7 @@ public class SolveurCplex implements Solveur{
         }
         try {
             if(cplex.solve()) {
-                // Cplex a trouve une solution realisable !
+                // Cplex a trouvé une solution realisable !
 
                 //System.out.println(cplex.toString());
 
@@ -93,7 +93,7 @@ public class SolveurCplex implements Solveur{
                 System.out.println("Cplex n’a pas trouve de solution realisable");
                 
                 //System.out.println(cplex.getInfeasibilities(cplex.ge));
-                // Cplex n’a pas trouve de solution realisable ...
+                // Cplex n’a pas trouvé de solution realisable ...
             }
         } catch (IloException e) {
             throw new RuntimeException(e);
@@ -103,8 +103,8 @@ public class SolveurCplex implements Solveur{
     }
 
     /**
-     * pose les equoitions du model cplex et les enregistre dans modelsCplex/model_{nom instance}.lp
-     * @param instance instance traité par le solveur
+     * pose les equations du model cplex et les enregistre dans modelsCplex/model_{nom instance}.lp
+     * @param instance instance traitée par le solveur
      */
     private void init(Instance instance) {
         try {
@@ -120,7 +120,7 @@ public class SolveurCplex implements Solveur{
         // ne pas imprimer les informations sur la console
         // ne pas mettre cette option pendant les tests !
         this.cplex.setOut(null);
-        // exporter le modele dans un fichier texte au format .lp
+        // exporter le modèle dans un fichier texte au format .lp
         // ce format est comprehensible par cplex
         /*try {
             this.cplex.exportModel("modelsCplex/model_" + instance.getNom() + ".lp");
@@ -130,13 +130,13 @@ public class SolveurCplex implements Solveur{
     }
 
     /**
-     * definit les equoitions relative à la viabilité de la solution.
-     * @param instance instance traité par le solveur
+     * définit les equations relative à la viabilité de la solution.
+     * @param instance instance traitée par le solveur
      */
     private void initContrainteInerante(Instance instance){
         int nbEquipe=instance.getNbEquipes();
 
-        //chaque equipe est presente une seul fois par jour
+        //chaque équipe est présente une seule fois par jour
         for (int j = 0; j < instance.getNbJournees(); j++) {
             for(int e=0;e<instance.getNbEquipes();e++) {
                 IloLinearNumExpr expr = null;
@@ -155,7 +155,8 @@ public class SolveurCplex implements Solveur{
             }
         }
 
-        //chaque rencontre n'est afecter que une seul foix sur l'ensemble des journee ou 0 pour les rencontre contre sois-même
+        //chaque rencontre n'est affectée qu'une seule fois sur l'ensemble des journées ou 0 pour les rencontres contre
+        // sois-même
 
         for(int d=0;d<instance.getNbEquipes();d++){
             for(int e=0;e<instance.getNbEquipes();e++) {
@@ -198,8 +199,9 @@ public class SolveurCplex implements Solveur{
     }
 
     /**
-     * definit les equations delimitant les variables de decisions ne definissant pas directement de la solution (Pause,Minimiser)
-     * @param instance instance traité par le solveur
+     * définit les equations délimitant les variables de decisions ne définissant pas directement de la solution
+     * (Pause,Minimiser)
+     * @param instance instance traitée par le solveur
      */
     public void initContrainteDecision(Instance instance){
         int nbE=instance.getNbEquipes();
@@ -212,10 +214,10 @@ public class SolveurCplex implements Solveur{
                     IloLinearNumExpr exprz1 = null;
                     IloLinearNumExpr exprz2 = null;
                     try {
-                        expry1 = cplex.linearNumExpr();//pause au au jour j-1 d'une equipe en domicile
-                        expry2 = cplex.linearNumExpr();//pause au au jour j d'une equipe en domicile
-                        exprz1 = cplex.linearNumExpr();//pause au au jour j-1 d'une equipe en exterieur
-                        exprz2 = cplex.linearNumExpr();//pause au au jour j d'une equipe en exterieur
+                        expry1 = cplex.linearNumExpr();//pause au jour j-1 d'une équipe en domicile
+                        expry2 = cplex.linearNumExpr();//pause au jour j d'une équipe en domicile
+                        exprz1 = cplex.linearNumExpr();//pause au jour j-1 d'une équipe en extérieur
+                        exprz2 = cplex.linearNumExpr();//pause au jour j d'une équipe en extérieur
                         for (int i = 0; i < nbE; i++) {
                             if (i != e) {
                                 expry1.addTerm(x[e][i][j - 1], 1);
@@ -225,12 +227,14 @@ public class SolveurCplex implements Solveur{
                             }
                         }
                         if(instance.isPauseConcerne(e,j, TypeMode.DOMICILE,avoidContraintePauseGlobale)) {
-                            cplex.addLe(cplex.sum(cplex.sum(expry1, expry2), -1), y[j - 1][e], "CNPD1j" + j + "e" + e);
+                            cplex.addLe(cplex.sum(cplex.sum(expry1, expry2), -1), y[j - 1][e], "CNPD1j" + j +
+                                    "e" + e);
                             cplex.addLe(y[j - 1][e], expry1, "CNPD2j" + j + "e" + e);
                             cplex.addLe(y[j - 1][e], expry2, "CNPD3j" + j + "e" + e);
                         }
                         if(instance.isPauseConcerne(e,j, TypeMode.EXTERIEUR,avoidContraintePauseGlobale)) {
-                            cplex.addLe(cplex.sum(cplex.sum(exprz1, exprz2), -1), z[j - 1][e], "CNPE1j" + j + "e" + e);
+                            cplex.addLe(cplex.sum(cplex.sum(exprz1, exprz2), -1), z[j - 1][e], "CNPE1j" + j +
+                                    "e" + e);
                             cplex.addLe(z[j - 1][e], exprz2, "CNPE3j" + j + "e" + e);
                             cplex.addLe(z[j - 1][e], exprz1, "CNPE2j" + j + "e" + e);
                         }
@@ -241,7 +245,7 @@ public class SolveurCplex implements Solveur{
                 }
             }
         }
-        //on cherche à minimiser le nombre de contrainte dure non respecté
+        //on cherche à minimiser le nombre de contraintes dures non respectées
         if(minimiseDure&&!minimiseSouple) {
             try {
                 IloLinearNumExpr expr = cplex.linearNumExpr();
@@ -294,7 +298,8 @@ public class SolveurCplex implements Solveur{
     }
 
     /**
-     * permet d'acceder à la variable de decision definisant les afectation de couple d'equipe à une journee (rencontres)
+     * permet d'accéder à la variable de decision définissant les affectations de couple d'équipes à une journée
+     * (rencontres)
      * @return x un IloIntVar[][][] de taille nbEquipe ^2 et nb Journee
      */
     public IloIntVar[][][] getX() {
@@ -302,7 +307,7 @@ public class SolveurCplex implements Solveur{
     }
 
     /**
-     * permet d'acceder à la variable de decision definisant les pauses par equipe par jour en domicile
+     * permet d'accéder à la variable de decision définissant les pauses par équipe par jour en domicile
      * @return y un IloIntVar[][] de taille nbEquipe et nb Journee
      */
     public IloIntVar[][] getY() {
@@ -310,7 +315,7 @@ public class SolveurCplex implements Solveur{
     }
 
     /**
-     * permet d'acceder à la variable de decision definisant les pauses par equipe par jour en exterieur
+     * permet d'accéder à la variable de decision définissant les pauses par équipe par jour en extérieur
      * @return z un IloIntVar[][] de taille nbEquipe et nb Journee
      */
     public IloIntVar[][] getZ() {
@@ -318,7 +323,8 @@ public class SolveurCplex implements Solveur{
     }
 
     /**
-     * permet d'acceder à la variable de decision definisant les ecart de coef sur les borne max de la contrainte spécifié
+     * permet d'accéder à la variable de decision définissant les écarts de coeff sur les bornes max de la contrainte
+     * spécifié
      * @param c contrainte ciblé
      * @return cDurMax un IloIntVar
      */
@@ -327,7 +333,8 @@ public class SolveurCplex implements Solveur{
     }
 
     /**
-     * permet d'acceder à la variable de decision definisant les ecart de coef sur les borne min de la contrainte spécifié
+     * permet d'accéder à la variable de decision définissant les écarts de coeff sur les bornes min de la contrainte
+     * spécifié
      * @param c contrainte ciblé
      * @return cDurMin un IloIntVar
      */
@@ -336,7 +343,7 @@ public class SolveurCplex implements Solveur{
     }
 
     /**
-     * permet d'acceder à la variable de decision definisant le cout de la contrainte spécifié
+     * permet d'accéder à la variable de decision définissant le cout de la contrainte spécifié
      * @param c contrainte ciblé
      * @return coutC un IloIntVar
      */
@@ -345,14 +352,15 @@ public class SolveurCplex implements Solveur{
     }
 
     /**
-     * definit les equation lié au contrainte dure et souple
-     * @param instance instance traité par le solveur
+     * définit les equations liées aux contraintes dures et souples
+     * @param instance instance traitée par le solveur
      */
     private void initContrainte(Instance instance){
         for(Contrainte c:instance.getContraintes()){
             if(c.estDure()||((!c.estDure()) && minimiseSouple)) {
                 if((c instanceof ContraintePauseGlobale)) {
-                    if(!avoidContraintePauseGlobale) c.initCplexEquation(this, instance, minimiseDure, minimiseSouple, c.estDure());
+                    if(!avoidContraintePauseGlobale) c.initCplexEquation(this, instance, minimiseDure,
+                            minimiseSouple, c.estDure());
                 }else{
                     c.initCplexEquation(this, instance, minimiseDure, minimiseSouple, c.estDure());
                 }
@@ -362,8 +370,8 @@ public class SolveurCplex implements Solveur{
     }
 
     /**
-     * initialise les variabe de decision en les afectant au modele et les nomant
-     * @param instance instance traité par le solveur
+     * initialise-les variables de decisions en les affectant au modèle et les nommant
+     * @param instance instance traitée par le solveur
      */
     private void initVariableDecision(Instance instance){
         int nbE=instance.getNbEquipes();
@@ -432,9 +440,9 @@ public class SolveurCplex implements Solveur{
     }
 
     /**
-     * converti la variable de decision x du model cplex relative aux afectation equipes journe en Solution
-     * update les log de la solution
-     * @param instance instance traité par le solveur
+     * Convertit la variable de décision x du model cplex relative aux affectations équipes journées en Solution
+     * update les logs de la solution
+     * @param instance instance traitée par le solveur
      * @return
      */
     private Solution formatSaveSolution(Instance instance){
@@ -445,7 +453,8 @@ public class SolveurCplex implements Solveur{
                     for (int j = 0; j < instance.getNbJournees(); j++) {
                         try {
                             if(cplex.getValue(x[d][e][j])==1){
-                                OperateurInsertion o=new OperateurInsertion(s,s.getJourneeByID(j),s.getRencontreByEquipes(d,e));
+                                OperateurInsertion o=new OperateurInsertion(s,s.getJourneeByID(j),s
+                                        .getRencontreByEquipes(d,e));
                                 if(!o.doMouvementTrusted()){
                                     System.err.println(o.toString());
                                 };

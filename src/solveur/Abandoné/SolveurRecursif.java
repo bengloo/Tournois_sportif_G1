@@ -20,15 +20,15 @@ public class SolveurRecursif implements Solveur {
 
     @Override
     public Solution solve(Instance instance) {
-        //solution solutionglobal(instance)
+        //solution solutionglobale(instance)
         //solution bestsolution
-        //soit r la premierre rencontre ayant journnee à null
-        //pour toute les journee  j ayant rencontres.size<NbRencontreJournee
-            //si insertion j r valide sur solution global
+        //soit r la premiere rencontre ayant journée à null
+        //pour toutes les journées j ayant rencontres.size<NbRencontreJournee
+            //si insertion j r valide sur solution globale
                 //Solution newsolution(instance)
-                //do insertion sur newsolution
+                //do insertion sur newSolution
                 //newSolution = solvRec(newsolution);
-                //si newsolution beter best solution
+                //si newsolution better best solution
                     //bestsolution= newsolution
         //return best solution
         return null;
@@ -41,16 +41,18 @@ public class SolveurRecursif implements Solveur {
      */
     public Solution solveRec(Solution solprec) {
 
-        //soit r la premierre rencontre ayant journnee à null
-        //si r==null retune solprec
+        //soit r la premiere rencontre ayant journée à null
+        //si r==null return solprec
         //solution bestsolution
-        //TODO exclure les solution evoluant vers un coups trops fort (le cout doit evolué exponentielement au nombre de rencontre dejas inseré)
+        //TODO exclure les solutions évoluant vers un coût trop fort (le coût doit évoluer exponentiellement au nombre
+        // de rencontre deja inséré)
         //pour toute les journee j ayant rencontres.size<NbRencontreJournee
             //si insertion j r valide sur solprec
-                //Solution newsolution(solution) //constructeur par copy , l'instance et equipe ont les même reference mais pas rencontres journees
-                //do insertion sur newsolution
+                //Solution newsolution(solution) //constructeur par copy , l'instance et equipe ont les même reference
+        // mais pas rencontres journees
+                //do insertion sur newSolution
                     //newSolution = solvRec(newsolution);
-                    //si newsolution beter best solution
+                    //si newsolution better best solution
                         //bestsolution= newsolution
         // return best solution
         return null;
