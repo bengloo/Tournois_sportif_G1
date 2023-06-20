@@ -24,8 +24,7 @@ import java.util.regex.Pattern;
  * Cette classe permet de tester et comparer les performances de plusieurs 
  * methodes de resolution sur un jeu d'instances du CVRP pour les TPs du 
  * cours de LE4-SI POO pour l'optimisation.
- * 
- * Les instances sont fournies sur moodle au format '.vrp'.
+ *
  * 
  * Cette classe permet de resoudre un jeu d'instances avec plusieurs solveurs
  * et d'afficher tous les resultats dans un fichier au format '.csv'.

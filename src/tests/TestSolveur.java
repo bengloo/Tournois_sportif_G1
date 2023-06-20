@@ -8,7 +8,7 @@ import solveur.Solveur;
 import solveur.SolveurCplex;
 import solveur.SolveurIter;
 
-/** classe définissant TestInsertionSimple (pour tester la classe InsertionSimple)
+/** classe définissant TestCplex (pour tester la classe SplveurCplex)
  * @author Engloo Benjamin
  * @author Morcq Alexandre
  * @author Sueur Jeanne

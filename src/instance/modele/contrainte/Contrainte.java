@@ -21,6 +21,7 @@ public abstract class Contrainte {
     public Contrainte(Integer penalite) {
         this.penalite=penalite;
     }
+
     public Contrainte() {
         this.penalite=Integer.MAX_VALUE;
     }
@@ -98,9 +99,10 @@ public abstract class Contrainte {
 
 
     /**
-     * definit l'equoition de contrainte souple pour une contrainte soumis à un maximum à partire de l'expr du coef/valc
-     * @param sCplex    le solveur contenant le model cplex et les variable de decision
-     * @param max la valeur max admise par le contrainte
+     * défini les equations de contraintes souples pour une contrainte soumis à un maximum à partir de l'expression
+     * du coef/valc
+     * @param sCplex le solveur contenant le model cplex et les variables de decisions
+     * @param max la valeur max admise par la contrainte
      * @param expr expression cplex du coef de la contrainte 
      */
     public void addEqSoupleMax(SolveurCplex sCplex, int max, IloLinearNumExpr expr){
@@ -122,6 +124,15 @@ public abstract class Contrainte {
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * défini les equations de contraintes souples pour une contrainte soumise à un maximum et un minimum à partir de
+     * l'expression du coef/valc
+     * @param sCplex    le solveur contenant le model cplex et les variables de decisions
+     * @param max la valeur max admise par la contrainte
+     * @param min la valeur min admise par la contrainte
+     * @param expr expression cplex du coeff de la contrainte
+     */
     public void addEqSoupleMaxMin(SolveurCplex sCplex, int max,int min, IloLinearNumExpr expr){
         //expr est l'iloNumexpr representative de valc
         //cout=(max(expr-k;0)+max(L-expr;0))*w
