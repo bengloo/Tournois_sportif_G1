@@ -16,20 +16,14 @@ import solveur.SolveurIter;
 
 
 public class Main {
-    public static String inFile;
+    public static String cheminFichier;
+    private static Integer watchDog;
+    private static Boolean minimiseDure;
+    private static Boolean minimiseSouple;
+    private static Boolean avoidContraintePauseGlobale;
 
     public static void main(String[] args) {
-        String cheminFichier;
-        Integer watchDog;
-        Boolean minimiseDure;
-        Boolean minimiseSouple;
-        Boolean avoidContraintePauseGlobale;
         readArgs(args);
-        cheminFichier = args[0];
-        watchDog = Integer.valueOf(args[1]);
-        minimiseDure = Boolean.valueOf(args[2]);
-        minimiseSouple = Boolean.valueOf(args[3]);
-        avoidContraintePauseGlobale = Boolean.valueOf(args[4]);
         String path=cheminFichier;
         //System.out.println(cheminFichier + watchDog + minimiseDure + minimiseSouple + avoidContraintePauseGlobale);
         //String path="instanceTestUnitaire/instance_test_ContraintePlacement_4Equipe.txt";
@@ -62,10 +56,11 @@ public class Main {
             printUsage();
             System.exit(-1);
         }
-
-        int index = -1;
-
-        inFile = args[++index];
+        cheminFichier = args[0];
+        watchDog = Integer.valueOf(args[1]);
+        minimiseDure = Boolean.valueOf(args[2]);
+        minimiseSouple = Boolean.valueOf(args[3]);
+        avoidContraintePauseGlobale = Boolean.valueOf(args[4]);
     }
     public static void printUsage() {
         System.out.println("Usage: java -jar Tournois_sportif_G1.jar <fichier> <watchdog> <miniserDure(bool)> " +
