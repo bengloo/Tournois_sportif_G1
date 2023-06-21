@@ -63,7 +63,7 @@ Contrainte equite 4 equipe
 // Nombre
 1
 // Contraintes
-equipes=0;1;2;3	jours=0;1;2	max=0	penalite=1
+equipes=0;1;2	jours=0;1;2	max=0	penalite=1
 
 // Contraintes de separation
 // Nombre

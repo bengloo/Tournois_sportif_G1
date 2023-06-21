@@ -6,6 +6,7 @@ import instance.Instance;
 import operateur.OperateurEchange;
 import operateur.OperateurInsertion;
 import operateur.Operateur;
+import solution.Journee;
 import solution.Solution;
 import solution.Rencontre;
 import solveur.SolveurCplex;
@@ -77,21 +78,29 @@ public class ContrainteHBClassement extends Contrainte{
         return TypeContrainte.HBCLASSEMENT;
     }
 
-    //TODO implementer les fonction de calcule de cout en sinspirent de la contrainte de placement, réflechire si on ne
-    // peux pas factoriser du code sout des fonction comune aux contraintes
     @Override
     public int getCoutTotal(Solution championnat) {
         //le nombre de rencontres jouées par l’équipe de la contrainte selon un mode sur l’ensemble des journées
         int valc=0;
-        //pour toutes les rencontres
-        for(Rencontre r:championnat.getRencontres().values()){
-            // à chaque équipe adverse de la liste rencontrée
-            if (this.equipesAdverses.contains(r.getDomicile().getId()) || this.equipesAdverses.contains(r.getExterieur()
-                    .getId())) {
-                valc += parcoursJournees(championnat, r);
+        if(mode==DOMICILE||mode==INDEFINI) {
+            for (int j : this.journees) {
+                for (Rencontre r : championnat.getJourneeByID(j).getRencontres().values()) {
+                    if(r.getDomicile().getId()==this.equipe && this.equipesAdverses.contains(r.getExterieur().getId())){
+                        valc+=1;
+                    }
+                }
             }
         }
+        if(mode==EXTERIEUR||mode==INDEFINI) {
+            for (int j : this.journees) {
+                for (Rencontre r : championnat.getJourneeByID(j).getRencontres().values()) {
+                    if(r.getExterieur().getId()==this.equipe && this.equipesAdverses.contains(r.getDomicile().getId())){
+                        valc+=1;
 
+                    }
+                }
+            }
+        }
         if(valc>this.max) {
             if (estDure()) return Integer.MAX_VALUE;
             return this.penalite *(valc-this.max);
@@ -161,43 +170,6 @@ public class ContrainteHBClassement extends Contrainte{
         }
         return Integer.MAX_VALUE;
 
-    }
-
-    /**
-     * Parcourt les journées de la contrainte pour incrémenter un compteur à chaque fois que son équipe fait partie de
-     * la rencontre
-     * @param championnat la solution
-     * @param r la rencontre concernée
-     * @return le nombre entier du compteur
-     */
-    private int parcoursJournees(Solution championnat, Rencontre r) { //Factorisation du code
-        int valcDelta=0;
-        for (Integer jID : this.journees) {
-            /*if(r.isConcerne(championnat.getEquipes().get(this.équipe), this.mode) && championnat.isRJPresent(jID,r));
-            valcDelta++;*/
-            switch(this.mode) {
-                case DOMICILE:
-                    if(r.isConcerne(championnat.getEquipes().get(this.equipe), this.mode) && this.equipesAdverses
-                            .contains(r.getExterieur().getId()) && championnat.isRJPresent(jID,r)) {
-                        valcDelta++;
-                    }
-                    break;
-                case EXTERIEUR:
-                    if(r.isConcerne(championnat.getEquipes().get(this.equipe), this.mode) && this.equipesAdverses
-                            .contains(r.getDomicile().getId()) && championnat.isRJPresent(jID,r)) {
-                        valcDelta++;
-                    }
-                    break;
-                case INDEFINI:
-                    if(r.isConcerne(championnat.getEquipes().get(this.equipe), this.mode) && (this.equipesAdverses
-                            .contains(r.getDomicile().getId()) || this.equipesAdverses.contains(r.getExterieur()
-                            .getId())) && championnat.isRJPresent(jID,r)) {
-                        valcDelta++;
-                    }
-                    break;
-            }
-        }
-        return valcDelta;
     }
 
     @Override

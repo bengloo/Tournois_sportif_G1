@@ -13,9 +13,8 @@ Contrainte HBClassement 4 equipe
 
 // Contraintes d'equipes en haut et bas de classement
 // Nombre
-1
+0
 // Contraintes
-equipe=0	jours=0	equipesAdverses=1;2;3	mode=D	max=1
 
 // Contraintes de rencontres
 // Nombre
@@ -42,8 +41,9 @@ equipe=0	jours=0	equipesAdverses=1;2;3	mode=D	max=1
 
 // Contraintes d'equipes en haut et bas de classement
 // Nombre
-0
+1
 // Contraintes
+equipe=0	jours=0;1;2;3	equipesAdverses=1;2;3	mode=E	max=0	penalite=1
 
 // Contraintes de rencontres
 // Nombre

@@ -5,6 +5,7 @@ import operateur.Operateur;
 import operateur.OperateurEchange;
 import operateur.OperateurInsertion;
 import solution.Equipe;
+import solution.Journee;
 import solution.Rencontre;
 import solution.Solution;
 import solveur.SolveurCplex;
@@ -56,31 +57,19 @@ public class ContrainteEquite extends Contrainte {
 
     @Override
     public int getCoutTotal(Solution championnat) {
-        //on calcule le nombre de rencontres à domicile pour les equipes de la contrainte sur les jours de la contrainte
-        HashMap<Integer,Integer> coefs=new HashMap<>();
-        for(int eid:this.equipes) {
-            coefs.put(eid, 0);
-        }
-        for(int jid:this.journees){
-            for(Rencontre r:championnat.getJourneeByID(jid).getRencontres().values()){
-                if(this.equipes.contains(r.getDomicile().getId())){
-                    coefs.put(r.getDomicile().getId(),coefs.get(r.getDomicile().getId())+1);
-                }
-            }
-        }
-        //on calcule les deltas de chaque paire d'équipe
-        int pena=0;
-        for(int e1:this.equipes){
-            for(int e2:this.equipes){
-                if(e1>e2){
-                    int valc= Math.abs(coefs.get(e1)-coefs.get(e2))-this.max;
-                    if(valc>0){
-                        pena+=this.penalite*valc;
+        int nbViolation = 0;
+
+        for(int e1:this.equipes) {
+            for(int e2:this.equipes) {
+                if(e2>e1) {
+                    int nb = this.computeMaxDiffNbRencontresDomiciles(championnat, e1, e2);
+                    if (nb > this.max) {
+                        nbViolation += nb - this.max;
                     }
                 }
             }
         }
-        return pena;
+        return nbViolation * this.penalite;
     }
 
     @Override
@@ -111,8 +100,36 @@ public class ContrainteEquite extends Contrainte {
             }
 
         }
+        return  valcDelta;
+    }
 
-        return valcDelta;
+    private int computeMaxDiffNbRencontresDomiciles(Solution sol, int e1, int e2) {
+        int max = 0;
+        int nbD1 = 0;
+        int nbD2 = 0;
+        int j1 = 0;
+        List<Integer> jours = new ArrayList();
+
+        int j2;
+        for(Iterator var9 = this.journees.iterator(); var9.hasNext(); j1 = j2 + 1) {
+            j2 = (Integer)var9.next();
+            for(int j = j1; j <= j2; ++j) {
+                jours.add(j);
+            }
+            nbD1=0;
+            nbD2=0;
+            for(int jc:jours){
+                for(Rencontre r:sol.getJourneeByID(jc).getRencontres().values()){
+                    if(r.getDomicile().getId()==e1)nbD1+=1;
+                    if(r.getDomicile().getId()==e2)nbD2+=1;
+                }
+            }
+            if (Math.abs(nbD1 - nbD2) > max) {
+                max = Math.abs(nbD1 - nbD2);
+            }
+        }
+
+        return max;
     }
 
     public TreeSet<Integer> getEquipes() {

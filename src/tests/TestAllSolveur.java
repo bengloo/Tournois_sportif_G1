@@ -86,7 +86,7 @@ public class TestAllSolveur {
         //System.err.close();
         //solveurs.add(new InsertionSimple());
         //solveurs.add(new SolveurIterThread(new MeilleureInsertionV2()));
-        solveurs.add(new SolveurCplex());
+        solveurs.add(new SolveurCplex(600,false,false,false));
         // TO ADD : par la suite vous ajouterez ici les autres solveurs a tester
         // solveurs.add(new AutreSolveurATester());
     }
@@ -184,7 +184,6 @@ public class TestAllSolveur {
             sol.writeSolutionCheckerProf(solveur.getNom());
             //TODO integré le cheker du prof
             System.out.println(sol.getLog());
-            sol.restLog();
             // TO CHECK : recperer le cout total de la solution, et savoir si
             // la solution est valide
             Resultat result = new Resultat(sol.getCoutTotal(),Integer.parseInt(sol.getLog(8)), sol.check());
@@ -357,7 +356,7 @@ public class TestAllSolveur {
      * @param args
      */
     public static void main(String[] args) {
-        TestAllSolveur test = new TestAllSolveur("instancesViablesCplex");
+        TestAllSolveur test = new TestAllSolveur("instancesTestsUnitaires");
         test.printAllResultats("results");
     }
 }
