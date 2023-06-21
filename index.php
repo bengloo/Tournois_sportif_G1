@@ -1,7 +1,8 @@
 <!-- Source: https://codepen.io/kbocz/pen/vbBEBN -->
 
 <!DOCTYPE html>
-<meta charset="utf-8">
+
+<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Tournoi sportif G1  - Import instance</title>
 <html>
@@ -10,7 +11,7 @@
         <script src="jquery-3.7.0.js"></script>
     </head>
     <body>
-        <form id="myForm" method="post" action="">
+        <form id="myForm" method="post" action="index.php" enctype="multipart/form-data">
             <div class="frame" id="content">
                 <div class="center" id="import">
                     <div class="title">
@@ -20,7 +21,7 @@
                     <div class="dropzone">
                         <img src="http://100dayscss.com/codepen/upload.svg" class="upload-icon"/>
                         <span class="filename"></span>
-                        <input type="file" class="upload-input" id="fileInput"/>
+                        <input type="file" name="file" class="upload-input" id="fileInput"/>
                     </div>
                     <input type="hidden" name="fileName" id="jsVariableInput">
                     <button type="button" class="btn" onclick="submitForm()">Soumettre</button>
@@ -92,6 +93,9 @@ function submitForm() {
     fileName = getFileName();
 
     if (fileName != null && fileName.split('.').pop() == "txt") {
+        // Affichage de la page de chargement
+        $('body').append('<div id="loadingOverlay"><div class="loadingSpinner"></div></div>');
+
         // Remplir un champ de formulaire invisible avec la valeur de la variable JavaScript
         document.getElementById('jsVariableInput').value = fileName;
 
@@ -112,7 +116,7 @@ function submitForm() {
 
 window.addEventListener('DOMContentLoaded', function() {
     // Vérifier périodiquement la présence du fichier
-    setInterval(checkFilePresence, 1000);
+    setInterval(checkFilePresence, 50);
 });
 
 // Vérifie la présence d'un fichier
@@ -141,7 +145,6 @@ function checkFilePresence() {
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['fileName'])) {
         // Récupérer la valeur de la variable JavaScript envoyée via le formulaire
         $fileName = $_POST['fileName'];
-        echo '<div id="loadingOverlay"><div class="loadingSpinner"></div></div>';
         
         if (!isset($_POST['minimize-hard'])) {
             $_POST['minimize-hard'] = 'off';
@@ -155,8 +158,27 @@ function checkFilePresence() {
         
         print_r($_POST);
         // echo "La valeur de la variable JavaScript est : " . $fileName;
+
+        if (isset($_FILES['file'])) {
+            $file = $_FILES['file'];
         
-        $commande = 'powershell -InputFormat none -ExecutionPolicy ByPass -NoProfile -Command "& { .\Run_program.ps1 ' . $fileName;
+            // Vérifier s'il y a une erreur lors de l'envoi du fichier
+            if ($file['error'] === UPLOAD_ERR_OK) {
+              $fileName = $file['name'];
+              $tmpFilePath = $file['tmp_name'];
+        
+              // Spécifiez le répertoire de destination où vous souhaitez enregistrer le fichier
+              $destinationDir = 'c:/Users/jsu62/Documents/';
+        
+              // Déplacez le fichier temporaire vers le répertoire de destination
+              move_uploaded_file($tmpFilePath, $destinationDir . $fileName);
+            } else {
+              // Une erreur s'est produite lors de l'envoi du fichier
+              echo 'Une erreur s\'est produite lors de l\'envoi du fichier.';
+            }
+        }
+        
+        $commande = 'powershell -InputFormat none -ExecutionPolicy ByPass -NoProfile -Command "& { .\Run_program.ps1 ' . $fileName . ' ' . $_POST['watchdog'] . ' ' . $_POST['minimize-hard'] . ' ' . $_POST['minimize-soft'] . ' ' . $_POST['disable-global-pause'];
         $commande = $commande . '; }"';
         // echo $commande;
         echo "<pre>";

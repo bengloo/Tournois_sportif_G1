@@ -22,17 +22,27 @@ body {
     align-items: center; /* Centrage vertical des éléments enfants */
 }
 
+@media (max-width: 768px) {
+	.frame {
+	  flex-direction: column; /* Affichage en colonne */
+	  width: 100%;
+	  height: 100%;
+	}
+  }
+
+
 .center {
     width: 345px;
     height: 300px;
     border-radius: 3px;
     box-shadow: 8px 10px 15px 0 rgba(0, 0, 0, 0.2);
     background: #fff;
-    margin: auto;
+    margin: 10px;
     display: flex;
     align-items: center;
     justify-content: space-around;
     flex-direction: column;
+	
 }
 
 #options {
@@ -60,7 +70,7 @@ h1 {
 }
 
 .dropzone {
-	width: 100px;
+	width: 250px;
 	height: 80px;
 	border: 1px dashed #999;
 	border-radius: 3px;
