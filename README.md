@@ -1,72 +1,94 @@
 # Tournois_sportif_G1
 
 ## Rep checkerProf
-Dossier pour executer le chekerChampionat
-pour l'executer depuis le terminal en utilsant la dernierre verssion java (la même que l'ide):
+Dossier pour exécuter le checkerChampionnat
+pour l'exécuter depuis le terminal en utilisant la dernière version java (la même que l'IDE):
 sudo ~/.jdks/openjdk-20.0.1/bin/java -jar CheckerChampionnat.jar a adaptée celons votre systeme d'exploitation
 
 
-fichierInstance.txt et fichierInstance_sol.txt sont automatiquement écrasés par la dernierre instance traitée via le solveur cplex
+fichierInstance.txt et fichierInstance_sol.txt sont automatiquement écrasés par la dernière instance traitée via le 
+solveur cplex
 
-Le dosier docup sert à drag and drop les instances que l'on veut traiter via chekerChampionat avec l'option -all
+Le dossier docup sert à drag and drop les instances que l'on veut traiter via checkerChampionnat avec l'option -all
 
 ## Rep instances
-Sert à stoquer un ensemble de l'instance de notre choix 
+Sert à stocker l'ensemble des instances de notre choix 
 
 ## Rep instanceTestUnitaire
-Sert à stocker les instances des tests unitaires soit par contrainte et nombre d'équipes
+Sert à stocker les instances des tests unitaires soit par contraintes et nombre d'équipes
 
 ## Rep instanceViableCplex
-Sert hystoriquement à stocker les instances solvables directement par cplex respectant à la fois la viabilité de la solution et les contraintes dures.
+Sert à stocker les instances respectant à la fois la viabilité de la solution et 
+l'ensemble des contraintes dures.(solutions obtenues avec Cplex)
+### Rep saufPause
+Sert à stocker les instances respectant à la fois la viabilité de la solution et
+l'ensemble des contraintes dures sauf la contrainte de Pause Globale.(solutions obtenues avec Cplex)
 
-## Rep ModelsCplex
-Sert à stocker les model generé par cplex sert avant tout pour le debug
+## Rep modeleCplex
+Sert à stocker les models générés par Cplex (.lp). Cela est principalement utile pour du debug.
 
-## Rep Resultat
-Toute instance traitée par testAllSolveur ou testCplex à sa solution enregistrée dans un sous repertoir nomé selon le solveur utilisé 
+## Rep resultats
+Toutes solutions des instances traitées par testAllSolveur ou testCplex est enregistrée dans un sous 
+repertoire nommé selon le solveur utilisé. (Les dernières exécutions sont donc dans SolveurIter(.....) car
+nous essayons de diminuer les coûts)
 
 ## Src
 Code source
 
-### solveur
-#### repAbandoned
-Enciens solveurs vetustes
-#### Meilleure Insertion V2
-Realise sucessivement les operations d'insertion realisable prioritaire en termes de marge et ayant le meilleur cout tant qu'il en à
-forte proba d'amener à une solution partielle non viable
-#### solveur Iter
-Realise iterativement un solveur designé et retourne la solution au meilleur cout
-le nombre d'iteration peux étre passé en parametre du constructeur sinon voir l'atribut par defaut
-#### Solveur cplex
-Solveur utilisant cplex d'IBM
-à plusieur atribut de parametrage qui peuvent aussi étre placé en parametre du constructeur
+### instance
 
-| atribut      | fonction                                                                                          |
-|--------------|---------------------------------------------------------------------------------------------------|
-| watchdog     | delay maximum d'execution                                                                         |
-| minimiseDure | rend permissif les contraintes dure et essaye de minimiser leurs nombre (prioritaire sur le cout) |
-| minimiseCout | definit les equoition de cout des contrainte souple et cherche à le minimiser                     |
+### io
+Package permettant la lecture et l'écriture
+### operateur
+Package contenant les différents opérateurs
+### solution
+Package contenant l'ensemble des classes servant à décrire une solution
+### solveur
+#### abandonne
+Anciens solveurs vétustes
+#### solveur Iter
+Realise itérativement un solveur designé et retourne la solution au meilleur cout
+le nombre d'itérations peux-être passé en paramètre du constructeur sinon voir l'attribut par défaut
+#### Solveur cplex
+Solveur utilisant Cplex d'IBM à plusieurs attributs de paramétrage qui peuvent aussi
+être placé en paramètre du constructeur
+
+| attributs    | fonction                                                                                                                                               |
+|--------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|
+| watchdog     | delai maximum d'exécution                                                                                                                              |
+| minimiseDure | rend permissif les contraintes dure et essaye de minimiser leurs nombre non respectées(prioritaire sur le cout afin de traité les instance difficiles) |
+| minimiseCout | définit les equations de cout des contraintes souples et cherche à les minimiser                                                                       |
 
 ### tests
-#### rep hold
-Enciens test 
-#### test all solveur
-Permé d'executé un ensemble de solveur sur un ensemble d'instance
-dipose de quelque parametrage:
+#### hold
+Anciens tests
+#### TestAllSolveur
+Permet d'exécuter un ensemble de solveurs sur un ensemble d'instances.
+Il dispose aussi de quelque paramétrage :
 
-| ligne | parametrage                                  |
+| ligne | paramétrage                                  |
 |-------|----------------------------------------------|
 | 368   | dossier des instances à traiter              |
 | 369   | dossier principal de sauvegarde des solution |
 | 67    | initialisation des solveur à traiter         |
 
-#### Test solveur
-Permé d'excuté un solveur unique sur une instance unique
+#### TestSolveur
+Permet d'exécuter un solveur unique sur une instance unique
 
-| ligne | parametrage                                  |
+| ligne | paramétrage                                  |
 |-------|----------------------------------------------|
 | 29    | initialisation du solveur                    |
 | 24    | dossier principal de sauvegarde des solution |
 | 24    | instance à traiter                           |
 
+### Main 
+Contient le Main permettant l'appelle lors de l'exécution du .jar cotès serveur avec 
+des paramètres : 
+
+| attributs    | fonction                                                                                                                                              |
+|--------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
+| chemin       | chemin de l'instance a traiter                                                                                                                        |
+| watchdog     | delai maximum d'exécution                                                                                                                             |
+| minimiseDure | rend permissif les contraintes dure et essaye de minimiser leurs nombre non respectées(prioritaire sur le cout afin de traité les instance difficiles) |
+| minimiseCout | définit les equations de cout des contraintes souples et cherche à les minimiser                                                                      |
 

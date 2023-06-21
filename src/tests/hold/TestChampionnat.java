@@ -1,4 +1,4 @@
-package tests.Hold;
+package tests.hold;
 
 import instance.Instance;
 import io.InstanceReader;

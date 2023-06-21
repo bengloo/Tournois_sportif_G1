@@ -1,4 +1,4 @@
-package tests.Hold;
+package tests.hold;
 
 import java.io.BufferedReader;
 import java.io.IOException;

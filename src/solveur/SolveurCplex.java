@@ -14,21 +14,14 @@ import java.net.UnknownHostException;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Random;
-
-
 public class SolveurCplex implements Solveur{
-
     private IloCplex cplex;
     private IloIntVar[][][] x;
     private IloIntVar[][] y;
     private IloIntVar[][] z;
-
     private HashMap<Contrainte,IloIntVar> cDurMax;
     private HashMap<Contrainte,IloIntVar> cDurMin;
     private HashMap<Contrainte,IloIntVar> coutC;
-
-
-
     private int watchDog = 1000;
     private boolean minimiseDure =true;
     private boolean minimiseSouple =false;
@@ -86,20 +79,15 @@ public class SolveurCplex implements Solveur{
         try {
             if(cplex.solve()) {
                 // Cplex a trouvé une solution realisable !
-
                 //System.out.println(cplex.toString());
-
             } else {
                 System.out.println("Cplex n’a pas trouve de solution realisable");
-                
                 //System.out.println(cplex.getInfeasibilities(cplex.ge));
                 // Cplex n’a pas trouvé de solution realisable ...
             }
         } catch (IloException e) {
             throw new RuntimeException(e);
         }
-
-
     }
 
     /**
@@ -135,7 +123,6 @@ public class SolveurCplex implements Solveur{
      */
     private void initContrainteInerante(Instance instance){
         int nbEquipe=instance.getNbEquipes();
-
         //chaque équipe est présente une seule fois par jour
         for (int j = 0; j < instance.getNbJournees(); j++) {
             for(int e=0;e<instance.getNbEquipes();e++) {
@@ -154,10 +141,8 @@ public class SolveurCplex implements Solveur{
                 }
             }
         }
-
         //chaque rencontre n'est affectée qu'une seule fois sur l'ensemble des journées ou 0 pour les rencontres contre
         // sois-même
-
         for(int d=0;d<instance.getNbEquipes();d++){
             for(int e=0;e<instance.getNbEquipes();e++) {
                 IloLinearNumExpr expr = null;
@@ -176,7 +161,6 @@ public class SolveurCplex implements Solveur{
                 }
             }
         }
-
         // chaque rencontre à son match retour dans une phase différente
         for(int d=0;d<instance.getNbEquipes();d++) {
             for (int e = 0; e < instance.getNbEquipes(); e++) {
@@ -368,7 +352,6 @@ public class SolveurCplex implements Solveur{
             //System.out.println("Contrainte set: "+c.toString());
         }
     }
-
     /**
      * initialise-les variables de decisions en les affectant au modèle et les nommant
      * @param instance instance traitée par le solveur
@@ -470,7 +453,4 @@ public class SolveurCplex implements Solveur{
         s.addLog("|"+s.check(false)+"|"+this.watchDog+"|"+ LocalDateTime.now()+"|"+s.getCoutTotal());
         return s;
     }
-
-
-
 }

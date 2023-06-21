@@ -1,13 +1,11 @@
-package solveur.Abandoné;
+package solveur.abandonne;
 
 import instance.Instance;
 import operateur.OperateurInsertion;
-import solution.Rencontre;
 import solution.Solution;
 import solveur.Solveur;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 /** classe définissant MeilleureInsertion (implémentant l'interface Solveur)
  * @author Engloo Benjamin

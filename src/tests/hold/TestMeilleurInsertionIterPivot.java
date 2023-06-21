@@ -1,11 +1,11 @@
-package tests.Hold;
+package tests.hold;
 
 import instance.Instance;
 import io.InstanceReader;
 import io.exception.ReaderException;
 import solution.Solution;
-import solveur.Abandoné.MeilleureInsertionV2;
-import solveur.Abandoné.SolveurIterPivot;
+import solveur.abandonne.MeilleureInsertionV2;
+import solveur.abandonne.SolveurIterPivot;
 
 /** classe définissant TestInsertionSimple (pour tester la classe InsertionSimple)
  * @author Engloo Benjamin
