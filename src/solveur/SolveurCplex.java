@@ -54,7 +54,7 @@ public class SolveurCplex implements Solveur{
             throw new RuntimeException(e);
         }
         s.addLog("|"+time);
-        s.writeSolutionCheckerProf(this.getNom());
+        s.writeSolutionCheckerProf();
         s.logCheckProf();
         return s;
     }
@@ -324,6 +324,11 @@ public class SolveurCplex implements Solveur{
         return coutC.get(c);
     }
 
+
+    /**
+     * permet de conaitre ci la contrainte de pause globale a été écarté ou non.
+     * @return avoidContraintePauseGlobale definit en atribut
+     */
     public boolean isAvoidContraintePauseGlobale() {
         return avoidContraintePauseGlobale;
     }

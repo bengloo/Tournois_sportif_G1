@@ -351,9 +351,22 @@ public class Solution {
         return check(true,false);
     }
 
+    /**
+     * Méthode permettant de vérifier la faisabilité de l'entièreté de la solution (avec les contraintes + planning)
+     * @param verbose definit si le cheker (si return faux) prompt dans le terminal d'erreur la contrainte concerné
+     * @return true si la solution est réalisable, false sinon
+     */
     public boolean check(boolean verbose){
         return check(verbose,false);
     }
+
+    /**
+     * Méthode permettant de vérifier la faisabilité de l'entièreté de la solution (avec les contraintes + planning)
+     * @param verbose definit si le cheker (si return faux) prompt dans le terminal d'erreur la contrainte concerné
+     * @param avoidPauseGlobale definit si le cheker doit tester ou non la contrainte de pause globale dans le cas
+     *                          où elle est écarté
+     * @return true si la solution est réalisable, false sinon
+     */
     public boolean check(boolean verbose,boolean avoidPauseGlobale){
         if(!checkIntegriteeChampionat(verbose))return false;
         return checkAllContrainte(verbose,avoidPauseGlobale);
@@ -401,6 +414,9 @@ public class Solution {
 
     /**
      * Méthode permettant de vérifier la faisabilité de la solution vis-à-vis des contraintes
+     * @param verbose definit si le cheker (si return faux) prompt dans le terminal d'erreur la contrainte concerné
+     * @param avoidPauseGlobale definit si le cheker doit tester ou non la contrainte de pause globale dans le cas
+     *                          où elle est écarté
      * @return true si les contraintes sont réalisables, false sinon
      */
     public boolean checkAllContrainte(boolean verbose,boolean avoidPauseGlobale){
@@ -442,6 +458,11 @@ public class Solution {
         return bestInsertion;
     }
 
+    /**
+     * Retourne la meilleure operation d'insertion en termes de cout sur la solution courante à partir des rencontres donné
+     * @param rTarget  ensemble de rencontres ciblé.
+     * @return OperateurInsertion obtenus
+     */
     public OperateurInsertion getMeilleureInsertion(ArrayList<Rencontre> rTarget) {
         OperateurInsertion bestInsertion = new OperateurInsertion();
         List<Rencontre> list = new ArrayList<Rencontre>(rTarget);
@@ -458,6 +479,11 @@ public class Solution {
         return bestInsertion;
     }
 
+    /**
+     * Retoune le meilleur operator insertion d'une liste et update les marge celons les operator non valide
+     * @param oTarget ensemble d'opérateurs ciblé
+     * @return l'operator choisis
+     */
     public OperateurInsertion getMeilleureInsertionV2(ArrayList<OperateurInsertion> oTarget) {
         OperateurInsertion bestInsertion = new OperateurInsertion();
         long seed = System.currentTimeMillis();
@@ -480,6 +506,11 @@ public class Solution {
         return bestInsertion;
     }
 
+    /**
+     * Compare le cout total de deux solutions
+     * @param sol solution a comparé
+     * @return true si la solution courante à un meilleur cout.
+     */
     public boolean isMeilleure(Solution sol){
         if(sol==null)return true;
         return sol.getCoutTotal()>this.getCoutTotal();
@@ -502,6 +533,10 @@ public class Solution {
         return null;
     }
 
+    /**
+     * écrit le fichier de solution instance_sol.txt dans le dossier resultats et un sous dossier nomé celons le solveur.
+     * @param repSolveur nom du repertoir de resultat du solveur
+     */
     public void writeSolution(String repSolveur){
         File folder = new File("resultats/"+repSolveur);
         //on crée un dossier propre au solveur si besoin
@@ -549,7 +584,10 @@ public class Solution {
         }
     }
 
-    public void writeSolutionCheckerProf(String repSolveur){
+    /**
+     *copie les fichier d'instance et de solution dans le dosier chekerprof
+     */
+    public void writeSolutionCheckerProf(){
 
         //on vide le dossier
         File dossier = new File("checkerProf");
@@ -626,6 +664,11 @@ public class Solution {
     }
 
 
+    /**
+     * Update les marge celons l'operateur donné et réalisé
+     * @param o operateur
+     * @return la nouvelle liste des operateur insertion viable celons les marges
+     */
     public List<OperateurInsertion> updateMages(OperateurInsertion o){
 
         if(o!=null) {
@@ -739,6 +782,7 @@ public class Solution {
         return res;
     }
 
+
     public ArrayList<OperateurInsertion> getInsertionMinMarge(List<OperateurInsertion> listinsert){
         ArrayList<OperateurInsertion> res=new ArrayList<>();
         int margeMin=Integer.MAX_VALUE;
@@ -763,6 +807,10 @@ public class Solution {
         return res;
     }
 
+    /**
+     * recupere les rencontres qui ne sont pas encore afecté à des journees
+     * @return une liste de label (String) representative de ces rencontres
+     */
     public List<String> getRencontreSansJournee(){
         List<String> res=new ArrayList<>();
         for(Rencontre r:this.getRencontres().values()){
@@ -809,6 +857,9 @@ public class Solution {
         return sb.toString();
     }
 
+    /**
+     * Reprend sous forme de log les resultat du chekerProf
+     */
     public void logCheckProf(){
         String cheminJar = "CheckerChampionnat.jar";
         String motifContraintes = "\t\t (\\d+) contraintes non satisfaites";

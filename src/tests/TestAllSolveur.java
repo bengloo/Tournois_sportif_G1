@@ -174,7 +174,7 @@ public class TestAllSolveur {
             }
 
             sol.writeSolution(solveur.getNom());
-            sol.writeSolutionCheckerProf(solveur.getNom());
+            sol.writeSolutionCheckerProf();
             System.out.println(sol.getLog());
             // recuperer le cout total de la solution, et savoir si
             // la solution est valide

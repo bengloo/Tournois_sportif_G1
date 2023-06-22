@@ -22,12 +22,12 @@ public class TestSolveur {
             InstanceReader reader = new InstanceReader(path);
             Instance i= reader.readInstance();
 
-            Solveur solveur = new SolveurIter( new SolveurCplex(1000,false,false,true),10);
+            Solveur solveur = new SolveurIter( new SolveurCplex(1000,true,false,true),10);
 
             Solution s = solveur.solve(i);
 
             s.writeSolution(solveur.getNom());
-            s.writeSolutionCheckerProf(solveur.getNom());
+            s.writeSolutionCheckerProf();
 
             System.out.println(s.toStringSimple());
             System.out.println(s.check());
