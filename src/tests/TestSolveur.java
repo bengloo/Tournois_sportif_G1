@@ -17,12 +17,12 @@ import solveur.SolveurIter;
  */
 public class TestSolveur {
     public static void main(String[] args) {
-        String path="instancesViablesCplex/instance_ITC2021_Test_1.txt";
+        String path="instancesViablesCplex/saufPause/instance_ITC2021_Early_1.txt";
         try {
             InstanceReader reader = new InstanceReader(path);
             Instance i= reader.readInstance();
 
-            Solveur solveur = new SolveurIter( new SolveurCplex(1000,false,false,false),10);
+            Solveur solveur = new SolveurIter( new SolveurCplex(1000,false,false,true),10);
 
             Solution s = solveur.solve(i);
 

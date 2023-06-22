@@ -348,12 +348,15 @@ public class Solution {
      * @return true si la solution est réalisable, false sinon
      */
     public boolean check(){
-        return check(true);
+        return check(true,false);
     }
 
     public boolean check(boolean verbose){
+        return check(verbose,false);
+    }
+    public boolean check(boolean verbose,boolean avoidPauseGlobale){
         if(!checkIntegriteeChampionat(verbose))return false;
-        return checkAllContrainte(verbose);
+        return checkAllContrainte(verbose,avoidPauseGlobale);
     }
 
     /**
@@ -400,16 +403,17 @@ public class Solution {
      * Méthode permettant de vérifier la faisabilité de la solution vis-à-vis des contraintes
      * @return true si les contraintes sont réalisables, false sinon
      */
-    public boolean checkAllContrainte(boolean verbose){
+    public boolean checkAllContrainte(boolean verbose,boolean avoidPauseGlobale){
         boolean res=true;
         for(Contrainte c:getContraintes()){
-            if(!c.checkContrainte(this)){
-                if(verbose)System.err.println("Contrainte non respectée: "+c.toString());
-                if(c instanceof ContraintePauseEquipe || c instanceof ContraintePauseGlobale){
-                    if(verbose)System.err.println("Coef"+((Integer)coefContraintes.get(c)));
+            if((!avoidPauseGlobale)||((avoidPauseGlobale)&&(!(c instanceof ContraintePauseGlobale)))) {
+                if (!c.checkContrainte(this)) {
+                    if (verbose) System.err.println("Contrainte non respectée: " + c.toString());
+                    if (c instanceof ContraintePauseEquipe || c instanceof ContraintePauseGlobale) {
+                        if (verbose) System.err.println("Coef" + ((Integer) coefContraintes.get(c)));
+                    }
+                    res = false;
                 }
-
-                res= false;
             }
         }
 

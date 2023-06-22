@@ -21,10 +21,14 @@ public class SolveurIter implements Solveur{
     @Override
     public Solution solve(Instance instance) {
         int niter=0;
+        boolean avoidPauseGlobale=false;
+        if(solveurInitial instanceof SolveurCplex){
+            avoidPauseGlobale=((SolveurCplex) solveurInitial).isAvoidContraintePauseGlobale();
+        }
         Solution sbest= new Solution(instance);
         while (niter<nbIterMax){
             Solution sol= this.solveurInitial.solve(instance);
-            if((!sbest.check(false))||sol.check(false)&&sol.isMeilleure(sbest)){
+            if((!sbest.check(false,avoidPauseGlobale))||sol.check(false,avoidPauseGlobale)&&sol.isMeilleure(sbest)){
                   sbest=sol;
                 System.out.println(sol.getLog());
             }

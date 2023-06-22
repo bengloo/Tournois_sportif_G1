@@ -324,6 +324,10 @@ public class SolveurCplex implements Solveur{
         return coutC.get(c);
     }
 
+    public boolean isAvoidContraintePauseGlobale() {
+        return avoidContraintePauseGlobale;
+    }
+
     /**
      * définit les equations liées aux contraintes dures et souples
      * @param instance instance traitée par le solveur
@@ -439,6 +443,7 @@ public class SolveurCplex implements Solveur{
         }
         s.addLog(this.getNom()+"|"+instance.getNom());
         s.addLog("|"+s.check(false)+"|"+this.watchDog+"|"+ LocalDateTime.now()+"|"+s.getCoutTotal());
+
         return s;
     }
 }
