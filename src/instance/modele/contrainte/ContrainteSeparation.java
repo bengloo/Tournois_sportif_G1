@@ -49,8 +49,8 @@ public class ContrainteSeparation extends Contrainte{
                    Journee j1=championnat.getRencontreByEquipes(equipe1,equipe2).getJournee();
                     Journee j2=championnat.getRencontreByEquipes(equipe2,equipe1).getJournee();
                     if(j1!=null && j2!=null){
-                        int separation= min - Math.abs(j1.getId()-j2.getId())-1;
-                        if(separation>0)valc+=separation;
+                        int separation= Math.max(0, this.min - (Math.abs(j1.getId()-j2.getId())-1));
+                        valc+=separation;
                     }
                 }
             }

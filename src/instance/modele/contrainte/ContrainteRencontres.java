@@ -98,16 +98,10 @@ public class ContrainteRencontres extends Contrainte{
      * @param r la rencontre concernée
      * @return le nombre entier du compteur
      */
-    private int parcoursJournees(Solution championnat, String r) { //Factorisation du code
-        int valcDelta=0;
-
-            for (Integer jID : this.journees) {
-                //si la journee courante contient la rencontre
-                if (jID != null && championnat.getJourneeByID(jID).getRencontres().containsKey(r)) {
-                    valcDelta++;
-                }
-            }
-        return valcDelta;
+    private int parcoursJournees(Solution championnat, String r) {
+        if(championnat.getRencontreByID(r).getJournee()==null)return 0;
+        if(this.journees.contains(championnat.getRencontreByID(r).getJournee().getId())) return 1;
+        return 0;
     }
 
     @Override

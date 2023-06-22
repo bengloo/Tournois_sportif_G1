@@ -74,7 +74,6 @@ public class ContraintePauseGlobale extends Contrainte{
                 }
             }
         }
-
         if(valc > this.max) {
             if (estDure()) return Integer.MAX_VALUE;
             return this.penalite * (valc-this.max);

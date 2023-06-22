@@ -348,7 +348,7 @@ public class TestAllSolveur {
      * @param args
      */
     public static void main(String[] args) {
-        TestAllSolveur test = new TestAllSolveur("instancesTestsUnitaires");
+        TestAllSolveur test = new TestAllSolveur("instancesTestsUnitairesLourds");
         test.printAllResultats("results");
     }
 }

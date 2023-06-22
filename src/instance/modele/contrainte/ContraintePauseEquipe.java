@@ -55,7 +55,8 @@ public class ContraintePauseEquipe extends Contrainte{
     }
 
     @Override
-    public int getCoutTotal(Solution championnat) {
+    public int getCoutTotal(Solution championnat){
+        System.out.println(this);
         int valc=0;
         for (Integer j : this.journees) {
             for (Rencontre r : championnat.getJourneeByID(j).getRencontres().values()) {

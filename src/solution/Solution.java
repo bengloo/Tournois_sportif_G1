@@ -183,8 +183,9 @@ public class Solution {
      */
     public Integer getCoutTotal() {
         int ctt=0;
-        for(Contrainte c:coefContraintes.keySet()){
-            ctt+=c.getCoutTotal(this);
+        for(Contrainte c:instance.getContraintes()){
+            int cout=c.getCoutTotal(this);
+            if(cout<Integer.MAX_VALUE){ctt+=cout;}
         }
         return ctt;
     }
@@ -232,6 +233,9 @@ public class Solution {
     }
     public Journee getJourneeByID(int id){
         return this.journees.get(id);
+    }
+    public Rencontre getRencontreByID(String id){
+        return this.rencontres.get(id);
     }
     public Rencontre getRencontreByEquipes(int eDomicile,int eExterne){
         return this.rencontres.get(getIDRencontre(eDomicile,eExterne));

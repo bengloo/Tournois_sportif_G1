@@ -17,7 +17,7 @@ import solveur.SolveurIter;
  */
 public class TestSolveur {
     public static void main(String[] args) {
-        String path="instancesTestsUnitaires/instance_test_ContrainteHBClassement_4Equipes.txt";
+        String path="instancesTestsUnitaires/instance_test_ContrainteRencontres_4Equipes.txt";
         try {
             InstanceReader reader = new InstanceReader(path);
             Instance i= reader.readInstance();

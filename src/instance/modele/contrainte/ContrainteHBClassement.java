@@ -84,7 +84,7 @@ public class ContrainteHBClassement extends Contrainte{
             for (int j : this.journees) {
                 for (Rencontre r : championnat.getJourneeByID(j).getRencontres().values()) {
                     if(r.getDomicile().getId()==this.equipe && this.equipesAdverses.contains(r.getExterieur().getId())){
-                        valc+=1;
+                        valc=valc+1;
                     }
                 }
             }
@@ -92,9 +92,8 @@ public class ContrainteHBClassement extends Contrainte{
         if(mode==EXTERIEUR||mode==INDEFINI) {
             for (int j : this.journees) {
                 for (Rencontre r : championnat.getJourneeByID(j).getRencontres().values()) {
-                    if(r.getExterieur().getId()==this.equipe && this.equipesAdverses.contains(r.getDomicile().getId())){
-                        valc+=1;
-
+                    if((r.getExterieur().getId()==this.equipe) && (this.equipesAdverses.contains(r.getDomicile().getId()))){
+                        valc=valc+1;
                     }
                 }
             }

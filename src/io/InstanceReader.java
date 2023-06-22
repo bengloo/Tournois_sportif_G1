@@ -215,7 +215,7 @@ public class InstanceReader {
 
             // Seulement si la contrainte est souple
             if (estSouple) {
-                penaliteStr = tokens[4].split("=")[1];
+                penaliteStr = tokens[5].split("=")[1];
                 penalite = Integer.parseInt(penaliteStr);
                 contrainteHBClassement = new ContrainteHBClassement(idEquipe, castModeToTypeEnum(mode), max, penalite);
             } else {

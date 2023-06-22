@@ -1,5 +1,5 @@
 // Nom
-Contrainte placement 6 equipe
+Contrainte separation 6 equipe
 
 // Nombre d'equipes
 6
@@ -36,25 +36,8 @@ Contrainte placement 6 equipe
 
 // Contraintes de placement
 // Nombre
-17
+0
 // Contraintes
-equipe=4	jours=5	mode=D	max=0	penalite=1
-equipe=5	jours=1;2	mode=D	max=1	penalite=1
-equipe=1	jours=1;7;9	mode=D	max=1	penalite=1
-equipe=0	jours=3;4;7	mode=D	max=1	penalite=1
-equipe=0	jours=4;5;7;8	mode=E	max=1	penalite=1
-equipe=4	jours=2	mode=D	max=0	penalite=1
-equipe=2	jours=0;1;7	mode=D	max=1	penalite=1
-equipe=0	jours=1;9	mode=D	max=1	penalite=1
-equipe=0	jours=2;5	mode=E	max=1	penalite=1
-equipe=2	jours=6	mode=E	max=0	penalite=1
-equipe=0	jours=3	mode=D	max=0	penalite=1
-equipe=2	jours=0;2;9	mode=D	max=1	penalite=1
-equipe=1	jours=5;7;9	mode=D	max=1	penalite=1
-equipe=3	jours=0;1;2;3;4	mode=E	max=1	penalite=1
-equipe=3	jours=7	mode=D	max=0	penalite=1
-equipe=4	jours=3;5;6;9	mode=E	max=1	penalite=1
-equipe=4	jours=1;3;5;9	mode=D	max=1	penalite=1
 
 // Contraintes d'equipes en haut et bas de classement
 // Nombre
@@ -83,5 +66,6 @@ equipe=4	jours=1;3;5;9	mode=D	max=1	penalite=1
 
 // Contraintes de separation
 // Nombre
-0
+1
 // Contraintes
+equipes=0;1;2;3;4;5	min=10	penalite=1
