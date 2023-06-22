@@ -22,12 +22,10 @@ public class SolveurIter implements Solveur{
     public Solution solve(Instance instance) {
         int niter=0;
         Solution sbest= new Solution(instance);
-        int bestCout=Integer.MAX_VALUE;
         while (niter<nbIterMax){
             Solution sol= this.solveurInitial.solve(instance);
-            if(sol.check(false)&&Integer.parseInt(sol.getLog(9))<bestCout){
+            if((!sbest.check(false))||sol.check(false)&&sol.isMeilleure(sbest)){
                   sbest=sol;
-                  bestCout= Integer.parseInt(sol.getLog(9));
                 System.out.println(sol.getLog());
             }
             niter++;

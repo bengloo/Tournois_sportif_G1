@@ -23,9 +23,8 @@ contrainte pause equipe 4 equipe
 
 // Contraintes de pause par equipe
 // Nombre
-1
+0
 // Contraintes
-equipe=2	jours=0;1;2;3;4;5	mode=E	max=0
 
 // Contraintes de pause globale
 // Nombre
@@ -52,8 +51,9 @@ equipe=2	jours=0;1;2;3;4;5	mode=E	max=0
 
 // Contraintes de pause par equipe
 // Nombre
-0
+1
 // Contraintes
+equipe=2	jours=0;1;2;3	mode=DE	max=0	penalite=1
 
 // Contraintes de pause globale
 // Nombre

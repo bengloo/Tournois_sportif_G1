@@ -190,6 +190,10 @@ public class Solution {
         return ctt;
     }
 
+    public void setCoutTotal(Integer coutTotal) {
+        this.coutTotal = coutTotal;
+    }
+
     /**
      * Méthode permettant de récupérer le coeff des contraintes de la solution
      * @return le tableau de l'ensemble des coeffs de contraintes
@@ -472,6 +476,10 @@ public class Solution {
         return bestInsertion;
     }
 
+    public boolean isMeilleure(Solution sol){
+        if(sol==null)return true;
+        return sol.getCoutTotal()>this.getCoutTotal();
+    }
 
 
     /**

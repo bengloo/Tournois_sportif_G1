@@ -56,12 +56,13 @@ public class ContraintePauseEquipe extends Contrainte{
 
     @Override
     public int getCoutTotal(Solution championnat){
-        System.out.println(this);
         int valc=0;
         for (Integer j : this.journees) {
             for (Rencontre r : championnat.getJourneeByID(j).getRencontres().values()) {
                 if(r.isConcerne(this.equipe,this.mode)){
+
                     valc+=traitementModes(championnat,r, this.mode);
+
                 }
             }
         }
@@ -111,6 +112,16 @@ public class ContraintePauseEquipe extends Contrainte{
                     if(rjprec.getExterieur().equals(rEquipe.getExterieur())){
                         return 1;
                     }
+                    break;
+                case INDEFINI:
+                    int res=0;
+                    if(rjprec.getDomicile().getId()==this.equipe&&rjprec.getDomicile().equals(rEquipe.getDomicile())){
+                        return 1;
+                    }
+                    if(rjprec.getExterieur().getId()==this.equipe&&rjprec.getExterieur().equals(rEquipe.getExterieur())){
+                        return 1;
+                    }
+                    break;
             }
         }
         return 0;

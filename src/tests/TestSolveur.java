@@ -17,15 +17,14 @@ import solveur.SolveurIter;
  */
 public class TestSolveur {
     public static void main(String[] args) {
-        String path="instancesTestsUnitaires/instance_test_ContrainteRencontres_4Equipes.txt";
+        String path="instancesViablesCplex/instance_ITC2021_Test_1.txt";
         try {
             InstanceReader reader = new InstanceReader(path);
             Instance i= reader.readInstance();
 
-            Solveur solveur = new SolveurIter( new SolveurCplex(1000,false,false,false),1);
+            Solveur solveur = new SolveurIter( new SolveurCplex(1000,false,false,false),10);
 
             Solution s = solveur.solve(i);
-
 
             s.writeSolution(solveur.getNom());
             s.writeSolutionCheckerProf(solveur.getNom());
