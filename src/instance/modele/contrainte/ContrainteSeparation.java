@@ -42,7 +42,7 @@ public class ContrainteSeparation extends Contrainte{
     @Override
     public int getCoutTotal(Solution championnat) {
         int valc =0;
-        //pour tout les couple d'équipes sans doublont
+        //pour tous les couples d'équipes sans doublons
         for (Integer equipe1 : equipes) {
             for (Integer equipe2 : equipes) {
                 if (equipe1 < equipe2) {
@@ -64,8 +64,7 @@ public class ContrainteSeparation extends Contrainte{
                 .getExterieur().getId())){
             Journee j1 = o.getJournee();
             Journee j2 = championnat.getMatchRetour(o.getRencontre()).getJournee();
-            //System.out.println(j1);
-            //System.out.println(j2);
+
             if (j2 != null) {
                 int separation = min - (Math.abs(j1.getId() - j2.getId()) - 1);
                 if (separation > 0) return separation;
@@ -86,7 +85,6 @@ public class ContrainteSeparation extends Contrainte{
             if (estDure()) return Integer.MAX_VALUE;
             return this.penalite *((Integer)valcDelta);
         }
-        //TODO d'autre operation implique d'autre cout*/
         return 0;
     }
 

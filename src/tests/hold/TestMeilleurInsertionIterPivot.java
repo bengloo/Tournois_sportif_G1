@@ -16,12 +16,10 @@ import solveur.abandonne.SolveurIterPivot;
  */
 public class TestMeilleurInsertionIterPivot {
     public static void main(String[] args) {
-        //String path="instances/instance_ITC2021_Early_1.txt";
         String path="instances/instance_test_sansContrainte_10Equipe.txt";
         try {
             InstanceReader reader = new InstanceReader(path);
             Instance i= reader.readInstance();
-            //System.out.println(i);
 
             SolveurIterPivot solveur = new SolveurIterPivot(new MeilleureInsertionV2(),200);
             Solution s = solveur.solve(i);

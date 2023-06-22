@@ -61,8 +61,6 @@ public class ContraintePauseGlobale extends Contrainte{
         return TypeContrainte.PAUSEGLOBALE;
     }
 
-    //TODO implementer les fonction de calcule de cout en sinspirent de la contrainte de placement, réflechire si on ne
-    // peux pas factoriser du code sout des fonction comune aux contraintes
     @Override
     public int getCoutTotal(Solution championnat) {
         int valc = 0;
@@ -70,15 +68,13 @@ public class ContraintePauseGlobale extends Contrainte{
             for (Rencontre r : championnat.getJourneeByID(j).getRencontres().values()) {
                 if(this.equipes.contains(r.getDomicile().getId())&&this.equipes.contains(r.getDomicile().getId())){
                     valc+=traitementModes(championnat,r,TypeMode.DOMICILE);
-                    //System.out.println(valc+":"+j+":"+r.getLabel()+"D");
                 }
                 if(this.equipes.contains(r.getExterieur().getId())&&this.equipes.contains(r.getExterieur().getId())){
                     valc+=traitementModes(championnat,r,TypeMode.EXTERIEUR);
-                    //System.out.println(valc+":"+j+":"+r.getLabel()+"E");
                 }
             }
         }
-        //System.out.println(valc);
+
         if(valc > this.max) {
             if (estDure()) return Integer.MAX_VALUE;
             return this.penalite * (valc-this.max);
@@ -88,45 +84,37 @@ public class ContraintePauseGlobale extends Contrainte{
 
     @Override
     public Object evalDeltaCoef(Solution championnat, Operateur o) {
-        //System.out.println("debut");
+
         int valcDelta=0;
         Journee jprec=championnat.getJourneeByID(o.getJournee().getId()-1);
         Journee jnext=championnat.getJourneeByID(o.getJournee().getId()+1);
         if(!this.equipes.contains(o.getRencontre().getDomicile().getId())&&!this.equipes.contains(o.getRencontre()
                 .getExterieur().getId()))return 0;
         if(jprec!=null&&this.journees.contains(o.getJournee().getId())){
-            //System.out.println(jprec.toString());
             for(Rencontre r:jprec.getRencontres().values()){
                 if(r.isConcerne(o.getRencontre().getDomicile(),TypeMode.DOMICILE)&&this.equipes.contains(o
                         .getRencontre().getDomicile().getId())){
-                    //System.out.printf("'''''''''''''''''''''''''''''''''''"+r.toString()+"\n");
                     valcDelta++;
                 };
                 if(r.isConcerne(o.getRencontre().getExterieur(),TypeMode.EXTERIEUR)&&this.equipes.contains(o
                         .getRencontre().getExterieur().getId())){
-                    //System.out.printf(r.toString()+"\n");
                     valcDelta++;
                 }
             }
         }
-        //System.out.println("Milieu");
         if(jnext!=null&&this.journees.contains(jnext.getId())){
-            //System.out.println(jnext.toString());
             for(Rencontre r : jnext.getRencontres().values()){
                 if(r.isConcerne(o.getRencontre().getDomicile(), TypeMode.DOMICILE)&&this.equipes.contains(r
                         .getDomicile().getId())){
-                    //System.out.printf(r.toString()+"\n");
                     valcDelta++;
                 }
                 if(r.isConcerne(o.getRencontre().getExterieur(), TypeMode.EXTERIEUR)&&this.equipes.contains(r
                         .getExterieur().getId()))
                 {
-                    //System.out.printf(r.toString()+"\n");
                     valcDelta++;
                 }
             }
         }
-        //System.out.println("Fin");
        return valcDelta;
     }
 
@@ -144,16 +132,12 @@ public class ContraintePauseGlobale extends Contrainte{
                 case DOMICILE:
                     if(rjprec.getDomicile().equals(rEquipe.getDomicile())&&this.equipes.contains(rEquipe.getDomicile()
                             .getId())){
-                        //System.out.println(rEquipe.getJournee().getId()+":"+rEquipe.getLabel()+":"+rjprec
-                        // .getLabel()+"D");
                         return 1;
                     }
                     break;
                 case EXTERIEUR:
                     if(rjprec.getExterieur().equals(rEquipe.getExterieur())&&this.equipes.contains(rEquipe
                             .getExterieur().getId())){
-                        //System.out.println(rEquipe.getJournee().getId()+":"+rEquipe.getLabel()+":"+rjprec
-                        // .getLabel()+"E");
                         return 1;
                     }
                     break;
@@ -177,7 +161,6 @@ public class ContraintePauseGlobale extends Contrainte{
                 return this.penalite *((Integer)valcDelta);
             }else return 0;
         }
-        //TODO d'autre operation implique d'autre cout
         return 0;
     }
 

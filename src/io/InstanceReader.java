@@ -6,14 +6,12 @@ import io.exception.FileExistException;
 import io.exception.FormatFileException;
 import io.exception.OpenFileException;
 import io.exception.ReaderException;
-import solution.Journee;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashMap;
 
 
 import static instance.modele.contrainte.TypeMode.*;
@@ -58,14 +56,10 @@ public class InstanceReader {
             BufferedReader br = new BufferedReader(f);
             String nom = lireNom(br);
             int nbEquipes = lireNbEquipes(br);
-            //System.out.println(this.instanceFile.getPath());
             Instance i = new Instance(nom,nbEquipes,this.instanceFile.getAbsolutePath());
-            //System.out.println(i);
 
-            // TO CHECK : constructeur de la classe Instance
             this.lireContraintesDures(br, i);
             this.lireContraintesSouples(br, i);
-            //System.out.println(i);
 
             br.close();
             f.close();
@@ -101,8 +95,6 @@ public class InstanceReader {
         String ligne = br.readLine();
         lecture(br, ligne, "// Contraintes dures");
 
-        //System.out.println("\n--------------- CONTRAINTES DURES ---------------");
-        //TODO retourne false si erreur d'ajout
         lireContraintesPlacement(br,i,false);
         lireContraintesHBClassement(br,i,false);
         lireContraintesRencontres(br,i,false);
@@ -120,7 +112,6 @@ public class InstanceReader {
         String ligne = br.readLine();
         lecture(br, ligne, "// Contraintes souples");
 
-       // System.out.println("\n--------------- CONTRAINTES SOUPLES ---------------");
         lireContraintesPlacement(br,i,true);
         lireContraintesHBClassement(br,i,true);
         lireContraintesRencontres(br,i,true);
@@ -156,7 +147,6 @@ public class InstanceReader {
 
         for(int i =0; i<nbContraintesPlacement;i++){
             ligne = br.readLine();
-           // System.out.println(ligne);
 
             tokens = ligne.split("\t");
             equipeStr = tokens[0].split("=")[1];
@@ -178,7 +168,6 @@ public class InstanceReader {
             tokensJours = idJour.split(";");
 
             for (int j = 0; j < tokensJours.length; j++) {
-                //TODO return false si erreur d'ajout
                 contraintePlacement.addJournee(Integer.parseInt(tokensJours[j]));
             }
             instance.addContrainte(contraintePlacement);
@@ -213,7 +202,6 @@ public class InstanceReader {
 
         for(int i =0; i<nbContraintesHBClassement;i++){
             ligne = br.readLine();
-            //  System.out.println(ligne);
 
             tokens = ligne.split("\t");
             equipeStr = tokens[0].split("=")[1];
@@ -237,12 +225,10 @@ public class InstanceReader {
             tokensEA = idEquipeAdverse.split(";");
 
             for (int j = 0; j < tokensJours.length; j++) {
-                //TODO return false si erreur d'ajout
                 contrainteHBClassement.addJournee(Integer.parseInt(tokensJours[j]));
             }
 
             for (int k = 0; k < tokensEA.length; k++) {
-                //TODO return false si erreur d'ajout
                 contrainteHBClassement.addEquipeAdverse(Integer.parseInt(tokensEA[k]));
             }
             instance.addContrainte(contrainteHBClassement);
@@ -276,7 +262,6 @@ public class InstanceReader {
 
         for(int i =0; i<nbContraintesRencontre;i++){
             ligne = br.readLine();
-           // System.out.println(ligne);
 
             tokens = ligne.split("\t");
 
@@ -300,12 +285,10 @@ public class InstanceReader {
             tokensRencontres = idRencontre.split(";");
 
             for (int j = 0; j < tokensJours.length; j++) {
-                //TODO return false si erreur d'ajout
                 contrainteRencontres.addJournee(Integer.parseInt(tokensJours[j]));
             }
 
             for (int k = 0; k < tokensRencontres.length; k++) {
-                //TODO return false si erreur d'ajout
                 contrainteRencontres.addRencontre(tokensRencontres[k].replace(',','-'));
             }
             instance.addContrainte(contrainteRencontres);
@@ -337,7 +320,6 @@ public class InstanceReader {
 
         for(int i =0; i<nbContraintesPauseEquipes;i++){
             ligne = br.readLine();
-            //  System.out.println(ligne);
 
             tokens = ligne.split("\t");
 
@@ -360,7 +342,6 @@ public class InstanceReader {
             tokensJours = idJour.split(";");
 
             for (int j = 0; j < tokensJours.length; j++) {
-                //TODO return false si erreur d'ajout
                 contraintePauseEquipe.addJournee(Integer.parseInt(tokensJours[j]));
             }
             instance.addContrainte(contraintePauseEquipe);
@@ -394,7 +375,6 @@ public class InstanceReader {
 
         for(int i =0; i<nbContraintesPauseGlobale;i++) {
             ligne = br.readLine();
-            //  System.out.println(ligne);
 
             tokens = ligne.split("\t");
 
@@ -409,23 +389,17 @@ public class InstanceReader {
                 penaliteStr = tokens[3].split("=")[1];
                 penalite = Integer.parseInt(penaliteStr);
                 contraintePauseGlobale = new ContraintePauseGlobale(max, penalite);
-                //System.out.println(estSouple);
-                //System.out.println(penalite);
             } else {
                 contraintePauseGlobale = new ContraintePauseGlobale(max);
-                //System.out.println(estSouple);
-                //System.out.println(penalite);
             }
             tokensJours = idJour.split(";");
             tokensE = equipeStr.split(";");
 
             for (int j = 0; j < tokensJours.length; j++) {
-                //TODO return false si erreur d'ajout
                 contraintePauseGlobale.addJournee((Integer.parseInt(tokensJours[j])));
             }
 
             for (int k = 0; k < tokensE.length; k++) {
-                //TODO return false si erreur d'ajout
                 contraintePauseGlobale.addEquipe((Integer.parseInt(tokensE[k])));
             }
             instance.addContrainte(contraintePauseGlobale);
@@ -457,7 +431,6 @@ public class InstanceReader {
 
         for(int i =0; i<nbContraintesRencontre;i++){
             ligne = br.readLine();
-            //System.out.println(ligne);
 
             tokens = ligne.split("\t");
 
@@ -475,12 +448,10 @@ public class InstanceReader {
             tokensE = equipeStr.split(";");
 
             for (int j = 0; j < tokensJours.length; j++) {
-                //TODO return false si erreur d'ajout
                 contrainteEquite.addJournee((Integer.parseInt(tokensJours[j])));
             }
 
             for (int k = 0; k < tokensE.length; k++) {
-                //TODO return false si erreur d'ajout
                 contrainteEquite.addEquipe((Integer.parseInt(tokensE[k])));
             }
             instance.addContrainte(contrainteEquite);
@@ -512,7 +483,6 @@ public class InstanceReader {
 
         for(int i =0; i<nbContraintesRencontre;i++){
             ligne = br.readLine();
-            //System.out.println(ligne);
 
             tokens = ligne.split("\t");
 
@@ -529,7 +499,6 @@ public class InstanceReader {
             tokensE = equipeStr.split(";");
 
             for (int k = 0; k < tokensE.length; k++) {
-                //TODO return false si erreur d'ajout
                 contrainteSeparation.addEquipe((Integer.parseInt(tokensE[k])));
             }
 

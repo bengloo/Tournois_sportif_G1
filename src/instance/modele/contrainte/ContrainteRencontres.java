@@ -5,7 +5,6 @@ import ilog.concert.IloLinearNumExpr;
 import instance.Instance;
 import operateur.Operateur;
 import operateur.OperateurInsertion;
-import solution.Rencontre;
 import solution.Solution;
 import solveur.SolveurCplex;
 
@@ -64,8 +63,6 @@ public class ContrainteRencontres extends Contrainte{
         return TypeContrainte.RENCONTRES;
     }
 
-    //TODO implementer les fonctions de calcul de cout en s'inspirant de la contrainte de placement, réflechir si on ne
-    // peut pas factoriser du code avec des fonctions communes aux contraintes
     @Override
     public int getCoutTotal(Solution championnat) {
         //le nombre de rencontres jouées par l’équipe de la contrainte selon un mode sur l’ensemble des journées
@@ -85,12 +82,8 @@ public class ContrainteRencontres extends Contrainte{
 
     @Override
     public Object evalDeltaCoef(Solution championnat, Operateur o) {
-        // TODO: passage 2x dans la méthode c'est normal ??? Faites le test avec System.out.println()
         int valcDelta=0;
         if(o instanceof OperateurInsertion) {
-            /*Rencontre r = o.getRencontre();
-            valcDelta = parcoursJournees(championnat, r.getLabel());*/
-            //System.out.println(this.rencontres.contains(o.getRencontre().getLabel()));
             if(this.journees.contains(o.getJournee().getId()) && this.rencontres.contains(o.getRencontre().getLabel())){
                 valcDelta = 1;
             }
@@ -111,7 +104,6 @@ public class ContrainteRencontres extends Contrainte{
             for (Integer jID : this.journees) {
                 //si la journee courante contient la rencontre
                 if (jID != null && championnat.getJourneeByID(jID).getRencontres().containsKey(r)) {
-                    // TODO enlever inutile ?? -------> && championnat.getJournees().equals(jID)
                     valcDelta++;
                 }
             }
@@ -133,11 +125,10 @@ public class ContrainteRencontres extends Contrainte{
                     .getCoefContraintes().get(this)+ (Integer) valcDelta < min){
                 if (estDure()) return Integer.MAX_VALUE;
                 //au dela du max ou en-dessous du min le cout suit une relation linéaire le delta cout est donc
-                // proportionel
+                // proportionnel
                 return this.penalite *((Integer)valcDelta);
             }else return 0;
         }
-        //TODO d'autre operation implique d'autre cout
         return 0;
     }
 

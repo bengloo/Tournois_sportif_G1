@@ -4,8 +4,6 @@ import instance.Instance;
 import operateur.Operateur;
 import operateur.OperateurEchange;
 import operateur.OperateurInsertion;
-import solution.Equipe;
-import solution.Journee;
 import solution.Rencontre;
 import solution.Solution;
 import solveur.SolveurCplex;

@@ -10,7 +10,6 @@ import solution.Solution;
 import solution.Rencontre;
 import solveur.SolveurCplex;
 
-import java.util.Objects;
 import java.util.TreeSet;
 
 /** classe définissant ContraintePauseEquipe (hérite de Contrainte)
@@ -62,7 +61,6 @@ public class ContraintePauseEquipe extends Contrainte{
             for (Rencontre r : championnat.getJourneeByID(j).getRencontres().values()) {
                 if(r.isConcerne(this.equipe,this.mode)){
                     valc+=traitementModes(championnat,r, this.mode);
-                    //valc+=traitementModes(championnat,r,TypeMode.EXTERIEUR);
                 }
             }
         }
@@ -143,7 +141,6 @@ public class ContraintePauseEquipe extends Contrainte{
                 return this.penalite *((Integer)valcDelta);
             }else return 0;
         }
-        //TODO d'autre operation implique d'autre cout
         return 0;
     }
 

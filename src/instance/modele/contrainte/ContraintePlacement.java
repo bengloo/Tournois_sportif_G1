@@ -2,9 +2,6 @@ package instance.modele.contrainte;
 
 import ilog.concert.IloException;
 import ilog.concert.IloLinearNumExpr;
-import ilog.concert.IloNumExpr;
-import ilog.concert.IloRange;
-import ilog.cplex.IloCplex;
 import instance.Instance;
 import operateur.OperateurInsertion;
 import operateur.Operateur;
@@ -12,7 +9,6 @@ import solution.Solution;
 import solution.Rencontre;
 import solveur.SolveurCplex;
 
-import java.util.Objects;
 import java.util.TreeSet;
 
 /** classe définissant ContraintePlacement (hérite de Contrainte)
@@ -78,7 +74,6 @@ public class ContraintePlacement extends Contrainte{
         for(Rencontre r:championnat.getRencontres().values()){
             //pour toutes les journees concerné par les contraintes
             valc += parcoursJournees(championnat, r);
-            //System.out.println("coef contrainte placement get cout tt:"+valc);
         }
 
         if(valc>this.max) {
@@ -111,7 +106,6 @@ public class ContraintePlacement extends Contrainte{
         int valcDelta=0;
         for (Integer jID : this.journees) {
             if(r.isConcerne(championnat.getEquipes().get(this.equipe), this.mode) && championnat.isRJPresent(jID,r)) {
-                //System.out.println("deltacoef++ evaldeltacoef coef:"+valcDelta);
                 valcDelta++;
             }
         }

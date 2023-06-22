@@ -79,10 +79,8 @@ public class SolveurCplex implements Solveur{
         try {
             if(cplex.solve()) {
                 // Cplex a trouvé une solution realisable !
-                //System.out.println(cplex.toString());
             } else {
                 System.out.println("Cplex n’a pas trouve de solution realisable");
-                //System.out.println(cplex.getInfeasibilities(cplex.ge));
                 // Cplex n’a pas trouvé de solution realisable ...
             }
         } catch (IloException e) {
@@ -104,17 +102,9 @@ public class SolveurCplex implements Solveur{
         initContrainteInerante(instance);
         initContrainteDecision(instance);
         initContrainte(instance);
-        //System.out.println("all Contrainte et variable init done");
         // ne pas imprimer les informations sur la console
         // ne pas mettre cette option pendant les tests !
         this.cplex.setOut(null);
-        // exporter le modèle dans un fichier texte au format .lp
-        // ce format est comprehensible par cplex
-        /*try {
-            this.cplex.exportModel("modelsCplex/model_" + instance.getNom() + ".lp");
-        } catch (IloException e) {
-            throw new RuntimeException(e);
-        }*/
     }
 
     /**
@@ -122,7 +112,6 @@ public class SolveurCplex implements Solveur{
      * @param instance instance traitée par le solveur
      */
     private void initContrainteInerante(Instance instance){
-        int nbEquipe=instance.getNbEquipes();
         //chaque équipe est présente une seule fois par jour
         for (int j = 0; j < instance.getNbJournees(); j++) {
             for(int e=0;e<instance.getNbEquipes();e++) {
@@ -349,7 +338,6 @@ public class SolveurCplex implements Solveur{
                     c.initCplexEquation(this, instance, minimiseDure, minimiseSouple, c.estDure());
                 }
             }
-            //System.out.println("Contrainte set: "+c.toString());
         }
     }
     /**

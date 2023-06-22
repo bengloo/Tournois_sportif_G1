@@ -319,7 +319,6 @@ public class Solution {
      */
     public void addCoefCoutContrainte(Contrainte c,Object deltaCoef,Integer deltaCout){
         //update du coeff contrainte
-        //System.out.println("Deltacoef pour cette insert"+deltaCoef);
         if(c instanceof ContrainteEquite){
             for(Integer e:((HashMap<Integer,Integer>)deltaCoef).keySet()){
                 ((HashMap<Integer,Integer>)coefContraintes.get(c)).put(e,((HashMap<Integer,Integer>)coefContraintes
@@ -382,9 +381,6 @@ public class Solution {
         // Vérification que les matchs allers et retours ne sont pas dans la même phase
         for(Rencontre r : this.rencontres.values()){
             if(getPhase(r.getJournee())==getPhase(this.rencontres.get(r.getLabelRetour()).getJournee())){
-                //int a=getPhase(r.getJournee());
-                //int b= getPhase(this.rencontres.get(r.getLabelRetour()).getJournee());
-                //Rencontre ra=this.rencontres.get(r.getLabelRetour());
                 if(verbose)System.err.println("La rencontre "+r.toString()+" a son match retour dans la même phase");
                 return false;
             }
@@ -403,8 +399,6 @@ public class Solution {
                 if(verbose)System.err.println("Contrainte non respectée: "+c.toString());
                 if(c instanceof ContraintePauseEquipe || c instanceof ContraintePauseGlobale){
                     if(verbose)System.err.println("Coef"+((Integer)coefContraintes.get(c)));
-                }else{
-                    //System.err.println("Coef"+coefContraintes.get(c).toString());
                 }
 
                 res= false;
@@ -430,13 +424,7 @@ public class Solution {
                     if(o.isMeilleur(bestInsertion)){
                         bestInsertion = o;
                     }
-                }else{
-                    //this.margeJournees[r.getDomicile().getId()][r.getExterieur().getId()].remove(o.getJournee()
-                    // .getId());
-                    //this.margeRencontres[o.getJournee().getId()].removeIf(n->(n[0]==r.getDomicile().getId()&&n[1]==r
-                    // .getExterieur().getId()));
                 }
-
             }
         }
         return bestInsertion;
@@ -508,16 +496,13 @@ public class Solution {
             String os = System.getProperty("os.name").toLowerCase();
             String aux;
             if (os.contains("win")) {
-                //System.out.println("Système d'exploitation : Windows");
                 aux=("resultats\\\\" + repSolveur + "\\\\" + (instance.getChemin().split("\\\\")[instance
                         .getChemin().split("\\\\").length-1]).replace(".txt","_sol.txt"));
             } else if (os.contains("mac")) {
-                //System.out.println("Système d'exploitation : macOS");
                 aux= ("resultats/" + repSolveur + "/" + (instance.getChemin().split("/")[instance.getChemin()
                         .split("/").length-1]).replace(".txt","_sol.txt"));
 
             } else if (os.contains("nix") || os.contains("nux") || os.contains("aix")) {
-                //System.out.println("Système d'exploitation : Unix/Linux");
                 aux=("resultats/" + repSolveur + "/" + (instance.getChemin().split("/")[instance.getChemin()
                         .split("/").length-1]).replace(".txt","_sol.txt"));
             } else {
@@ -557,7 +542,7 @@ public class Solution {
         if (dossier.isDirectory()) {
             File[] fichiers = dossier.listFiles();
 
-            // Parcoure tous les fichiers du dossier
+            // Parcours tous les fichiers du dossier
             for (File fichier : fichiers) {
                 // Vérifie si le fichier est un fichier ".txt"
                 if (fichier.isFile() && fichier.getName().endsWith(".txt")) {
@@ -592,8 +577,7 @@ public class Solution {
                 FileOutputStream fileOutputStream = new FileOutputStream(fichierDestination);
                 fileOutputStream.write(buffer);
                 fileOutputStream.close();
-                //System.out.println("Le fichier a été copié avec succès vers : " +
-                // fichierDestination.getAbsolutePath());
+
             } else {
                 System.out.println("Le fichier source n'existe pas.");
             }
@@ -682,7 +666,6 @@ public class Solution {
                         OperateurInsertion oi = new OperateurInsertion(this, this.getJourneeByID(ji),
                                 this.getRencontreByEquipes(di, ei));
                         if (!oi.isMouvementRealisable()) {
-                            //margeJournees[di][ei].removeIf(n -> (n == ji));
                             System.out.println(nbMargineString());
                             int daux = di;
                             int eaux = ei;
@@ -756,7 +739,6 @@ public class Solution {
     }
 
 
-
     public ArrayList<OperateurInsertion>getInsertRencontreViable(Rencontre r){
         ArrayList<OperateurInsertion> res= new ArrayList<>();
         for(int j:margeJournees[r.getDomicile().getId()][r.getExterieur().getId()]){
@@ -780,8 +762,6 @@ public class Solution {
     }
 
     public String getLog(int i) {
-        //System.out.println(log);
-        //System.out.println((log.split("\\|"))[i]);
         return log.split("\\|")[i];
     }
 
@@ -856,7 +836,6 @@ public class Solution {
                 }else if (matcherCoutbis.find()) {
                     cout = Integer.parseInt(matcherCoutbis.group(1));
                 }
-                //System.out.println(line);
             }
             addLog("|"+cout+"|"+deviation+"|"+contraintes);
             // Attendre la fin de l'exécution du processus
@@ -907,7 +886,5 @@ public class Solution {
         }
         return sb.toString();
     }
-
-
 }
 

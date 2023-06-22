@@ -27,10 +27,8 @@ public class OperateurInsertion extends Operateur{
 
     @Override
     protected Integer evalDeltaCout() {
-        //if(deltaCoef==null)return Integer.MAX_VALUE;
         Integer deltaCout=0;
         if(!isRealisableInital()){
-            //System.out.println(this.toString());
             return Integer.MAX_VALUE;
         }
         for(TypeContrainte type:TypeContrainte.values()){
@@ -77,14 +75,12 @@ public class OperateurInsertion extends Operateur{
     protected boolean isRealisableInital() {
         //check nb rencontre journée
         if(this.getJournee().getRencontres().size()+1>getChampionnat().getNBRencontreJournee()){
-            //System.out.println("nb max r pour j");
             return false;
         }
         //check un match par jr
         for(Rencontre r:getJournee().getRencontres().values()){
             if(r.isConcerne(getRencontre().getDomicile(), TypeMode.INDEFINI) || r.isConcerne(getRencontre()
                     .getExterieur(), TypeMode.INDEFINI)){
-                //System.out.println("nb rencontre par equipe joure >1");
                 return false;
             }
 
@@ -93,13 +89,6 @@ public class OperateurInsertion extends Operateur{
         //match aller ou retour par phase s'il existe
         if(getChampionnat().getPhase(getJournee())==getChampionnat().getPhase(getChampionnat().getRencontres()
                 .get(getRencontre().getLabelRetour()).getJournee())){
-            /*int a=getChampionnat().getPhase(getJournee());
-            Journee j=getJournee();
-            int b=getChampionnat().getPhase(getChampionnat().getRencontres().get(getRencontre().getLabelRetour())
-            .getJournee());
-            Journee j2=getChampionnat().getRencontres().get(getRencontre().getLabelRetour()).getJournee();
-            */
-            //System.out.println("matche retour même phase");
             return false;
         }
         return true;
@@ -108,20 +97,14 @@ public class OperateurInsertion extends Operateur{
     @Override
     protected boolean doMouvement() {
         Map<Contrainte, Object> deltaCoefs= evalDeltaCoefs();
-        //TODO y'a peut-être moyen de mieux parcourir un hashmap à moindre temps
-        //pour chaque contrainte impacté par l'opération
+
+        //pour chaque contrainte impactée par l'opération
         for(Contrainte c:deltaCoefs.keySet()){
-            //System.out.println(this.toString());
-            //System.out.println(getChampionnat().getCoefContraintes().toString());
-            //System.out.println(c.evalDeltaCout(getChampionnat(),this,deltaCoefs.get(c)));
-            //System.out.println("------------------------------------------\n");
 
             //on update le cout et les coeffs des contraintes
             getChampionnat().addCoefCoutContrainte(c,deltaCoefs.get(c),c.evalDeltaCout(getChampionnat(),
                     this,deltaCoefs.get(c)));
         }
-        //on update le cout total
-        //getChampionnat().addCoutTotal(this.getCout());
         //on affecte la rencontre à la journée
         try {
             return getChampionnat().getJournees().get(this.getJournee().getId()).addRencontre(this.getRencontre());

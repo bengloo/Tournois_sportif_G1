@@ -5,7 +5,7 @@
  */
 package tests;
 
-// TO CHECK : import des classes Instance, InstanceReader et ReaderException
+// import des classes Instance, InstanceReader et ReaderException
 
 import instance.Instance;
 import io.InstanceReader;
@@ -82,13 +82,7 @@ public class TestAllSolveur {
      * Ajout de tous les solveurs que l'on souhaite comparer
      */
     private void addSolveurs() {
-        // TO CHECK : constructeur par defaut de la classe InsertionSimple
-        //System.err.close();
-        //solveurs.add(new InsertionSimple());
-        //solveurs.add(new SolveurIterThread(new MeilleureInsertionV2()));
         solveurs.add(new SolveurCplex(600,false,false,false));
-        // TO ADD : par la suite vous ajouterez ici les autres solveurs a tester
-        // solveurs.add(new AutreSolveurATester());
     }
 
     private int extractNumberFromFileName(File file) {
@@ -114,9 +108,8 @@ public class TestAllSolveur {
         for (File file : listOfFiles) {
             if (file.isFile()&&(!file.getName().equals("readMe.txt"))) {
                 try {
-                    // TO CHECK : constructeur de InstanceReader
                     InstanceReader reader = new InstanceReader(file.getAbsolutePath());
-                    // TO CHECK : lecture d'une instance avec la classe InstanceReader
+                    // lecture d'une instance avec la classe InstanceReader
                     instances.add(reader.readInstance());
                 } catch (ReaderException ex) {
                     System.out.println("L'instance "+file.getAbsolutePath() + " n'a pas pu etre lue correctement");
@@ -169,7 +162,7 @@ public class TestAllSolveur {
      * @param inst l'instane pour laquelle on ecrit les resultats
      */
     private void printResultatsInstance(PrintWriter ecriture, Instance inst) {
-        // TO CHECK : recuperer le nom de l'instance
+        // recuperer le nom de l'instance
         ecriture.print(inst.getNom());
         for(Solveur solveur : solveurs) {
 
@@ -182,9 +175,8 @@ public class TestAllSolveur {
 
             sol.writeSolution(solveur.getNom());
             sol.writeSolutionCheckerProf(solveur.getNom());
-            //TODO integré le cheker du prof
             System.out.println(sol.getLog());
-            // TO CHECK : recperer le cout total de la solution, et savoir si
+            // recuperer le cout total de la solution, et savoir si
             // la solution est valide
             Resultat result = new Resultat(sol.getCoutTotal(),Integer.parseInt(sol.getLog(8)), sol.check());
             resultats.put(new InstanceSolveur(inst, solveur), result);
@@ -200,7 +192,7 @@ public class TestAllSolveur {
      */
     private void printEnTetes(PrintWriter ecriture) {
         for(Solveur solveur : solveurs) {
-            // TO CHECK : recuperer le nom du solveur
+            // recuperer le nom du solveur
             ecriture.print(";"+solveur.getNom()+";;");
         }
         ecriture.println();

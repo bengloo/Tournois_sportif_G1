@@ -6,12 +6,10 @@ import instance.Instance;
 import operateur.OperateurEchange;
 import operateur.OperateurInsertion;
 import operateur.Operateur;
-import solution.Journee;
 import solution.Solution;
 import solution.Rencontre;
 import solveur.SolveurCplex;
 
-import java.util.Objects;
 import java.util.TreeSet;
 
 import static instance.modele.contrainte.TypeMode.*;
@@ -187,7 +185,6 @@ public class ContrainteHBClassement extends Contrainte{
                 return this.penalite *((Integer)valcDelta);
             }else return 0;
         }
-        //TODO d'autre operation implique d'autre cout
         return 0;
     }
 

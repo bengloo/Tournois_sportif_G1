@@ -1,13 +1,8 @@
 package instance;
 
-import solution.Equipe;
-import solution.Rencontre;
 import instance.modele.contrainte.*;
-import solution.Journee;
 
-import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.Map;
 
 /** classe définissant Instance (complétée à la lecture du fichier)
  * @author Engloo Benjamin

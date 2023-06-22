@@ -15,7 +15,6 @@ import java.util.Map;
  * @version 1.0
  */
 public abstract class Operateur {
-    //TODO protected ou private pour ces atribut à réflechire
     private Journee journee;
     private Rencontre rencontre;
 
@@ -26,9 +25,7 @@ public abstract class Operateur {
     // pour ne pas recalculer entièrement les fonctions objectives de l'entièreté de la solution deja etablie
     private Integer cout;
 
-    /*
     //contient les deltaCoefs des contraintes impactées par l'opération
-    */
 
     public Operateur() {
         this.cout = Integer.MAX_VALUE;
@@ -74,7 +71,6 @@ public abstract class Operateur {
     protected abstract Map<Contrainte,Object> evalDeltaCoefs();
 
     /**
-     * ??? TODO: compléter (pas compris)
      * @return true si ??? est réalisable, false sinon
      */
     protected abstract boolean isRealisableInital();

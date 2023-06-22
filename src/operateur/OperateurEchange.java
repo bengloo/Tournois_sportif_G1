@@ -21,10 +21,8 @@ public class OperateurEchange extends Operateur{
 
     @Override
     protected Integer evalDeltaCout() {
-        //if(deltaCoef==null)return Integer.MAX_VALUE;
         Integer deltaCout=0;
         if(!isRealisableInital()){
-            //System.out.println(this.toString());
             return Integer.MAX_VALUE;
 
         }
@@ -84,15 +82,12 @@ public class OperateurEchange extends Operateur{
     @Override
     protected boolean doMouvement() {
         Map<Contrainte, Object> deltaCoefs= evalDeltaCoefs();
-        //TODO y'a peut-être moyen de mieux parcourir un hashmap à moindre temps
         //pour chaque contrainte impactée par l'opération
         for(Contrainte c:deltaCoefs.keySet()){
             //on update le cout et les coeffs des contraintes
             getChampionnat().addCoefCoutContrainte(c,deltaCoefs.get(c),c.evalDeltaCout(getChampionnat(),
                     this,deltaCoefs.get(c)));
         }
-        //on update le cout total
-        //getChampionnat().addCoutTotal(this.getCout());
         //on affecte la rencontre à la journée
         try {
             return echangeRencontre(this);

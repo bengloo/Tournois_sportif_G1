@@ -1,7 +1,5 @@
 package solution;
 
-import operateur.OperateurEchange;
-
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -69,7 +67,6 @@ public class Journee {
             if(rencontre.setJournee(this)){
                 return true;
             }else{
-                //System.err.println("On remove");
                 rencontres.remove(rencontre.getLabel());
                 return false;
             }

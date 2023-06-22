@@ -28,15 +28,6 @@ public class Equipe {
         return this.id;
     }
 
-    /**
-     * Renvoie une chaîne de caractères longue qui caractérise une équipe
-     * @return la chaîne de caractères avec l'ID de l'équipe
-     */
-    public String toStringLong() {
-        return "Equipe{" +
-                "id=" + id +
-                '}';
-    }
     @Override
     public String toString(){
         return id.toString();
