@@ -439,7 +439,6 @@ public class SolveurCplex implements Solveur{
         }
         s.addLog(this.getNom()+"|"+instance.getNom());
         s.addLog("|"+s.check(false)+"|"+this.watchDog+"|"+ LocalDateTime.now()+"|"+s.getCoutTotal());
-        if(!s.check(false))s.setCoutTotal(Integer.MAX_VALUE);
         return s;
     }
 }
