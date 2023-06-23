@@ -25,14 +25,9 @@ public class Main {
     public static void main(String[] args) {
         readArgs(args);
         String path=cheminFichier;
-        //System.out.println(cheminFichier + watchDog + minimiseDure + minimiseSouple + avoidContraintePauseGlobale);
-        //String path="instanceTestUnitaire/instance_test_ContraintePlacement_4Equipe.txt";
-        //String path="instancesViablesCplex/instance_ITC2021_Early_3.txt";
         try {
             InstanceReader reader = new InstanceReader(path);
             Instance i= reader.readInstance();
-            //System.out.println(i);
-            //Solveur solveur = new SolveurCplex();
             Solveur solveur = new SolveurIter( new SolveurCplex(watchDog,minimiseDure,minimiseSouple,avoidContraintePauseGlobale),1);
             Solution s = solveur.solve(i);
             s.writeSolution(solveur.getNom());
@@ -41,7 +36,6 @@ public class Main {
             System.out.println(s.check());
             System.out.println(s.getLog());
             s.restLog();
-            //System.out.println(s.toString());
         } catch (ReaderException ex) {
             System.out.println(ex.getMessage());
         }
@@ -60,6 +54,6 @@ public class Main {
     }
     public static void printUsage() {
         System.out.println("Usage: java -jar Tournois_sportif_G1.jar <fichier> <watchdog> <miniserDure(bool)> " +
-                "<miniserSouple(bool)> <enlever Pauseglobale>");
+                "<miniserSouple(bool)> <enlever Pauseglobale>(bool)");
     }
 }
