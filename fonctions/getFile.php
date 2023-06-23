@@ -1,6 +1,6 @@
 <?php
     // TODO: changer le répertoire
-    $directory = '../solutions';
+    $directory = '../resultats/SolveurIter(SolveurCplex)';
     $filename = $_GET['param'];
             
     $file_path = $directory . '/' . $filename;

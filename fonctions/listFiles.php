@@ -1,6 +1,5 @@
 <?php
-    // TODO: changer le répertoire
-    $directory = '../solutions';
+    $directory = '../resultats/SolveurIter(SolveurCplex)';
 
     // Vérifie si le répertoire existe
     if (is_dir($directory)) {
