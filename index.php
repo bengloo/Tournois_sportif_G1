@@ -147,20 +147,21 @@ function checkFilePresence() {
         $fileName = $_POST['fileName'];
         
         if (!isset($_POST['minimize-hard'])) {
-            $_POST['minimize-hard'] = 0;
+            $_POST['minimize-hard'] = 'false';
         } else {
-            $_POST['minimize-hard'] = 1;
+            $_POST['minimize-hard'] = 'true';
         }
 
         if (!isset($_POST['minimize-soft'])) {
-            $_POST['minimize-soft'] = 0;
+            $_POST['minimize-soft'] = 'false';
         } else {
-            $_POST['minimize-soft'] = 1;
+            $_POST['minimize-soft'] = 'true';
         }
+        
         if (!isset($_POST['disable-global-pause'])) {
-            $_POST['disable-global-pause'] = 0;
+            $_POST['disable-global-pause'] = 'false';
         } else {
-            $_POST['disable-global-pause'] = 1;
+            $_POST['disable-global-pause'] = 'true';
         }
         
         print_r($_POST);
