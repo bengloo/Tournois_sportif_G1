@@ -147,14 +147,21 @@ function checkFilePresence() {
         $fileName = $_POST['fileName'];
         
         if (!isset($_POST['minimize-hard'])) {
-            $_POST['minimize-hard'] = 'off';
-        } 
+            $_POST['minimize-hard'] = 0;
+        } else {
+            $_POST['minimize-hard'] = 1;
+        }
+
         if (!isset($_POST['minimize-soft'])) {
-            $_POST['minimize-soft'] = 'off';
-        } 
+            $_POST['minimize-soft'] = 0;
+        } else {
+            $_POST['minimize-soft'] = 1;
+        }
         if (!isset($_POST['disable-global-pause'])) {
-            $_POST['disable-global-pause'] = 'off';
-        } 
+            $_POST['disable-global-pause'] = 0;
+        } else {
+            $_POST['disable-global-pause'] = 1;
+        }
         
         print_r($_POST);
         // echo "La valeur de la variable JavaScript est : " . $fileName;
