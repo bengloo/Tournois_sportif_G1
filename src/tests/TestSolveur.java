@@ -21,7 +21,7 @@ public class TestSolveur {
         try {
             InstanceReader reader = new InstanceReader(path);
             Instance i= reader.readInstance();
-            Solveur solveur = new SolveurIter( new SolveurCplex(1000,true,false,true),10);
+            Solveur solveur = new SolveurIter( new SolveurCplex(1000,false,false,true),150);
             Solution s = solveur.solve(i);
             s.writeSolution(solveur.getNom());
             s.writeSolutionCheckerProf();
