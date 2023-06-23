@@ -42,15 +42,15 @@ public class Main {
     }
 
     public static void readArgs(String args[]) {
-        if (args.length < 4) {
+        if (args.length < 5) {
             printUsage();
             System.exit(-1);
         }
         cheminFichier = args[0];
         watchDog = Integer.valueOf(args[1]);
-        minimiseDure = Boolean.valueOf(args[2]);
-        minimiseSouple = Boolean.valueOf(args[3]);
-        avoidContraintePauseGlobale = Boolean.valueOf(args[4]);
+        minimiseDure = Boolean.parseBoolean(args[2]);
+        minimiseSouple = Boolean.parseBoolean(args[3]);
+        avoidContraintePauseGlobale = Boolean.parseBoolean(args[4]);
     }
     public static void printUsage() {
         System.out.println("Usage: java -jar Tournois_sportif_G1.jar <fichier> <watchdog> <miniserDure(bool)> " +
