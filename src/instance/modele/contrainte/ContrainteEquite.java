@@ -55,19 +55,19 @@ public class ContrainteEquite extends Contrainte {
 
     @Override
     public int getCoutTotal(Solution championnat) {
-        int nbViolation = 0;
+        int valc = 0;
 
         for(int e1:this.equipes) {
             for(int e2:this.equipes) {
                 if(e2>e1) {
-                    int nb = this.calculeDeltatDomicile(championnat, e1, e2);
+                    int nb = this.calculDeltatDomicile(championnat, e1, e2);
                     if (nb > this.max) {
-                        nbViolation += nb - this.max;
+                        valc += nb - this.max;
                     }
                 }
             }
         }
-        return nbViolation * this.penalite;
+        return valc * this.penalite;
     }
 
     @Override
@@ -101,7 +101,7 @@ public class ContrainteEquite extends Contrainte {
         return  valcDelta;
     }
 
-    private int calculeDeltatDomicile(Solution sol, int e1, int e2) {
+    private int calculDeltatDomicile(Solution sol, int e1, int e2) {
         int max = 0;
         int nbD1 = 0;
         int nbD2 = 0;
