@@ -42,7 +42,7 @@ public class Main {
     }
 
     public static void readArgs(String args[]) {
-        if (args.length < 1) {
+        if (args.length < 4) {
             printUsage();
             System.exit(-1);
         }
