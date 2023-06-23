@@ -188,7 +188,7 @@ public class TestAllSolveur {
 
     /**
      * Eriture des en-tetes dans le fichier de resultats.
-     * @param ecriture le writer sur lequel on fait l'ecriture
+     * @param ecriture le writer sur lequel on fait l'écriture
      */
     private void printEnTetes(PrintWriter ecriture) {
         for(Solveur solveur : solveurs) {
@@ -256,7 +256,7 @@ public class TestAllSolveur {
     
     /**
      * Cette classe interne represente le resultat a ecrire lorsqu'une instance
-     * a ete resolue.
+     * a été resolue.
      */
     class Resultat {
         /**
@@ -348,7 +348,7 @@ public class TestAllSolveur {
      * @param args
      */
     public static void main(String[] args) {
-        TestAllSolveur test = new TestAllSolveur("instancesTestsUnitairesLourds");
+        TestAllSolveur test = new TestAllSolveur("instancesTestsUnitaires/instancesTestsUnitairesLourds");
         test.printAllResultats("results");
     }
 }
