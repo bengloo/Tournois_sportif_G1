@@ -21,19 +21,14 @@ public class TestSolveur {
         try {
             InstanceReader reader = new InstanceReader(path);
             Instance i= reader.readInstance();
-
             Solveur solveur = new SolveurIter( new SolveurCplex(1000,false,true,false),1);
-
             Solution s = solveur.solve(i);
-
             s.writeSolution(solveur.getNom());
             s.writeSolutionCheckerProf();
-
             System.out.println(s.toStringSimple());
             System.out.println(s.check());
             System.out.println(s.getLog());
             s.restLog();
-
         } catch (ReaderException ex) {
             System.out.println(ex.getMessage());
         }

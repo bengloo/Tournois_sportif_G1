@@ -353,7 +353,7 @@ public class Solution {
 
     /**
      * Méthode permettant de vérifier la faisabilité de l'entièreté de la solution (avec les contraintes + planning)
-     * @param verbose definit si le cheker (si return faux) prompt dans le terminal d'erreur la contrainte concerné
+     * @param verbose definit si le checker (si return faux) prompt dans le terminal d'erreur la contrainte concernée
      * @return true si la solution est réalisable, false sinon
      */
     public boolean check(boolean verbose){
@@ -362,9 +362,9 @@ public class Solution {
 
     /**
      * Méthode permettant de vérifier la faisabilité de l'entièreté de la solution (avec les contraintes + planning)
-     * @param verbose definit si le cheker (si return faux) prompt dans le terminal d'erreur la contrainte concerné
-     * @param avoidPauseGlobale definit si le cheker doit tester ou non la contrainte de pause globale dans le cas
-     *                          où elle est écarté
+     * @param verbose definit si le checker (si return faux) prompt dans le terminal d'erreur la contrainte concerné
+     * @param avoidPauseGlobale definit si le checker doit tester ou non la contrainte de pause globale dans le cas
+     *                          où elle est écartée
      * @return true si la solution est réalisable, false sinon
      */
     public boolean check(boolean verbose,boolean avoidPauseGlobale){
@@ -414,9 +414,9 @@ public class Solution {
 
     /**
      * Méthode permettant de vérifier la faisabilité de la solution vis-à-vis des contraintes
-     * @param verbose definit si le cheker (si return faux) prompt dans le terminal d'erreur la contrainte concerné
-     * @param avoidPauseGlobale definit si le cheker doit tester ou non la contrainte de pause globale dans le cas
-     *                          où elle est écarté
+     * @param verbose definit si le checker (si return faux) prompt dans le terminal d'erreur la contrainte concerné
+     * @param avoidPauseGlobale definit si le checker doit tester ou non la contrainte de pause globale dans le cas
+     *                          où elle est écartée
      * @return true si les contraintes sont réalisables, false sinon
      */
     public boolean checkAllContrainte(boolean verbose,boolean avoidPauseGlobale){
@@ -459,7 +459,8 @@ public class Solution {
     }
 
     /**
-     * Retourne la meilleure operation d'insertion en termes de cout sur la solution courante à partir des rencontres donné
+     * Retourne la meilleure operation d'insertion en termes de coût sur la solution courante à partir des rencontres
+     * données
      * @param rTarget  ensemble de rencontres ciblé.
      * @return OperateurInsertion obtenus
      */
@@ -585,7 +586,7 @@ public class Solution {
     }
 
     /**
-     *copie les fichier d'instance et de solution dans le dosier chekerprof
+     *copie les fichier d'instance et de solution dans le dosier checkerprof
      */
     public void writeSolutionCheckerProf(){
 
@@ -858,7 +859,7 @@ public class Solution {
     }
 
     /**
-     * Reprend sous forme de log les resultat du chekerProf
+     * Reprend sous forme de log les résultats du checkerProf
      */
     public void logCheckProf(){
         String cheminJar = "CheckerChampionnat.jar";
