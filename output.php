@@ -51,8 +51,8 @@
 		<img src="./ressources/return_button.png" id="redirectIcon">
 	</a>
 
+	<div id="labelDropdown">Veuillez sélectionner une solution à afficher</div></br>
 	<div class="container animated animated-done bootdey" data-animate="fadeIn" data-animate-delay="0.05" style="animation-delay: 0.05s;">
-		<div id="labelDropdown">Veuillez sélectionner une solution à afficher</div></br>
 		<select id="fileDropdown">
 			<option selected style="color:grey;">-- Pas de sélection --</option>
 		</select>
@@ -65,6 +65,10 @@
 
 <script>
 	$(document).ready(function() {
+		$(window).on('load', function() {
+			$('').addClass('zoom-out');
+		});
+
 		// Appel AJAX pour récupérer la liste des noms de fichiers du répertoire
 		$.ajax({			
 			url: './fonctions/listFiles.php',

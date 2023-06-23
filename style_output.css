@@ -4,7 +4,20 @@
 body{
   margin-top:20px;
   background-image: url(./ressources/background.jpg);
-  font-family: "Lexend Deca", Helvetica, sans-serif; 
+  font-family: "Lexend Deca", Helvetica, sans-serif;
+}
+
+@media (max-width: 767px) {
+  body{
+    transform-origin: top left;
+    transform: scale(0.77);
+    transition: transform 1s ease-in;
+  }
+
+  #labelDropdown {  
+    width: 130%;
+    margin-top: 20px;
+  }
 }
 
 #redirectLink {
