@@ -16,15 +16,65 @@ import java.util.HashMap;
 import java.util.Random;
 public class SolveurCplex implements Solveur{
     private IloCplex cplex;
+
+    /**
+     * Variable de decision representative des affectations couples d'équipes aux journées
+     * Définit sur {0;1}
+     * Dimension 1 : equipe domicile
+     * Dimension 2 : equipe exterieur
+     * Dimension 3 : journée
+     */
     private IloIntVar[][][] x;
+
+    /**
+     * Variable de decision representative des pauses à domiciles par couples equipes journées
+     * afectation definit sur {0;1}
+     * Dimenssion 1 : journée
+     * Dimenssion 2 : equipe
+     */
     private IloIntVar[][] y;
+
+    /**
+     * Variable de decision representative des pauses à domicile par couples équipes journées
+     * afectation definit sur {0;1}
+     * Dimenssion 1 : journée
+     * Dimenssion 2 : équipe
+     */
     private IloIntVar[][] z;
+
+    /**
+     * Variable de decision representative de le deviation des contraintes dures sur un critère "Max"
+     */
     private HashMap<Contrainte,IloIntVar> cDurMax;
+
+    /**
+     * Variable de decision representative de le deviation des contraintes dures sur un critère "Min"
+     */
     private HashMap<Contrainte,IloIntVar> cDurMin;
+
+    /**
+     * Variable de decision representative des couts des contraintes souples.
+     */
     private HashMap<Contrainte,IloIntVar> coutC;
+
+    /**
+     * delay maximum execution du solveur cplex
+     */
     private int watchDog = 1000;
+
+    /**
+     * Definit si le solveur minimise la deviation des contraintes dures
+     */
     private boolean minimiseDure =true;
+
+    /**
+     * Definit si le solveur minimise le cout des contraintes souples
+     */
     private boolean minimiseSouple =false;
+
+    /**
+     * Definit si les equations de la contrainte de pause globale sont traitées ou non
+     */
     private boolean avoidContraintePauseGlobale=true;
 
     public SolveurCplex() {
